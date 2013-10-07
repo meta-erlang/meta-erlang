@@ -21,7 +21,7 @@ EOF
 
     rm -rf ${S}/lib/wx
 
-    ./otp_build configure --xcomp-conf=${XCOMP_CONF_PATH}
+    ./otp_build configure --xcomp-conf=${XCOMP_CONF_PATH} --prefix=${prefix}
 }
 
 do_compile() {    
@@ -32,52 +32,52 @@ do_compile() {
 do_install() {
     make install DESTDIR=${D}
 
-    pushd ${D}/usr/local/lib/erlang/ 2> /dev/null
-    ./Install -cross -minimal /usr/local/erlang
+    pushd ${D}${libdir}/erlang/ 2> /dev/null
+    ./Install -cross -minimal ${libdir}/erlang
     rm -f Install
 
-    rm -rf ${D}/usr/local/lib/erlang/usr
+    rm -rf ${D}${libdir}/erlang/usr
 }
 
 def get_erlang_libs(d):
     import os, bb
     install_root = bb.data.getVar('D', d, 1)
-    libdir = '/usr/local/lib'[1:]
-    libs = ["/usr/local/bin/dialyzer", "/usr/local/lib/erlang/bin/dialyzer"]
+    libdir = '${libdir}'[1:]
+    libs = ["${bindir}/dialyzer", "${libdir}/erlang/bin/dialyzer"]
     erlang_lib = bb.data.getVar('ERL_LIBS', d, 1)
     for fname in erlang_lib.split():
         lname = fname + '-*' + '/'
-        libs.append(os.path.join("/usr/local/lib", "erlang/lib", lname))
+        libs.append(os.path.join("${libdir}", "erlang/lib", lname))
     libs.sort()
     return libs
 
 def get_erlang_libs_static(d):
     import os, bb
     install_root = bb.data.getVar('D', d, 1)
-    libdir = '/usr/local/lib'[1:]
+    libdir = '${libdir}'[1:]
     libs = []
     erlang_lib = bb.data.getVar('ERL_LIBS', d, 1)
     for fname in erlang_lib.split():
         lname = fname + '-*' + '/'
-        libs.append(os.path.join("/usr/local/lib", "erlang/lib", lname, "lib/*.a"))
-        libs.append(os.path.join("/usr/local/lib", "erlang/lib", lname, "priv/lib/*.a"))
+        libs.append(os.path.join("${libdir}", "erlang/lib", lname, "lib/*.a"))
+        libs.append(os.path.join("${libdir}", "erlang/lib", lname, "priv/lib/*.a"))
     libs.sort()
     return libs    
 
 def get_erlang_libs_dev(d):
     import os, bb
     install_root = bb.data.getVar('D', d, 1)
-    libdir = '/usr/local/lib'[1:]
+    libdir = '${libdir}'[1:]
     libs = []
     erlang_lib = bb.data.getVar('ERL_LIBS', d, 1)
     for fname in erlang_lib.split():
         lname = fname + '-*' + '/'
-        libs.append(os.path.join("/usr/local/lib", "erlang/lib", lname, "src"))
-        libs.append(os.path.join("/usr/local/lib", "erlang/lib", lname, "include"))
+        libs.append(os.path.join("${libdir}", "erlang/lib", lname, "src"))
+        libs.append(os.path.join("${libdir}", "erlang/lib", lname, "include"))
     libs.sort()
     return libs    
 
-FILES_${PN}-libs-dbg += " /usr/local/lib/erlang/*/.debug /usr/local/lib/erlang/*/*/.debug /usr/local/lib/erlang/*/*/*/.debug /usr/local/lib/erlang/*/*/*/*/.debug /usr/local/lib/erlang/*/*/*/*/*/.debug "
+FILES_${PN}-libs-dbg += " ${libdir}/erlang/*/.debug ${libdir}/erlang/*/*/.debug ${libdir}/erlang/*/*/*/.debug ${libdir}/erlang/*/*/*/*/.debug ${libdir}/erlang/*/*/*/*/*/.debug "
 
 FILES_${PN}-libs-dev += " ${@' '.join(get_erlang_libs_dev(d))}"
 
@@ -85,13 +85,13 @@ FILES_${PN}-libs-staticdev += " ${@' '.join(get_erlang_libs_static(d))}"
 
 FILES_${PN}-libs += " ${@' '.join(get_erlang_libs(d))}"
 
-FILES_${PN}-doc += " /usr/local/lib/erlang/erts-*/doc /usr/local/lib/erlang/erts-*/man /usr/local/lib/erlang/lib/*/examples /usr/local/lib/erlang/misc"
-FILES_${PN}-dev += " /usr/local/lib/erlang/erts-*/include /usr/local/lib/erlang/erts-*/src"
-FILES_${PN}-staticdev += " /usr/local/lib/erlang/erts-*/lib/*.a /usr/local/lib/erlang/erts-*/lib/internal/*.a /usr/local/lib/erlang/erts-*/lib/internal/README"
+FILES_${PN}-doc += " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/lib/*/examples ${libdir}/erlang/misc"
+FILES_${PN}-dev += " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src"
+FILES_${PN}-staticdev += " ${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/*.a ${libdir}/erlang/erts-*/lib/internal/README"
 
-FILES_${PN} += " /usr/local/lib/erlang/releases /usr/local/bin/* /usr/local/lib/erlang/bin /usr/local/lib/erlang/lib /usr/local/lib/erlang/erts-*/bin /usr/local/lib/erlang/lib/*/ebin"
+FILES_${PN} += " ${libdir}/erlang/releases ${bindir}/* ${libdir}/erlang/bin ${libdir}/erlang/lib ${libdir}/erlang/erts-*/bin ${libdir}/erlang/lib/*/ebin"
 
-FILES_${PN}-dev += " /usr/local/lib/erlang/lib/*/include /usr/local/lib/erlang/lib/*/src /usr/local/lib/erlang/lib/*/c_src"
+FILES_${PN}-dev += " ${libdir}/erlang/lib/*/include ${libdir}/erlang/lib/*/src ${libdir}/erlang/lib/*/c_src"
 
 PACKAGES =+ "${PN}-libs-dbg ${PN}-libs-staticdev ${PN}-libs-dev ${PN}-libs"
 
