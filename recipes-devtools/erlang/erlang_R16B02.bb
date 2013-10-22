@@ -1,4 +1,5 @@
 include erlang.inc
+
 DEPENDS += "openssl"
 
 PR = "r0"
@@ -17,9 +18,9 @@ erl_xcomp_configure_flags=--with-ssl=${STAGING_DIR_HOST}${layout_exec_prefix}
 erl_xcomp_sysroot=${STAGING_DIR_HOST}
 EOF 
 
-    for lib in odbc wx ; do touch ${S}/lib/${lib}/SKIP ; done
+    cd ${S}/lib/wx; autoreconf; cd -
 
-    rm -rf ${S}/lib/wx
+    for lib in odbc wx ; do touch ${S}/lib/${lib}/SKIP ; done    
 
     ./otp_build configure --xcomp-conf=${XCOMP_CONF_PATH} --prefix=${prefix}
 }
