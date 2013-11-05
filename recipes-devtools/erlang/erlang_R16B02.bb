@@ -1,100 +1,119 @@
 include erlang.inc
-
-DEPENDS += "openssl"
+DEPENDS += "erlang-native openssl"
 
 PR = "r0"
 
-XCOMP_CONF_PATH = "${S}/xcomp/erl-xcomp-oe.conf"
+EI_PV="3.7.14"
+IC_PV="4.3.3"
 
-RELEASE_DIR = "${S}/release/${HOST_SYS}-gnu"
+TARGET_CC_ARCH += "${LDFLAGS}"
 
-ERL_LIBS = "appmon asn1 common_test compiler cosEvent cosEventDomain cosFileTransfer cosNotification cosProperty cosTime cosTransactions crypto debugger dialyzer diameter edoc eldap erl_docgen erl_interface erts et eunit gs hipe ic inets jinterface megaco mnesia observer orber os_mon otp_mibs parsetools percept pman public_key reltool runtime_tools snmp ssh ssl syntax_tools test_server toolbar tv typer webtool xmerl"
+EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
+
+EXTRA_OECONF = "--with-ssl=${STAGING_DIR_HOST}${layout_exec_prefix}"
+
+EXTRA_OECONF_append_arm = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF_append_armeb = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF_append_mipsel = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF_append_sh3 = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF_append_sh4 = " --disable-smp-support --disable-hipe"
+
+NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 do_configure() {
-    cat > ${XCOMP_CONF_PATH} <<EOF
-erl_xcomp_build=${BUILD_SYS}
-erl_xcomp_host=${HOST_SYS}
-erl_xcomp_configure_flags=--with-ssl=${STAGING_DIR_HOST}${layout_exec_prefix}
-erl_xcomp_sysroot=${STAGING_DIR_HOST}
-EOF 
+    cd ${S}/erts; autoreconf; cd -
 
-    cd ${S}/lib/wx; autoreconf; cd -
+    . ${CONFIG_SITE}
 
-    for lib in odbc wx ; do touch ${S}/lib/${lib}/SKIP ; done    
+    ac_cv_prog_javac_ver_1_2=no \
+    ac_cv_prog_javac_ver_1_5=no \
+    SHLIB_LD='${CC}' \
+    CROSS_COMPILING=yes \
+    BOOTSTRAP_ONLY=no \
+    oe_runconf
 
-    ./otp_build configure --xcomp-conf=${XCOMP_CONF_PATH} --prefix=${prefix}
+    sed -i -e 's|$(ERL_TOP)/bin/dialyzer|${NATIVE_BIN}/dialyzer --output_plt $@ -pa $(ERL_TOP)/lib/kernel/ebin -pa $(ERL_TOP)/lib/stdlib/ebin|' lib/dialyzer/src/Makefile
 }
 
-do_compile() {    
-    ./otp_build boot -a    
-    ./otp_build release -a
+do_compile() {
+    TARGET=${TARGET_SYS} \
+    PATH=${NATIVE_BIN}:$PATH \
+    oe_runmake noboot
 }
 
 do_install() {
-    make install DESTDIR=${D}
-
-    pushd ${D}${libdir}/erlang/ 2> /dev/null
-    ./Install -cross -minimal ${libdir}/erlang
-    rm -f Install
-
-    rm -rf ${D}${libdir}/erlang/usr
+    TARGET=${TARGET_SYS} \
+    PATH=${NATIVE_BIN}:$PATH \
+    oe_runmake 'INSTALL_PREFIX=${D}' install
+    for f in erl start
+        do sed -i -e 's:ROOTDIR=.*:ROOTDIR=/usr/lib/erlang:' \
+                ${D}/usr/lib/erlang/erts-*/bin/$f ${D}/usr/lib/erlang/bin/$f
+    done
 }
 
-def get_erlang_libs(d):
-    import os, bb
-    install_root = bb.data.getVar('D', d, 1)
-    libdir = '${libdir}'[1:]
-    libs = ["${bindir}/dialyzer", "${libdir}/erlang/bin/dialyzer"]
-    erlang_lib = bb.data.getVar('ERL_LIBS', d, 1)
-    for fname in erlang_lib.split():
-        lname = fname + '-*' + '/'
-        libs.append(os.path.join("${libdir}", "erlang/lib", lname))
-    libs.sort()
-    return libs
+erl_int_path="${libdir}/${PN}/lib/erl_interface-${EI_PV}"
+ic_path="${libdir}/${PN}/lib/ic-${IC_PV}"
 
-def get_erlang_libs_static(d):
-    import os, bb
-    install_root = bb.data.getVar('D', d, 1)
-    libdir = '${libdir}'[1:]
-    libs = []
-    erlang_lib = bb.data.getVar('ERL_LIBS', d, 1)
-    for fname in erlang_lib.split():
-        lname = fname + '-*' + '/'
-        libs.append(os.path.join("${libdir}", "erlang/lib", lname, "lib/*.a"))
-        libs.append(os.path.join("${libdir}", "erlang/lib", lname, "priv/lib/*.a"))
-    libs.sort()
-    return libs    
+PACKAGES =+ "${PN}-libs-dbg ${PN}-libs"
 
-def get_erlang_libs_dev(d):
-    import os, bb
-    install_root = bb.data.getVar('D', d, 1)
-    libdir = '${libdir}'[1:]
-    libs = []
-    erlang_lib = bb.data.getVar('ERL_LIBS', d, 1)
-    for fname in erlang_lib.split():
-        lname = fname + '-*' + '/'
-        libs.append(os.path.join("${libdir}", "erlang/lib", lname, "src"))
-        libs.append(os.path.join("${libdir}", "erlang/lib", lname, "include"))
-    libs.sort()
-    return libs    
-
+FILES_${PN}-staticdev += "${libdir}/*/*/*/*.a ${libdir}/*/*/*/*/*.a ${libdir}/*/*/*/*/*/*.a ${erl_int_path}/lib/*.a ${ic_path}/lib/*.a "
 FILES_${PN}-libs-dbg += " ${libdir}/erlang/*/.debug ${libdir}/erlang/*/*/.debug ${libdir}/erlang/*/*/*/.debug ${libdir}/erlang/*/*/*/*/.debug ${libdir}/erlang/*/*/*/*/*/.debug "
-
-FILES_${PN}-libs-dev += " ${@' '.join(get_erlang_libs_dev(d))}"
-
-FILES_${PN}-libs-staticdev += " ${@' '.join(get_erlang_libs_static(d))}"
-
-FILES_${PN}-libs += " ${@' '.join(get_erlang_libs(d))}"
-
-FILES_${PN}-doc += " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/lib/*/examples ${libdir}/erlang/misc"
-FILES_${PN}-dev += " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src"
-FILES_${PN}-staticdev += " ${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/*.a ${libdir}/erlang/erts-*/lib/internal/README"
-
-FILES_${PN} += " ${libdir}/erlang/releases ${bindir}/* ${libdir}/erlang/bin ${libdir}/erlang/lib ${libdir}/erlang/erts-*/bin ${libdir}/erlang/lib/*/ebin"
-
-FILES_${PN}-dev += " ${libdir}/erlang/lib/*/include ${libdir}/erlang/lib/*/src ${libdir}/erlang/lib/*/c_src"
-
-PACKAGES =+ "${PN}-libs-dbg ${PN}-libs-staticdev ${PN}-libs-dev ${PN}-libs"
 
 SRC_URI[md5sum] = "ca63bcde0e5ae0f2df9457f97b3115a4"
 SRC_URI[sha256sum] = "6ab8ad1df8185345554a4b80e10fd8be06c4f2b71b69dcfb8528352787b32f85"
+
+## INSANE_SKIP doesn't seem to work by itself here, so we override the 
+## config.log check below and make it non-fatal.  Stupid erlang bootstrap...
+
+python do_qa_configure() {
+    import subprocess
+
+    ###########################################################################
+    # Check config.log for cross compile issues
+    ###########################################################################
+
+    configs = []
+    workdir = d.getVar('WORKDIR', True)
+    bb.note("Checking autotools environment for common misconfiguration")
+    for root, dirs, files in os.walk(workdir):
+        statement = "grep -e 'CROSS COMPILE Badness:' -e 'is unsafe for cross-compilation' %s > /dev/null" % \
+                    os.path.join(root,"config.log")
+        if "config.log" in files:
+            if subprocess.call(statement, shell=True) == 0:
+                bb.note("""This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
+This is expected because of the erlang bootstrap. The path was '%s'""" % root)
+
+        if "configure.ac" in files:
+            configs.append(os.path.join(root,"configure.ac"))
+        if "configure.in" in files:
+            configs.append(os.path.join(root, "configure.in"))
+
+    ###########################################################################
+    # Check gettext configuration and dependencies are correct
+    ###########################################################################
+
+    cnf = d.getVar('EXTRA_OECONF', True) or ""
+    if "gettext" not in d.getVar('P', True) and "gcc-runtime" not in d.getVar('P', True) and "--disable-nls" not in cnf:
+        ml = d.getVar("MLPREFIX", True) or ""
+        if bb.data.inherits_class('native', d) or bb.data.inherits_class('cross', d) or bb.data.inherits_class('crosssdk', d) or bb.data.inherits_class('nativesdk', d):
+            gt = "gettext-native"
+        elif bb.data.inherits_class('cross-canadian', d):
+            gt = "nativesdk-gettext"
+        else:
+            gt = "virtual/" + ml + "gettext"
+        deps = bb.utils.explode_deps(d.getVar('DEPENDS', True) or "")
+        if gt not in deps:
+            for config in configs:
+                gnu = "grep \"^[[:space:]]*AM_GNU_GETTEXT\" %s >/dev/null" % config
+                if subprocess.call(gnu, shell=True) == 0:
+                    bb.fatal("""%s required but not in DEPENDS for file %s.
+Missing inherit gettext?""" % (gt, config))
+
+    ###########################################################################
+    # Check license variables
+    ###########################################################################
+
+    if not package_qa_check_license(workdir, d):
+        bb.fatal("Licensing Error: LIC_FILES_CHKSUM does not match, please fix")
+
+}
