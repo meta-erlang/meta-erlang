@@ -32,8 +32,10 @@ do_configure() {
 
     ac_cv_prog_javac_ver_1_2=no \
     ac_cv_prog_javac_ver_1_5=no \
-	SHLIB_LD='${CC}' \
-    CROSS_COMPILING=yes BOOTSTRAP_ONLY=no oe_runconf
+    SHLIB_LD='${CC}' \
+    CROSS_COMPILING=yes \
+    BOOTSTRAP_ONLY=no \
+    oe_runconf
 
     sed -i -e 's|$(ERL_TOP)/bin/dialyzer|${NATIVE_BIN}/dialyzer --output_plt $@ -pa $(ERL_TOP)/lib/kernel/ebin -pa $(ERL_TOP)/lib/stdlib/ebin|' lib/dialyzer/src/Makefile
 }
