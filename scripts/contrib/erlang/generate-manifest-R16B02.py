@@ -443,6 +443,6 @@ if __name__ == "__main__":
     m.addPackage( "${PN}-dev", "", "", " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src ${libdir}/erlang/usr/include", True)
     m.addPackage( "${PN}-dbg", "", "", " ${libdir}/erlang/bin/.debug ${libdir}/erlang/erts-*/bin/.debug", True)
     m.addPackage( "${PN}-staticdev", "", "", "  ${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a ${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/*", True)
-    m.addPackage( "${PN}", "", "", "${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${libdir}/erlang/erts-*/bin", True)
+    m.addPackage( "${PN}", "", "${PN}-erts ${PN}-kernel ${PN}-sasl ${PN}-stdlib", "${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${libdir}/erlang/erts-*/bin", True)
 
     m.make()

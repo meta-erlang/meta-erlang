@@ -1,6 +1,7 @@
 include erlang.inc
 DEPENDS += "erlang-native openssl"
-RDEPENDS_${PN} += "${PN}-erts ${PN}-kernel ${PN}-sasl ${PN}-stdlib"
+
+require erlang-${PV}-manifest.inc
 
 PR = "r0"
 
@@ -52,8 +53,6 @@ do_install() {
     # Actually wx is not suitable with erlang embedded
     rm -rf ${D}/${libdir}/erlang/lib/wx-*
 }
-
-require erlang-${PV}-manifest.inc
 
 SRC_URI[md5sum] = "ca63bcde0e5ae0f2df9457f97b3115a4"
 SRC_URI[sha256sum] = "6ab8ad1df8185345554a4b80e10fd8be06c4f2b71b69dcfb8528352787b32f85"

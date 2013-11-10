@@ -1105,7 +1105,7 @@ FILES_${PN}-appmon="${libdir}/erlang/lib/appmon-* "
 
 ALLOW_EMPTY_${PN}="1"
 DESCRIPTION_${PN}=""
-RDEPENDS_${PN}=""
+RDEPENDS_${PN}="${PN}-erts ${PN}-kernel ${PN}-sasl ${PN}-stdlib"
 FILES_${PN}+="${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${libdir}/erlang/erts-*/bin "
 
 DESCRIPTION_${PN}-modules="All Erlang modules"
