@@ -14,6 +14,7 @@ do_configure() {
     TARGET=${HOST_SYS} \
     ac_cv_prog_javac_ver_1_2=no \
     ac_cv_prog_javac_ver_1_5=no \
+    erl_xcomp_sysroot=${STAGING_DIR_HOST}${SDKPATHNATIVE} \
     oe_runconf
 }
 
