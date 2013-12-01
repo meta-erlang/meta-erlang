@@ -3,7 +3,7 @@ DEPENDS += "erlang-native openssl"
 
 require erlang-${PV}-manifest.inc
 
-PR = "r0"
+PR = "r1"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
@@ -21,6 +21,9 @@ do_configure() {
 
     cd ${S}/erts; autoreconf; cd -
     cd ${S}/lib/wx; autoreconf; cd -
+
+    touch ${S}/lib/wx/SKIP
+    touch ${S}/lib/odbc/SKIP
 
     . ${CONFIG_SITE}
 
