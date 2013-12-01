@@ -1,8 +1,10 @@
 include erlang.inc
 
-PR = "r0"
-
 inherit native
+
+PR = "r1"
+
+EXTRA_OECONF = '--without-ssl'
 
 do_configure() {
     TARGET=${HOST_SYS} \
