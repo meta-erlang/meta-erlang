@@ -4,7 +4,6 @@ inherit native
 
 PR = "r1"
 
-# EXTRA_OEMAKE = 'OTP_SMALL_BUILD=true'
 EXTRA_OECONF = '--without-ssl'
 
 do_configure() {
