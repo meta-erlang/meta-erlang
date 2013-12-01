@@ -22,6 +22,9 @@ do_configure() {
     cd ${S}/erts; autoreconf; cd -
     cd ${S}/lib/wx; autoreconf; cd -
 
+    touch ${S}/lib/wx/SKIP
+    touch ${S}/lib/odbc/SKIP
+
     . ${CONFIG_SITE}
 
     ac_cv_prog_javac_ver_1_2=no \
