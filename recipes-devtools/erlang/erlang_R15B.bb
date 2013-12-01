@@ -15,7 +15,7 @@ EXTRA_OECONF_append_mipsel = " --disable-smp-support --disable-hipe"
 EXTRA_OECONF_append_sh3 = " --disable-smp-support --disable-hipe"
 EXTRA_OECONF_append_sh4 = " --disable-smp-support --disable-hipe"
 
-NATIVE_BIN = "${TMPDIR}/work/erlang-native-${PV}-${PR}/otp_src_${UPSTREAM_VERSION}/bin"
+NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 do_configure() {
 
