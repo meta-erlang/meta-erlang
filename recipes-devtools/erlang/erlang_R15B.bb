@@ -1,7 +1,7 @@
 include erlang.inc
 DEPENDS += "erlang-native openssl"
 
-PR = "r3"
+PR = "r4"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
