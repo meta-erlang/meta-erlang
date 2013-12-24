@@ -3,7 +3,7 @@ DEPENDS += "erlang-native openssl"
 
 require erlang-${PV}-manifest.inc
 
-PR = "r1"
+PR = "r0"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
@@ -57,5 +57,5 @@ do_install() {
     rm -rf ${D}/${libdir}/erlang/lib/wx-*
 }
 
-SRC_URI[md5sum] = "ca63bcde0e5ae0f2df9457f97b3115a4"
-SRC_URI[sha256sum] = "6ab8ad1df8185345554a4b80e10fd8be06c4f2b71b69dcfb8528352787b32f85"
+SRC_URI[md5sum] = "c330150913556a0fe73e57a441cb6375"
+SRC_URI[sha256sum] = "6133b3410681a5c934e54c76eee1825f96dead8d6a12c31a64f6e160daf0bb06"
