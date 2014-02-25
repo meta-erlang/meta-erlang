@@ -21,5 +21,5 @@ do_install_prepend() {
     export TARGET=${HOST_SYS}
 }
 
-SRC_URI[md5sum] = "c330150913556a0fe73e57a441cb6375"
-SRC_URI[sha256sum] = "6133b3410681a5c934e54c76eee1825f96dead8d6a12c31a64f6e160daf0bb06"
+SRC_URI[md5sum] = "e5ece977375197338c1b93b3d88514f8"
+SRC_URI[sha256sum] = "17ce53459bc5ceb34fc2da412e15ac8c23835a15fbd84e62c8d1852704747ee7"
