@@ -14,4 +14,4 @@ S = "${WORKDIR}/otp_src_${PV}"
 
 PARALLEL_MAKE = ""
 
-inherit autotools
+inherit autotools-brokensep
