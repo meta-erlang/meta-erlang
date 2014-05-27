@@ -16,4 +16,4 @@ S = "${WORKDIR}/otp_src_${UPSTREAM_VERSION}"
 
 PARALLEL_MAKE = ""
 
-inherit autotools
+inherit autotools-brokensep
