@@ -33,5 +33,5 @@ do_install_append() {
     rm -f ${D}/${libdir}/erlang/Install
 }
 
-SRC_URI[md5sum] = "e5ece977375197338c1b93b3d88514f8"
-SRC_URI[sha256sum] = "17ce53459bc5ceb34fc2da412e15ac8c23835a15fbd84e62c8d1852704747ee7"
+SRC_URI[md5sum] = "a5f78c1cf0eb7724de3a59babc1a28e5"
+SRC_URI[sha256sum] = "297f2baaa65e5ed1c2492c500fe191bff852217ad57af5da2470a3218c9acadb"
