@@ -1,4 +1,5 @@
 include erlang.inc
+include erlang-17.3.inc
 
 inherit native
 
@@ -21,5 +22,3 @@ do_install_prepend() {
     export TARGET=${HOST_SYS}
 }
 
-SRC_URI[md5sum] = "a5f78c1cf0eb7724de3a59babc1a28e5"
-SRC_URI[sha256sum] = "297f2baaa65e5ed1c2492c500fe191bff852217ad57af5da2470a3218c9acadb"
