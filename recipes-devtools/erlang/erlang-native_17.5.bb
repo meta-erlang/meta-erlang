@@ -1,5 +1,5 @@
 include erlang.inc
-include erlang-17.3.inc
+include erlang-${PV}.inc
 
 inherit native
 

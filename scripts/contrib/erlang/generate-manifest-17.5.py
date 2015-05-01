@@ -14,7 +14,7 @@ import os
 import sys
 import time
 
-VERSION = "R16B02"
+VERSION = "17.5"
 
 __author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
 __version__ = "20110222.2"
@@ -438,6 +438,11 @@ if __name__ == "__main__":
     m.addPackage( "${PN}-xmerl-dbg", "", "", "/xmerl-*/bin/.debug /xmerl-*/lib/.debug /xmerl-*/priv/lib/.debug /xmerl-*/priv/obj/.debug /xmerl-*/priv/bin/.debug")
     m.addPackage( "${PN}-xmerl-dev", "", "", "/xmerl-*/src /xmerl-*/include")
     m.addPackage( "${PN}-xmerl-staticdev", "", "", "/xmerl-*/lib/*.a /xmerl-*/priv/lib/*.a")
+
+    m.addPackage( "${PN}-ose", "", "", "/ose-*")
+    m.addPackage( "${PN}-ose-dbg", "", "", "/ose-*/bin/.debug /ose-*/lib/.debug /ose-*/priv/lib/.debug /ose-*/priv/obj/.debug /ose-*/priv/bin/.debug")
+    m.addPackage( "${PN}-ose-dev", "", "", "/ose-*/src /ose-*/include")
+    m.addPackage( "${PN}-ose-staticdev", "", "", "/ose-*/lib/*.a /ose-*/priv/lib/*.a")
 
     m.addPackage( "${PN}-doc", "", "", " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/lib/*/examples ${libdir}/erlang/misc", True)
     m.addPackage( "${PN}-dev", "", "", " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src ${libdir}/erlang/usr/include", True)
