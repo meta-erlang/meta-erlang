@@ -5,13 +5,13 @@ inherit native
 
 PR = "r0"
 
-EXTRA_OECONF = '--without-ssl'
+EXTRA_OECONF = "--with-ssl=${STAGING_DIR_NATIVE}"
+
+CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
 
 do_configure() {
     TARGET=${HOST_SYS} \
-    ac_cv_prog_javac_ver_1_2=no \
-    ac_cv_prog_javac_ver_1_5=no \
-	oe_runconf
+    oe_runconf
 }
 
 do_compile_prepend() {
