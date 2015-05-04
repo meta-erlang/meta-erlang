@@ -1,0 +1,2 @@
+
+DEPENDS += "erlang erlang-native"
