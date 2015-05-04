@@ -1,6 +1,6 @@
 
 # WARNING: This file is AUTO GENERATED: Manual edits will be lost next time I regenerate the file.
-# Generator: './generate-manifest-17.5.py' Version 20110222.2 (C) 2002-2010 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+# Generator: '../../scripts/contrib/erlang/generate-manifest-17.5.py' Version 20110222.2 (C) 2002-2010 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
 
  
 
@@ -66,7 +66,7 @@ FILES_${PN}-typer-dbg="${libdir}/erlang/lib/typer-*/bin/.debug ${libdir}/erlang/
 ALLOW_EMPTY_${PN}-typer="1"
 DESCRIPTION_${PN}-typer=""
 RDEPENDS_${PN}-typer=""
-FILES_${PN}-typer="${libdir}/erlang/lib/typer-* "
+FILES_${PN}-typer="${bindir}/typer ${libdir}/erlang/bin/typer ${libdir}/erlang/lib/typer-* ${libdir}/erlang/erts-6.4/bin/typer "
 
 ALLOW_EMPTY_${PN}-tv-staticdev="1"
 DESCRIPTION_${PN}-tv-staticdev=""
@@ -851,7 +851,7 @@ FILES_${PN}-dialyzer-dbg="${libdir}/erlang/lib/dialyzer-*/bin/.debug ${libdir}/e
 ALLOW_EMPTY_${PN}-dialyzer="1"
 DESCRIPTION_${PN}-dialyzer=""
 RDEPENDS_${PN}-dialyzer=""
-FILES_${PN}-dialyzer="${libdir}/erlang/lib/dialyzer-* "
+FILES_${PN}-dialyzer="${bindir}/dialyzer ${libdir}/erlang/bin/dialyzer ${libdir}/erlang/lib/dialyzer-* ${libdir}/erlang/erts-6.4/bin/dialyzer "
 
 ALLOW_EMPTY_${PN}-dev="1"
 DESCRIPTION_${PN}-dev=""
@@ -1061,7 +1061,7 @@ FILES_${PN}-compiler-dbg="${libdir}/erlang/lib/compiler-*/bin/.debug ${libdir}/e
 ALLOW_EMPTY_${PN}-compiler="1"
 DESCRIPTION_${PN}-compiler=""
 RDEPENDS_${PN}-compiler=""
-FILES_${PN}-compiler="${libdir}/erlang/lib/compiler-* "
+FILES_${PN}-compiler="${bindir}/erlc ${libdir}/erlang/bin/erlc ${libdir}/erlang/lib/compiler-* ${libdir}/erlang/erts-6.4/bin/erlc "
 
 ALLOW_EMPTY_${PN}-common-test-staticdev="1"
 DESCRIPTION_${PN}-common-test-staticdev=""
@@ -1081,7 +1081,7 @@ FILES_${PN}-common-test-dbg="${libdir}/erlang/lib/common_test-*/bin/.debug ${lib
 ALLOW_EMPTY_${PN}-common-test="1"
 DESCRIPTION_${PN}-common-test=""
 RDEPENDS_${PN}-common-test=""
-FILES_${PN}-common-test="${libdir}/erlang/lib/common_test-* "
+FILES_${PN}-common-test="${bindir}/ct_run ${libdir}/erlang/bin/ct_run ${libdir}/erlang/lib/common_test-* ${libdir}/erlang/erts-6.4/bin/ct_run "
 
 ALLOW_EMPTY_${PN}-asn1-staticdev="1"
 DESCRIPTION_${PN}-asn1-staticdev=""

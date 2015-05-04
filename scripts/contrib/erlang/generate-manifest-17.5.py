@@ -15,6 +15,7 @@ import sys
 import time
 
 VERSION = "17.5"
+ERTS_VERSION = "6.4"
 
 __author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
 __version__ = "20110222.2"
@@ -204,12 +205,12 @@ if __name__ == "__main__":
     m.addPackage( "${PN}-asn1-dev", "", "", "/asn1-*/src /asn1-*/include")
     m.addPackage( "${PN}-asn1-staticdev", "", "", "/asn1-*/lib/*.a /asn1-*/priv/lib/*.a")
 
-    m.addPackage( "${PN}-common-test", "", "", "/common_test-*")
+    m.addPackage( "${PN}-common-test", "", "", "${bindir}/ct_run ${libdir}/erlang/bin/ct_run /common_test-* " + "${libdir}/erlang/erts-" + ERTS_VERSION + "/bin/ct_run")
     m.addPackage( "${PN}-common-test-dbg", "", "", "/common_test-*/bin/.debug /common_test-*/lib/.debug /common_test-*/priv/lib/.debug /common_test-*/priv/obj/.debug /common_test-*/priv/bin/.debug")
     m.addPackage( "${PN}-common-test-dev", "", "", "/common_test-*/src /common_test-*/include")
     m.addPackage( "${PN}-common-test-staticdev", "", "", "/common_test-*/lib/*.a /common_test-*/priv/lib/*.a")
 
-    m.addPackage( "${PN}-compiler", "", "", "/compiler-*")
+    m.addPackage( "${PN}-compiler", "", "", "${bindir}/erlc ${libdir}/erlang/bin/erlc /compiler-* " + "${libdir}/erlang/erts-" + ERTS_VERSION + "/bin/erlc")
     m.addPackage( "${PN}-compiler-dbg", "", "", "/compiler-*/bin/.debug /compiler-*/lib/.debug /compiler-*/priv/lib/.debug /compiler-*/priv/obj/.debug /compiler-*/priv/bin/.debug")
     m.addPackage( "${PN}-compiler-dev", "", "", "/compiler-*/src /compiler-*/include")
     m.addPackage( "${PN}-compiler-staticdev", "", "", "/compiler-*/lib/*.a /compiler-*/priv/lib/*.a")
@@ -259,7 +260,7 @@ if __name__ == "__main__":
     m.addPackage( "${PN}-debugger-dev", "", "", "/debugger-*/src /debugger-*/include")
     m.addPackage( "${PN}-debugger-staticdev", "", "", "/debugger-*/lib/*.a /debugger-*/priv/lib/*.a")
 
-    m.addPackage( "${PN}-dialyzer", "", "", "/dialyzer-*")
+    m.addPackage( "${PN}-dialyzer", "", "", "${bindir}/dialyzer ${libdir}/erlang/bin/dialyzer /dialyzer-* " + "${libdir}/erlang/erts-" + ERTS_VERSION + "/bin/dialyzer")
     m.addPackage( "${PN}-dialyzer-dbg", "", "", "/dialyzer-*/bin/.debug /dialyzer-*/lib/.debug /dialyzer-*/priv/lib/.debug /dialyzer-*/priv/obj/.debug /dialyzer-*/priv/bin/.debug")
     m.addPackage( "${PN}-dialyzer-dev", "", "", "/dialyzer-*/src /dialyzer-*/include")
     m.addPackage( "${PN}-dialyzer-staticdev", "", "", "/dialyzer-*/lib/*.a /dialyzer-*/priv/lib/*.a")
@@ -424,7 +425,7 @@ if __name__ == "__main__":
     m.addPackage( "${PN}-tv-dev", "", "", "/tv-*/src /tv-*/include")
     m.addPackage( "${PN}-tv-staticdev", "", "", "/tv-*/lib/*.a /tv-*/priv/lib/*.a")
 
-    m.addPackage( "${PN}-typer", "", "", "/typer-*")
+    m.addPackage( "${PN}-typer", "", "", "${bindir}/typer ${libdir}/erlang/bin/typer /typer-* " + "${libdir}/erlang/erts-" + ERTS_VERSION + "/bin/typer")
     m.addPackage( "${PN}-typer-dbg", "", "", "/typer-*/bin/.debug /typer-*/lib/.debug /typer-*/priv/lib/.debug /typer-*/priv/obj/.debug /typer-*/priv/bin/.debug")
     m.addPackage( "${PN}-typer-dev", "", "", "/typer-*/src /typer-*/include")
     m.addPackage( "${PN}-typer-staticdev", "", "", "/typer-*/lib/*.a /typer-*/priv/lib/*.a")
