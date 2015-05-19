@@ -1,12 +1,17 @@
+OpenEmbedded/Yocto Project layer for Erlang support
+===================================================
+
+This layer provides support for Erlang for use with OpenEmbedded and/or
+Yocto Project build system:
+
 This layer depends on:
 
 URI: git://github.com/openembedded/oe-core.git
 branch: master
 revision: HEAD
 
-URI: git://github.com/openembedded/meta-oe.git
-branch: master
-revision: HEAD
+Contributing
+------------
 
 Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-erlang]' in the subject'
 
@@ -14,3 +19,19 @@ When sending single patches, please using something like:
 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-erlang][PATCH'
 
 Interim layer maintainer: João Henrique Freitas <joaohf@gmail.com>
+
+Usage instructions
+------------------
+
+For conf/bblayers.conf you have to add
+
+BBLAYERS ?= " \
+   ...
+  path_to_source/sources/meta-erlang \
+  "
+
+Than run 'bitbake erlang-embedded-image-minimal' that will creates a image
+with embedded erlang.
+
+Or add 'IMAGE_INSTALL_append = " erlang"' in conf/local.conf and run
+'bitbake core-image-minimal' to get an image with erlang support.
