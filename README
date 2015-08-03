@@ -35,3 +35,16 @@ with embedded erlang.
 
 Or add 'IMAGE_INSTALL_append = " erlang"' in conf/local.conf and run
 'bitbake core-image-minimal' to get an image with erlang support.
+
+
+Other Information
+------------------
+
+This layer can provide the entire Erlang installation, from the base
+runtime (erlang) to a full erlang development environment with all
+of the bells and whistles (erlang-modules).
+
+A list of all the packages provided can be found in the manifest file,
+at recipes-devtools/erlang/erlang-${PV}-manifest.inc. This file needs
+to be re-generated and new SRCREVs need to be added whenever the version
+changes.
