@@ -15,3 +15,8 @@ S = "${WORKDIR}/otp_src_${PV}"
 PARALLEL_MAKE = ""
 
 inherit autotools-brokensep
+
+do_install_append() {
+	# remove erlang code that does not need to be loaded by the erlang runtime
+	rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin
+}

@@ -74,6 +74,7 @@ class MakefileMaker:
             provideLine += "%s " % name
         provideLine += '"'
 
+        self.out( "ERTS_VERSION = \"" + ERTS_VERSION + "\"" )
         self.out( provideLine )
         self.out( "" )
 
@@ -290,7 +291,7 @@ if __name__ == "__main__":
     m.addPackage( "${PN}-erl-interface-dev", "", "", "/erl_interface-*/src /erl_interface-*/include")
     m.addPackage( "${PN}-erl-interface-staticdev", "", "", "/erl_interface-*/lib/*.a /erl_interface-*/priv/lib/*.a")
 
-    m.addPackage( "${PN}-erts", "", "", "/erts-*")
+    m.addPackage( "${PN}-erts", "", "", "${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${libdir}/erlang/erts-*/bin")
     m.addPackage( "${PN}-erts-dbg", "", "", "/erts-*/bin/.debug /erts-*/lib/.debug /erts-*/priv/lib/.debug /erts-*/priv/obj/.debug /erts-*/priv/bin/.debug")
     m.addPackage( "${PN}-erts-dev", "", "", "/erts-*/src /erts-*/include")
     m.addPackage( "${PN}-erts-staticdev", "", "", "/erts-*/lib/*.a /erts-*/priv/lib/*.a")
@@ -449,6 +450,6 @@ if __name__ == "__main__":
     m.addPackage( "${PN}-dev", "", "", " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src ${libdir}/erlang/usr/include", True)
     m.addPackage( "${PN}-dbg", "", "", " ${libdir}/erlang/bin/.debug ${libdir}/erlang/erts-*/bin/.debug", True)
     m.addPackage( "${PN}-staticdev", "", "", "  ${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a ${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/*", True)
-    m.addPackage( "${PN}", "", "${PN}-erts ${PN}-kernel ${PN}-sasl ${PN}-stdlib", "${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${libdir}/erlang/erts-*/bin", True)
+    m.addPackage( "${PN}", "", "${PN}-erts ${PN}-kernel ${PN}-stdlib ${PN}-sasl", "", True)
 
     m.make()
