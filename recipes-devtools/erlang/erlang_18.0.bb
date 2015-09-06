@@ -6,6 +6,10 @@ require erlang-${PV}-manifest.inc
 
 PR = "r0"
 
+PACKAGECONFIG ??= ""
+
+PACKAGECONFIG[odbc] = "--with-odbc,-without-odbc,libodbc"
+
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"

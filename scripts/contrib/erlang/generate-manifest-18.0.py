@@ -441,6 +441,11 @@ if __name__ == "__main__":
     m.addPackage( "${PN}-xmerl-dev", "", "", "/xmerl-*/src /xmerl-*/include")
     m.addPackage( "${PN}-xmerl-staticdev", "", "", "/xmerl-*/lib/*.a /xmerl-*/priv/lib/*.a")
 
+    m.addPackage( "${PN}-odbc", "", "", "/odbc-*")
+    m.addPackage( "${PN}-odbc-dbg", "", "", "/odbc-*/bin/.debug /odbc*/lib/.debug /odbc-*/priv/lib/.debug /odbc-*/priv/obj/.debug /odbc-*/priv/bin/.debug")
+    m.addPackage( "${PN}-odbc-dev", "", "", "/odbc-*/src /odbc-*/include")
+    m.addPackage( "${PN}-odbc-staticdev", "", "", "/odbc-*/lib/*.a /odbc-*/priv/lib/*.a")
+
     m.addPackage( "${PN}-ose", "", "", "/ose-*")
     m.addPackage( "${PN}-ose-dbg", "", "", "/ose-*/bin/.debug /ose-*/lib/.debug /ose-*/priv/lib/.debug /ose-*/priv/obj/.debug /ose-*/priv/bin/.debug")
     m.addPackage( "${PN}-ose-dev", "", "", "/ose-*/src /ose-*/include")
