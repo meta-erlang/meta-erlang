@@ -4,8 +4,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 
 S = "${WORKDIR}/git"
-SRCREV = "ed88055a750736c5c9807ca4da4803ff8a6aef16"
-PV = "2.5.1-git${SRCPV}"
+SRCREV = "365ac649dc818619757f96a699ddb174f004cff9"
+PV = "2.6.1-git${SRCPV}"
 PR = "r0"
 
 SRC_URI = "git://github.com/rebar/rebar;branch=master"
