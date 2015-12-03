@@ -1,5 +1,5 @@
 include erlang.inc
-include erlang-18.0.inc
+include erlang-18.1.inc
 
 inherit nativesdk
 

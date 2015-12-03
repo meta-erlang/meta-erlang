@@ -14,8 +14,8 @@ import os
 import sys
 import time
 
-VERSION = "18.0"
-ERTS_VERSION = "7.0"
+VERSION = "18.1"
+ERTS_VERSION = "7.1"
 
 __author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
 __version__ = "20110222.2"
