@@ -12,7 +12,7 @@ FILES_${PN}-staticdev="${base_erlang_release}/erts-*/lib/*.a ${base_erlang_relea
 ALLOW_EMPTY_${PN}-dev="1"
 DESCRIPTION_${PN}-dev=""
 RDEPENDS_${PN}-dev=""
-FILES_${PN}-dev="${base_erlang_release}/erts-*/include ${base_erlang_release}/lib/*/include/* "
+FILES_${PN}-dev="${base_erlang_release}/erts-*/include ${base_erlang_release}/lib/*/include/* ${base_erlang_release}/erts*/src"
 
 ALLOW_EMPTY_${PN}-dbg="1"
 DESCRIPTION_${PN}-dbg=""
