@@ -59,5 +59,6 @@ do_install() {
 
     # Actually wx is not suitable with erlang embedded
     rm -rf ${D}/${libdir}/erlang/lib/wx-*
+    chown -R root:root ${D}${libdir}/erlang
 }
 
