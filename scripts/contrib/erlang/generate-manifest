@@ -1,0 +1,390 @@
+#!/usr/bin/env python2
+
+# generate Erlang Manifest for the OpenEmbedded build system
+# (C) 2016 Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+# (C) 2002-2010 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+# (C) 2007 Jeremy Laine
+# licensed under MIT, see COPYING.MIT
+#
+# June 22, 2011 -- Mark Hatle <mark.hatle@windriver.com>
+#  * Updated to no longer generate special -dbg package, instead use the
+#    single system -dbg
+#  * Update version with ".1" to indicate this change
+#
+# Feb 25, 2016 -- Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+#  * Updated to support generation for different Erlang version
+#  * Major cleanup of module handling
+#  * Version reset to 20160225
+
+
+import os
+import sys
+import argparse
+
+__author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
+__version__ = "20160225"
+
+class Module(object):
+    PN = '${PN}-%(name)s'
+    BASE_PATHS = ["/%(name)s-*"]
+    DOC_PATHS = ["/%(name)s-*/examples"]
+    DEBUG_PATHS = ["/%(name)s-*/bin/.debug",
+                   "/%(name)s-*/lib/.debug",
+                   "/%(name)s-*/priv/lib/.debug",
+                   "/%(name)s-*/priv/obj/.debug",
+                   "/%(name)s-*/priv/bin/.debug"]
+    DEV_PATHS = ["/%(name)s-*/src",
+                 "/%(name)s-*/include"]
+    STATICDEV_PATHS = ["/%(name)s-*/lib/*.a",
+                       "/%(name)s-*/priv/lib/*.a"]
+
+    def __init__(self, name, description="", dependencies="", base="", doc="",
+                 debug="", dev="", staticdev=""):
+
+        self.name = name
+        base_formatter = {'name': name}
+        sanitized_name = name.replace("-", "_")
+        sanitized_formatter = {'name': sanitized_name}
+
+        pn = self.PN % base_formatter
+
+        base_paths = base if base else " ".join(self.BASE_PATHS)
+        doc_paths = doc if doc else " ".join(self.DOC_PATHS)
+        debug_paths = debug if debug else " ".join(self.DEBUG_PATHS)
+        dev_paths = dev if dev else " ".join(self.DEV_PATHS)
+        staticdev_paths = staticdev if staticdev else " ".join(self.STATICDEV_PATHS)
+
+        self.packages = [
+            [pn, "", "", base_paths % sanitized_formatter],
+            # doc files are not Erlang modules, hence a base formatter can be used
+            [pn + "-doc", "", "", doc_paths % base_formatter],
+            [pn + "-dbg", "", "", debug_paths % sanitized_formatter],
+            [pn + "-dev", "", "", dev_paths % sanitized_formatter],
+            [pn + "-staticdev", "", "", staticdev_paths % sanitized_formatter],
+        ]
+
+
+COMMON_MODULES = [
+    Module("sasl"),
+    Module("stdlib"),
+    Module("kernel"),
+    Module("tools"),
+    Module("appmon"),
+    Module("asn1"),
+    Module("common-test",
+           base="${bindir}/ct_run ${libdir}/erlang/bin/ct_run /common_test-* " + \
+           "${libdir}/erlang/erts-*/bin/ct_run"),
+    Module("compiler",
+           base="${bindir}/erlc ${libdir}/erlang/bin/erlc /compiler-* " + \
+           "${libdir}/erlang/erts-*/bin/erlc"),
+    Module("cosevent",
+           base="/cosEvent-*",
+           debug="/cosEvent-*/bin/.debug /cosEvent-*/lib/.debug "\
+           "/cosEvent-*/priv/lib/.debug /cosEvent-*/priv/obj/.debug "\
+           "/cosEvent-*/priv/bin/.debug",
+           dev="/cosEvent-*/src /cosEvent-*/include",
+           staticdev="/cosEvent-*/lib/*.a /cosEvent-*/priv/lib/*.a"),
+    Module("coseventdomain",
+           base="/cosEventDomain-*",
+           debug="/cosEventDomain-*/bin/.debug /cosEventDomain-*/lib/.debug "\
+           "/cosEventDomain-*/priv/lib/.debug /cosEventDomain-*/priv/obj/.debug "\
+           "/cosEventDomain-*/priv/bin/.debug",
+           dev="/cosEventDomain-*/src /cosEventDomain-*/include",
+           staticdev="/cosEventDomain-*/lib/*.a /cosEventDomain-*/priv/lib/*.a"),
+    Module("cosfiletransfer",
+           base="/cosFileTransfer-*",
+           debug="/cosFileTransfer-*/bin/.debug /cosFileTransfer-*/lib/.debug "\
+           "/cosFileTransfer-*/priv/lib/.debug /cosFileTransfer-*/priv/obj/.debug "\
+           "/cosFileTransfer-*/priv/bin/.debug",
+           dev="/cosFileTransfer-*/src /cosFileTransfer-*/include",
+           staticdev="/cosFileTransfer-*/lib/*.a /cosFileTransfer-*/priv/lib/*.a"),
+    Module("cosnotification",
+           base="/cosNotification-*",
+           debug="/cosNotification-*/bin/.debug /cosNotification-*/lib/.debug "\
+           "/cosNotification-*/priv/lib/.debug /cosNotification-*/priv/obj/.debug "\
+           "/cosNotification-*/priv/bin/.debug",
+           dev="/cosNotification-*/src /cosNotification-*/include",
+           staticdev="/cosNotification-*/lib/*.a /cosNotification-*/priv/lib/*.a"),
+    Module("cosproperty",
+           base="/cosProperty-*",
+           debug="/cosProperty-*/bin/.debug /cosProperty-*/lib/.debug "\
+           "/cosProperty-*/priv/lib/.debug /cosProperty-*/priv/obj/.debug "\
+           "/cosProperty-*/priv/bin/.debug",
+           dev="/cosProperty-*/src /cosProperty-*/include",
+           staticdev="/cosProperty-*/lib/*.a /cosProperty-*/priv/lib/*.a"),
+    Module("costime",
+           base="/cosTime-*",
+           debug="/cosTime-*/bin/.debug /cosTime-*/lib/.debug /cosTime-*/priv/lib/.debug " \
+           "/cosTime-*/priv/obj/.debug /cosTime-*/priv/bin/.debug",
+           dev="/cosTime-*/src /cosTime-*/include",
+           staticdev="/cosTime-*/lib/*.a /cosTime-*/priv/lib/*.a"),
+    Module("costransactions",
+           base="/cosTransactions-*",
+           staticdev="/cosTransactions-*/lib/*.a /cosTransactions-*/priv/lib/*.a",
+           dev="/cosTransactions-*/src /cosTransactions-*/include",
+           debug="/cosTransactions-*/bin/.debug /cosTransactions-*/lib/.debug " \
+           "/cosTransactions-*/priv/lib/.debug /cosTransactions-*/priv/obj/.debug " \
+           "/cosTransactions-*/priv/bin/.debug"),
+    Module("crypto"),
+    Module("debugger"),
+    Module("dialyzer",
+           base="${bindir}/%(name)s ${libdir}/erlang/bin/%(name)s /%(name)s-* " + \
+           "${libdir}/erlang/erts-*/bin/%(name)s"),
+    Module("diameter"),
+    Module("edoc"),
+    Module("eldap"),
+    Module("erl-docgen"),
+    Module("erl-interface"),
+    Module("erts",
+           base="${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin "\
+           "${libdir}/erlang/erts-*/bin"),
+    Module("et"),
+    Module("eunit"),
+    Module("gs"),
+    Module("hipe"),
+    Module("ic"),
+    Module("inets"),
+    Module("jinterface"),
+    Module("megaco"),
+    Module("mnesia"),
+    Module("observer"),
+    Module("orber"),
+    Module("os-mon"),
+    Module("otp-mibs"),
+    Module("parsetools"),
+    Module("percept"),
+    Module("pman"),
+    Module("public-key"),
+    Module("reltool"),
+    Module("runtime-tools"),
+    Module("snmp"),
+    Module("ssh"),
+    Module("ssl"),
+    Module("syntax-tools"),
+    Module("test-server"),
+    Module("toolbar"),
+    Module("tv"),
+    Module("typer",
+           base="${bindir}/typer ${libdir}/erlang/bin/typer /typer-* " + \
+           "${libdir}/erlang/erts-*/bin/typer"),
+    Module("webtool"),
+    Module("xmerl"),
+    Module("odbc"),
+    Module("ose"),
+]
+
+
+SPEC = {
+    '18.1.5': {
+        'ERTS_VERSION': '7.1',
+        'modules' : COMMON_MODULES,
+    },
+    '18.2.3': {
+        'ERTS_VERSION': '7.2.1',
+        'modules' : COMMON_MODULES,
+    },
+}
+
+
+class MakefileMaker:
+
+    def __init__(self, outfile, version, erts_version):
+        """initialize"""
+        self.version = version
+        self.erts_version = erts_version
+        self.packages = {}
+        self.targetPrefix = "${libdir}/erlang/lib"
+        self.output = outfile
+        self.out("""
+# WARNING: This file is AUTO GENERATED: Manual edits will be lost next time I regenerate the file.
+# Generator: '%s' Version %s (C) 2002-2010 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+""" % (' '.join(sys.argv), __version__))
+
+    #
+    # helper functions
+    #
+
+    def out(self, data):
+        """print a line to the output file"""
+        self.output.write("%s\n" % data)
+
+    def setPrefix(self, targetPrefix):
+        """set a file prefix for addPackage files"""
+        self.targetPrefix = targetPrefix
+
+    def doProlog(self):
+        self.out(""" """)
+        self.out("")
+
+    def addModule(self, module):
+        for pkg in module.packages:
+            self.addPackage(*pkg)
+
+    def addPackage(self, name, description, dependencies, filenames, keepfiles=False):
+        """add a package to the Makefile"""
+        if type(filenames) == type(""):
+            filenames = filenames.split()
+        fullFilenames = []
+        for filename in filenames:
+            if filename[0] != "$":
+                fullFilenames.append("%s%s" % (self.targetPrefix, filename))
+            else:
+                fullFilenames.append(filename)
+        self.packages[name] = description, dependencies, fullFilenames, keepfiles
+
+    def doBody(self):
+        """generate body of Makefile"""
+
+        #
+        # generate provides line
+        #
+
+        provideLine = 'PROVIDES+="'
+        for name in sorted(self.packages):
+            provideLine += "%s " % name
+        provideLine += '"'
+
+        self.out("ERTS_VERSION = \"" + self.erts_version + "\"")
+        self.out(provideLine)
+        self.out("")
+
+        #
+        # generate package line
+        #
+
+        packageLine = 'PACKAGES="${PN}-dbg '
+        for name in reversed(sorted(self.packages)):
+            if name.startswith("${PN}-distutils"):
+                if name == "${PN}-distutils":
+                    packageLine += "%s-staticdev %s " % (name, name)
+            elif name != '${PN}-dbg':
+                packageLine += "%s " % name
+        packageLine += '${PN}-modules"'
+
+        self.out(packageLine)
+        self.out("")
+
+        #
+        # generate package variables
+        #
+
+        for name, data in reversed(sorted(self.packages.iteritems())):
+            desc, deps, files, keepfiles = data
+
+            #
+            # write out the description, revision and dependencies
+            #
+            self.out('ALLOW_EMPTY_%s="1"' % (name))
+            self.out('DESCRIPTION_%s="%s"' % (name, desc))
+            self.out('RDEPENDS_%s="%s"' % (name, deps))
+
+            if keepfiles:
+                line = 'FILES_%s+="' % name
+            else:
+                line = 'FILES_%s="' % name
+
+            #
+            # check which directories to make in the temporary directory
+            #
+
+            # if python had a set-datatype this would be
+            # sufficient. for now, we're using a dict
+            # instead.
+            dirset = {}
+            for target in files:
+                dirset[os.path.dirname(target)] = True
+
+            #
+            # generate which files to copy for the target (-dfR
+            # because whole directories are also allowed)
+            #
+            for target in files:
+                line += "%s " % target
+
+            line += '"'
+            self.out(line)
+            self.out("")
+
+        self.out('DESCRIPTION_${PN}-modules="All Erlang modules"')
+        line = 'RDEPENDS_${PN}-modules="'
+
+        pkgtoskip = ('-dbg', '-staticdev', '-dev')
+
+        for name, data in sorted(self.packages.iteritems()):
+            if name.endswith(pkgtoskip):
+                continue
+            if name not in ['${PN}-dev', '${PN}-distutils-staticdev']:
+                line += "%s " % name
+
+
+        self.out("%s \"" % line)
+        self.out('ALLOW_EMPTY_${PN}-modules = "1"')
+
+    def doEpilog(self):
+        self.out("""""")
+        self.out("")
+
+    def make(self):
+        self.doProlog()
+        self.doBody()
+        self.doEpilog()
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='OpemEmbedded Erlang manifest generator')
+    parser.add_argument('--erlang-version', required=True,
+                        help='Erlang version, ex: 18.1')
+    parser.add_argument('--outfile', help='Output file')
+
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+
+    opts = parse_arguments()
+
+    if opts.outfile:
+        try:
+            os.unlink(opts.outfile)
+        except OSError:
+            sys.exc_clear()
+        outfile = file(opts.outfile, "w")
+    else:
+        outfile = sys.stdout
+
+    if opts.erlang_version not in SPEC:
+        sys.stderr.write("Unknown Erlang version '%s'\n" % opts.erlang_version)
+        raise SystemExit(1)
+
+    spec = SPEC[opts.erlang_version]
+
+    m = MakefileMaker(outfile,
+                      version=opts.erlang_version,
+                      erts_version=spec['ERTS_VERSION'])
+
+    for module in spec['modules']:
+        m.addModule(module)
+
+    # Add packages here. Only specify dlopen-style library
+    # dependencies here, no ldd-style dependencies!  Parameters:
+    #
+    # revision, name, description, dependencies, filenames
+    #
+    m.addPackage("${PN}-doc", "", "",
+                 " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man "\
+                 "${libdir}/erlang/lib/*/examples ${libdir}/erlang/misc",
+                 True)
+    m.addPackage("${PN}-dev", "", "",
+                 " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src "\
+                 "${libdir}/erlang/usr/include",
+                 True)
+    m.addPackage("${PN}-dbg", "", "",
+                 " ${libdir}/erlang/bin/.debug ${libdir}/erlang/erts-*/bin/.debug",
+                 True)
+    m.addPackage("${PN}-staticdev", "", "",
+                 "  ${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a "\
+                 "${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/*",
+                 True)
+    m.addPackage("${PN}", "",
+                 "${PN}-erts ${PN}-kernel ${PN}-stdlib ${PN}-sasl", "", True)
+    m.make()
