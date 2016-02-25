@@ -27,14 +27,17 @@ __version__ = "20160225"
 class Module(object):
     PN = '${PN}-%(name)s'
     BASE_PATHS = ["/%(name)s-*"]
-    DOC_PATHS = ["/%(name)s-*/examples"]
+    DOC_PATHS = ["/%(name)s-*/examples",
+                 "/%(name)s-*/doc",
+                 "/%(name)s-*/man"]
     DEBUG_PATHS = ["/%(name)s-*/bin/.debug",
                    "/%(name)s-*/lib/.debug",
                    "/%(name)s-*/priv/lib/.debug",
                    "/%(name)s-*/priv/obj/.debug",
                    "/%(name)s-*/priv/bin/.debug"]
-    DEV_PATHS = ["/%(name)s-*/src",
-                 "/%(name)s-*/include"]
+    DEV_PATHS = ["/%(name)s-*/*src",
+                 "/%(name)s-*/include",
+                 "/%(name)s-*/priv/obj"]
     STATICDEV_PATHS = ["/%(name)s-*/lib/*.a",
                        "/%(name)s-*/priv/lib/*.a"]
 
