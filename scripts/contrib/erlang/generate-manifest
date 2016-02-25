@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python2.7
 
 # generate Erlang Manifest for the OpenEmbedded build system
 # (C) 2016 Maciej Borzecki <maciej.borzecki@open-rnd.pl>
@@ -20,6 +20,7 @@
 import os
 import sys
 import argparse
+from collections import OrderedDict
 
 __author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
 __version__ = "20160225"
@@ -58,12 +59,12 @@ class Module(object):
         staticdev_paths = staticdev if staticdev else " ".join(self.STATICDEV_PATHS)
 
         self.packages = [
-            [pn, "", "", base_paths % sanitized_formatter],
             # doc files are not Erlang modules, hence a base formatter can be used
             [pn + "-doc", "", "", doc_paths % base_formatter],
             [pn + "-dbg", "", "", debug_paths % sanitized_formatter],
             [pn + "-dev", "", "", dev_paths % sanitized_formatter],
             [pn + "-staticdev", "", "", staticdev_paths % sanitized_formatter],
+            [pn, "", "", base_paths % sanitized_formatter],
         ]
 
 
@@ -138,9 +139,6 @@ COMMON_MODULES = [
     Module("eldap"),
     Module("erl-docgen"),
     Module("erl-interface"),
-    Module("erts",
-           base="${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin "\
-           "${libdir}/erlang/erts-*/bin"),
     Module("et"),
     Module("eunit"),
     Module("gs"),
@@ -168,12 +166,15 @@ COMMON_MODULES = [
     Module("toolbar"),
     Module("tv"),
     Module("typer",
-           base="${bindir}/typer ${libdir}/erlang/bin/typer /typer-* " + \
-           "${libdir}/erlang/erts-*/bin/typer"),
+           base="${bindir}/%(name)s ${libdir}/erlang/bin/%(name)s /%(name)s-* " + \
+           "${libdir}/erlang/erts-*/bin/%(name)s"),
     Module("webtool"),
     Module("xmerl"),
     Module("odbc"),
     Module("ose"),
+    Module("erts",
+           base="${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin "\
+           "${libdir}/erlang/erts-*/bin"),
 ]
 
 
@@ -195,7 +196,7 @@ class MakefileMaker:
         """initialize"""
         self.version = version
         self.erts_version = erts_version
-        self.packages = {}
+        self.packages = OrderedDict()
         self.targetPrefix = "${libdir}/erlang/lib"
         self.output = outfile
         self.out("""
@@ -243,7 +244,7 @@ class MakefileMaker:
         #
 
         provideLine = 'PROVIDES+="'
-        for name in sorted(self.packages):
+        for name in self.packages:
             provideLine += "%s " % name
         provideLine += '"'
 
@@ -256,7 +257,7 @@ class MakefileMaker:
         #
 
         packageLine = 'PACKAGES="${PN}-dbg '
-        for name in reversed(sorted(self.packages)):
+        for name in self.packages:
             if name.startswith("${PN}-distutils"):
                 if name == "${PN}-distutils":
                     packageLine += "%s-staticdev %s " % (name, name)
@@ -271,7 +272,7 @@ class MakefileMaker:
         # generate package variables
         #
 
-        for name, data in reversed(sorted(self.packages.iteritems())):
+        for name, data in self.packages.iteritems():
             desc, deps, files, keepfiles = data
 
             #
