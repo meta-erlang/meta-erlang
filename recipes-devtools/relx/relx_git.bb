@@ -4,8 +4,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2c2fa1d0e3e31bc54af95828d407a5c1"
 
 S = "${WORKDIR}/git"
-SRCREV = "2c8e17e366a548d54f319e8a62d6543d13c64d07"
-PV = "3.5.0-git${SRCPV}"
+SRCREV = "1e15397a4924804f248facc18ccd07076baef7a4"
+PV = "3.19.0-git${SRCPV}"
 PR = "r0"
 
 SRC_URI = "git://github.com/erlware/relx;branch=master"
