@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/nerves-project/erlinit;branch=master \
     file://erlinit.config \
     "
 
-RDEPENDS_${PN} += "erlang"
 
 EXTRA_OEMAKE = "erlinit"
 
