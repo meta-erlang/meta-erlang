@@ -1,10 +1,12 @@
 DESCRIPTION = "A dynamic programming language and runtime environment, \
 with built-in support for concurrency, distribution and fault tolerance"
 SECTION = "devel/erlang"
-DEPENDS = "ncurses zlib"
 PRIORITY = "optional"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ff253ad767462c46be284da12dda33e8"
+
+DEPENDS = "ncurses zlib"
+DEPENDS_append_class-native = " ncurses-native"
 
 SRC_URI = "https://github.com/erlang/otp/archive/OTP-${PV}.tar.gz"
 SRC_URI += "file://fix-wx-configure.patch"
