@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/erlang/otp;branch=master"
 SRC_URI += "file://fix-wx-configure.patch"
 SRC_URI += "file://erlang-fix-build-issue-in-Yocto.patch"
 
-S = "${WORKDIR}/otp-OTP-${PV}"
+S = "${WORKDIR}/git"
 
 PARALLEL_MAKE = ""
 
