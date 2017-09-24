@@ -4,14 +4,15 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1cb512268740591efa7a3791b3924ef8"
 
 S = "${WORKDIR}/git"
-SRCREV = "8a33b05f66d520df97694a9bf3b255437cb3eb35"
-PV = "0.7.3-git${SRCPV}"
+SRCREV = "e0df8a62ca61507888d9f07b64ea44c8db21a4eb"
+PV = "1.1.4-git${SRCPV}"
 PR = "r0"
 
 SRC_URI = "git://github.com/nerves-project/erlinit;branch=master \
     file://erlinit.config \
     "
 
+TARGET_CC_ARCH += "${LDFLAGS}"
 
 EXTRA_OEMAKE = "erlinit"
 
