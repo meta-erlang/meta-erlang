@@ -198,7 +198,10 @@ SPEC = {
     '19.3.6.2': {
         'ERTS_VERSION': '8.3.5.2',
         'modules' : COMMON_MODULES,
-    }
+    },
+    '20.0.5': {
+        'ERTS_VERSION': '9.0.5',
+        'modules' : COMMON_MODULES,
     }
 }
 
@@ -345,7 +348,6 @@ class MakefileMaker:
         self.doProlog()
         self.doBody()
         self.doEpilog()
-
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='OpemEmbedded Erlang manifest generator')
