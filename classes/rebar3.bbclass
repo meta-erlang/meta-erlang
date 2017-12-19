@@ -26,11 +26,11 @@ def get_erlang_release(v):
     return "%s.%s.%s" % (m.group(1), m.group(2), m.group(3))
 
 def get_erlang_erts(systemlibspath):
-   ldir = os.listdir(systemlibspath)
-   for dir in ldir:
-       if dir.startswith("erts"):
-           return dir.split('-')[1]
-   return ""
+    ldir = os.listdir(systemlibspath)
+    for dir in ldir:
+        if dir.startswith("erts"):
+            return dir.split('-')[1]
+    return ""
 
 rebar3_do_compile() {
     rebar3 compile
