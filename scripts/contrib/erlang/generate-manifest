@@ -15,7 +15,10 @@
 #  * Updated to support generation for different Erlang version
 #  * Major cleanup of module handling
 #  * Version reset to 20160225
-
+#
+# Aug 09, 2018 -- Niklas Johansson <raphexion@gmail.com>
+#  * Minor bugfix (isinstance)
+#  * Improve readability and pep8
 
 import os
 import sys
@@ -23,7 +26,8 @@ import argparse
 from collections import OrderedDict
 
 __author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
-__version__ = "20160225"
+__version__ = "20180809"
+
 
 class Module(object):
     PN = '${PN}-%(name)s'
@@ -42,8 +46,8 @@ class Module(object):
     STATICDEV_PATHS = ["/%(name)s-*/lib/*.a",
                        "/%(name)s-*/priv/lib/*.a"]
 
-    def __init__(self, name, description="", dependencies="", base="", doc="",
-                 debug="", dev="", staticdev=""):
+    def __init__(self, name, description="", dependencies="", base=[], doc=[],
+                 debug=[], dev=[], staticdev=[]):
 
         self.name = name
         base_formatter = {'name': name}
@@ -52,14 +56,15 @@ class Module(object):
 
         pn = self.PN % base_formatter
 
-        base_paths = base if base else " ".join(self.BASE_PATHS)
-        doc_paths = doc if doc else " ".join(self.DOC_PATHS)
-        debug_paths = debug if debug else " ".join(self.DEBUG_PATHS)
-        dev_paths = dev if dev else " ".join(self.DEV_PATHS)
-        staticdev_paths = staticdev if staticdev else " ".join(self.STATICDEV_PATHS)
-
+        base_paths = ' '.join(base if base else self.BASE_PATHS)
+        doc_paths = ' '.join(doc if doc else self.DOC_PATHS)
+        debug_paths = ' '.join(debug if debug else self.DEBUG_PATHS)
+        dev_paths = ' '.join(dev if dev else self.DEV_PATHS)
+        staticdev_paths = ' '.join(staticdev if staticdev
+                                   else self.STATICDEV_PATHS)
         self.packages = [
-            # doc files are not Erlang modules, hence a base formatter can be used
+            # doc files are not Erlang modules,
+            # hence a base formatter can be used
             [pn + "-doc", "", "", doc_paths % base_formatter],
             [pn + "-dbg", "", "", debug_paths % sanitized_formatter],
             [pn + "-dev", "", "", dev_paths % sanitized_formatter],
@@ -76,64 +81,98 @@ COMMON_MODULES = [
     Module("appmon"),
     Module("asn1"),
     Module("common-test",
-           base="${bindir}/ct_run ${libdir}/erlang/bin/ct_run /common_test-* " + \
-           "${libdir}/erlang/erts-*/bin/ct_run"),
+           base=["${bindir}/ct_run ${libdir}/erlang/bin/ct_run",
+                 "/common_test-*",
+                 "${libdir}/erlang/erts-*/bin/ct_run"]),
     Module("compiler",
-           base="${bindir}/erlc ${libdir}/erlang/bin/erlc /compiler-* " + \
-           "${libdir}/erlang/erts-*/bin/erlc"),
+           base=["${bindir}/erlc",
+                 "${libdir}/erlang/bin/erlc",
+                 "/compiler-*",
+                 "${libdir}/erlang/erts-*/bin/erlc"]),
     Module("cosevent",
-           base="/cosEvent-*",
-           debug="/cosEvent-*/bin/.debug /cosEvent-*/lib/.debug "\
-           "/cosEvent-*/priv/lib/.debug /cosEvent-*/priv/obj/.debug "\
-           "/cosEvent-*/priv/bin/.debug",
-           dev="/cosEvent-*/src /cosEvent-*/include",
-           staticdev="/cosEvent-*/lib/*.a /cosEvent-*/priv/lib/*.a"),
+           base=["/cosEvent-*"],
+           debug=["/cosEvent-*/bin/.debug",
+                  "/cosEvent-*/lib/.debug",
+                  "/cosEvent-*/priv/lib/.debug",
+                  "/cosEvent-*/priv/obj/.debug",
+                  "/cosEvent-*/priv/bin/.debug"],
+           dev=["/cosEvent-*/src",
+                "/cosEvent-*/include"],
+           staticdev=["/cosEvent-*/lib/*.a",
+                      "/cosEvent-*/priv/lib/*.a"]),
     Module("coseventdomain",
-           base="/cosEventDomain-*",
-           debug="/cosEventDomain-*/bin/.debug /cosEventDomain-*/lib/.debug "\
-           "/cosEventDomain-*/priv/lib/.debug /cosEventDomain-*/priv/obj/.debug "\
-           "/cosEventDomain-*/priv/bin/.debug",
-           dev="/cosEventDomain-*/src /cosEventDomain-*/include",
-           staticdev="/cosEventDomain-*/lib/*.a /cosEventDomain-*/priv/lib/*.a"),
+           base=["/cosEventDomain-*"],
+           debug=["/cosEventDomain-*/bin/.debug",
+                  "/cosEventDomain-*/lib/.debug",
+                  "/cosEventDomain-*/priv/lib/.debug",
+                  "/cosEventDomain-*/priv/obj/.debug",
+                  "/cosEventDomain-*/priv/bin/.debug"],
+           dev=["/cosEventDomain-*/src",
+                "/cosEventDomain-*/include"],
+           staticdev=["/cosEventDomain-*/lib/*.a",
+                      "/cosEventDomain-*/priv/lib/*.a"]),
     Module("cosfiletransfer",
-           base="/cosFileTransfer-*",
-           debug="/cosFileTransfer-*/bin/.debug /cosFileTransfer-*/lib/.debug "\
-           "/cosFileTransfer-*/priv/lib/.debug /cosFileTransfer-*/priv/obj/.debug "\
-           "/cosFileTransfer-*/priv/bin/.debug",
-           dev="/cosFileTransfer-*/src /cosFileTransfer-*/include",
-           staticdev="/cosFileTransfer-*/lib/*.a /cosFileTransfer-*/priv/lib/*.a"),
+           base=["/cosFileTransfer-*"],
+           debug=["/cosFileTransfer-*/bin/.debug",
+                  "/cosFileTransfer-*/lib/.debug",
+                  "/cosFileTransfer-*/priv/lib/.debug",
+                  "/cosFileTransfer-*/priv/obj/.debug",
+                  "/cosFileTransfer-*/priv/bin/.debug"],
+           dev=["/cosFileTransfer-*/src",
+                "/cosFileTransfer-*/include"],
+           staticdev=["/cosFileTransfer-*/lib/*.a",
+                      "/cosFileTransfer-*/priv/lib/*.a"]),
     Module("cosnotification",
-           base="/cosNotification-*",
-           debug="/cosNotification-*/bin/.debug /cosNotification-*/lib/.debug "\
-           "/cosNotification-*/priv/lib/.debug /cosNotification-*/priv/obj/.debug "\
-           "/cosNotification-*/priv/bin/.debug",
-           dev="/cosNotification-*/src /cosNotification-*/include",
-           staticdev="/cosNotification-*/lib/*.a /cosNotification-*/priv/lib/*.a"),
+           base=["/cosNotification-*"],
+           debug=["/cosNotification-*/bin/.debug",
+                  "/cosNotification-*/lib/.debug",
+                  "/cosNotification-*/priv/lib/.debug",
+                  "/cosNotification-*/priv/obj/.debug",
+                  "/cosNotification-*/priv/bin/.debug"],
+           dev=["/cosNotification-*/src",
+                "/cosNotification-*/include"],
+           staticdev=["/cosNotification-*/lib/*.a",
+                      "/cosNotification-*/priv/lib/*.a"]),
     Module("cosproperty",
-           base="/cosProperty-*",
-           debug="/cosProperty-*/bin/.debug /cosProperty-*/lib/.debug "\
-           "/cosProperty-*/priv/lib/.debug /cosProperty-*/priv/obj/.debug "\
-           "/cosProperty-*/priv/bin/.debug",
-           dev="/cosProperty-*/src /cosProperty-*/include",
-           staticdev="/cosProperty-*/lib/*.a /cosProperty-*/priv/lib/*.a"),
+           base=["/cosProperty-*"],
+           debug=["/cosProperty-*/bin/.debug",
+                  "/cosProperty-*/lib/.debug",
+                  "/cosProperty-*/priv/lib/.debug",
+                  "/cosProperty-*/priv/obj/.debug",
+                  "/cosProperty-*/priv/bin/.debug"],
+           dev=["/cosProperty-*/src",
+                "/cosProperty-*/include"],
+           staticdev=["/cosProperty-*/lib/*.a",
+                      "/cosProperty-*/priv/lib/*.a"]),
     Module("costime",
-           base="/cosTime-*",
-           debug="/cosTime-*/bin/.debug /cosTime-*/lib/.debug /cosTime-*/priv/lib/.debug " \
-           "/cosTime-*/priv/obj/.debug /cosTime-*/priv/bin/.debug",
-           dev="/cosTime-*/src /cosTime-*/include",
-           staticdev="/cosTime-*/lib/*.a /cosTime-*/priv/lib/*.a"),
+           base=["/cosTime-*"],
+           debug=["/cosTime-*/bin/.debug",
+                  "/cosTime-*/lib/.debug",
+                  "/cosTime-*/priv/lib/.debug",
+                  "/cosTime-*/priv/obj/.debug",
+                  "/cosTime-*/priv/bin/.debug"],
+           dev=["/cosTime-*/src",
+                "/cosTime-*/include"],
+           staticdev=["/cosTime-*/lib/*.a",
+                      "/cosTime-*/priv/lib/*.a"]),
     Module("costransactions",
-           base="/cosTransactions-*",
-           staticdev="/cosTransactions-*/lib/*.a /cosTransactions-*/priv/lib/*.a",
-           dev="/cosTransactions-*/src /cosTransactions-*/include",
-           debug="/cosTransactions-*/bin/.debug /cosTransactions-*/lib/.debug " \
-           "/cosTransactions-*/priv/lib/.debug /cosTransactions-*/priv/obj/.debug " \
-           "/cosTransactions-*/priv/bin/.debug"),
+           base=["/cosTransactions-*"],
+           staticdev=["/cosTransactions-*/lib/*.a",
+                      "/cosTransactions-*/priv/lib/*.a"],
+           dev=["/cosTransactions-*/src",
+                "/cosTransactions-*/include"],
+           debug=["/cosTransactions-*/bin/.debug",
+                  "/cosTransactions-*/lib/.debug",
+                  "/cosTransactions-*/priv/lib/.debug",
+                  "/cosTransactions-*/priv/obj/.debug",
+                  "/cosTransactions-*/priv/bin/.debug"]),
     Module("crypto"),
     Module("debugger"),
     Module("dialyzer",
-           base="${bindir}/%(name)s ${libdir}/erlang/bin/%(name)s /%(name)s-* " + \
-           "${libdir}/erlang/erts-*/bin/%(name)s"),
+           base=["${bindir}/%(name)s",
+                 "${libdir}/erlang/bin/%(name)s",
+                 "/%(name)s-*",
+                 "${libdir}/erlang/erts-*/bin/%(name)s"]),
     Module("diameter"),
     Module("edoc"),
     Module("eldap"),
@@ -166,51 +205,60 @@ COMMON_MODULES = [
     Module("toolbar"),
     Module("tv"),
     Module("typer",
-           base="${bindir}/%(name)s ${libdir}/erlang/bin/%(name)s /%(name)s-* " + \
-           "${libdir}/erlang/erts-*/bin/%(name)s"),
+           base=["${bindir}/%(name)s",
+                 "${libdir}/erlang/bin/%(name)s",
+                 "/%(name)s-*",
+                 "${libdir}/erlang/erts-*/bin/%(name)s"]),
     Module("webtool"),
     Module("xmerl"),
     Module("odbc"),
     Module("ose"),
     Module("erts",
-           base="${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin "\
-           "${libdir}/erlang/erts-*/bin"),
+           base=["${bindir}",
+                 "${libdir}/erlang/releases",
+                 "${libdir}/erlang/bin",
+                 "${libdir}/erlang/erts-*/bin"]),
 ]
 
 
 SPEC = {
     '18.1.5': {
         'ERTS_VERSION': '7.1',
-        'modules' : COMMON_MODULES,
+        'modules': COMMON_MODULES,
     },
     '18.2.3': {
         'ERTS_VERSION': '7.2.1',
-        'modules' : COMMON_MODULES,
+        'modules': COMMON_MODULES,
     },
     '18.3.4': {
         'ERTS_VERSION': '7.3',
-        'modules' : COMMON_MODULES,
+        'modules': COMMON_MODULES,
     },
     '19.0': {
         'ERTS_VERSION': '8.0',
-        'modules' : COMMON_MODULES,
+        'modules': COMMON_MODULES,
     },
     '19.3.6.2': {
         'ERTS_VERSION': '8.3.5.2',
-        'modules' : COMMON_MODULES,
+        'modules': COMMON_MODULES,
     },
     '20.0.5': {
         'ERTS_VERSION': '9.0.5',
-        'modules' : COMMON_MODULES,
+        'modules': COMMON_MODULES,
     },
     '21.1.0': {
         'ERTS_VERSION': '10.1.0',
-        'modules' : COMMON_MODULES,
+        'modules': COMMON_MODULES,
     }
 }
 
 
 class MakefileMaker:
+    WARNING = '\n# '.join([
+        '# WARNING: This file is AUTO GENERATED.',
+        'Manual edits will be lost next time we regenerate this file.',
+        'Generated by script in scripts/contrib/erlang',
+        'Was runned for erlang version: %s'])
 
     def __init__(self, outfile, version, erts_version):
         """initialize"""
@@ -219,11 +267,7 @@ class MakefileMaker:
         self.packages = OrderedDict()
         self.targetPrefix = "${libdir}/erlang/lib"
         self.output = outfile
-        self.out("""
-# WARNING: This file is AUTO GENERATED: Manual edits will be lost next time I regenerate the file.
-# Generator: '%s' Version %s (C) 2002-2010 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
-""" % (' '.join(sys.argv), __version__))
-
+        self.out(self.WARNING % version)
     #
     # helper functions
     #
@@ -246,7 +290,7 @@ class MakefileMaker:
 
     def addPackage(self, name, description, dependencies, filenames, keepfiles=False):
         """add a package to the Makefile"""
-        if type(filenames) == type(""):
+        if isinstance(filenames, str):
             filenames = filenames.split()
         fullFilenames = []
         for filename in filenames:
@@ -340,7 +384,6 @@ class MakefileMaker:
             if name not in ['${PN}-dev', '${PN}-distutils-staticdev']:
                 line += "%s " % name
 
-
         self.out("%s \"" % line)
         self.out('ALLOW_EMPTY_${PN}-modules = "1"')
 
@@ -352,6 +395,7 @@ class MakefileMaker:
         self.doProlog()
         self.doBody()
         self.doEpilog()
+
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='OpemEmbedded Erlang manifest generator')
@@ -394,18 +438,18 @@ if __name__ == "__main__":
     # revision, name, description, dependencies, filenames
     #
     m.addPackage("${PN}-doc", "", "",
-                 " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man "\
+                 " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man "
                  "${libdir}/erlang/lib/*/examples ${libdir}/erlang/misc",
                  True)
     m.addPackage("${PN}-dev", "", "",
-                 " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src "\
+                 " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src "
                  "${libdir}/erlang/usr/include",
                  True)
     m.addPackage("${PN}-dbg", "", "",
                  " ${libdir}/erlang/bin/.debug ${libdir}/erlang/erts-*/bin/.debug",
                  True)
     m.addPackage("${PN}-staticdev", "", "",
-                 "  ${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a "\
+                 "  ${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a "
                  "${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/*",
                  True)
     m.addPackage("${PN}", "",
