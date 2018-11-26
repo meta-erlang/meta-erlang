@@ -1,7 +1,7 @@
 
 inherit erlang
 
-DEPENDS += "rebar3-native"
+DEPENDS += "rebar3-native gawk-native"
 
 B = "${S}"
 
@@ -14,7 +14,7 @@ REBAR3_RELEASE_NAME ?= "${BPN}-${@get_erlang_release("${PV}")}"
 export REBAR3_TARGET_INCLUDE_ERTS = "${STAGING_LIBDIR}/erlang"
 export REBAR3_TARGET_SYSTEM_LIBS = "${STAGING_LIBDIR}/erlang"
 
-export ERLANG_ERTS = "${@get_erlang_erts("${REBAR3_TARGET_SYSTEM_LIBS}")}"
+export ERLANG_ERTS = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
 
 def get_full_profile(p):
     profiles = p.split(',')
@@ -24,13 +24,6 @@ def get_erlang_release(v):
     import re
     m = re.match("^([0-9]+)\.([0-9]+)\.([0-9]+)", v)
     return "%s.%s.%s" % (m.group(1), m.group(2), m.group(3))
-
-def get_erlang_erts(systemlibspath):
-    ldir = os.listdir(systemlibspath)
-    for dir in ldir:
-        if dir.startswith("erts"):
-            return dir.split('-')[1]
-    return ""
 
 rebar3_do_compile() {
     rebar3 compile
