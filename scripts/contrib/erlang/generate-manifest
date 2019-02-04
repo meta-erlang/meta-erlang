@@ -327,7 +327,7 @@ class MakefileMaker:
                     packageLine += "%s-staticdev %s " % (name, name)
             elif name != '${PN}-dbg':
                 packageLine += "%s " % name
-        packageLine += '${PN}-modules"'
+        packageLine += '${PN}-modules ${PN}-modules-dev"'
 
         self.out(packageLine)
         self.out("")
@@ -376,7 +376,7 @@ class MakefileMaker:
         self.out('DESCRIPTION_${PN}-modules="All Erlang modules"')
         line = 'RDEPENDS_${PN}-modules="'
 
-        pkgtoskip = ('-dbg', '-staticdev', '-dev')
+        pkgtoskip = ('-dbg', '-doc', '-staticdev', '-dev')
 
         for name, data in sorted(self.packages.iteritems()):
             if name.endswith(pkgtoskip):
@@ -386,6 +386,20 @@ class MakefileMaker:
 
         self.out("%s \"" % line)
         self.out('ALLOW_EMPTY_${PN}-modules = "1"')
+        self.out("")
+
+        self.out('DESCRIPTION_${PN}-modules-dev="All Erlang modules for developers"')
+        line = 'RDEPENDS_${PN}-modules-dev="${PN}-modules '
+
+        for name, data in sorted(self.packages.iteritems()):
+            if not name.endswith(pkgtoskip) or name.endswith('-dbg'):
+                continue
+            if name not in ['${PN}-dev', '${PN}-distutils-staticdev']:
+                line += "%s " % name
+
+        self.out("%s \"" % line)
+        self.out('ALLOW_EMPTY_${PN}-modules-dev = "1"')
+
 
     def doEpilog(self):
         self.out("""""")
