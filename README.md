@@ -25,18 +25,25 @@ Interim layer maintainer: João Henrique Freitas <joaohf@gmail.com>
 Usage instructions
 ------------------
 
-For conf/bblayers.conf you have to add
+For conf/bblayers.conf you have to add:
 
+```
 BBLAYERS ?= " \
    ...
   path_to_source/sources/meta-erlang \
   "
+```
 
-Than run 'bitbake erlang-embedded-image-minimal' that will creates a image
-with embedded erlang.
+Than run:
 
-Or add 'IMAGE_INSTALL_append = " erlang"' in conf/local.conf and run
-'bitbake core-image-minimal' to get an image with erlang support.
+```
+bitbake erlang-embedded-image-minimal
+```
+
+That will creates a image with embedded erlang.
+
+Or add ```IMAGE_INSTALL_append = " erlang"``` in conf/local.conf and run
+```bitbake core-image-minimal``` to get an image with erlang support.
 
 
 Other Information
