@@ -12,6 +12,11 @@ URI: git://github.com/openembedded/oe-core.git
 branch: master
 revision: HEAD
 
+Documentation
+-------------
+
+See [meta-erlang documentation](http://joaohf.github.io/meta-erlang).
+
 Contributing
 ------------
 
