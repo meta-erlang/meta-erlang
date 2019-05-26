@@ -1,5 +1,5 @@
-OpenEmbedded/Yocto Project layer for Erlang support
-===================================================
+OpenEmbedded/Yocto Project layer for Erlang and Elixir support
+==============================================================
 
 [![Build Status](https://travis-ci.com/joaohf/meta-erlang.svg?branch=master)](https://travis-ci.com/joaohf/meta-erlang)
 

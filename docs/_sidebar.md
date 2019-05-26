@@ -4,7 +4,7 @@
 
   - [Quickstart](guides-quickstart)
   - [My application](guides-my-application)
-  - [A tiny recipe](guides-a-tiny-recipe)
+  - [Recipes](guides-a-tiny-recipe)
   - [Axon layer](guides-axon-layer)
   - [Hot swap code](guides-how-swap-code)
 

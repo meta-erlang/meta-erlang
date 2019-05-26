@@ -33,3 +33,16 @@ Copy the erlang native sdk, changing the version:
 ```bash
 cp recipes-devtools/erlang/nativesdk-erlang_21.1.0.bb recipes-devtools/erlang/nativesdk-erlang_21.3.2.bb
 ```
+
+## Add a new elixir version
+
+Copy the elixir recipe to the new version:
+
+```bash
+cp recipes-devtools/elixir/elixir_1.8.2.bb recipes-devtools/elixir/elixir_1.9.0.bb
+```
+
+Open the elixir_1.9.0.bb and change the following:
+
+ * `SRCREV`: must point to the sha1 commit that represents the new elixir version
+ * `SRC_URL`: change the version ('branch=') to the base elixir version branch. Example: 'v1.8'
