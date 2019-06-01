@@ -26,7 +26,11 @@ def get_erlang_release(v):
     return "%s.%s.%s" % (m.group(1), m.group(2), m.group(3))
 
 rebar3_do_compile() {
-    rebar3 compile
+    if [ "${REBAR3_PROFILE}" ]; then
+        REBAR3_AS="as ${REBAR3_PROFILE}"
+    fi
+
+    rebar3 ${REBAR3_AS} compile
 }
 
 PROFILE = "${@get_full_profile("${REBAR3_PROFILE}")}"
@@ -47,10 +51,16 @@ rebar3_do_install() {
 
     # Use escript full path. We will use embedded erts so it's safe to
     # use escript from there.
-    sed -i -e "s|^#!.*/usr/bin/env|#! ${base_erlang_release}/erts-${ERLANG_ERTS}/bin/escript|" ${erlang_release}/bin/nodetool
-    sed -i -e "s|^#!.*/usr/bin/env|#! ${base_erlang_release}/erts-${ERLANG_ERTS}/bin/escript|" ${erlang_release}/bin/install_upgrade.escript
+    if [ -f ${erlang_release}/bin/nodetool ]; then
+        sed -i -e "s|^#!.*/usr/bin/env|#! ${base_erlang_release}/erts-${ERLANG_ERTS}/bin/escript|" ${erlang_release}/bin/nodetool
+    fi
+    if [ -f ${erlang_release}/bin/install_upgrade.escript ]; then
+        sed -i -e "s|^#!.*/usr/bin/env|#! ${base_erlang_release}/erts-${ERLANG_ERTS}/bin/escript|" ${erlang_release}/bin/install_upgrade.escript
+    fi
     for i in ${erlang_release}/erts-*/bin/nodetool ${erlang_release}/erts-*/bin/install_upgrade.escript; do
-        sed -i -e "s|^#!.*/usr/bin/env|#! ${base_erlang_release}/erts-${ERLANG_ERTS}/bin/escript|" $i
+        if [ -f $i ]; then
+            sed -i -e "s|^#!.*/usr/bin/env|#! ${base_erlang_release}/erts-${ERLANG_ERTS}/bin/escript|" $i
+        fi
     done
 
     chown root:root -R ${erlang_release}
