@@ -12,12 +12,12 @@ FILES_${PN}-staticdev="${base_erlang_release}/erts-*/lib/*.a ${base_erlang_relea
 ALLOW_EMPTY_${PN}-dev="1"
 DESCRIPTION_${PN}-dev=""
 RDEPENDS_${PN}-dev=""
-FILES_${PN}-dev="${base_erlang_release}/erts-*/include ${base_erlang_release}/lib/*/include/* ${base_erlang_release}/erts*/src"
+FILES_${PN}-dev="${base_erlang_release}/erts-*/include ${base_erlang_release}/lib/*/include/* ${base_erlang_release}/lib/*/c_src/* ${base_erlang_release}/erts*/src"
 
 ALLOW_EMPTY_${PN}-dbg="1"
 DESCRIPTION_${PN}-dbg=""
 RDEPENDS_${PN}-dbg=""
-FILES_${PN}-dbg="${base_erlang_release}/lib/*/bin/.debug ${base_erlang_release}/lib/*/lib/.debug ${base_erlang_release}/lib/*/priv/lib/.debug ${base_erlang_release}/lib/*/priv/obj/.debug ${base_erlang_release}/lib/*/priv/bin/.debug "
+FILES_${PN}-dbg="${base_erlang_release}/lib/*/bin/.debug ${base_erlang_release}/lib/*/lib/.debug ${base_erlang_release}/lib/*/priv/lib/.debug ${base_erlang_release}/lib/*/priv/obj/.debug ${base_erlang_release}/lib/*/priv/bin/.debug /usr/src/debug"
 
 ALLOW_EMPTY_${PN}="1"
 DESCRIPTION_${PN}=""
