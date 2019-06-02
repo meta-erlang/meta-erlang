@@ -6,6 +6,7 @@
   - [My application](guides-my-application)
   - [Recipes](guides-a-tiny-recipe)
   - [Axon layer](guides-axon-layer)
+  - [EMQ](guides-emqx)
   - [Hot swap code](guides-how-swap-code)
 
 - Contributing
