@@ -1,0 +1,96 @@
+diff --git a/rebar.config b/rebar.config
+index 19807d8..eca6d08 100644
+--- a/rebar.config
++++ b/rebar.config
+@@ -39,6 +39,8 @@
+ 
+ {relx,
+     [ {include_src,false}
++    , {include_erts, true}
++    , {system_libs, true}
+     , {extended_start_script,false}
+     , {generate_start_script,false}
+     , {sys_config,false}
+diff --git a/rebar.config.script b/rebar.config.script
+index b861182..908f5c3 100644
+--- a/rebar.config.script
++++ b/rebar.config.script
+@@ -90,17 +90,63 @@ DefaultDepRef =
+ %% Relx configs
+ %% ==============================================================================
+ 
++ReplaceRelx =
++fun(Key, Path, Config) ->
++    case lists:keyfind(relx, 1, Config) of
++        false ->
++            Config;
++        {relx, Relx} ->
++            case lists:keyfind(Key, 1, Relx) of
++                false ->
++                    Config;
++                {Key, true} ->
++                    NewPath = {Key, Path},
++                    NewRelx = lists:keyreplace(Key, 1, Relx, NewPath),
++                    lists:keystore(relx, 1, Config, {relx, NewRelx});
++                {Key, _} ->
++                    Config
++            end
++    end
++end,
++
++ReplaceIncludeErts =
++fun(Path, Config) ->
++    ReplaceRelx(include_erts, Path, Config)
++end,
++
++ReplaceSystemLibs =
++fun(Path, Config) ->
++    ReplaceRelx(system_libs, Path, Config)
++end,
++
++EnvTargetIncludeErts = os:getenv("REBAR3_TARGET_INCLUDE_ERTS"),
++EnvTargetSystemLibs = os:getenv("REBAR3_TARGET_SYSTEM_LIBS"),
++
++Check = {EnvTargetIncludeErts, EnvTargetSystemLibs},
++CONFIGX = case Check of
++    {false, false} ->
++        CONFIG1;
++    {IncludeErts, false} ->
++        ReplaceIncludeErts(IncludeErts, CONFIG1);
++    {false, SystemLibs} ->
++        ReplaceSystemLibs(SystemLibs, CONFIG1);
++    {IncludeErts, SystemLibs} ->
++        _CONFIG = ReplaceIncludeErts(IncludeErts, CONFIG1),
++        ReplaceSystemLibs(SystemLibs, _CONFIG)
++end,
++
++
+ GitDescribe = [I || I <- os:cmd("git describe --tag --match \"v*\""), I =/= $\n],
+-Relx0 = Kf(relx, CONFIG1),
++Relx0 = Kf(relx, CONFIGX),
+ {release, _, RelxBaseApps0} = lists:keyfind(release, 1, Relx0),
+ 
+-RelxElixirApps = Kf(elixir_relx_apps, CONFIG1),
++RelxElixirApps = Kf(elixir_relx_apps, CONFIGX),
+ RelxBaseApps = RelxBaseApps0 ++ RelxElixirApps,
+ RelxOverlay = Kf(overlay, Relx0),
+-RelxCloudApps = RelxBaseApps ++ Kf(cloud_relx_apps, CONFIG1),
+-RelxEdgeApps = RelxBaseApps ++ Kf(edge_relx_apps, CONFIG1),
+-RelxCloudOverlay0 = Kf(cloud_relx_overlay, CONFIG1),
+-RelxEdgeOverlay0 = Kf(edge_relx_overlay, CONFIG1),
++RelxCloudApps = RelxBaseApps ++ Kf(cloud_relx_apps, CONFIGX),
++RelxEdgeApps = RelxBaseApps ++ Kf(edge_relx_apps, CONFIGX),
++RelxCloudOverlay0 = Kf(cloud_relx_overlay, CONFIGX),
++RelxEdgeOverlay0 = Kf(edge_relx_overlay, CONFIGX),
+ RelxCloudOverlay = RelxOverlay ++ RelxCloudOverlay0,
+ RelxEdgeOverlay = RelxOverlay ++ RelxEdgeOverlay0,
+ 
+@@ -151,7 +197,7 @@ Deletes = [ deps
+ 
+ Additions = [{profiles, Profiles}],
+ 
+-CONFIG2 = lists:foldl(fun(K, Acc) -> lists:keydelete(K, 1, Acc) end, CONFIG1, Deletes),
++CONFIG2 = lists:foldl(fun(K, Acc) -> lists:keydelete(K, 1, Acc) end, CONFIGX, Deletes),
+ CONFIG3 = lists:foldl(fun({K, V}, Acc) -> lists:keystore(K, 1, Acc, {K, V}) end, CONFIG2, Additions),
+ 
+ FilePath = case os:type() of
