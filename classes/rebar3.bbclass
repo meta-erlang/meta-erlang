@@ -9,7 +9,8 @@ B = "${S}"
 INSANE_SKIP_${PN} += "already-stripped"
 
 REBAR3_PROFILE ?= ""
-REBAR3_RELEASE_NAME ?= "${BPN}-${@get_erlang_release("${PV}")}"
+REBAR3_RELEASE_NAME ?= "${PN}"
+REBAR3_RELEASE ?= "${REBAR3_RELEASE_NAME}-${@get_erlang_release("${PV}")}"
 
 export REBAR3_TARGET_INCLUDE_ERTS = "${STAGING_LIBDIR}/erlang"
 export REBAR3_TARGET_SYSTEM_LIBS = "${STAGING_LIBDIR}/erlang"
@@ -24,6 +25,14 @@ def get_erlang_release(v):
     import re
     m = re.match("^([0-9]+)\.([0-9]+)\.([0-9]+)", v)
     return "%s.%s.%s" % (m.group(1), m.group(2), m.group(3))
+
+rebar3_do_configure() {
+    if [ "${REBAR3_PROFILE}" ]; then
+        REBAR3_AS="as ${REBAR3_PROFILE}"
+    fi
+
+    rebar3 ${REBAR3_AS} get-deps
+}
 
 rebar3_do_compile() {
     if [ "${REBAR3_PROFILE}" ]; then
@@ -44,10 +53,10 @@ rebar3_do_install() {
 
     install -d ${erlang_release}
 
-    REBAR3_RELEASE_DIR="${B}/_build/${PROFILE}/rel/${BPN}"
+    REBAR3_RELEASE_DIR="${B}/_build/${PROFILE}/rel/${REBAR3_RELEASE_NAME}"
     ERLANG_RELEASE_FILE="${REBAR3_RELEASE_DIR}/releases/${BPN}.rel"
 
-    tar -zxf ${REBAR3_RELEASE_DIR}/${REBAR3_RELEASE_NAME}.tar.gz -C ${erlang_release}
+    tar -zxf ${REBAR3_RELEASE_DIR}/${REBAR3_RELEASE}.tar.gz -C ${erlang_release}
 
     # Use escript full path. We will use embedded erts so it's safe to
     # use escript from there.
@@ -66,4 +75,4 @@ rebar3_do_install() {
     chown root:root -R ${erlang_release}
 }
 
-EXPORT_FUNCTIONS do_compile do_install
+EXPORT_FUNCTIONS do_configure do_compile do_install
