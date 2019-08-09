@@ -15,4 +15,11 @@ SRC_URI = "\
     file://emqx.patch \
     "
 
+REBAR3_RELEASE_NAME = "emqx"
+
 inherit rebar3
+
+do_compile_prepend() {
+    install -D ${WORKDIR}/Makefile.c_src.bcrypt ${S}/_build/${REBAR3_PROFILE}/lib/bcrypt/c_src/Makefile
+    install -D ${WORKDIR}/rebar.config.bcrypt ${S}/_build/${REBAR3_PROFILE}/lib/bcrypt/rebar.config
+}
