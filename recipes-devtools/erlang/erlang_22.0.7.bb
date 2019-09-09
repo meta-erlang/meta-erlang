@@ -9,6 +9,7 @@ PR = "r0"
 PACKAGECONFIG ??= ""
 
 PACKAGECONFIG[odbc] = "--with-odbc,-without-odbc,libodbc"
+PACKAGECONFIG[lttng] = "--with-dynamic-trace=lttng,--without-dynamic-trace,lttng-ust"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
