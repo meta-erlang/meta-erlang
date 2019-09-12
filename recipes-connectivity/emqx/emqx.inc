@@ -9,10 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 S = "${WORKDIR}/git"
 
 SRC_URI = "\
-    git://github.com/emqx/emqx-rel;branch=master \
     file://Makefile.c_src.bcrypt  \
     file://rebar.config.bcrypt \
-    file://emqx.patch \
+    file://0001-Add-support-to-cross-compile-using-rebar3.patch \
     "
 
 REBAR3_RELEASE_NAME = "emqx"
