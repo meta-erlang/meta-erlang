@@ -10,7 +10,7 @@ addons:
 before_install:
   - docker pull crops/poky
 script:
-  - docker run --rm -it -v $PWD:/workdir -e AWS_BUCKET=$AWS_BUCKET -e POKY=$POKY crops/poky --workdir=/workdir --cmd scripts/travis-build.sh
+  - docker run --rm -it -v $PWD:/workdir -e AWS_BUCKET=$AWS_BUCKET -e POKY=$POKY crops/poky --workdir=/workdir scripts/travis-build.sh
   # Copy new sstate files to S3 bucket.
   - export SSTATE_CACHE=$TRAVIS_BUILD_DIR/build/sstate-cache
   - $TRAVIS_BUILD_DIR/scripts/sstate2s3.sh
