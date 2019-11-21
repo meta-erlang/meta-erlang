@@ -1,7 +1,7 @@
 OpenEmbedded/Yocto Project layer for Erlang and Elixir support
 ==============================================================
 
-[![Build Status](https://travis-ci.com/joaohf/meta-erlang.svg?branch=master)](https://travis-ci.com/joaohf/meta-erlang)
+[![CircleCI](https://circleci.com/gh/joaohf/meta-erlang/tree/master.svg?style=svg)](https://circleci.com/gh/joaohf/meta-erlang/tree/master)
 
 This layer provides support for Erlang for use with OpenEmbedded and/or
 Yocto Project build system:
