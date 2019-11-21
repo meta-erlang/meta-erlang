@@ -19,7 +19,10 @@ jobs:
             - sstate-test-
       - run:
           name: Clone poky
-          command: git clone -b warrior --single-branch git://git.yoctoproject.org/poky 
+          command: git clone -b warrior --single-branch git://git.yoctoproject.org/poky
+      - run:
+          name: Clone meta-oe
+          command: git clone -b warrior --single-branch https://github.com/openembedded/meta-openembedded.git meta-oe
       - run:
           name: Link meta-erlang
           command: ln -sf . meta-erlang

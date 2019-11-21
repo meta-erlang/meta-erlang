@@ -17,6 +17,31 @@ Documentation
 
 See [meta-erlang documentation](http://joaohf.github.io/meta-erlang).
 
+Dependencies
+------------
+
+This layer depends on:
+
+  URI: git://git.openembedded.org/bitbake
+  branch: master
+
+  URI: git://git.openembedded.org/openembedded-core
+  layers: meta
+  branch: master
+
+For erlang odbc:
+
+  URI: https://github.com/openembedded/meta-openembedded.git
+  layers: meta-oe
+  branch: master
+
+For erlang lksctp run-time support:
+
+  URI: https://github.com/openembedded/meta-openembedded.git
+  layers: meta-networking
+  branch: master
+
+
 Contributing
 ------------
 
