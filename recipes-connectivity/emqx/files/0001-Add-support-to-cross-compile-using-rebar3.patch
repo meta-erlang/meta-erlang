@@ -1,41 +1,51 @@
-From a18317fd6427ec1de19185a527a2feede3844cec Mon Sep 17 00:00:00 2001
+From 81a63d264340d0ae57fdc1d92cedf2db1e951509 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Thu, 12 Sep 2019 22:05:22 +0200
 Subject: [PATCH] Add support to cross compile using rebar3
 
+ * remove rebar3_run plugin
+ * remove observer load dependency
 ---
- rebar.config        |  4 ++-
+ rebar.config        |  5 ++--
  rebar.config.script | 59 +++++++++++++++++++++++++++++++++++++++------
- 2 files changed, 55 insertions(+), 8 deletions(-)
+ 2 files changed, 55 insertions(+), 9 deletions(-)
 
 diff --git a/rebar.config b/rebar.config
-index 1de1991..3096327 100644
+index 7b49f83..376724f 100644
 --- a/rebar.config
 +++ b/rebar.config
-@@ -40,6 +40,8 @@
+@@ -39,6 +39,8 @@
  
  {relx,
-     [ {include_src,false}
-+    , {include_erts, true}
-+    , {system_libs, true}
-     , {extended_start_script,false}
-     , {generate_start_script,false}
-     , {sys_config,false}
-@@ -157,7 +159,7 @@
+  [{include_src, false},
++  {include_erts, true},
++  {system_libs, true},
+   {extended_start_script, false},
+   {generate_start_script, false},
+   {sys_config, false},
+@@ -130,7 +132,6 @@
+   {emqx_lua_hook, load},
+   {emqx_lwm2m, load},
+   {emqx_statsd, load},
+-  {observer, load},
+   luerl,
+   xmerl
+  ]}.
+@@ -153,7 +154,7 @@
  {cover_opts, [verbose]}.
  {cover_export_enabled, true}.
  
 -{plugins, [rebar3_run]}.
 +{plugins, []}.
  
- {post_hooks, [ {"(linux|darwin|solaris|freebsd|netbsd|openbsd)", compile, "./post-compile.sh"}
-              , {"win32", compile, "post-compile.cmd"}]}.
+ {post_hooks,
+  [{"(linux|darwin|solaris|freebsd|netbsd|openbsd)", compile, "./post-compile.sh"},
 diff --git a/rebar.config.script b/rebar.config.script
-index de85496..a6e9e73 100644
+index 69c1052..da5d80b 100644
 --- a/rebar.config.script
 +++ b/rebar.config.script
-@@ -108,20 +108,65 @@ DefaultDepRef =
+@@ -108,23 +108,68 @@ DefaultDepRef =
  %% Relx configs
  %% ==============================================================================
  
@@ -90,8 +100,11 @@ index de85496..a6e9e73 100644
                end,
 -Relx0 = Kf(relx, CONFIG2),
 +Relx0 = Kf(relx, CONFIGX),
- {release, _, RelxBaseApps0} = lists:keyfind(release, 1, Relx0),
- 
+ {release, {_, Vsn0}, RelxBaseApps0} = lists:keyfind(release, 1, Relx0),
+ Vsn1 = case Vsn0 of
+     git_describe -> GitDescribe;
+     Vsn -> Vsn
+ end,
 -RelxElixirApps = Kf(elixir_relx_apps, CONFIG2),
 +RelxElixirApps = Kf(elixir_relx_apps, CONFIGX),
  RelxBaseApps = RelxBaseApps0 ++ RelxElixirApps,
@@ -107,7 +120,7 @@ index de85496..a6e9e73 100644
  RelxCloudOverlay = RelxOverlay ++ RelxCloudOverlay0,
  RelxEdgeOverlay = RelxOverlay ++ RelxEdgeOverlay0,
  
-@@ -173,7 +218,7 @@ Deletes = [ deps
+@@ -176,7 +221,7 @@ Deletes = [ deps
  
  Additions = [{profiles, Profiles}],
  
