@@ -33,6 +33,10 @@ jobs:
           name: Build erlang
           command: source poky/oe-init-build-env build && bitbake erlang
           no_output_timeout: 50m
+      - run:
+          name: Build emqx
+          command: source poky/oe-init-build-env build && bitbake emqx
+          no_output_timeout: 50m
 
       - save_cache:
           key: sstate-test-{{ .Branch }}-{{ .Revision }}
