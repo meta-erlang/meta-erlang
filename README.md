@@ -1,7 +1,7 @@
 OpenEmbedded/Yocto Project layer for Erlang and Elixir support
 ==============================================================
 
-[![Build Status](https://travis-ci.com/joaohf/meta-erlang.svg?branch=master)](https://travis-ci.com/joaohf/meta-erlang)
+[![CircleCI](https://circleci.com/gh/joaohf/meta-erlang/tree/master.svg?style=svg)](https://circleci.com/gh/joaohf/meta-erlang/tree/master)
 
 This layer provides support for Erlang for use with OpenEmbedded and/or
 Yocto Project build system:
@@ -16,6 +16,31 @@ Documentation
 -------------
 
 See [meta-erlang documentation](http://joaohf.github.io/meta-erlang).
+
+Dependencies
+------------
+
+This layer depends on:
+
+  URI: git://git.openembedded.org/bitbake
+  branch: master
+
+  URI: git://git.openembedded.org/openembedded-core
+  layers: meta
+  branch: master
+
+For erlang odbc:
+
+  URI: https://github.com/openembedded/meta-openembedded.git
+  layers: meta-oe
+  branch: master
+
+For erlang lksctp run-time support:
+
+  URI: https://github.com/openembedded/meta-openembedded.git
+  layers: meta-networking
+  branch: master
+
 
 Contributing
 ------------

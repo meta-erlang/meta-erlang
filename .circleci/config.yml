@@ -1,0 +1,45 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: crops/yocto:ubuntu-19.04-builder
+        environment:
+          LC_ALL: en_US.UTF-8
+          LANG: en_US.UTF-8
+          LANGUAGE: en_US.UTF-8
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - sstate-test-{{ .Branch }}-{{ .Revision }}
+            - sstate-test-{{ .Branch }}-
+            - sstate-test-master-
+            - sstate-test-
+      - run:
+          name: Clone poky
+          command: git clone -b warrior --single-branch git://git.yoctoproject.org/poky
+      - run:
+          name: Clone meta-oe
+          command: git clone -b warrior --single-branch https://github.com/openembedded/meta-openembedded.git meta-oe
+      - run:
+          name: Link meta-erlang
+          command: ln -sf . meta-erlang
+      - run:
+          name: Initialize build directory
+          command: TEMPLATECONF=../.circleci source poky/oe-init-build-env build
+      - run:
+          name: Build erlang
+          command: source poky/oe-init-build-env build && bitbake erlang
+          no_output_timeout: 50m
+
+      - save_cache:
+          key: sstate-test-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - "build/sstate-cache/"
+
+workflows:
+  workflow:
+    jobs:
+      - build
