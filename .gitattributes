@@ -1,0 +1,2 @@
+*.inc linguist-language=Bitbake
+docs/* linguist-documentation
