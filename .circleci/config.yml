@@ -35,7 +35,11 @@ jobs:
           no_output_timeout: 50m
       - run:
           name: Build emqx
-          command: source poky/oe-init-build-env build && bitbake emqx
+          command: source poky/oe-init-build-env build && bitbake -c cleanall emqx && bitbake emqx
+          no_output_timeout: 50m
+      - run:
+          name: Build emqx-edge
+          command: source poky/oe-init-build-env build && bitbake -c cleanall emqx-edge && bitbake emqx-edge
           no_output_timeout: 50m
 
       - save_cache:
