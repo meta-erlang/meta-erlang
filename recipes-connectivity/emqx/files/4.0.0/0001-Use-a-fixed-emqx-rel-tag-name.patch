@@ -1,0 +1,35 @@
+From 7eca6f1af49ee7c7787b2a44cf6495ea962304f1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sun, 15 Dec 2019 19:00:20 +0100
+Subject: [PATCH] Use a fixed emqx-rel tag name
+
+---
+ rebar.config.script | 11 +----------
+ 1 file changed, 1 insertion(+), 10 deletions(-)
+
+diff --git a/rebar.config.script b/rebar.config.script
+index 69c1052..3e2324e 100644
+--- a/rebar.config.script
++++ b/rebar.config.script
+@@ -93,16 +93,7 @@ MATCH_BRANCH = fun (BranchName) when BranchName =:= "master";
+ 
+ BRANCH = MATCH_BRANCH(CUR_BRANCH),
+ 
+-DefaultDepRef =
+-    case os:getenv("EMQX_DEPS_DEFAULT_VSN") of
+-        false -> {branch, BRANCH}; %% not set
+-        "" -> {branch, BRANCH}; %% set empty
+-        MaybeTag ->
+-            case re:run(MaybeTag, "v\[0-9\]+\.\[0-9\]+\.*") of
+-                nomatch -> {branch, MaybeTag};
+-                _ -> {tag, MaybeTag}
+-            end
+-    end,
++DefaultDepRef = {tag, "v4.0-beta.4"},
+ 
+ %% ==============================================================================
+ %% Relx configs
+-- 
+2.17.1
+
