@@ -49,7 +49,9 @@ rebar3_do_install() {
         REBAR3_AS="as ${REBAR3_PROFILE}"
     fi
 
-    rebar3 ${REBAR3_AS} release tar
+    rebar3 ${REBAR3_AS} release tar \
+        --system_libs ${REBAR3_TARGET_SYSTEM_LIBS} \
+        --include-erts ${REBAR3_TARGET_INCLUDE_ERTS}
 
     install -d ${erlang_release}
 
