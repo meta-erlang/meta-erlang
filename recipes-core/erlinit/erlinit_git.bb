@@ -4,8 +4,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9a690f6d9d9ecde5e7332edfb7183ba0"
 
 S = "${WORKDIR}/git"
-SRCREV = "a7353d554e121bbd99cc23da3e43ec5f944f93d7"
-PV = "1.5.3-git${SRCPV}"
+SRCREV = "53b0a4dfc5aab5f883652527e29e2db39ac546ae"
+PV = "1.6.0-git${SRCPV}"
 PR = "r0"
 
 SRC_URI = "git://github.com/nerves-project/erlinit;branch=master \
