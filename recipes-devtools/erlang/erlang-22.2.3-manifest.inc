@@ -1391,7 +1391,7 @@ FILES_${PN}-doc+="${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libd
 
 ALLOW_EMPTY_${PN}-dev="1"
 DESCRIPTION_${PN}-dev=""
-RDEPENDS_${PN}-dev=""
+RDEPENDS_${PN}-dev="${PN}-erts-dev ${PN}-kernel-dev ${PN}-stdlib-dev ${PN}-sasl-dev"
 FILES_${PN}-dev+="${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src ${libdir}/erlang/usr/include "
 
 ALLOW_EMPTY_${PN}-dbg="1"

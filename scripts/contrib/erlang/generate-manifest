@@ -471,7 +471,8 @@ if __name__ == "__main__":
                  " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man "
                  "${libdir}/erlang/lib/*/examples ${libdir}/erlang/misc",
                  True)
-    m.addPackage("${PN}-dev", "", "",
+    m.addPackage("${PN}-dev", "",
+                 "${PN}-erts-dev ${PN}-kernel-dev ${PN}-stdlib-dev ${PN}-sasl-dev" ,
                  " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src "
                  "${libdir}/erlang/usr/include",
                  True)
