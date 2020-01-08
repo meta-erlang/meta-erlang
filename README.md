@@ -75,6 +75,25 @@ That will creates a image with embedded erlang.
 Or add ```IMAGE_INSTALL_append = " erlang"``` in conf/local.conf and run
 ```bitbake core-image-minimal``` to get an image with erlang support.
 
+Supported Erlang versions
+-------------------------
+
+ * 22.2.1
+ * 22.1.8
+ * 22.0.7
+ * 21.1.0
+ * 20.0.5
+ * 19.3.6.2
+ * 19.0
+ * 18.3.4
+ * 18.2.3
+ * 18.1.5
+
+Supported Elixir versions
+-------------------------
+
+* 1.9.x
+* 1.8.x
 
 Other Information
 ------------------
