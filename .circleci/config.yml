@@ -34,6 +34,10 @@ jobs:
           command: source poky/oe-init-build-env build && bitbake erlang
           no_output_timeout: 50m
       - run:
+          name: Build elixir
+          command: source poky/oe-init-build-env build && bitbake elixir
+          no_output_timeout: 50m
+      - run:
           name: Build emqx
           command: source poky/oe-init-build-env build && bitbake -c cleanall emqx && bitbake emqx
           no_output_timeout: 50m
