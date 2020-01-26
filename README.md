@@ -1,5 +1,5 @@
-OpenEmbedded/Yocto Project layer for Erlang and Elixir support
-==============================================================
+# OpenEmbedded/Yocto Project layer for Erlang and Elixir support
+
 
 [![CircleCI](https://circleci.com/gh/joaohf/meta-erlang/tree/master.svg?style=svg)](https://circleci.com/gh/joaohf/meta-erlang/tree/master)
 
@@ -12,13 +12,11 @@ URI: git://github.com/openembedded/oe-core.git
 branch: master
 revision: HEAD
 
-Documentation
--------------
+## Documentation
 
 See [meta-erlang documentation](http://joaohf.github.io/meta-erlang).
 
-Dependencies
-------------
+## Dependencies
 
 This layer depends on:
 
@@ -42,8 +40,7 @@ For erlang lksctp run-time support:
   branch: master
 
 
-Contributing
-------------
+## Contributing
 
 Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-erlang]' in the subject'
 
@@ -52,8 +49,7 @@ When sending single patches, please using something like:
 
 Interim layer maintainer: João Henrique Freitas <joaohf@gmail.com>
 
-Usage instructions
-------------------
+## Usage instructions
 
 For conf/bblayers.conf you have to add:
 
@@ -75,9 +71,32 @@ That will creates a image with embedded erlang.
 Or add ```IMAGE_INSTALL_append = " erlang"``` in conf/local.conf and run
 ```bitbake core-image-minimal``` to get an image with erlang support.
 
+## Supported versions
 
-Other Information
-------------------
+### Erlang
+
+ * 22.2.1
+ * 22.1.8
+ * 22.0.7
+ * 21.1.0
+ * 20.0.5
+ * 19.3.6.2
+ * 19.0
+ * 18.3.4
+ * 18.2.3
+ * 18.1.5
+
+### Elixir
+
+* 1.9.x
+* 1.8.x
+
+### Yocto
+
+* zeus
+* warrior
+
+## Other Information
 
 This layer can provide the entire Erlang installation, from the base
 runtime (erlang) to a full erlang development environment with all

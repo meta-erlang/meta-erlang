@@ -1,5 +1,13 @@
 version: 2.1
 
+parameters:
+  yocto-branch:
+    type: string
+    default: "zeus"
+  yocto-version:
+    type: string
+    default: "yocto-3.0.1"
+
 jobs:
   build:
     docker:
@@ -13,16 +21,16 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - sstate-test-{{ .Branch }}-{{ .Revision }}
-            - sstate-test-{{ .Branch }}-
-            - sstate-test-master-
-            - sstate-test-
+            - v1-sstate-test-{{ .Branch }}-{{ .Revision }}
+            - v1-sstate-test-{{ .Branch }}-
+            - v1-sstate-test-master-
+            - v1-sstate-test-
       - run:
           name: Clone poky
-          command: git clone -b warrior --single-branch git://git.yoctoproject.org/poky
+          command: git clone -b << pipeline.parameters.yocto-version >> --single-branch git://git.yoctoproject.org/poky
       - run:
           name: Clone meta-oe
-          command: git clone -b warrior --single-branch https://github.com/openembedded/meta-openembedded.git meta-oe
+          command: git clone -b << pipeline.parameters.yocto-branch >> --single-branch https://github.com/openembedded/meta-openembedded.git meta-oe
       - run:
           name: Link meta-erlang
           command: ln -sf . meta-erlang
@@ -31,21 +39,26 @@ jobs:
           command: TEMPLATECONF=../.circleci source poky/oe-init-build-env build
       - run:
           name: Build erlang
-          command: source poky/oe-init-build-env build && bitbake erlang
+          command: source poky/oe-init-build-env build && bitbake -p erlang
+          no_output_timeout: 50m
+      - run:
+          name: Build elixir
+          command: source poky/oe-init-build-env build && bitbake -p elixir
           no_output_timeout: 50m
       - run:
           name: Build emqx
-          command: source poky/oe-init-build-env build && bitbake -c cleanall emqx && bitbake emqx
+          command: source poky/oe-init-build-env build && bitbake -p emqx
           no_output_timeout: 50m
       - run:
           name: Build emqx-edge
-          command: source poky/oe-init-build-env build && bitbake -c cleanall emqx-edge && bitbake emqx-edge
+          command: source poky/oe-init-build-env build && bitbake -p emqx-edge
           no_output_timeout: 50m
 
       - save_cache:
-          key: sstate-test-{{ .Branch }}-{{ .Revision }}
+          key: v1-sstate-test-{{ .Branch }}-{{ .Revision }}
           paths:
             - "build/sstate-cache/"
+            - "build/downloads/"  
 
 workflows:
   workflow:
