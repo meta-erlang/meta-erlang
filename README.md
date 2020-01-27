@@ -88,6 +88,7 @@ Or add ```IMAGE_INSTALL_append = " erlang"``` in conf/local.conf and run
 
 ### Elixir
 
+* 1.10.x
 * 1.9.x
 * 1.8.x
 
