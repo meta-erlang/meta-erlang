@@ -75,7 +75,7 @@ Or add ```IMAGE_INSTALL_append = " erlang"``` in conf/local.conf and run
 
 ### Erlang
 
- * 22.2.1
+ * 22.2.3
  * 22.1.8
  * 22.0.7
  * 21.1.0
@@ -88,6 +88,7 @@ Or add ```IMAGE_INSTALL_append = " erlang"``` in conf/local.conf and run
 
 ### Elixir
 
+* 1.10.x
 * 1.9.x
 * 1.8.x
 
