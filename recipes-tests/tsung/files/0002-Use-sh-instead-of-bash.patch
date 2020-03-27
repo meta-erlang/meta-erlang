@@ -1,0 +1,34 @@
+From 8b77b1ea7d8baf8677496189d1c2f0c82fd225d0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Thu, 26 Mar 2020 23:30:16 +0100
+Subject: [PATCH] Use sh instead of bash
+
+---
+ tsung-recorder.sh.in | 2 +-
+ tsung.sh.in          | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tsung-recorder.sh.in b/tsung-recorder.sh.in
+index 7f4feaa..81aa880 100644
+--- a/tsung-recorder.sh.in
++++ b/tsung-recorder.sh.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env bash
++#!/usr/bin/env sh
+ 
+ UNAME=`uname`
+ case $UNAME in
+diff --git a/tsung.sh.in b/tsung.sh.in
+index 34c8d75..3eb4042 100755
+--- a/tsung.sh.in
++++ b/tsung.sh.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env bash
++#!/usr/bin/env sh
+ 
+ UNAME=`uname`
+ case $UNAME in
+-- 
+2.17.1
+

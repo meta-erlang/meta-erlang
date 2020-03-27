@@ -8,6 +8,7 @@
   - [Axon layer](guides-axon-layer)
   - [EMQ](guides-emqx)
   - [Yaws](guides-yaws)
+  - [Tsung](guides-tsung)
   - [Hot swap code](guides-how-swap-code)
 
 - Contributing
