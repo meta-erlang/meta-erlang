@@ -23,6 +23,7 @@ SRC_URI = "git://github.com/klacke/yaws;protocol=https \
            file://yaws.init"
 
 PV = "2.0.7"
+PR = "r1"
 SRCREV = "c5aa1e300105578f3c3c025b367f4d2725ae5b5d"
 
 S = "${WORKDIR}/git"
@@ -49,7 +50,7 @@ do_install_append() {
 		${D}/var/yaws/www/cgi-bin/foo.py
 
 	# Fix host-user-contaminated
-	chown -R root:root ${D}/var/yaws/www/*
+	chown -R root:root ${D}/var/yaws/www
 
 	# Fix yaws script
 	sed -i -e 's,^erl=.*$,erl=${libdir}/erlang/bin/erl,g' \
