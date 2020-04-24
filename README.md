@@ -95,6 +95,7 @@ Or add ```IMAGE_INSTALL_append = " erlang"``` in conf/local.conf and run
 
 ### Yocto
 
+* dunfell
 * zeus
 * warrior
 
