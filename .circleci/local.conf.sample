@@ -19,5 +19,7 @@ CONF_VERSION = "1"
 
 SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
 SSTATE_MIRRORS = "\
-file://.* http://sstate.yoctoproject.org/3.0.1/PATH;downloadfilename=PATH \n \
+file://.* http://sstate.yoctoproject.org/3.1/PATH;downloadfilename=PATH \n \
 "
+
+DISTRO_FEATURES_remove = "ptest"
