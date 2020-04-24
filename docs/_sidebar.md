@@ -7,6 +7,7 @@
   - [Recipes](guides-a-tiny-recipe)
   - [Axon layer](guides-axon-layer)
   - [EMQ](guides-emqx)
+  - [Ejabberd](guides-ejabberd)
   - [Yaws](guides-yaws)
   - [Tsung](guides-tsung)
   - [Hot swap code](guides-how-swap-code)

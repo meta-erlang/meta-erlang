@@ -2,7 +2,7 @@
 
 # meta-erlang
 
-> Erlang and Elixir ecosystem to Yocto/Openembedded
+> Erlang and Elixir ecosystem for Yocto/Openembedded
 
 <!-- insert asciinema or other gif here -->
 
