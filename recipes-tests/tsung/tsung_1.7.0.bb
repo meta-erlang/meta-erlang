@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/processone/tsung;protocol=https \
           file://0002-Use-sh-instead-of-bash.patch"
 
 SRCREV = "cf6195d0ddad0b445947258febc2681e741a9764"
+PR = "r1"
 
 S = "${WORKDIR}/git"
 
@@ -44,7 +45,7 @@ do_install_append() {
 
 ALLOW_EMPTY_${PN}-tools = "1"
 DESCRIPTION_${PN}-tools = ""
-RDEPENDS_${PN}-tools = "${PN} perl python"
+RDEPENDS_${PN}-tools = "${PN} perl python3"
 FILES_${PN}-tools = "${bindir}/tsplot ${bindir/tsung-recorder \
     ${libdir}/tsung/bin/*.pl ${libdir}/tsung/tsung_plotter \
     ${datadir}/tsung/tsung_plotter"
