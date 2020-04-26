@@ -1,0 +1,34 @@
+From e736f8194ffe97c9264b079703f470f90f741704 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Fri, 24 Apr 2020 19:29:50 +0000
+Subject: [PATCH] Fix escript path
+
+---
+ configure.ac | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 2d98f62f1..7429abb91 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -31,6 +31,7 @@ fi
+ AC_PATH_TOOL(ERL, erl, , [${extra_erl_path}$PATH])
+ AC_PATH_TOOL(ERLC, erlc, , [${extra_erl_path}$PATH])
+ AC_PATH_TOOL(EPMD, epmd, , [${extra_erl_path}$PATH])
++AC_PATH_TOOL(ESCRIPT, escript, , [${extra_erl_path}$PATH])
+ 
+ AC_ERLANG_NEED_ERL
+ AC_ERLANG_NEED_ERLC
+@@ -51,8 +52,6 @@ esac
+ AC_ERLANG_SUBST_ROOT_DIR
+ # AC_ERLANG_SUBST_LIB_DIR
+ 
+-#locating escript
+-AC_PATH_PROG([ESCRIPT], [escript], [], [$ERLANG_ROOT_DIR/bin])
+ 
+ #locating make
+ AC_CHECK_PROG([MAKE], [make], [make], [])
+-- 
+2.17.1
+
