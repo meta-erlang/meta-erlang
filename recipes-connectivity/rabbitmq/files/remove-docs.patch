@@ -1,0 +1,17 @@
+Upstream-Status: Inappropriate [other]
+
+The package searches the web for xsl documents and this causes the build to fail.
+
+Index: rabbitmq-server-3.0.4/Makefile
+===================================================================
+--- rabbitmq-server-3.0.4.orig/Makefile
++++ rabbitmq-server-3.0.4/Makefile
+@@ -320,7 +320,7 @@ $(SOURCE_DIR)/%_usage.erl:
+ 
+ docs_all: $(MANPAGES) $(WEB_MANPAGES)
+ 
+-install: install_bin install_docs
++install: install_bin
+ 
+ install_bin: all install_dirs
+ 	cp -r ebin include LICENSE* INSTALL $(TARGET_DIR)

@@ -1,0 +1,13 @@
+[Unit]
+Description=RabbitMQ Messaging broker/server service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStartPre=/usr/bin/rabbitmq-server-setup
+ExecStart=/usr/bin/rabbitmq-server
+ExecStop=/usr/bin/rabbitmqctl stop
+
+[Install]
+WantedBy=multi-user.target
