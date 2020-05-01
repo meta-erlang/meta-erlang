@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# rabbitmq-server-setup RabbitMQ broker setup
+#
+# description: To Enable AMQP server provided by RabbitMQ,
+#		this setup required before starting rabbitmq-server.
+#
+##
+
+
+# Ensure that HOME is set, since the erlang cookie file must be written
+# somewhere
+export HOME=/home/root
+
+USER=root
+ROTATE_SUFFIX=
+INIT_LOG_DIR=/var/log/rabbitmq
+
+# setup log dir and files for rabbitmq server
+if [ ! -d ${INIT_LOG_DIR} ]; then
+        mkdir ${INIT_LOG_DIR}
+        chmod 0755 ${INIT_LOG_DIR}
+        chown $USER:$USER ${INIT_LOG_DIR}
+        touch ${INIT_LOG_DIR}/startup_err
+        touch ${INIT_LOG_DIR}/startup_log
+fi

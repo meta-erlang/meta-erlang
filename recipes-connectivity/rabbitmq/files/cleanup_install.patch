@@ -1,0 +1,14 @@
+Index: rabbitmq-server-3.2.4/Makefile
+===================================================================
+--- rabbitmq-server-3.2.4.orig/Makefile
++++ rabbitmq-server-3.2.4/Makefile
+@@ -326,7 +326,8 @@
+ install: install_bin
+ 
+ install_bin: all install_dirs
+-	cp -r ebin include LICENSE* INSTALL $(TARGET_DIR)
++	cp -r ebin include $(TARGET_DIR)
++	cp -r LICENSE* INSTALL $(DOC_INSTALL_DIR)
+ 
+ 	chmod 0755 scripts/*
+ 	for script in rabbitmq-env rabbitmq-server rabbitmqctl rabbitmq-plugins rabbitmq-defaults; do \
