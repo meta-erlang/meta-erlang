@@ -8,7 +8,7 @@
 
 This is a [Yocto Project/Openembedded layer](https://www.yoctoproject.org/software-overview/layers/) that enables developing [Erlang](https://www.erlang.org) and [Elixir](https://elixir-lang.org/) applications on embedded Linux development context.
 
-You can build easily any Erlang/Elixir project based on rebar2, rebar3, mix as well autotools.
+You can build easily any Erlang/Elixir project based on rebar2, rebar3, erlang.mk, mix and autotools.
 
 
 ## What I can do with meta-erlang
@@ -27,6 +27,7 @@ Some ideas:
 * Yaws
 * EMQX
 * Ejabberd
+* rabbitmq
 * Erlang
 * Elixir
 
