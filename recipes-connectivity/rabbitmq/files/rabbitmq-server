@@ -22,7 +22,7 @@ export HOME=%ROOT_HOME%
 
 DAEMON=/usr/bin/rabbitmq-server
 CONTROL=/usr/bin/rabbitmqctl
-USER=root
+USER=rabbitmq
 ROTATE_SUFFIX=
 INIT_LOG_DIR=/var/log/rabbitmq
 PID_FILE=/var/run/rabbitmq/pid

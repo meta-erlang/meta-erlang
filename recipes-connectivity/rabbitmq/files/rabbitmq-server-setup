@@ -10,9 +10,9 @@
 
 # Ensure that HOME is set, since the erlang cookie file must be written
 # somewhere
-export HOME=/home/root
+export HOME=/var/lib/rabbitmq
 
-USER=root
+USER=rabbitmq
 ROTATE_SUFFIX=
 INIT_LOG_DIR=/var/log/rabbitmq
 
