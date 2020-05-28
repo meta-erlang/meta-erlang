@@ -69,7 +69,8 @@ do_install() {
         rabbitmq-plugins \
         rabbitmq-diagnostics \
         rabbitmq-queues \
-        rabbitmq-upgrade"
+        rabbitmq-upgrade \
+        cuttlefish"
 
     # Create symbolic links as install-bin does
     install -d ${D}${bindir}
