@@ -25,8 +25,9 @@ SRC_URI = "git://github.com/processone/ejabberd;protocol=https \
            file://0001-Fix-escript-path.patch \
            file://ejabberd.init"
 
-SRCREV = "633b3625775fdc4938bc5d2be6d225ff221167f9"
+SRCREV = "db2825342cfabb35215f067bfa5b3d0e5a21b97c"
 PR = "r0"
+PV = "20.04+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -103,6 +104,7 @@ FILES_${PN} += " \
                ${libdir}/ezlib-* \
                ${libdir}/cache_tab-* \
                ${libdir}/jiffy-* \
+               ${libdir}/stun-* \
                ${root_prefix}/run"
 
 USERADD_PACKAGES = "${PN}"
