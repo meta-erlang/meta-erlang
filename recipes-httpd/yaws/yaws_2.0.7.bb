@@ -22,9 +22,9 @@ SRC_URI = "git://github.com/klacke/yaws;protocol=https \
            file://yaws.conf \
            file://yaws.init"
 
-PV = "2.0.7"
-PR = "r1"
-SRCREV = "c5aa1e300105578f3c3c025b367f4d2725ae5b5d"
+PV = "2.0.7+git${SRCPV}"
+PR = "r2"
+SRCREV = "66dfd84b16590cef119e1f2e25cb9b15a4299640"
 
 S = "${WORKDIR}/git"
 
@@ -36,6 +36,8 @@ export yawsdir = "${libdir}/yaws-${PV}"
 
 EXTRA_OECONF = "\
                 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)}"
+
+EXTRA_OEMAKE = "WARNINGS_AS_ERRORS="
 
 do_install_append() {
 	# Install systemd unit files
