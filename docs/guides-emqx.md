@@ -6,6 +6,10 @@ As a final result, we are able to run an embedded emqx using qemu.
 
 Follow the quickstart guide to get a basic working environment and then:
 
+ * Add erlang preferred version 22.x in _conf/local.conf_
+```bash
+echo 'PREFERRED_VERSION_erlang = "22%"
+```
  * Add `emqx` package to `IMAGE_INSTAL` in _conf/local.conf_
 ```bash
 echo 'IMAGE_INSTALL_append = " emqx"' >> conf/local.conf
