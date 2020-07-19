@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=af16b76db5b16eaa076c067efcb08596"
 SECTION = "network"
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
            file://rabbitmq-server \
@@ -27,7 +27,8 @@ DEPENDS = " \
     coreutils-native\
 "
 
-RDEPENDS_${PN} = "erlang erlang-modules"
+RDEPENDS_${PN} = "erlang erlang-modules \
+                  ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'socat', '', d)}"
 
 do_unpack_append() {
     bb.build.exec_func('do_fetch_deps', d)
