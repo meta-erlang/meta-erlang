@@ -1,0 +1,73 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          couchdb
+# Required-Start:    $remote_fs $network
+# Required-Stop:     $remote_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts Couchdb server
+# Description:       Starts Couchdb server, a document-oriented
+#                    NoSQL database
+### END INIT INFO
+
+DAEMON=/opt/couchdb/bin/couchdb
+NAME=couchdb
+DESC="Couchdb server"
+DAEMON_OPTS=""
+
+test -x $DAEMON || exit 0
+
+PIDFILE=/var/run/couchdb.pid
+
+# Source function library.
+. /etc/init.d/functions
+
+start()
+{
+    start-stop-daemon --quiet --make-pidfile --pidfile $PIDFILE --background --exec $DAEMON --start -- \
+        $DAEMON_OPTS
+}
+
+stop()
+{
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+}
+
+case "$1" in
+    start)
+        echo "Starting $DESC" "$NAME"
+        start
+        echo $?
+        ;;
+    stop)
+        echo "Stopping $DESC" "$NAME"
+        stop
+        echo $?
+        ;;
+    status)
+        start-stop-daemon --stop --test --pidfile $PIDFILE > /dev/null 2>&1
+        if [ 0 -eq $? ]; then
+            echo "$NAME is running..."
+        else
+            echo "$NAME is stopped"
+        fi
+        ;;
+    reload|force-reload)
+	stop
+	start
+        ;;
+    restart)
+        echo "Restarting $DESC" "$NAME"
+        stop
+        start
+        echo $?
+        ;;
+    *)
+        N=/etc/init.d/$NAME
+        echo "Usage: $N {start|stop|status|restart|reload|force-reload}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
