@@ -1,0 +1,15 @@
+[Unit]
+Description=A document-oriented NoSQL database
+After=network.target remote-fs.target
+
+[Service]
+Type=forking
+GuessMainPID=no
+
+ExecStart=%bindir%/couchdb -o /dev/stdout -e /dev/stderr
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
