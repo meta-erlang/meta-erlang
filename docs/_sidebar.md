@@ -10,6 +10,7 @@
   - [Ejabberd](guides-ejabberd)
   - [Yaws](guides-yaws)
   - [Tsung](guides-tsung)
+  - [Couchdb](guides-couchdb)
   - [Hot swap code](guides-how-swap-code)
 
 - Contributing
