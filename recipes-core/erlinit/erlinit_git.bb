@@ -8,7 +8,7 @@ SRCREV = "53b0a4dfc5aab5f883652527e29e2db39ac546ae"
 PV = "1.6.0-git${SRCPV}"
 PR = "r0"
 
-SRC_URI = "git://github.com/nerves-project/erlinit;branch=master \
+SRC_URI = "git://github.com/nerves-project/erlinit;branch=main \
     file://erlinit.config \
     "
 
