@@ -1,0 +1,40 @@
+From 971e8c5f60485edfeeeb191a8da36b109ac13312 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sat, 24 Oct 2020 15:08:57 +0000
+Subject: [PATCH] Switch to shared snappy library link
+
+---
+ build_detect_platform | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
+
+diff --git a/build_detect_platform b/build_detect_platform
+index 0f231fc..ae7f9e9 100755
+--- a/build_detect_platform
++++ b/build_detect_platform
+@@ -50,7 +50,7 @@ CROSS_COMPILE=
+ PLATFORM_CCFLAGS=
+ PLATFORM_CXXFLAGS=
+ PLATFORM_LDFLAGS=
+-PLATFORM_SHARED_EXT=
++PLATFORM_SHARED_EXT="so"
+ PLATFORM_SHARED_LDFLAGS="-shared -Wl,-soname -Wl,"
+ PLATFORM_SHARED_CFLAGS="-fPIC"
+ PLATFORM_SHARED_VERSIONED=true
+@@ -174,12 +174,7 @@ EOF
+ EOF
+     if [ "$?" = 0 ]; then
+         COMMON_FLAGS="$COMMON_FLAGS -DSNAPPY"
+-        if [ "$PLATFORM" = "OS_LINUX" ]; then
+-            # Basho: switching to static snappy library to make tools more portable
+-            PLATFORM_LDFLAGS="$PLATFORM_LDFLAGS -Wl,-non_shared -lsnappy -Wl,-call_shared"
+-        else
+-            PLATFORM_LDFLAGS="$PLATFORM_LDFLAGS -lsnappy"
+-        fi
++        PLATFORM_LDFLAGS="$PLATFORM_LDFLAGS -lsnappy"
+     fi
+ 
+     # Test whether tcmalloc is available
+-- 
+2.25.1
+

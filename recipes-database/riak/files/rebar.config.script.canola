@@ -1,0 +1,47 @@
+%% -*- mode: erlang;erlang-indent-level: 4;indent-tabs-mode: nil -*-
+%% ex: ts=4 sw=4 ft=erlang et
+
+ReplaceRelx =
+fun(Key, Path, Config) ->
+    case lists:keyfind(relx, 1, Config) of
+        false ->
+            Config;
+        {relx, Relx} ->
+            case lists:keyfind(Key, 1, Relx) of
+                false ->
+                    Config;                
+                {Key, true} ->
+                    NewPath = {Key, Path},
+                    NewRelx = lists:keyreplace(Key, 1, Relx, NewPath),                                   
+                    lists:keystore(relx, 1, Config, {relx, NewRelx});
+                {Key, _} ->
+                    Config
+            end
+    end
+end,
+
+ReplaceIncludeErts =
+fun(Path, Config) ->
+    ReplaceRelx(include_erts, Path, Config)
+end,
+
+ReplaceSystemLibs =
+fun(Path, Config) ->
+    ReplaceRelx(system_libs, Path, Config)
+end,
+
+EnvTargetIncludeErts = os:getenv("REBAR3_TARGET_INCLUDE_ERTS"),
+EnvTargetSystemLibs = os:getenv("REBAR3_TARGET_SYSTEM_LIBS"),
+
+Check = {EnvTargetIncludeErts, EnvTargetSystemLibs},
+case Check of
+    {false, false} ->
+        CONFIG;
+    {IncludeErts, false} ->
+        ReplaceIncludeErts(IncludeErts, CONFIG);
+    {false, SystemLibs} ->
+        ReplaceSystemLibs(SystemLibs, CONFIG);
+    {IncludeErts, SystemLibs} ->
+        CONFIG1 = ReplaceIncludeErts(IncludeErts, CONFIG),
+        ReplaceSystemLibs(SystemLibs, CONFIG1)
+end.

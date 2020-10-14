@@ -1,0 +1,14 @@
+%% -*- mode: erlang;erlang-indent-level: 2;indent-tabs-mode: nil -*-
+%% -*- coding: utf-8 -*-
+
+{erl_opts, [
+ debug_info,
+ warnings_as_errors,
+ warn_untyped_record,
+ {platform_define, "^[0-9]+", namespaced_types}
+]}.
+
+{artifacts, ["priv/syslog_drv.so"]}.
+
+{pre_hooks, [{"(linux|darwin|solaris)", compile, "make -C c_src/"},
+	     	     {"(freebsd)", compile, "gmake -C c_src/"}]}.
