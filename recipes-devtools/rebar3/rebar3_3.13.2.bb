@@ -1,0 +1,4 @@
+require rebar3.inc
+
+SRCBRANCH = "v3.13"
+SRCREV = "73c36138ffbca4851331878791156845047761d2"
