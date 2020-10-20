@@ -11,6 +11,7 @@
   - [Yaws](guides-yaws)
   - [Tsung](guides-tsung)
   - [Couchdb](guides-couchdb)
+  - [Riak](guides-riak)
   - [Hot swap code](guides-how-swap-code)
 
 - Contributing
