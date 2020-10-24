@@ -15,6 +15,11 @@ REBAR3_RELEASE ?= "${REBAR3_RELEASE_NAME}-${@get_erlang_release("${PV}")}"
 export REBAR3_TARGET_INCLUDE_ERTS = "${STAGING_LIBDIR}/erlang"
 export REBAR3_TARGET_SYSTEM_LIBS = "${STAGING_LIBDIR}/erlang"
 
+# rebar3 new cmake
+export ERTS_INCLUDE_DIR = "${REBAR3_TARGET_SYSTEM_LIBS}/usr/include"
+export ERL_INTERFACE_INCLUDE_DIR = "${REBAR3_TARGET_SYSTEM_LIBS}/usr/include"
+export ERL_INTERFACE_LIB_DIR = "${REBAR3_TARGET_SYSTEM_LIBS}/usr/lib"
+
 export ERLANG_ERTS = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
 
 def get_full_profile(p):
