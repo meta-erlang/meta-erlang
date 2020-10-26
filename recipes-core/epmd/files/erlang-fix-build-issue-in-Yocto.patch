@@ -1,0 +1,25 @@
+Upstream-Status: Inappropriate [The fix is specific to Yocto build env]
+
+Skip host library path check to fix following Yocto insane check issue: 
+ERROR: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
+Rerun configure task after fixing this.
+
+Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
+
+--- otp_src_R15B/erts/configure.in.orig	2011-12-14 04:22:11.000000000 -0600
++++ otp_src_R15B/erts/configure.in	2013-11-19 04:15:33.694334610 -0600
+@@ -1469,10 +1469,10 @@
+ 	# ln -s libdlpi.so.1 $try_dlpi_lib/libdlpi.so
+ 	])
+    fi
+-   LDFLAGS="-L$try_dlpi_lib -R$try_dlpi_lib $LDFLAGS"
+-   unset -v try_dlpi_lib
+-   AC_MSG_NOTICE([Extending the search to include /lib])
+-   AC_CHECK_LIB(dlpi, dlpi_open)
++#   LDFLAGS="-L$try_dlpi_lib -R$try_dlpi_lib $LDFLAGS"
++#   unset -v try_dlpi_lib
++#   AC_MSG_NOTICE([Extending the search to include /lib])
++#   AC_CHECK_LIB(dlpi, dlpi_open)
+    if test x"$ac_cv_lib_dlpi_dlpi_open" = x"no"; then
+       LDFLAGS="$save_ldflags"
+    fi
