@@ -12,7 +12,7 @@ INSANE_SKIP_${PN} += "already-stripped"
 
 MIX_RELEASE_NAME="${@get_release_name("${PN}")}"
 MIX_RELEASE_VERSION="${@get_release_version("${PV}")}"
-MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}/rel/${MIX_RELEASE_NAME}/releases/${MIX_RELEASE_VERSION}/"
+MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}"
 
 export MIX_REBAR3="${WORKDIR}/recipe-sysroot-native/usr/bin/rebar3"
 
@@ -35,11 +35,11 @@ mix_do_compile() {
 }
 
 mix_do_install() {
-    MIX_ENV=${MIX_ENV} mix release --env=${MIX_ENV}
+    MIX_ENV=${MIX_ENV} mix release --overwrite
 
     install -d ${erlang_release}
 
-    tar -zxf ${MIX_RELEASE_DIR}/${MIX_RELEASE_NAME}.tar.gz -C ${erlang_release}
+    tar -zxf ${MIX_RELEASE_DIR}/${MIX_RELEASE_NAME}-${MIX_RELEASE_VERSION}.tar.gz -C ${erlang_release}
 
     chown root:root -R ${erlang_release}    
 }
