@@ -14,6 +14,8 @@ MIX_RELEASE_NAME="${@get_release_name("${PN}")}"
 MIX_RELEASE_VERSION="${@get_release_version("${PV}")}"
 MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}/rel/${MIX_RELEASE_NAME}/releases/${MIX_RELEASE_VERSION}/"
 
+export MIX_REBAR3="${WORKDIR}/recipe-sysroot-native/usr/bin/rebar3"
+
 export MIX_TARGET_INCLUDE_ERTS = "${STAGING_LIBDIR}/erlang"
 
 def get_release_name(pn):
