@@ -73,33 +73,31 @@ Or add ```IMAGE_INSTALL_append = " erlang"``` in conf/local.conf and run
 
 ## Supported versions
 
-### Erlang
- 
- * 23.1.2
- * 23.0.3
- * 22.3
- * 22.2.8
- * 22.1.8
- * 22.0.7
- * 21.1.0
- * 20.0.5
- * 19.3.6.2
- * 19.0
- * 18.3.4
- * 18.2.3
- * 18.1.5
+meta-erlang tries to support a well balanced range of Erlang, Elixir and Yocto Project versions.
 
+Following the [OTP Versions Tree](http://erlang.org/download/otp_versions_tree.html),
+[Elixir Compatibility and Deprecations](https://hexdocs.pm/elixir/compatibility-and-deprecations.html)
+ and [Yocto Project releases](https://wiki.yoctoproject.org/wiki/Releases) meta-erlang supports the below branches:
+
+### Erlang
+
+ * [maint-23](https://github.com/erlang/otp/tree/maint-23)
+ * [maint-22](https://github.com/erlang/otp/tree/maint-22)
+ * [maint-21](https://github.com/erlang/otp/tree/maint-21)
+ * [maint-20](https://github.com/erlang/otp/tree/maint-20)
+ 
 ### Elixir
 
-* 1.11.x
-* 1.10.x
-* 1.9.x
+* [v1.11](https://github.com/elixir-lang/elixir/tree/v1.11)
+* [v1.10](https://github.com/elixir-lang/elixir/tree/v1.10)
+* [v1.9](https://github.com/elixir-lang/elixir/tree/v1.9)
 
 ### Yocto
 
-* dunfell
-* zeus
-* warrior
+* [gatesgarth](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=gatesgarth)
+* [dunfell](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=dunfell)
+* [zeus](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=zeus)
+* [warrior](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=warrior)
 
 ## Other Information
 
