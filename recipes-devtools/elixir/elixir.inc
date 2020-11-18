@@ -37,7 +37,7 @@ PROVIDES += "${PN}-mix-doc ${PN}-mix-dbg ${PN}-mix-dev ${PN}-mix-staticdev ${PN}
 PACKAGES = "${PN}-mix-doc ${PN}-mix-dbg ${PN}-mix-dev ${PN}-mix-staticdev ${PN}-mix \
              ${PN}-ex-unit-doc ${PN}-ex-unit-dbg ${PN}-ex-unit-dev ${PN}-ex-unit-staticdev ${PN}-ex-unit \
              ${PN}-eex-doc ${PN}-eex-dbg ${PN}-eex-dev ${PN}-eex-staticdev ${PN}-eex \
-             ${PN}-doc ${PN}-dbg ${PN}-dev ${PN}-staticdev ${PN} \
+             ${PN}-doc ${PN}-dbg ${PN}-dev ${PN}-staticdev ${PN} ${PN}-modules ${PN}-modules-dev \
              "
 
 ALLOW_EMPTY_${PN}-mix-doc = "1"
@@ -140,3 +140,15 @@ DESCRIPTION_${PN} = ""
 RDEPENDS_${PN} = "erlang erlang-compiler"
 RDEPENDS_${PN}_class-native = "erlang"
 FILES_${PN} = "${libdir}/elixir/lib/logger ${libdir}/elixir/lib/iex ${libdir}/elixir/lib/elixir ${libdir}/elixir/bin/iex ${libdir}/elixir/bin/elixirc ${libdir}/elixir/bin/elixir ${bindir}/elixir ${bindir}/elixirc ${bindir}/iex "
+
+DESCRIPTION_${PN}-modules = "All Elixir modules"
+RDEPENDS_${PN}-modules = "${PN}-mix ${PN}-ex-unit ${PN}-eex ${PN}"
+ALLOW_EMPTY_${PN}-modules = "1"
+
+DESCRIPTION_${PN}-modules-dev = "All Elixir modules for developers"
+RDEPENDS_${PN}-modules-dev = "${PN}-modules ${PN}-mix-doc ${PN}-mix-dev ${PN}-mix-staticdev \
+            ${PN}-ex-unit-doc ${PN}-ex-unit-dev ${PN}-ex-unit-staticdev \
+            ${PN}-eex-doc ${PN}-eex-dev ${PN}-eex-staticdev \
+            ${PN}-doc ${PN}-dev ${PN}-staticdev \
+            "
+ALLOW_EMPTY_${PN}-modules-dev = "1"
