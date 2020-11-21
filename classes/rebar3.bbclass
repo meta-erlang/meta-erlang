@@ -29,7 +29,9 @@ def get_full_profile(p):
 def get_erlang_release(v):
     import re
     m = re.match("^([0-9]+)\.([0-9]+)\.([0-9]+)", v)
-    return "%s.%s.%s" % (m.group(1), m.group(2), m.group(3))
+    if m:
+        return "%s.%s.%s" % (m.group(1), m.group(2), m.group(3))
+    return v
 
 rebar3_do_configure() {
     if [ "${REBAR3_PROFILE}" ]; then
