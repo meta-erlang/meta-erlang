@@ -58,7 +58,8 @@ rebar3_do_install() {
 
     rebar3 ${REBAR3_AS} tar \
         --system_libs ${REBAR3_TARGET_SYSTEM_LIBS} \
-        --include-erts ${REBAR3_TARGET_INCLUDE_ERTS}
+        --include-erts ${REBAR3_TARGET_INCLUDE_ERTS} \
+        -n ${REBAR3_RELEASE_NAME}
 
     install -d ${erlang_release}
 
