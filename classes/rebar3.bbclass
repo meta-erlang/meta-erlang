@@ -84,7 +84,7 @@ rebar3_do_install() {
 
     # remove any .src file
     for i in ${erlang_release}/erts-*/bin/*.src; do
-        rm $i
+        rm -f $i
     done
 
     chown root:root -R ${erlang_release}
