@@ -4,17 +4,23 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 S = "${WORKDIR}/git"
-SRCREV = "4f49df183fa4b5cff5f7afb4818d907b65d9ab37"
-PV = "0.0.0-git${SRCPV}"
+SRCREV = "1ba101eff091ce79f2437c95f50cca5d2ab62426"
+PV = "0.1.0-git${SRCPV}"
 PR = "r0"
 
-SRC_URI = "git://github.com/fhunleth/relsync;branch=master"
+SRC_URI = "git://github.com/joaohf/relsync;branch=master"
 
-DEPENDS += "erlang-native"
+inherit rebar3
+
+REBAR3_PROFILE = "release"
+
+do_compile() {
+    rebar3 as ${REBAR3_PROFILE} escriptize
+}
 
 do_install() {
         install -d 0755 ${D}/${bindir}
-	install -m 0755 ${S}/relsync ${D}/${bindir}/relsync
+	install -m 0755 ${S}/_build/${REBAR3_PROFILE}/bin/relsync ${D}/${bindir}/relsync
 }
 
 FILES_${PN} = "${bindir}"
