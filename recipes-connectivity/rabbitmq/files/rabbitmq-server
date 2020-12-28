@@ -44,6 +44,12 @@ ensure_pid_dir () {
     fi
 }
 
+ensure_log_dir () {
+    if [ ! -d "$INIT_LOG_DIR" ] ; then
+        mkdir -p $INIT_LOG_DIR
+    fi
+}
+
 remove_pid () {
     rm -f ${PID_FILE}
     rmdir `dirname ${PID_FILE}` || :
@@ -56,6 +62,7 @@ start_rabbitmq () {
     else
         RETVAL=0
         ensure_pid_dir
+        ensure_log_dir
         set +e
         RABBITMQ_PID_FILE=$PID_FILE start-stop-daemon --pidfile=$PID_FILE --exec $DAEMON --background --start
         $CONTROL wait $PID_FILE >/dev/null 2>&1
