@@ -16,10 +16,7 @@
 # Short-Description: Enable AMQP service provided by RabbitMQ broker
 ### END INIT INFO
 
-# Ensure that HOME is set, since the erlang ookie file must be written
-# somewhere
-export HOME=%ROOT_HOME%
-
+SETUP=/usr/bin/rabbitmq-server-setup
 DAEMON=/usr/bin/rabbitmq-server
 CONTROL=/usr/bin/rabbitmqctl
 USER=rabbitmq
@@ -69,7 +66,7 @@ start_rabbitmq () {
         RETVAL=$?
         set -e
         case "$RETVAL" in
-            0)
+            69)
                 echo SUCCESS
                 if [ -n "$LOCK_FILE" ] ; then
                     touch $LOCK_FILE
@@ -147,6 +144,8 @@ restart_rabbitmq() {
     stop_rabbitmq
     start_rabbitmq
 }
+
+source $SETUP
 
 case "$1" in
     start)
