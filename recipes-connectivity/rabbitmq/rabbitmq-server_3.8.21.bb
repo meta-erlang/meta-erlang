@@ -87,17 +87,17 @@ do_install() {
     install -m 644 ${WORKDIR}/rabbitmq.conf ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
     chown root.rabbitmq ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
 
+	install -d ${D}${bindir}
+	install -m 0755 ${WORKDIR}/rabbitmq-server-setup ${D}${bindir}
+
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/rabbitmq-server ${D}${sysconfdir}/init.d/rabbitmq-server
-        sed -e "s:%ROOT_HOME%:/var/lib/rabbitmq:" -i ${D}${sysconfdir}/init.d/rabbitmq-server
     fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${WORKDIR}/rabbitmq-server.service ${D}${systemd_unitdir}/system
-	install -d ${D}${bindir}
-	install -m 0755 ${WORKDIR}/rabbitmq-server-setup ${D}${bindir}
     fi
 }
 
