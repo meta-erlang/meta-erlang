@@ -3,8 +3,7 @@ DESCRIPTION = "rebar is a self-contained Erlang script, so it's easy to distribu
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 
-SRCBRANCH ?= "master"
-SRC_URI = "git://github.com/erlang/rebar3;branch=${SRCBRANCH}"
+SRC_URI = "git://github.com/erlang/rebar3;nobranch=1"
 S = "${WORKDIR}/git"
 
 DEPENDS += "erlang-native"
