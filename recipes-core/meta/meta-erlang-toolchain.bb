@@ -1,10 +1,12 @@
-SUMMARY = "Meta package for building a installable Erlang/Elixir toolchain"
+SUMMARY = "Meta package for building an installable Erlang/Elixir toolchain"
 LICENSE = "MIT"
 
 inherit populate_sdk
 
 TOOLCHAIN_HOST_TASK_append = " \
      nativesdk-rebar3 \
+     nativesdk-erlfmt \
+     nativesdk-elvis \
      nativesdk-erlang \
      nativesdk-erlang-modules-dev \
      nativesdk-elixir \
