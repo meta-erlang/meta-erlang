@@ -328,7 +328,7 @@ class MakefileMaker:
             provideLine += "%s " % name
         provideLine += '"'
 
-        provideNativeLine = 'PROVIDES_class-native+="'
+        provideNativeLine = 'RPROVIDES_class-native+="'
         for name in self.packages:
             provideNativeLine += "%s-native " % name
         provideNativeLine += '"'
