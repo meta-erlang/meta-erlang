@@ -15,6 +15,7 @@ DEPENDS_append_class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openss
 SRC_URI = "git://github.com/erlang/otp;branch=master"
 SRC_URI += "file://fix-wx-configure.patch"
 SRC_URI += "file://erlang-fix-build-issue-in-Yocto.patch"
+SRC_URI += "file://otp-0002-Remove-rpath.patch"
 
 S = "${WORKDIR}/git"
 
