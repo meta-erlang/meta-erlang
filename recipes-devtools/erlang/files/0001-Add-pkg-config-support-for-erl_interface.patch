@@ -1,0 +1,135 @@
+From f1eeb74364b69d50068188997b762317f77d56e6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Tue, 16 Feb 2021 21:06:34 -0300
+Subject: [PATCH] Add pkg-config support for erl_interface
+
+pkg-config is a helper tool used when compiling applications and
+libraries.
+
+This commit introduces the file erl_ei.pc which will be installed
+in the standard pkg-config directory.
+
+Thus, using pkg-config like this:
+
+    pkg-config --libs --cflags erl_ei
+
+Returns the correct libs and cflags that can be used by build tools
+(like autotools);
+
+    -I/cross/sysroots/core2-32-vendor-linux/usr/lib/erlang/lib/erl_interface-4.0.2/include
+    -L/cross/sysroots/core2-32-vendor-linux/usr/lib/erlang/lib/erl_interface-4.0.2/lib -lei
+
+Upstream-Status: Pending
+---
+ lib/erl_interface/configure.in    |  8 ++++++--
+ lib/erl_interface/erl_ei.pc.in    | 31 +++++++++++++++++++++++++++++++
+ lib/erl_interface/src/Makefile.in |  9 +++++++++
+ 3 files changed, 46 insertions(+), 2 deletions(-)
+ create mode 100644 lib/erl_interface/erl_ei.pc.in
+
+diff --git a/lib/erl_interface/configure.in b/lib/erl_interface/configure.in
+index fa07048424..1c0ed7b5a2 100644
+--- a/lib/erl_interface/configure.in
++++ b/lib/erl_interface/configure.in
+@@ -24,8 +24,8 @@
+ 
+ # Find the erl_interface version number and set m4 macro to it.
+ # We do this because AC_INIT can't handle shell variables. Still broken.
+-dnl m4_define(EI_VERSION,`grep EI_VSN ../vsn.mk | sed 's/^.*=[ ]*//'`)
+-dnl m4_define(EI_VERSION,regexp(m4_include(VERSION),[version \([-.0-9A-Za-z]+\)],[\1]))
++m4_define([ei_version],`grep EI_VSN $srcdir/vsn.mk | sed 's/^.*=[ ]*//' | awk 'NR==1{print $1}'`)
++#dnl m4_define(EI_VERSION,regexp(m4_include(VERSION),[version \([-.0-9A-Za-z]+\)],[\1]))
+ 
+ AC_INIT()
+ 
+@@ -58,6 +58,9 @@ else
+     host_os=win32
+ fi
+ 
++EI_VERSION=ei_version
++AC_SUBST(EI_VERSION)
++
+ TARGET=$host
+ AC_SUBST(TARGET)
+ 
+@@ -374,4 +377,5 @@ LDFLAGS="$LDFLAGS $sanitizers"
+ AC_OUTPUT(
+ 	src/$host/Makefile:src/Makefile.in
+ 	src/$host/eidefs.mk:src/eidefs.mk.in
++	src/$host/erl_ei.pc:erl_ei.pc.in
+ 	)
+diff --git a/lib/erl_interface/erl_ei.pc.in b/lib/erl_interface/erl_ei.pc.in
+new file mode 100644
+index 0000000000..0b5d439af1
+--- /dev/null
++++ b/lib/erl_interface/erl_ei.pc.in
+@@ -0,0 +1,31 @@
++/*
++ * %CopyrightBegin%
++ *
++ * Copyright Ericsson AB 1998-2021. All Rights Reserved.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ *
++ * %CopyrightEnd%
++ */
++prefix=@prefix@/lib/erlang/lib/erl_interface
++version=@EI_VERSION@
++includedir=${prefix}-${version}/include
++libdir=${prefix}-${version}/lib
++
++Name: erl_ei
++Description: The Erl_Interface library contains \
++             functions that help you integrate programs \
++             written in C and Erlang.
++Version: ${version}
++Cflags: -I${includedir}
++Libs: -L${libdir} -lei
+diff --git a/lib/erl_interface/src/Makefile.in b/lib/erl_interface/src/Makefile.in
+index 061fd05a1d..b230ed24ae 100644
+--- a/lib/erl_interface/src/Makefile.in
++++ b/lib/erl_interface/src/Makefile.in
+@@ -42,6 +42,10 @@ include $(TARGET)/eidefs.mk
+ 
+ include $(ERL_TOP)/make/output.mk
+ 
++prefix          = @prefix@
++exec_prefix     = @exec_prefix@
++libdir          = @libdir@
++
+ EBINDIR=../ebin
+ 
+ APP_FILE= erl_interface.app
+@@ -668,6 +672,9 @@ EXTRA = \
+ 	README.internal \
+ 	$(TARGET)/eidefs.mk
+ 
++PKG-CONFIG = \
++	$(TARGET)/erl_ei.pc
++
+ release: opt
+ 	$(INSTALL_DIR) "$(RELSYSDIR)/include"
+ 	$(INSTALL_DIR) "$(RELSYSDIR)/lib"
+@@ -683,6 +690,8 @@ release: opt
+ 	$(INSTALL_DIR) "$(RELSYSDIR)/src/prog"
+ 	$(INSTALL_DIR) "$(RELEASE_PATH)/usr/include"
+ 	$(INSTALL_DIR) "$(RELEASE_PATH)/usr/lib"
++	$(INSTALL_DIR) "$(DESTDIR)/$(libdir)/pkgconfig"
++	$(INSTALL_DATA) $(PKG-CONFIG) "$(DESTDIR)/$(libdir)/pkgconfig"
+ 	$(INSTALL_DATA) $(APP_TARGET)  "$(RELSYSDIR)/ebin/$(APP_FILE)"
+ 	$(INSTALL_DATA) $(APPUP_TARGET)  "$(RELSYSDIR)/ebin/$(APPUP_FILE)"
+ 	$(INSTALL_DATA) $(HEADERS)     "$(RELSYSDIR)/include"
+-- 
+2.25.1
+
