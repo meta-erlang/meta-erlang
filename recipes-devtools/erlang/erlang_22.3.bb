@@ -8,6 +8,8 @@ PR = "r0"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/22.3:"
 
+SRC_URI += "file://0001-Add-pkg-config-support-for-erl_interface.patch"
+
 PACKAGECONFIG ??= ""
 
 PACKAGECONFIG[odbc] = "--with-odbc,--without-odbc,libodbc"
@@ -50,7 +52,7 @@ do_compile() {
 do_install() {
     TARGET=${TARGET_SYS} \
     PATH=${NATIVE_BIN}:$PATH \
-    oe_runmake 'INSTALL_PREFIX=${D}' install
+    oe_runmake 'DESTDIR=${D}' install
     for f in erl start
         do sed -i -e 's:ROOTDIR=.*:ROOTDIR=${libdir}/erlang:' \
             ${D}/${libdir}/erlang/erts-*/bin/$f ${D}/${libdir}/erlang/bin/$f
