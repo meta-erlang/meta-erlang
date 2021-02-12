@@ -108,7 +108,7 @@ do_install_prepend_class-nativesdk() {
 do_install_class-target() {
     TARGET=${TARGET_SYS} \
     PATH=${NATIVE_BIN}:$PATH \
-    oe_runmake 'INSTALL_PREFIX=${D}' install
+    oe_runmake 'DESTDIR=${D}' install
     for f in erl start
         do sed -i -e 's:ROOTDIR=.*:ROOTDIR=${libdir}/erlang:' \
             ${D}/${libdir}/erlang/erts-*/bin/$f ${D}/${libdir}/erlang/bin/$f
