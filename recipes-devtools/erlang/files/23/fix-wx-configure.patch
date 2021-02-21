@@ -1,4 +1,4 @@
-From 893ac1780068ec9751518772023377833e247d31 Mon Sep 17 00:00:00 2001
+From 4084c50bf15d4b4f0c999d5f1027c334f61e7716 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Tue, 19 Nov 2019 21:29:14 +0100
@@ -9,7 +9,7 @@ Subject: [PATCH] Fix unsafe compilation path in the wx configure script.
  1 file changed, 25 deletions(-)
 
 diff --git a/lib/wx/configure.in b/lib/wx/configure.in
-index f35e6cdbd0..22ea0707df 100644
+index 5a69738544..fa81d9a867 100644
 --- a/lib/wx/configure.in
 +++ b/lib/wx/configure.in
 @@ -250,31 +250,6 @@ dnl
@@ -44,6 +44,3 @@ index f35e6cdbd0..22ea0707df 100644
  else
      AC_CHECK_HEADERS([gl/gl.h],[],[],[#include <windows.h>])
  fi
--- 
-2.17.1
-

@@ -1,4 +1,4 @@
-From f1eeb74364b69d50068188997b762317f77d56e6 Mon Sep 17 00:00:00 2001
+From 6f46dc760987c1895f447f7351986deb6630763f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Tue, 16 Feb 2021 21:06:34 -0300
@@ -21,6 +21,7 @@ Returns the correct libs and cflags that can be used by build tools
     -L/cross/sysroots/core2-32-vendor-linux/usr/lib/erlang/lib/erl_interface-4.0.2/lib -lei
 
 Upstream-Status: Pending
+
 ---
  lib/erl_interface/configure.in    |  8 ++++++--
  lib/erl_interface/erl_ei.pc.in    | 31 +++++++++++++++++++++++++++++++
@@ -97,7 +98,7 @@ index 0000000000..0b5d439af1
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lei
 diff --git a/lib/erl_interface/src/Makefile.in b/lib/erl_interface/src/Makefile.in
-index 061fd05a1d..b230ed24ae 100644
+index 7ff3f09abb..61cab5be23 100644
 --- a/lib/erl_interface/src/Makefile.in
 +++ b/lib/erl_interface/src/Makefile.in
 @@ -42,6 +42,10 @@ include $(TARGET)/eidefs.mk
@@ -111,7 +112,7 @@ index 061fd05a1d..b230ed24ae 100644
  EBINDIR=../ebin
  
  APP_FILE= erl_interface.app
-@@ -668,6 +672,9 @@ EXTRA = \
+@@ -724,6 +728,9 @@ EXTRA = \
  	README.internal \
  	$(TARGET)/eidefs.mk
  
@@ -121,8 +122,8 @@ index 061fd05a1d..b230ed24ae 100644
  release: opt
  	$(INSTALL_DIR) "$(RELSYSDIR)/include"
  	$(INSTALL_DIR) "$(RELSYSDIR)/lib"
-@@ -683,6 +690,8 @@ release: opt
- 	$(INSTALL_DIR) "$(RELSYSDIR)/src/prog"
+@@ -740,6 +747,8 @@ release: opt
+ 	$(INSTALL_DIR) "$(RELSYSDIR)/src/registry"
  	$(INSTALL_DIR) "$(RELEASE_PATH)/usr/include"
  	$(INSTALL_DIR) "$(RELEASE_PATH)/usr/lib"
 +	$(INSTALL_DIR) "$(DESTDIR)/$(libdir)/pkgconfig"
@@ -130,6 +131,3 @@ index 061fd05a1d..b230ed24ae 100644
  	$(INSTALL_DATA) $(APP_TARGET)  "$(RELSYSDIR)/ebin/$(APP_FILE)"
  	$(INSTALL_DATA) $(APPUP_TARGET)  "$(RELSYSDIR)/ebin/$(APPUP_FILE)"
  	$(INSTALL_DATA) $(HEADERS)     "$(RELSYSDIR)/include"
--- 
-2.25.1
-
