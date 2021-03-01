@@ -7,6 +7,8 @@ SRC_URI = "git://github.com/erlang/rebar3;nobranch=1 \
            file://environment.d-rebar3.sh"
 S = "${WORKDIR}/git"
 
+INC_PR = "r0"
+
 DEPENDS += "erlang-native"
 
 do_compile () {
