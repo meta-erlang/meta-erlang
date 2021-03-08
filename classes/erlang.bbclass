@@ -20,6 +20,7 @@ FILES_${PN}-dev = "\
     ${base_erlang_release}/lib/*/include/* \
     ${base_erlang_release}/lib/*/c_src/* \
     ${base_erlang_release}/lib/*/src/* \
+    ${base_erlang_release}/lib/*/priv/obj \
     ${base_erlang_release}/erts*/src \
     "
 
