@@ -111,8 +111,10 @@ do_install_class-target() {
     oe_runmake 'DESTDIR=${D}' install
     for f in erl start
         do sed -i -e 's:ROOTDIR=.*:ROOTDIR=${libdir}/erlang:' \
-            ${D}/${libdir}/erlang/erts-*/bin/$f ${D}/${libdir}/erlang/bin/$f
+            ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/$f ${D}/${libdir}/erlang/bin/$f
     done
+
+    cp ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/dyn_erl ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/erl
 
     rm -f ${D}/${libdir}/erlang/Install
 
