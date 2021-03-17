@@ -9,6 +9,8 @@ SRC_URI = " \
     file://couchdb.init \
 "
 
+PR = "r1"
+
 inherit autotools-brokensep erlang systemd update-rc.d useradd
 
 # couchdb supports: 1.8.5, 60, 68
@@ -20,6 +22,8 @@ EXTRA_OECONF_remove = "--disable-static"
 ERL_INTERFACE_VERSION = "`pkg-config --modversion erl_ei`"
 export ERL_CFLAGS = "`pkg-config --cflags-only-I erl_ei` -I${STAGING_LIBDIR}/erlang/usr/include"
 export ERL_EI_LIBDIR = "${STAGING_LIBDIR}/erlang/lib/erl_interface-${ERL_INTERFACE_VERSION}/lib/"
+
+LDFLAGS_ += "-L${STAGING_LIBDIR}/erlang/lib/erl_interface-${ERL_INTERFACE_VERSION}/lib"
 
 INITSCRIPT_NAME = "couchdb"
 INITSCRIPT_PARAMS = "defaults"
@@ -34,7 +38,7 @@ S = "${WORKDIR}/apache-couchdb-${PV}"
 
 do_configure_append() {
     sed -i "s:-I/usr/include/mozjs-${SPIDERMONKEY_VERSION}:-I${STAGING_INCDIR}/mozjs-${SPIDERMONKEY_VERSION}:g" ${B}/src/couch/rebar.config.script
-    sed -i "s:-L/usr/local/lib:-L${STAGING_LIBDIR}:g" ${B}/src/couch/rebar.config.script
+    sed -i "s:-L/usr/local/lib:\$LDFLAGS:g" ${B}/src/couch/rebar.config.script
 
     # include target erts
     sed -i  "/{sys/ a {root_dir, \"${STAGING_LIBDIR}/erlang\"}," ${B}/rel/reltool.config
@@ -77,4 +81,4 @@ DEPENDS += " \
     rebar-native \
 "
 
-INSANE_SKIP_${PN} = "ldflags already-stripped"
+INSANE_SKIP_${PN} = "already-stripped"
