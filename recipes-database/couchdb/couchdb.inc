@@ -49,7 +49,7 @@ do_configure_append() {
 do_install_append() {
     install -d ${D}/opt
     cp -r ${B}/rel/couchdb ${D}/opt/
-    chown -R root.couchdb ${D}/opt/couchdb
+    chown -R couchdb.couchdb ${D}/opt/couchdb
 
     install -d ${D}/var/lib/couchdb
     install -d ${D}/var/volatile/log/couchdb
