@@ -130,7 +130,7 @@ do_install_append_class-nativesdk() {
     chown -R root:root ${D}${libdir}/erlang
 }
 
-do_install_append() {
+do_install_append_class-target() {
 	# remove erlang code that does not need to be loaded by the erlang runtime
 	rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin
 }
