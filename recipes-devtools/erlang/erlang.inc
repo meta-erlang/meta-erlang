@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/erlang/otp;branch=master"
 SRC_URI += "file://fix-wx-configure.patch"
 SRC_URI += "file://erlang-fix-build-issue-in-Yocto.patch"
 SRC_URI += "file://otp-0002-Remove-rpath.patch"
-SRC_URI += "file://0001-Add-pkg-config-support-for-erl_interface.patch"
 
 S = "${WORKDIR}/git"
 
@@ -36,6 +35,7 @@ PACKAGECONFIG[java] = ",--without-javac,,"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
+
 
 # EXTRA_OECONF_append_arm = " --disable-smp-support --disable-hipe"
 # EXTRA_OECONF_append_armeb = " --disable-smp-support --disable-hipe"
