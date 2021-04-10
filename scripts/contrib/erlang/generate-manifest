@@ -316,6 +316,10 @@ SPEC = {
         'ERTS_VERSION': '11.1.8',
         'modules': COMMON_MODULES,
     },
+    '23.3.1': {
+        'ERTS_VERSION': '11.2',
+        'modules': COMMON_MODULES,
+    },
 }
 
 
