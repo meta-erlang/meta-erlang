@@ -1,7 +1,7 @@
 
 inherit erlang
 
-DEPENDS += " rebar3-native elixir-native "
+DEPENDS += "elixir-native"
 
 B = "${S}"
 
@@ -14,7 +14,7 @@ MIX_RELEASE_NAME="${@get_release_name("${PN}")}"
 MIX_RELEASE_VERSION="${@get_release_version("${PV}")}"
 MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}"
 
-export MIX_REBAR3="${WORKDIR}/recipe-sysroot-native/usr/bin/rebar3"
+export MIX_HOME = "${WORKDIR}/mix"
 
 ERLANG_ERTS_VERSION = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
 
@@ -26,6 +26,10 @@ def get_release_version(pv):
     return pv.split("-")[0]
 
 mix_do_configure() {
+    # fetch rebar if the user has not called mix-rebar3.bbclass
+    if [ -n "$MIX_REBAR3" ]; then
+        mix local.rebar --force
+    fi
     mix local.hex --force
     mix deps.get
 }
