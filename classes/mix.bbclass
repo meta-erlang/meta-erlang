@@ -16,7 +16,7 @@ MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}"
 
 export MIX_REBAR3="${WORKDIR}/recipe-sysroot-native/usr/bin/rebar3"
 
-export ERLANG_ERTS_VERSION = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
+ERLANG_ERTS_VERSION = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
 
 def get_release_name(pn):
     pn = pn.split("-")
@@ -35,12 +35,10 @@ mix_do_compile() {
 }
 
 mix_do_install() {
-    MIX_TARGET_INCLUDE_ERTS="${STAGING_LIBDIR}/erlang/erts-${ERLANG_ERTS_VERSION}" \
-    MIX_ENV=${MIX_ENV} mix release --overwrite
-
     install -d ${erlang_release}
 
-    tar -zxf ${MIX_RELEASE_DIR}/${MIX_RELEASE_NAME}-${MIX_RELEASE_VERSION}.tar.gz -C ${erlang_release}
+    MIX_TARGET_INCLUDE_ERTS="${STAGING_LIBDIR}/erlang/erts-${ERLANG_ERTS_VERSION}" \
+    MIX_ENV=${MIX_ENV} mix release --overwrite --path ${erlang_release}
 
     chown root:root -R ${erlang_release}    
 }
