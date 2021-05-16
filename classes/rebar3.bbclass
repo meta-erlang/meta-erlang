@@ -9,7 +9,7 @@ B = "${S}"
 INSANE_SKIP_${PN} += "already-stripped"
 
 REBAR3_PROFILE ?= ""
-REBAR3_RELEASE_NAME ?= "${PN}"
+REBAR3_RELEASE_NAME ?= "${@make_release_name("${PN}")}"
 REBAR3_RELEASE ?= "${REBAR3_RELEASE_NAME}-${@get_erlang_release("${PV}")}"
 
 export REBAR3_TARGET_SYSTEM = "${STAGING_LIBDIR}/erlang"
@@ -33,6 +33,9 @@ def get_erlang_release(v):
     if m:
         return "%s.%s.%s" % (m.group(1), m.group(2), m.group(3))
     return v
+
+def make_release_name(v):
+    return v.replace("-", "_")
 
 rebar3_do_configure() {
     if [ "${REBAR3_PROFILE}" ]; then
