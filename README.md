@@ -70,6 +70,10 @@ That will create an image with embedded erlang.
 Or add ```IMAGE_INSTALL_append = " erlang"``` in _conf/local.conf_ file and run
 ```bitbake core-image-minimal``` to get an image with erlang support.
 
+Also, there are a set of [recipe examples](recipes-examples) demonstrating how to integrate Erlang/Elixir
+projects into YP/OE. The examples tried to cover some common use cases when dealing with cross compiled  
+applications.
+
 ## Supported versions
 
 meta-erlang tries to support a well balanced range of Erlang, Elixir and Yocto Project versions. The purpose is to provide up-to-date recipes following the latest fixes found in Erlang and Elixir projects as well keeping the old recipes to not break compatibility.
