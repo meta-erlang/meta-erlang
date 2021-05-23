@@ -1,0 +1,26 @@
+Fix unsafe compilation path in the wx configure script.
+
+Index: wx/configure.in
+===================================================================
+--- otp_src_R15B.orig/lib/wx/configure.in
++++ otp_src_R15B/lib/wx/configure.in
+@@ -234,18 +234,10 @@ if test X"$host_os" != X"win32" ; then
+        	$as_unset ac_cv_header_GL_gl_h
+        	AC_CHECK_HEADERS([GL/gl.h])
+        	if test X"$ac_cv_header_GL_gl_h" != Xyes ; then
+-	    AC_MSG_NOTICE(Checking for OpenGL headers in /usr/local)
+-	    CPPFLAGS="-isystem /usr/local/include $saved_CPPFLAGS"
+-	    $as_unset ac_cv_header_GL_gl_h
+-	    AC_CHECK_HEADERS([GL/gl.h])
+-	    if test X"$ac_cv_header_GL_gl_h" != Xyes ; then
+ 		AC_MSG_WARN([No OpenGL headers found, wx will NOT be usable])
+ 		CPPFLAGS="$saved_CPPFLAGS"
+-	    else 
+-	    	GL_LIBS="-L/usr/local/lib $GL_LIBS"
+-	    fi
+ 	else 
+-    	    GL_LIBS="-L/usr/X11R6/lib $GL_LIBS"
++    	    GL_LIBS="-L=/usr/X11R6/lib $GL_LIBS"
+        	fi
+     fi
+ else
