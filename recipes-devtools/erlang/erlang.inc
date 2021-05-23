@@ -14,7 +14,6 @@ DEPENDS_append_class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openss
 
 SRC_URI = "git://github.com/erlang/otp;branch=master"
 SRC_URI += "file://fix-wx-configure.patch"
-SRC_URI += "file://erlang-fix-build-issue-in-Yocto.patch"
 SRC_URI += "file://otp-0002-Remove-rpath.patch"
 
 S = "${WORKDIR}/git"
@@ -46,18 +45,20 @@ EXTRA_OECONF_append_sh4 = " --disable-smp-support --disable-hipe"
 NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 EXTRA_OECONF_class-native += " \
-    --with-ssl=${STAGING_DIR_NATIVE} \
+    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-incl=${STAGING_DIR_NATIVE}/usr \
     "
 EXTRA_OECONF_class-nativesdk += " \
-    --with-ssl=${STAGING_DIR_NATIVE}"
+    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-incl=${STAGING_DIR_NATIVE}/usr \
+    "
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET}"
 CACHED_CONFIGUREVARS_class-native += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
 CACHED_CONFIGUREVARS_class-nativesdk += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
 
+OTP_BUILD_CONFIGURE_OPTS ?= "autoconf"
+
 do_configure_class-target() {
-    cd ${S}; ./otp_build autoconf; cd -
-    cd ${S}/erts; autoreconf; cd -
+    cd ${S}; ./otp_build ${OTP_BUILD_CONFIGURE_OPTS}; cd -
 
     . ${CONFIG_SITE}
 
@@ -68,16 +69,13 @@ do_configure_class-target() {
 }
 
 do_configure_class-native() {
-    cd ${S}; ./otp_build autoconf
+    cd ${S}; ./otp_build ${OTP_BUILD_CONFIGURE_OPTS}
     TARGET=${HOST_SYS} \
     oe_runconf
 }
 
 do_configure_class-nativesdk() {
-
-    rm -rf ${S}/lib/wx
-
-    cd ${S}; ./otp_build autoconf
+    cd ${S}; ./otp_build ${OTP_BUILD_CONFIGURE_OPTS}
     TARGET=${HOST_SYS} \
     oe_runconf
 }
