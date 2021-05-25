@@ -3,13 +3,12 @@ HOMEPAGE = "https://erlang.org/doc/man/epmd.html"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ff253ad767462c46be284da12dda33e8"
 SECTION = "network"
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "git://github.com/erlang/otp;branch=master \
            file://epmd.init \
            file://epmd.service \
            file://epmd.socket \
-           file://erlang-fix-build-issue-in-Yocto.patch \
            file://fix-wx-configure.patch \
           "
 
@@ -32,9 +31,10 @@ NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET}"
 
+TARGET_SYS_GNU = "${TARGET_SYS}-gnu"
+
 do_configure() {
     cd ${S}; ./otp_build autoconf; cd -
-    cd ${S}/erts; autoreconf; cd -
 
     . ${CONFIG_SITE}
 
@@ -46,7 +46,7 @@ do_configure() {
 
 do_compile() {
     cd ${S}/erts/epmd
-    PATH=${NATIVE_BIN}:$PATH \    
+    PATH=${NATIVE_BIN}:$PATH \
     oe_runmake ERL_TOP=${S} TARGET=${TARGET_SYS}
 }
 
@@ -63,7 +63,7 @@ do_install() {
     fi
 
     install -d ${D}/${sbindir}
-    install -m 0755 ${S}/bin/${TARGET_SYS}/epmd ${D}/${sbindir}/epmd
+    install -m 0755 ${S}/bin/${TARGET_SYS_GNU}/epmd ${D}/${sbindir}/epmd
 }
 
 inherit useradd update-rc.d systemd
