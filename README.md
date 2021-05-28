@@ -1,8 +1,5 @@
 # OpenEmbedded/Yocto Project layer for Erlang and Elixir support
 
-
-[![CircleCI](https://circleci.com/gh/joaohf/meta-erlang/tree/master.svg?style=svg)](https://circleci.com/gh/joaohf/meta-erlang/tree/master)
-
 This layer provides support for [Erlang](https://www.erlang.org/) and [Elixir](https://elixir-lang.org/) for use with [OpenEmbedded](http://www.openembedded.org/wiki/Main_Page) and/or
 the [Yocto Project](https://www.yoctoproject.org/) build system:
 
@@ -96,6 +93,7 @@ Following the [OTP Versions Tree](http://erlang.org/download/otp_versions_tree.h
 
 Erlang:
 
+ * [maint-24](https://github.com/erlang/otp/tree/maint-24)
  * [maint-23](https://github.com/erlang/otp/tree/maint-23)
  * [maint-22](https://github.com/erlang/otp/tree/maint-22)
  * [maint-21](https://github.com/erlang/otp/tree/maint-21)
@@ -109,6 +107,7 @@ Elixir:
 
 Yocto:
 
+* [hardknott]](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=hardknott)
 * [gatesgarth](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=gatesgarth)
 * [dunfell](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=dunfell)
 * [zeus](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=zeus)
