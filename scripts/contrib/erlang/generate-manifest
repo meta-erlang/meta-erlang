@@ -244,6 +244,10 @@ SPEC = {
         'ERTS_VERSION': '10.3.5.16',
         'modules': COMMON_MODULES,
     },
+    '21.3.8.24': {
+        'ERTS_VERSION': '10.3.5.19',
+        'modules': COMMON_MODULES,
+    },
     '22.0': {
         'ERTS_VERSION': '10.4',
         'modules': COMMON_MODULES,
@@ -278,6 +282,10 @@ SPEC = {
     },
     '22.3.4.19': {
         'ERTS_VERSION': '10.7.2.11',
+        'modules': COMMON_MODULES,
+    },
+    '22.3.4.20': {
+        'ERTS_VERSION': '10.7.2.12',
         'modules': COMMON_MODULES,
     },
     '23.0.3': {
@@ -328,8 +336,16 @@ SPEC = {
         'ERTS_VERSION': '11.2.2.1',
         'modules': COMMON_MODULES,
     },
+    '23.3.4.2': {
+        'ERTS_VERSION': '11.2.2.2',
+        'modules': COMMON_MODULES,
+    },
     '24.0.1': {
         'ERTS_VERSION': '12.0.1',
+        'modules': COMMON_MODULES,
+    },
+    '24.0.2': {
+        'ERTS_VERSION': '12.0.2',
         'modules': COMMON_MODULES,
     },
 }

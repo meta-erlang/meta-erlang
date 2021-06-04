@@ -1,36 +1,41 @@
-From 893ac1780068ec9751518772023377833e247d31 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
- <joaohf@gmail.com>
-Date: Tue, 19 Nov 2019 21:29:14 +0100
+From 89be3c1e1ad0ecd44d3a54d0780be45c45809668 Mon Sep 17 00:00:00 2001
+From: Kas User <kas@example.com>
+Date: Mon, 31 May 2021 21:09:49 -0300
 Subject: [PATCH] Fix unsafe compilation path in the wx configure script.
 
+Upstream-Status: Inappropriate [Yocto specific]
 ---
- lib/wx/configure.in | 25 -------------------------
- 1 file changed, 25 deletions(-)
+ lib/wx/configure | 29 -----------------------------
+ 1 file changed, 29 deletions(-)
 
-diff --git a/lib/wx/configure.in b/lib/wx/configure.in
-index f35e6cdbd0..22ea0707df 100644
---- a/lib/wx/configure.in
-+++ b/lib/wx/configure.in
-@@ -250,31 +250,6 @@ dnl
- if test X"$host_os" != X"win32" ; then
-     AC_CHECK_HEADERS([GL/gl.h], [],
-     	[AC_CHECK_HEADERS([OpenGL/gl.h])])
--    if test X"$ac_cv_header_GL_gl_h" != Xyes &&
--       	test X"$ac_cv_header_OpenGL_gl_h" != Xyes
--    then
--       	saved_CPPFLAGS="$CPPFLAGS"
--	AC_MSG_NOTICE(Checking for OpenGL headers in /usr/X11R6)
--       	CPPFLAGS="-isystem /usr/X11R6/include $CPPFLAGS"
--       	$as_unset ac_cv_header_GL_gl_h
--       	AC_CHECK_HEADERS([GL/gl.h])
+diff --git a/lib/wx/configure b/lib/wx/configure
+index 18c74090c2..29dffdf2d0 100755
+--- a/lib/wx/configure
++++ b/lib/wx/configure
+@@ -4529,35 +4529,6 @@ fi
+ 
+ done
+ 
 -       	if test X"$ac_cv_header_GL_gl_h" != Xyes ; then
--	    AC_MSG_NOTICE(Checking for OpenGL headers in /usr/local)
+-	    { $as_echo "$as_me:${as_lineno-$LINENO}: Checking for OpenGL headers in /usr/local" >&5
+-$as_echo "$as_me: Checking for OpenGL headers in /usr/local" >&6;}
 -	    CPPFLAGS="-isystem /usr/local/include $saved_CPPFLAGS"
 -	    $as_unset ac_cv_header_GL_gl_h
--	    AC_CHECK_HEADERS([GL/gl.h])
+-	    for ac_header in GL/gl.h
+-do :
+-  ac_fn_c_check_header_mongrel "$LINENO" "GL/gl.h" "ac_cv_header_GL_gl_h" "$ac_includes_default"
+-if test "x$ac_cv_header_GL_gl_h" = xyes; then :
+-  cat >>confdefs.h <<_ACEOF
+-#define HAVE_GL_GL_H 1
+-_ACEOF
+-
+-fi
+-
+-done
+-
 -	    if test X"$ac_cv_header_GL_gl_h" != Xyes ; then
--		AC_MSG_WARN([No OpenGL headers found, wx will NOT be usable])
+-		{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: No OpenGL headers found, wx will NOT be usable" >&5
+-$as_echo "$as_me: WARNING: No OpenGL headers found, wx will NOT be usable" >&2;}
 -		echo "No OpenGL headers found, wx will NOT be usable" >> ./CONF_INFO
 -		WXERL_CAN_BUILD_DRIVER=false
 -		CPPFLAGS="$saved_CPPFLAGS"
@@ -40,10 +45,9 @@ index f35e6cdbd0..22ea0707df 100644
 -	else
 -    	    GL_LIBS="-L/usr/X11R6/lib $GL_LIBS"
 -       	fi
--    fi
+     fi
  else
-     AC_CHECK_HEADERS([gl/gl.h],[],[],[#include <windows.h>])
- fi
+     for ac_header in gl/gl.h
 -- 
-2.17.1
+2.25.1
 
