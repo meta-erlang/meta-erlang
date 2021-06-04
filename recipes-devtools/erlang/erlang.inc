@@ -30,6 +30,7 @@ PACKAGECONFIG[lttng] = "--with-dynamic-trace=lttng,--without-dynamic-trace,lttng
 PACKAGECONFIG[wx] = "--with-observer,--without-observer,wxwidgets,"
 PACKAGECONFIG[sctp] = ",,,lksctp-tools"
 PACKAGECONFIG[java] = ",--without-javac,,"
+PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
@@ -44,10 +45,10 @@ EXTRA_OECONF_append_sh4 = " --disable-smp-support --disable-hipe"
 
 NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
-EXTRA_OECONF_class-native += " \
+EXTRA_OECONF_class-native ??= " \
     --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-incl=${STAGING_DIR_NATIVE}/usr \
     "
-EXTRA_OECONF_class-nativesdk += " \
+EXTRA_OECONF_class-nativesdk ??= " \
     --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-incl=${STAGING_DIR_NATIVE}/usr \
     "
 

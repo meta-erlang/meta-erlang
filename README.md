@@ -97,7 +97,6 @@ Erlang:
  * [maint-23](https://github.com/erlang/otp/tree/maint-23)
  * [maint-22](https://github.com/erlang/otp/tree/maint-22)
  * [maint-21](https://github.com/erlang/otp/tree/maint-21)
- * [maint-20](https://github.com/erlang/otp/tree/maint-20)
 
 Elixir:
 
