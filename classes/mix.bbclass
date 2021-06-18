@@ -27,7 +27,7 @@ def get_release_version(pv):
 
 mix_do_configure() {
     # fetch rebar if the user has not called mix-rebar3.bbclass
-    if [ -n "$MIX_REBAR3" ]; then
+    if [ -z "$MIX_REBAR3" ]; then
         mix local.rebar --force
     fi
     mix local.hex --force
