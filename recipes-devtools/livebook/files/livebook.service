@@ -1,0 +1,10 @@
+[Unit]
+Description=Livebook
+
+[Service]
+EnvironmentFile=/etc/livebook.conf
+ExecStart=/usr/lib/livebook/bin/livebook start 
+ExecStop=/usr/lib/livebook/bin/livebook stop
+
+[Install]
+WantedBy=multi-user.target
