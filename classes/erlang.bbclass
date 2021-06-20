@@ -82,8 +82,8 @@ FILES_${PN}-dev-tools = "\
 
 ALLOW_EMPTY_${PN} = "1"
 DESCRIPTION_${PN} = ""
-RDEPENDS_${PN} = "${PN}-erts"
-FILES_${PN} = "\
+RDEPENDS_${PN} += "${PN}-erts"
+FILES_${PN} += "\
     ${base_erlang_release}/* \
     "
 
