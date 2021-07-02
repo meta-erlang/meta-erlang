@@ -10,3 +10,15 @@ PV = "0.1.0-git${SRCPV}"
 SRC_URI = "git://github.com/meta-erlang/hello-world;branch=master;subpath=${BPN}"
 
 inherit mix
+
+DEPENDS_append = " nodejs-native "
+
+MIX_ENV ?= "prod"
+
+# see https://hexdocs.pm/phoenix/releases.html
+do_compile() {
+    MIX_ENV=${MIX_ENV} mix compile
+    npm install --prefix ./assets
+    npm run deploy --prefix ./assets
+    mix phx.digest
+}
