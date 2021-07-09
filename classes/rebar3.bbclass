@@ -3,7 +3,11 @@ inherit erlang
 
 DEPENDS += "rebar3-native gawk-native"
 
-B = "${S}"
+B = "${WORKDIR}/build"
+
+# support REBAR_BASE_DIR for setting the base_dir 
+# https://github.com/erlang/rebar3/commit/9402857f5527e300bf28b7e3744bef3fc88f3379
+export REBAR_BASE_DIR = "${B}"
 
 # erlang system libs, target system was striped
 INSANE_SKIP_${PN} += "already-stripped"
@@ -38,6 +42,9 @@ def make_release_name(v):
     return v.replace("-", "_")
 
 rebar3_do_configure() {
+    # This is needed since the default is to be in ${B}. In fact all the task
+    # which invoke rebar3 need its.
+    cd ${S}
     if [ "${REBAR3_PROFILE}" ]; then
         REBAR3_AS="as ${REBAR3_PROFILE}"
     fi
@@ -46,6 +53,7 @@ rebar3_do_configure() {
 }
 
 rebar3_do_compile() {
+    cd ${S}
     if [ "${REBAR3_PROFILE}" ]; then
         REBAR3_AS="as ${REBAR3_PROFILE}"
     fi
@@ -56,6 +64,7 @@ rebar3_do_compile() {
 PROFILE = "${@get_full_profile("${REBAR3_PROFILE}")}"
 
 rebar3_do_install() {
+    cd ${S}
     if [ "${REBAR3_PROFILE}" ]; then
         REBAR3_AS="as ${REBAR3_PROFILE}"
     fi
@@ -67,7 +76,7 @@ rebar3_do_install() {
 
     install -d ${erlang_release}
 
-    REBAR3_RELEASE_DIR="${B}/_build/${PROFILE}/rel/${REBAR3_RELEASE_NAME}"
+    REBAR3_RELEASE_DIR="${REBAR_BASE_DIR}/${PROFILE}/rel/${REBAR3_RELEASE_NAME}"
     ERLANG_RELEASE_FILE="${REBAR3_RELEASE_DIR}/releases/${BPN}.rel"
 
     tar -zxf ${REBAR3_RELEASE_DIR}/${REBAR3_RELEASE}.tar.gz -C ${erlang_release}
