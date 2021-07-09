@@ -16,5 +16,5 @@ REBAR3_PROFILE = "prod"
 
 # This is how we can `patch` files that were fetched by rebar3_do_configure()
 do_compile_prepend() {
-    install -D ${WORKDIR}/Makefile.c_src.bcrypt ${S}/_build/${REBAR3_PROFILE}/lib/bcrypt/c_src/Makefile
+    install -D ${WORKDIR}/Makefile.c_src.bcrypt ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bcrypt/c_src/Makefile
 }
