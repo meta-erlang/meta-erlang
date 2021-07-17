@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6d36c043a022f90fea8faa1a4cc9bd4b"
 SRC_URI = "git://github.com/covertool/covertool.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
-SRCREV = "aabf751302d275275438c90a0684763d988ed31d"
-PV = "2.0.3+git${SRCPV}"
+SRCREV = "659a14335cff00e8e1eca546f88574ec536590bd"
+PV = "2.0.4+git${SRCPV}"
 
 inherit rebar3
 
