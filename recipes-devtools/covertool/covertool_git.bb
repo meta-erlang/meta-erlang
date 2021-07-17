@@ -9,17 +9,18 @@ S = "${WORKDIR}/git"
 SRCREV = "aabf751302d275275438c90a0684763d988ed31d"
 PV = "2.0.3+git${SRCPV}"
 
-DEPENDS += "rebar3-native"
+inherit rebar3
 
 REBAR3_PROFILE = "default"
 
 do_compile() {
+    cd ${S}
     rebar3 as ${REBAR3_PROFILE} escriptize
 }
 
 do_install() {
     install -d 0755 ${D}/${bindir}
-    install -m 0755 ${S}/_build/${REBAR3_PROFILE}/bin/covertool ${D}/${bindir}/covertool
+    install -m 0755 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/bin/covertool ${D}/${bindir}/covertool
 }
 
 FILES_${PN} = "${bindir}/covertool"
