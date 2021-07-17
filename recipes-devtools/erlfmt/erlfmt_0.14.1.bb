@@ -9,17 +9,18 @@ S = "${WORKDIR}/git"
 SRCREV = "0d9907bbf8a4659529a2e0b96c5829f8f96e907f"
 PV .= "+git${SRCPV}"
 
-DEPENDS += "rebar3-native"
+inherit rebar3
 
 REBAR3_PROFILE = "release"
 
 do_compile() {
+    cd ${S}
     rebar3 as ${REBAR3_PROFILE} escriptize
 }
 
 do_install() {
     install -d 0755 ${D}/${bindir}
-    install -m 0755 ${S}/_build/${REBAR3_PROFILE}/bin/erlfmt ${D}/${bindir}/erlfmt
+    install -m 0755 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/bin/erlfmt ${D}/${bindir}/erlfmt
 }
 
 FILES_${PN} = "${bindir}/erlfmt"
