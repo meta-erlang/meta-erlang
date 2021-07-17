@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 S = "${WORKDIR}/git"
 SRCREV = "1ba101eff091ce79f2437c95f50cca5d2ab62426"
 PV = "0.1.0-git${SRCPV}"
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "git://github.com/joaohf/relsync;branch=master"
 
@@ -15,12 +15,13 @@ inherit rebar3
 REBAR3_PROFILE = "release"
 
 do_compile() {
+    cd ${S}
     rebar3 as ${REBAR3_PROFILE} escriptize
 }
 
 do_install() {
-        install -d 0755 ${D}/${bindir}
-	install -m 0755 ${S}/_build/${REBAR3_PROFILE}/bin/relsync ${D}/${bindir}/relsync
+    install -d 0755 ${D}/${bindir}
+    install -m 0755 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/bin/relsync ${D}/${bindir}/relsync
 }
 
 FILES_${PN} = "${bindir}"

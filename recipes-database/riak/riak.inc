@@ -3,6 +3,8 @@ HOMEPAGE = "http://www.riak.info/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 
+PR = "r1"
+
 SRC_URI = " \
     git://github.com/basho/riak;branch=develop-3.0 \
     file://Makefile.c_src.canola \
@@ -27,11 +29,10 @@ SRC_URI = " \
     file://riak.service \
 "
 
-inherit rebar3 useradd systemd update-rc.d
+inherit rebar3-brokensep useradd systemd update-rc.d
 
 INITSCRIPT_NAME = "riak"
 INITSCRIPT_PARAMS = "defaults"
-
 SYSTEMD_SERVICE_${PN} = "riak.service"
 
 USERADD_PACKAGES = "${PN}"
@@ -45,28 +46,28 @@ REBAR3_RELEASE_NAME = "riak"
 
 do_compile_prepend() {
     # ebloom
-    install -D ${WORKDIR}/Makefile.c_src.ebloom ${S}/_build/${REBAR3_PROFILE}/lib/ebloom/c_src/Makefile
-    install -D ${WORKDIR}/rebar.config.ebloom ${S}/_build/${REBAR3_PROFILE}/lib/ebloom/rebar.config    
+    install -D ${WORKDIR}/Makefile.c_src.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/c_src/Makefile
+    install -D ${WORKDIR}/rebar.config.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/rebar.config    
     # bitcask
-    install -D ${WORKDIR}/Makefile.c_src.bitcask ${S}/_build/${REBAR3_PROFILE}/lib/bitcask/c_src/Makefile
-    install -D ${WORKDIR}/rebar.config.bitcask ${S}/_build/${REBAR3_PROFILE}/lib/bitcask/rebar.config
+    install -D ${WORKDIR}/Makefile.c_src.bitcask ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bitcask/c_src/Makefile
+    install -D ${WORKDIR}/rebar.config.bitcask ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bitcask/rebar.config
     # lz4
-    install -D ${WORKDIR}/Makefile.c_src.lz4 ${S}/_build/${REBAR3_PROFILE}/lib/lz4/c_src/Makefile
-    install -D ${WORKDIR}/rebar.config.lz4 ${S}/_build/${REBAR3_PROFILE}/lib/lz4/rebar.config
+    install -D ${WORKDIR}/Makefile.c_src.lz4 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/lz4/c_src/Makefile
+    install -D ${WORKDIR}/rebar.config.lz4 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/lz4/rebar.config
     # riak_ensemble
-    install -D ${WORKDIR}/Makefile.c_src.riak_ensemble ${S}/_build/${REBAR3_PROFILE}/lib/riak_ensemble/c_src/Makefile
-    install -D ${WORKDIR}/rebar.config.riak_ensemble ${S}/_build/${REBAR3_PROFILE}/lib/riak_ensemble/rebar.config
+    install -D ${WORKDIR}/Makefile.c_src.riak_ensemble ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/riak_ensemble/c_src/Makefile
+    install -D ${WORKDIR}/rebar.config.riak_ensemble ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/riak_ensemble/rebar.config
     # fix dependency: canola
-    install -D ${WORKDIR}/Makefile.c_src.canola ${S}/_build/${REBAR3_PROFILE}/lib/canola/c_src/Makefile
-    install -D ${WORKDIR}/rebar.config.canola ${S}/_build/${REBAR3_PROFILE}/lib/canola/rebar.config
+    install -D ${WORKDIR}/Makefile.c_src.canola ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/canola/c_src/Makefile
+    install -D ${WORKDIR}/rebar.config.canola ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/canola/rebar.config
     # fix dependency: syslog
-    install -D ${WORKDIR}/Makefile.c_src.syslog ${S}/_build/${REBAR3_PROFILE}/lib/syslog/c_src/Makefile
-    install -D ${WORKDIR}/rebar.config.syslog ${S}/_build/${REBAR3_PROFILE}/lib/syslog/rebar.config
+    install -D ${WORKDIR}/Makefile.c_src.syslog ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/syslog/c_src/Makefile
+    install -D ${WORKDIR}/rebar.config.syslog ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/syslog/rebar.config
     # fix dependency: eleveldb
-    install -D ${WORKDIR}/0001-Switch-to-shared-snappy-library-link.patch ${S}/_build/${REBAR3_PROFILE}/lib/eleveldb/c_src/0001-Switch-to-shared-snappy-library-link.patch
-    install -D ${WORKDIR}/build_deps.sh.eleveldb ${S}/_build/${REBAR3_PROFILE}/lib/eleveldb/c_src/build_deps.sh
-    install -D ${WORKDIR}/Makefile.c_src.eleveldb ${S}/_build/${REBAR3_PROFILE}/lib/eleveldb/c_src/Makefile
-    install -D ${WORKDIR}/rebar.config.eleveldb ${S}/_build/${REBAR3_PROFILE}/lib/eleveldb/rebar.config
+    install -D ${WORKDIR}/0001-Switch-to-shared-snappy-library-link.patch ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/0001-Switch-to-shared-snappy-library-link.patch
+    install -D ${WORKDIR}/build_deps.sh.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/build_deps.sh
+    install -D ${WORKDIR}/Makefile.c_src.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/Makefile
+    install -D ${WORKDIR}/rebar.config.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/rebar.config
 }
 
 do_install_append() {
@@ -90,7 +91,7 @@ do_install_append() {
 }
 
 DEPENDS += " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} \
+    libpam \
     openssl \
     snappy \
 "
