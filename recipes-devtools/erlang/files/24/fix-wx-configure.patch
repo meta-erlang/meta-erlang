@@ -1,0 +1,44 @@
+From 71c0f0f1ca28c6f068568981c8adea0968cabfd0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Fri, 21 May 2021 18:33:19 -0300
+Subject: [PATCH] Fix unsafe compilation path in the wx configure script
+
+---
+ lib/wx/configure.in | 17 +++--------------
+ 1 file changed, 3 insertions(+), 14 deletions(-)
+
+diff --git a/lib/wx/configure.in b/lib/wx/configure.in
+index 8194ec37d0..1744a6332e 100644
+--- a/lib/wx/configure.in
++++ b/lib/wx/configure.in
+@@ -266,23 +266,12 @@ if test X"$host_os" != X"win32" ; then
+        	test X"$ac_cv_header_OpenGL_gl_h" != Xyes
+     then
+        	saved_CPPFLAGS="$CPPFLAGS"
+-	AC_MSG_NOTICE(Checking for OpenGL headers in /usr/X11R6)
+-       	CPPFLAGS="-isystem /usr/X11R6/include $CPPFLAGS"
++        AC_MSG_NOTICE(Checking for OpenGL headers)
+        	$as_unset ac_cv_header_GL_gl_h
+        	AC_CHECK_HEADERS([GL/gl.h])
+        	if test X"$ac_cv_header_GL_gl_h" != Xyes ; then
+-	    AC_MSG_NOTICE(Checking for OpenGL headers in /usr/local)
+-	    CPPFLAGS="-isystem /usr/local/include $saved_CPPFLAGS"
+-	    $as_unset ac_cv_header_GL_gl_h
+-	    AC_CHECK_HEADERS([GL/gl.h])
+-	    if test X"$ac_cv_header_GL_gl_h" != Xyes ; then
+-		WX_MSG_ERROR([No OpenGL headers found, wx will NOT be usable])
+-		CPPFLAGS="$saved_CPPFLAGS"
+-	    else
+-	    	GL_LIBS="-L/usr/local/lib $GL_LIBS"
+-	    fi
+-	else
+-    	    GL_LIBS="-L/usr/X11R6/lib $GL_LIBS"
++            WX_MSG_ERROR([No OpenGL headers found, wx will NOT be usable])
++            CPPFLAGS="$saved_CPPFLAGS"
+        	fi
+     fi
+ else
+-- 
+2.25.1
+
