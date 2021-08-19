@@ -1,7 +1,7 @@
 DESCRIPTION = "High-performance AMQP-compliant message broker written in Erlang."
 HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
-LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=af16b76db5b16eaa076c067efcb08596"
+LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=815ca599c9df247a0c7f619bab123dad"
 SECTION = "network"
 PR = "r1"
 
@@ -12,8 +12,8 @@ SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/
            file://rabbitmq.conf \
            "
 
-SRC_URI[md5sum] = "2f47cc1c92ffd13774f021d5ca5b773c"
-SRC_URI[sha256sum] = "aedc8458701a80167b35958c10090d468c3de11984510b49ec02e777c51b1aba"
+SRC_URI[md5sum] = "ea8d933817ce2f4c398d70d87e75ac64"
+SRC_URI[sha256sum] = "5eb0ff3fa7e2bd2bd863d6d29c6d476346ed85ee1f5e5218f10e4a1d540724e5"
 
 DEPENDS = " \
     python3-native \
