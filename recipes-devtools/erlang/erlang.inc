@@ -46,10 +46,10 @@ EXTRA_OECONF_append_sh4 = " --disable-smp-support --disable-hipe"
 NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 EXTRA_OECONF_class-native ??= " \
-    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-incl=${STAGING_DIR_NATIVE}/usr \
+    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-zlib=${STAGING_DIR_NATIVE}/usr \
     "
 EXTRA_OECONF_class-nativesdk ??= " \
-    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-incl=${STAGING_DIR_NATIVE}/usr \
+    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-zlib=${STAGING_DIR_NATIVE}/usr \
     "
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET}"
@@ -57,6 +57,9 @@ CACHED_CONFIGUREVARS_class-native += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_jav
 CACHED_CONFIGUREVARS_class-nativesdk += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
 
 OTP_BUILD_CONFIGURE_OPTS ?= "autoconf"
+
+# https://github.com/erlang/otp/issues/4821 setting EGREP to make AC_EGREP_CPP works
+export EGREP = "egrep"
 
 do_configure_class-target() {
     cd ${S}; ./otp_build ${OTP_BUILD_CONFIGURE_OPTS}; cd -
