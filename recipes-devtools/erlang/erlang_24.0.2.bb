@@ -13,6 +13,3 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files/24:"
 OTP_BUILD_CONFIGURE_OPTS = "update_configure --no-commit"
 
 PACKAGECONFIG = "pkgconfig"
-
-EXTRA_OECONF_class-native = ""
-EXTRA_OECONF_class-nativesdk = ""
