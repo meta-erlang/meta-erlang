@@ -3,7 +3,7 @@ DESCRIPTION = "erlfmt is an opinionated Erlang code formatter. By automating the
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dcbf253b3d6d09ae7e64cb34b4d0ec33"
 
-SRC_URI = "git://github.com/WhatsApp/erlfmt.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/WhatsApp/erlfmt.git;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
 SRCREV = "ca8a2378cdc91f9dad47fcfd18b1533132b5711e"
