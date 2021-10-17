@@ -12,7 +12,8 @@ DEPENDS_append_class-native = " ncurses-native zlib-native openssl-native"
 DEPENDS_append_class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openssl nativesdk-ncurses"
 
 
-SRC_URI = "git://github.com/erlang/otp;branch=master"
+SRC_URI = "git://github.com/erlang/otp;branch=master \
+    file://environment.d-erlang.sh.in"
 SRC_URI += "file://fix-wx-configure.patch"
 SRC_URI += "file://otp-0002-Remove-rpath.patch"
 
@@ -101,6 +102,12 @@ do_install_prepend_class-native() {
 
 do_install_prepend_class-nativesdk() {
     export TARGET=${HOST_SYS}
+
+    sed -i -e 's,@ERTS_VERSION@,${ERTS_VERSION},g' \
+        -e 's,@ERL_INTERFACE_VERSION@,${ERL_INTERFACE_VERSION},g' \
+         ${WORKDIR}/environment.d-erlang.sh.in
+    mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
+    install -m 644 ${WORKDIR}/environment.d-erlang.sh.in ${D}${SDKPATHNATIVE}/environment-setup.d/erlang.sh
 }
 
 do_install_class-target() {
@@ -134,3 +141,5 @@ do_install_append_class-target() {
 	# remove erlang code that does not need to be loaded by the erlang runtime
 	rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin
 }
+
+FILES_${PN}_append_class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/erlang.sh"
