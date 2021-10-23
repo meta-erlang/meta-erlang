@@ -23,6 +23,8 @@ inherit autotools-brokensep
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
 
+EXTRA_OECONF += "--without-wx"
+
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
