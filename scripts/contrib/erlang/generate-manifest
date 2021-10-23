@@ -247,6 +247,11 @@ SPEC = {
         'ERL_INTERFACE_VERSION': '3.13',
         'modules': COMMON_MODULES,
     },
+    '21.3.8.24': {
+        'ERTS_VERSION': '10.3.5.19',
+        'ERL_INTERFACE_VERSION': '3.11.3.2',
+        'modules': COMMON_MODULES,
+    },
     '22.2.8': {
         'ERTS_VERSION': '10.6.4',
         'ERL_INTERFACE_VERSION': '3.13.1',
@@ -255,6 +260,11 @@ SPEC = {
     '22.3': {
         'ERTS_VERSION': '10.7',
         'ERL_INTERFACE_VERSION': '3.13.2',
+        'modules': COMMON_MODULES,
+    },
+    '22.3.4.22': {
+        'ERTS_VERSION': '10.7.2.14',
+        'ERL_INTERFACE_VERSION': '3.13.2.2',
         'modules': COMMON_MODULES,
     },
     '23.0.3': {
@@ -282,11 +292,21 @@ SPEC = {
         'ERL_INTERFACE_VERSION': '4.0.3.1',
         'modules': COMMON_MODULES,
     },
+    '23.3.4.8': {
+        'ERTS_VERSION': '11.2.2.7',
+        'ERL_INTERFACE_VERSION': '4.0.3.1',
+        'modules': COMMON_MODULES,
+    },
     '24.0.5': {
         'ERTS_VERSION': '12.0.3',
         'ERL_INTERFACE_VERSION': '5.0.1',
         'modules': COMMON_MODULES,
-    },    
+    },
+    '24.1.2': {
+        'ERTS_VERSION': '12.1.2',
+        'ERL_INTERFACE_VERSION': '5.1',
+        'modules': COMMON_MODULES,
+    },
 }
 
 
