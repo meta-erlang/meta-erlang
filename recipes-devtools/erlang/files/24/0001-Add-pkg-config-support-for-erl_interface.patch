@@ -1,4 +1,4 @@
-From 62ccf3248fb0eff8d65e8debea793ea7552bf00f Mon Sep 17 00:00:00 2001
+From a59c64c373722270292737c1c7a812f9c67a4560 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Tue, 30 Mar 2021 23:17:29 -0300
@@ -27,18 +27,18 @@ argument when calling configure script.
 
 Upstream-Status: Pending
 ---
- configure.src                     | 14 +++++++++++++-
+ configure.src                     | 12 ++++++++++++
  lib/erl_interface/configure.in    | 18 ++++++++++++++++--
  lib/erl_interface/erl_ei.pc.in    | 31 +++++++++++++++++++++++++++++++
  lib/erl_interface/src/Makefile.in | 19 ++++++++++++++++++-
- 4 files changed, 78 insertions(+), 4 deletions(-)
+ 4 files changed, 77 insertions(+), 3 deletions(-)
  create mode 100644 lib/erl_interface/erl_ei.pc.in
 
 diff --git a/configure.src b/configure.src
-index c0a195b147..987d25a66e 100644
+index f0afd5c6ee..6ea2147b03 100644
 --- a/configure.src
 +++ b/configure.src
-@@ -48,6 +48,7 @@ help=no
+@@ -52,6 +52,7 @@ help=no
  user_srcdir=
  config_arguments=
  skip_applications=
@@ -46,19 +46,17 @@ index c0a195b147..987d25a66e 100644
  while test $# != 0; do
      case $1 in
  	-srcdir=* | --srcdir=*)
-@@ -135,7 +136,10 @@ while test $# != 0; do
- 	    pie_cflags="-fno-PIE"
- 	    pie_ldflags="-no-pie"
+@@ -144,6 +145,9 @@ while test $# != 0; do
+         flgs_val=`echo "$1" | sed 's/^[^=]*=//'`
+ 	    eval $flgs_var=\$flgs_val
  	    ;;
--	CFLAGS=* | LDFLAGS=*)
 +        --enable-pkg-config)
 +	    pkg_config=yes
 +	    ;;
-+        CFLAGS=* | LDFLAGS=*)
- 	    flgs_var=`expr "$1" : '\([^=]*\)=.*'`
- 	    flgs_val=`expr "$1" : '[^=]*=\(.*\)'`
- 	    eval $flgs_var=\$flgs_val
-@@ -308,6 +312,14 @@ else
+ 	--help=r* | -help=r*)
+ 	    help=all;;
+         --help* | -help* | -h)
+@@ -312,6 +316,14 @@ else
      esac
  fi
  
@@ -159,7 +157,7 @@ index 0000000000..0b5d439af1
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lei
 diff --git a/lib/erl_interface/src/Makefile.in b/lib/erl_interface/src/Makefile.in
-index 061fd05a1d..816c05e948 100644
+index 56fdaa608e..42e4488ca8 100644
 --- a/lib/erl_interface/src/Makefile.in
 +++ b/lib/erl_interface/src/Makefile.in
 @@ -42,6 +42,10 @@ include $(TARGET)/eidefs.mk
@@ -182,7 +180,7 @@ index 061fd05a1d..816c05e948 100644
  # The default library (no extra extension in name) is for Unix with
  # thread support if exists.  For windows MD is the default.
  #
-@@ -668,7 +674,18 @@ EXTRA = \
+@@ -667,7 +673,18 @@ EXTRA = \
  	README.internal \
  	$(TARGET)/eidefs.mk
  
@@ -203,5 +201,5 @@ index 061fd05a1d..816c05e948 100644
  	$(INSTALL_DIR) "$(RELSYSDIR)/lib"
  	$(INSTALL_DIR) "$(RELSYSDIR)/bin"
 -- 
-2.25.1
+2.30.2
 

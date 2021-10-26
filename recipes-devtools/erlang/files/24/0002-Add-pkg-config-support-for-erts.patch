@@ -1,8 +1,8 @@
-From 29fb78b113ab03a26ae2eefd3d13481b0d7e709a Mon Sep 17 00:00:00 2001
+From 7c0652a47ed0e564a2ddbec94ba8ba334c77691d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Tue, 30 Mar 2021 23:17:11 -0300
-Subject: [PATCH] Add pkg-config support for erts
+Subject: [PATCH 2/2] Add pkg-config support for erts
 
 This commit introduces the file erl_erts.pc which will be installed
 in the standard pkg-config directory.
@@ -25,7 +25,7 @@ Upstream-Status: Pending
  create mode 100644 erts/erl_erts.pc.in
 
 diff --git a/erts/configure.in b/erts/configure.in
-index fd3190f0f1..85626803c4 100644
+index d8ad6ff552..d0ce30074f 100644
 --- a/erts/configure.in
 +++ b/erts/configure.in
 @@ -21,11 +21,16 @@ dnl %CopyrightEnd%
@@ -45,7 +45,7 @@ index fd3190f0f1..85626803c4 100644
  dnl We check if -Werror was given on command line and if so
  dnl we disable it for the configure and only use it when
  dnl actually building erts
-@@ -3601,6 +3606,21 @@ CFLAGS="$CFLAGS $sanitizers"
+@@ -3598,6 +3603,21 @@ CFLAGS="$CFLAGS $sanitizers"
  LDFLAGS="$LDFLAGS $sanitizers"
  ])
  
@@ -67,7 +67,7 @@ index fd3190f0f1..85626803c4 100644
  dnl ----------------------------------------------------------------------
  dnl Output the result.
  dnl ----------------------------------------------------------------------
-@@ -3614,6 +3634,7 @@ AC_CONFIG_FILES([
+@@ -3611,6 +3631,7 @@ AC_CONFIG_FILES([
    include/internal/$host/erts_internal.mk:include/internal/erts_internal.mk.in
    lib_src/$host/Makefile:lib_src/Makefile.in
    ../make/$host/otp.mk:../make/otp.mk.in
@@ -155,5 +155,5 @@ index 0000000000..d32955b51a
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lerts
 -- 
-2.25.1
+2.30.2
 
