@@ -4,18 +4,18 @@ DEPENDS += "erlang erlang-native"
 base_erlang_release = "${libdir_native}/${BPN}"
 erlang_release = "${D}/${base_erlang_release}"
 
-ALLOW_EMPTY_${PN}-staticdev = "1"
-DESCRIPTION_${PN}-staticdev = ""
-RDEPENDS_${PN}-staticdev = ""
-FILES_${PN}-staticdev = "\
+ALLOW_EMPTY:${PN}-staticdev = "1"
+DESCRIPTION:${PN}-staticdev = ""
+RDEPENDS:${PN}-staticdev = ""
+FILES:${PN}-staticdev = "\
     ${base_erlang_release}/lib/*/lib/*.a \
     ${base_erlang_release}/lib/*/priv/*.a \
     "
 
-ALLOW_EMPTY_${PN}-dev = "1"
-DESCRIPTION_${PN}-dev = ""
-RDEPENDS_${PN}-dev = ""
-FILES_${PN}-dev = "\
+ALLOW_EMPTY:${PN}-dev = "1"
+DESCRIPTION:${PN}-dev = ""
+RDEPENDS:${PN}-dev = ""
+FILES:${PN}-dev = "\
     ${base_erlang_release}/erts-*/include \
     ${base_erlang_release}/lib/*/include/* \
     ${base_erlang_release}/lib/*/c_src/* \
@@ -24,10 +24,10 @@ FILES_${PN}-dev = "\
     ${base_erlang_release}/erts*/src \
     "
 
-ALLOW_EMPTY_${PN}-dbg = "1"
-DESCRIPTION_${PN}-dbg = ""
-RDEPENDS_${PN}-dbg = ""
-FILES_${PN}-dbg = "\
+ALLOW_EMPTY:${PN}-dbg = "1"
+DESCRIPTION:${PN}-dbg = ""
+RDEPENDS:${PN}-dbg = ""
+FILES:${PN}-dbg = "\
     ${base_erlang_release}/lib/*/bin/.debug \
     ${base_erlang_release}/lib/*/lib/.debug \
     ${base_erlang_release}/lib/*/priv/lib/.debug \
@@ -36,25 +36,25 @@ FILES_${PN}-dbg = "\
     /usr/src/debug \
     "
 
-ALLOW_EMPTY_${PN}-erts-staticdev = "1"
-DESCRIPTION_${PN}-erts-staticdev = ""
-RDEPENDS_${PN}-erts-staticdev = ""
-FILES_${PN}-erts-staticdev = "\
+ALLOW_EMPTY:${PN}-erts-staticdev = "1"
+DESCRIPTION:${PN}-erts-staticdev = ""
+RDEPENDS:${PN}-erts-staticdev = ""
+FILES:${PN}-erts-staticdev = "\
     ${base_erlang_release}/erts-*/lib \
     "
 
-ALLOW_EMPTY_${PN}-erts-doc = "1"
-DESCRIPTION_${PN}-erts-doc = ""
-RDEPENDS_${PN}-erts-doc = ""
-FILES_${PN}-erts-doc = "\
+ALLOW_EMPTY:${PN}-erts-doc = "1"
+DESCRIPTION:${PN}-erts-doc = ""
+RDEPENDS:${PN}-erts-doc = ""
+FILES:${PN}-erts-doc = "\
     ${base_erlang_release}/erts-*/doc \
     ${base_erlang_release}/erts-*/man \
     "
 
-ALLOW_EMPTY_${PN}-erts = "1"
-DESCRIPTION_${PN}-erts = ""
-RDEPENDS_${PN}-erts = ""
-FILES_${PN}-erts = "\
+ALLOW_EMPTY:${PN}-erts = "1"
+DESCRIPTION:${PN}-erts = ""
+RDEPENDS:${PN}-erts = ""
+FILES:${PN}-erts = "\
     ${base_erlang_release}/erts-*/bin/beam.smp \
     ${base_erlang_release}/erts-*/bin/dyn_erl \
     ${base_erlang_release}/erts-*/bin/epmd \
@@ -70,20 +70,20 @@ FILES_${PN}-erts = "\
     ${base_erlang_release}/erts-*/bin/start_erl \
     "
 
-ALLOW_EMPTY_${PN}-dev-tools = "1"
-DESCRIPTION_${PN}-dev-tools = ""
-RDEPENDS_${PN}-dev-tools = ""
-FILES_${PN}-dev-tools = "\
+ALLOW_EMPTY:${PN}-dev-tools = "1"
+DESCRIPTION:${PN}-dev-tools = ""
+RDEPENDS:${PN}-dev-tools = ""
+FILES:${PN}-dev-tools = "\
     ${base_erlang_release}/erts-*/bin/ct_run \
     ${base_erlang_release}/erts-*/bin/dialyzer \
     ${base_erlang_release}/erts-*/bin/erlc \
     ${base_erlang_release}/erts-*/bin/typer \
     "
 
-ALLOW_EMPTY_${PN} = "1"
-DESCRIPTION_${PN} = ""
-RDEPENDS_${PN} += "${PN}-erts"
-FILES_${PN} += "\
+ALLOW_EMPTY:${PN} = "1"
+DESCRIPTION:${PN} = ""
+RDEPENDS:${PN} += "${PN}-erts"
+FILES:${PN} += "\
     ${base_erlang_release}/* \
     "
 

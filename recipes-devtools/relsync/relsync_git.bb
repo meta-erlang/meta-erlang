@@ -24,8 +24,8 @@ do_install() {
     install -m 0755 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/bin/relsync ${D}/${bindir}/relsync
 }
 
-FILES_${PN} = "${bindir}"
-FILES_${PN}-dbg += "/.debug"
+FILES:${PN} = "${bindir}"
+FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"
 

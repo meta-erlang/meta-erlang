@@ -33,18 +33,18 @@ inherit rebar3-brokensep useradd systemd update-rc.d
 
 INITSCRIPT_NAME = "riak"
 INITSCRIPT_PARAMS = "defaults"
-SYSTEMD_SERVICE_${PN} = "riak.service"
+SYSTEMD_SERVICE:${PN} = "riak.service"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system riak"
-USERADD_PARAM_${PN}  = "--system --create-home --home /var/lib/riak -g riak riak"
+GROUPADD_PARAM:${PN} = "--system riak"
+USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/riak -g riak riak"
 
 S = "${WORKDIR}/git"
 
 REBAR3_PROFILE = "rel"
 REBAR3_RELEASE_NAME = "riak"
 
-do_compile_prepend() {
+do_compile:prepend() {
     # ebloom
     install -D ${WORKDIR}/Makefile.c_src.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/c_src/Makefile
     install -D ${WORKDIR}/rebar.config.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/rebar.config    
@@ -70,7 +70,7 @@ do_compile_prepend() {
     install -D ${WORKDIR}/rebar.config.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/rebar.config
 }
 
-do_install_append() {
+do_install:append() {
     # substitute bash to sh
     sed -i -e "s|^#!.*/bin/bash|#!/bin/sh|" ${erlang_release}/bin/hooks/builtin/wait_for_process
     
@@ -96,7 +96,7 @@ DEPENDS += " \
     snappy \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /etc \
     /var/lib/riak \
 "

@@ -2,7 +2,7 @@ SUMMARY = "Target packages for the Erlang/Elixir SDK"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     erlang \
     erlang-modules-dev \
     elixir \

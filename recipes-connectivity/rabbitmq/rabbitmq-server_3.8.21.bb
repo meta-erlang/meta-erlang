@@ -27,10 +27,10 @@ DEPENDS = " \
     coreutils-native\
 "
 
-RDEPENDS_${PN} = "erlang erlang-modules \
+RDEPENDS:${PN} = "erlang erlang-modules \
                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'socat', '', d)}"
 
-do_unpack_append() {
+do_unpack:append() {
     bb.build.exec_func('do_fetch_deps', d)
 }
 
@@ -39,7 +39,7 @@ do_fetch_deps() {
     oe_runmake fetch-deps
 }
 
-do_patch_append() {
+do_patch:append() {
     bb.build.exec_func('do_fix_deps', d)
 }
 
@@ -104,20 +104,20 @@ do_install() {
 inherit useradd update-rc.d systemd
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system rabbitmq"
-USERADD_PARAM_${PN}  = "--system --create-home --home /var/lib/rabbitmq \
+GROUPADD_PARAM:${PN} = "--system rabbitmq"
+USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/rabbitmq \
 			-g rabbitmq rabbitmq"
 
 INITSCRIPT_NAME = "rabbitmq-server"
 INITSCRIPT_PARAMS = "defaults"
 
-SYSTEMD_SERVICE_${PN} = "rabbitmq-server.service"
+SYSTEMD_SERVICE:${PN} = "rabbitmq-server.service"
 
-FILES_${PN} += " ${libdir}/erlang/lib/rabbitmq_server-${PV}/* \
+FILES:${PN} += " ${libdir}/erlang/lib/rabbitmq_server-${PV}/* \
                  ${libdir}/erlang/bin \
                  ${libdir}/erlang/autocomplete \
                  ${localstatedir}/* \
                "
-FILES_${PN}-dev += " ${libdir}/erlang/lib/rabbitmq_server-${PV}/include"
+FILES:${PN}-dev += " ${libdir}/erlang/lib/rabbitmq_server-${PV}/include"
 
-FILES_${PN}-doc += " ${libdir}/erlang/lib/rabbitmq_server-${PV}/*LICENSE* ${libdir}/erlang/lib/rabbitmq_server-${PV}/INSTALL"
+FILES:${PN}-doc += " ${libdir}/erlang/lib/rabbitmq_server-${PV}/*LICENSE* ${libdir}/erlang/lib/rabbitmq_server-${PV}/INSTALL"

@@ -15,7 +15,7 @@ DEPENDS = "erlang-native \
            libyaml \
            ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
-RDEPENDS_${PN} = "erlang erlang-compiler erlang-mnesia erlang-os-mon erlang-crypto erlang-ssl erlang-public-key erlang-asn1 erlang-inets"
+RDEPENDS:${PN} = "erlang erlang-compiler erlang-mnesia erlang-os-mon erlang-crypto erlang-ssl erlang-public-key erlang-asn1 erlang-inets"
 
 LICENSE = "GPL-2.0"
 
@@ -44,7 +44,7 @@ export ERL_CFLAGS = "-I${STAGING_LIBDIR}/erlang/lib/${@get_erlang_application(d,
 
 export ERL_EI_LIBDIR = "${STAGING_LIBDIR}/erlang/lib/${@get_erlang_application(d, "erl_interface")}/lib"
 
-do_configure_append() {
+do_configure:append() {
     make deps
 
     for i in fast_tls fast_xml fast_yaml eimp ezlib stringprep ezlib; do
@@ -55,7 +55,7 @@ do_configure_append() {
     cd ${S}
 }
 
-do_install_append() {
+do_install:append() {
 	# Fix ejabberdctl
 	sed -i -e 's,^ERL=.*$,ERL=${bindir}/erl,g' \
 		${D}/${sbindir}/ejabberdctl
@@ -81,7 +81,7 @@ do_install_append() {
     fi
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
                ${libdir}/pkix-* \
                ${libdir}/p1_oauth2-* \
                ${libdir}/unicode_util_compat-* \
@@ -108,7 +108,7 @@ FILES_${PN} += " \
                ${root_prefix}/run"
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "--system --create-home --home-dir ${localstatedir}/lib/ejabberd \
+USERADD_PARAM:${PN} = "--system --create-home --home-dir ${localstatedir}/lib/ejabberd \
     --shell /bin/false --user-group ejabberd"
 
 INITSCRIPT_NAME = "ejabberd"

@@ -8,7 +8,7 @@ B = "${S}"
 MIX_ENV ?= "prod"
 
 # erlang system libs, target system was striped
-INSANE_SKIP_${PN} += "already-stripped"
+INSANE_SKIP:${PN} += "already-stripped"
 
 MIX_RELEASE_NAME="${@get_release_name("${PN}")}"
 MIX_RELEASE_VERSION="${@get_release_version("${PV}")}"

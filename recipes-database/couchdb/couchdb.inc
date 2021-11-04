@@ -17,7 +17,7 @@ inherit autotools-brokensep erlang systemd update-rc.d useradd
 SPIDERMONKEY_VERSION ?= "60"
 
 CONFIGUREOPTS = "--with-curl --spidermonkey-version ${SPIDERMONKEY_VERSION} --disable-docs"
-EXTRA_OECONF_remove = "--disable-static"
+EXTRA_OECONF:remove = "--disable-static"
 
 ERL_INTERFACE_VERSION = "`pkg-config --modversion erl_ei`"
 export ERL_CFLAGS = "`pkg-config --cflags-only-I erl_ei` -I${STAGING_LIBDIR}/erlang/usr/include"
@@ -28,15 +28,15 @@ LDFLAGS_ += "-L${STAGING_LIBDIR}/erlang/lib/erl_interface-${ERL_INTERFACE_VERSIO
 INITSCRIPT_NAME = "couchdb"
 INITSCRIPT_PARAMS = "defaults"
 
-SYSTEMD_SERVICE_${PN} = "couchdb.service"
+SYSTEMD_SERVICE:${PN} = "couchdb.service"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system couchdb"
-USERADD_PARAM_${PN}  = "--system --create-home --home /var/lib/couchdb -g couchdb couchdb"
+GROUPADD_PARAM:${PN} = "--system couchdb"
+USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/couchdb -g couchdb couchdb"
 
 S = "${WORKDIR}/apache-couchdb-${PV}"
 
-do_configure_append() {
+do_configure:append() {
     sed -i "s:-I/usr/include/mozjs-${SPIDERMONKEY_VERSION}:-I${STAGING_INCDIR}/mozjs-${SPIDERMONKEY_VERSION}:g" ${B}/src/couch/rebar.config.script
     sed -i "s:-L/usr/local/lib:\$LDFLAGS:g" ${B}/src/couch/rebar.config.script
 
@@ -46,7 +46,7 @@ do_configure_append() {
     sed -i 's:"^erts.*/bin/(dialyzer|typer)":"^erts.*/bin/(dialyzer|typer)", "^erts.*/lib":g' ${B}/rel/reltool.config
 }
 
-do_install_append() {
+do_install:append() {
     install -d ${D}/opt
     cp -r ${B}/rel/couchdb ${D}/opt/
     chown -R couchdb.couchdb ${D}/opt/couchdb
@@ -64,7 +64,7 @@ do_install_append() {
     install -Dm 0755 ${WORKDIR}/couchdb.init ${D}/${sysconfdir}/init.d/couchdb
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /etc \
     /opt/couchdb \
     /var/lib/couchdb \
@@ -81,4 +81,4 @@ DEPENDS += " \
     rebar-native \
 "
 
-INSANE_SKIP_${PN} = "already-stripped"
+INSANE_SKIP:${PN} = "already-stripped"

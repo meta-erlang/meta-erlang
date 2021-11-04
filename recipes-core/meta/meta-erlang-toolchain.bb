@@ -3,7 +3,7 @@ LICENSE = "MIT"
 
 inherit populate_sdk
 
-TOOLCHAIN_HOST_TASK_append = " \
+TOOLCHAIN_HOST_TASK:append = " \
      nativesdk-rebar3 \
      nativesdk-erlfmt \
      nativesdk-elvis \
@@ -13,7 +13,7 @@ TOOLCHAIN_HOST_TASK_append = " \
      nativesdk-elixir-modules-dev \
 "
 
-TOOLCHAIN_TARGET_TASK_append = " \
+TOOLCHAIN_TARGET_TASK:append = " \
     ${@multilib_pkg_extend(d, 'packagegroup-erlang-sdk-target')} \
 "
 

@@ -69,13 +69,13 @@ do_install() {
 inherit useradd update-rc.d systemd
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system epmd"
-USERADD_PARAM_${PN}  = "--system --create-home --home /var/lib/epmd \
+GROUPADD_PARAM:${PN} = "--system epmd"
+USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/epmd \
                         -g epmd epmd"
 
 INITSCRIPT_NAME = "epmd"
 INITSCRIPT_PARAMS = "defaults"
 
-SYSTEMD_SERVICE_${PN} = "epmd.service epmd.socket"
+SYSTEMD_SERVICE:${PN} = "epmd.service epmd.socket"
 
-FILES_${PN} += "${systemd_system_unitdir}"
+FILES:${PN} += "${systemd_system_unitdir}"

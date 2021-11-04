@@ -20,14 +20,14 @@ do_install() {
     install -m 0755 ${S}/rebar3 ${D}/${bindir}/rebar3
 }
 
-do_install_append_class-nativesdk() {
+do_install:append:class-nativesdk() {
     mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
     install -m 644 ${WORKDIR}/environment.d-rebar3.sh ${D}${SDKPATHNATIVE}/environment-setup.d/rebar3.sh
 }
 
-FILES_${PN} = "${bindir}/rebar3"
-FILES_${PN}-dbg += "/.debug"
+FILES:${PN} = "${bindir}/rebar3"
+FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"
 
-FILES_${PN}_append_class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/rebar3.sh"
+FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/rebar3.sh"

@@ -21,8 +21,8 @@ do_install() {
 	install -m 0755 ${S}/rebar ${D}/${bindir}/rebar
 }
 
-FILES_${PN} = "${bindir}"
-FILES_${PN}-dbg += "/.debug"
+FILES:${PN} = "${bindir}"
+FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"
 
