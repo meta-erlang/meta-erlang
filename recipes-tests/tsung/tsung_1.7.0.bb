@@ -10,7 +10,7 @@ SECTION = "test"
 
 DEPENDS = "erlang-native"
 
-RDEPENDS_${PN} = "erlang erlang-compiler erlang-crypto erlang-xmerl erlang-ssl erlang-public-key erlang-asn1 erlang-inets erlang-os-mon"
+RDEPENDS:${PN} = "erlang erlang-compiler erlang-crypto erlang-xmerl erlang-ssl erlang-public-key erlang-asn1 erlang-inets erlang-os-mon"
 
 LICENSE = "GPL-2.0"
 
@@ -27,7 +27,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep
 
-do_install_append() {
+do_install:append() {
 	# Fix tsung scripts
 	sed -i -e 's,^ERL=.*$,ERL=${libdir}/erlang/bin/erl,g' \
 		${D}/${bindir}/tsung
@@ -35,22 +35,22 @@ do_install_append() {
 		${D}/${bindir}/tsung-recorder
 }
 
-#ALLOW_EMPTY_${PN}-examples = "1"
-#DESCRIPTION_${PN}-examples = ""
-#RDEPENDS_${PN}-examples = "${PN}"
-#FILES_${PN}-examples = "${libdir}/yaws-*/examples /var/yaws/www/*"
+#ALLOW_EMPTY:${PN}-examples = "1"
+#DESCRIPTION:${PN}-examples = ""
+#RDEPENDS:${PN}-examples = "${PN}"
+#FILES:${PN}-examples = "${libdir}/yaws-*/examples /var/yaws/www/*"
 
-#FILES_${PN} += " ${libdir}/yaws-*"
+#FILES:${PN} += " ${libdir}/yaws-*"
 
 
-ALLOW_EMPTY_${PN}-tools = "1"
-DESCRIPTION_${PN}-tools = ""
-RDEPENDS_${PN}-tools = "${PN} perl python3"
-FILES_${PN}-tools = "${bindir}/tsplot ${bindir/tsung-recorder \
+ALLOW_EMPTY:${PN}-tools = "1"
+DESCRIPTION:${PN}-tools = ""
+RDEPENDS:${PN}-tools = "${PN} perl python3"
+FILES:${PN}-tools = "${bindir}/tsplot ${bindir/tsung-recorder \
     ${libdir}/tsung/bin/*.pl ${libdir}/tsung/tsung_plotter \
     ${datadir}/tsung/tsung_plotter"
 
-FILES_${PN}-src += "${libdir}/tsung/tsung-*/src ${libdir}/tsung/tsung-*/include \
+FILES:${PN}-src += "${libdir}/tsung/tsung-*/src ${libdir}/tsung/tsung-*/include \
     ${libdir}/tsung/tsung_recorder-*/src ${libdir}/tsung/tsung_recorder-*/include \
     ${libdir}/tsung/tsung_controller-*/src ${libdir}/tsung/tsung_controller-*/include"
 

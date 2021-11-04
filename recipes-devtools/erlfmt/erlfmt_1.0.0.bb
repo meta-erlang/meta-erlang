@@ -23,8 +23,8 @@ do_install() {
     install -m 0755 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/bin/erlfmt ${D}/${bindir}/erlfmt
 }
 
-FILES_${PN} = "${bindir}/erlfmt"
-FILES_${PN}-dbg += "/.debug"
+FILES:${PN} = "${bindir}/erlfmt"
+FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"
 

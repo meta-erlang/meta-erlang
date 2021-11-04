@@ -19,7 +19,7 @@ VIRTUAL-RUNTIME_syslog ?= ""
 VIRTUAL-RUNTIME_dev_manager ?= ""
 VIRTUAL-RUNTIME_keymaps ?= ""
 VIRTUAL-RUNTIME_update-alternatives = ""
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     base-files \
     ${VIRTUAL-RUNTIME_init_manager} \
     ${VIRTUAL-RUNTIME_initscripts} \

@@ -23,7 +23,7 @@ do_install() {
     install -m 0755 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/bin/covertool ${D}/${bindir}/covertool
 }
 
-FILES_${PN} = "${bindir}/covertool"
-FILES_${PN}-dbg += "/.debug"
+FILES:${PN} = "${bindir}/covertool"
+FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"

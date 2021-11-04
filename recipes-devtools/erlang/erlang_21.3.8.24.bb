@@ -4,7 +4,7 @@ require erlang-${PV}-manifest.inc
 
 PR = "r0"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files/21:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files/21:"
 
 OTP_BUILD_CONFIGURE_OPTS = "skip"
 

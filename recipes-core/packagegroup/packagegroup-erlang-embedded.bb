@@ -13,12 +13,12 @@ PACKAGES = "\
     ${PN}-erlang \
     "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${PN}-initscripts \
     ${PN}-erlang \
     "
 
-RDEPENDS_${PN}-erlang = "\
+RDEPENDS:${PN}-erlang = "\
     erlang \
     erlang-tools \
     "

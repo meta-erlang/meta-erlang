@@ -10,7 +10,7 @@ B = "${WORKDIR}/build"
 export REBAR_BASE_DIR = "${B}"
 
 # erlang system libs, target system was striped
-INSANE_SKIP_${PN} += "already-stripped"
+INSANE_SKIP:${PN} += "already-stripped"
 
 REBAR3_PROFILE ?= ""
 REBAR3_RELEASE_NAME ?= "${@make_release_name("${PN}")}"

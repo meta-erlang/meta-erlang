@@ -456,7 +456,7 @@ class MakefileMaker:
             provideLine += "%s " % name
         provideLine += '"'
 
-        provideNativeLine = 'RPROVIDES_${PN}_class-native+="'
+        provideNativeLine = 'RPROVIDES:${PN}:class-native+="'
         for name in self.packages:
             provideNativeLine += "%s-native " % name
         provideNativeLine += '"'
@@ -493,14 +493,14 @@ class MakefileMaker:
             #
             # write out the description, revision and dependencies
             #
-            self.out('ALLOW_EMPTY_%s="1"' % (name))
-            self.out('DESCRIPTION_%s="%s"' % (name, desc))
-            self.out('RDEPENDS_%s="%s"' % (name, deps))
+            self.out('ALLOW_EMPTY:%s="1"' % (name))
+            self.out('DESCRIPTION:%s="%s"' % (name, desc))
+            self.out('RDEPENDS:%s="%s"' % (name, deps))
 
             if keepfiles:
-                line = 'FILES_%s+="' % name
+                line = 'FILES:%s+="' % name
             else:
-                line = 'FILES_%s="' % name
+                line = 'FILES:%s="' % name
 
             #
             # check which directories to make in the temporary directory
@@ -524,8 +524,8 @@ class MakefileMaker:
             self.out(line)
             self.out("")
 
-        self.out('DESCRIPTION_${PN}-modules="All Erlang modules"')
-        line = 'RDEPENDS_${PN}-modules="'
+        self.out('DESCRIPTION:${PN}-modules="All Erlang modules"')
+        line = 'RDEPENDS:${PN}-modules="'
 
         pkgtoskip = ('-dbg', '-doc', '-staticdev', '-dev')
 
@@ -536,11 +536,11 @@ class MakefileMaker:
                 line += "%s " % name
 
         self.out("%s \"" % line)
-        self.out('ALLOW_EMPTY_${PN}-modules = "1"')
+        self.out('ALLOW_EMPTY:${PN}-modules = "1"')
         self.out("")
 
-        self.out('DESCRIPTION_${PN}-modules-dev="All Erlang modules for developers"')
-        line = 'RDEPENDS_${PN}-modules-dev="${PN}-modules '
+        self.out('DESCRIPTION:${PN}-modules-dev="All Erlang modules for developers"')
+        line = 'RDEPENDS:${PN}-modules-dev="${PN}-modules '
 
         for name, data in sorted(self.packages.iteritems()):
             if not name.endswith(pkgtoskip) or name.endswith('-dbg'):
@@ -549,7 +549,7 @@ class MakefileMaker:
                 line += "%s " % name
 
         self.out("%s \"" % line)
-        self.out('ALLOW_EMPTY_${PN}-modules-dev = "1"')
+        self.out('ALLOW_EMPTY:${PN}-modules-dev = "1"')
 
 
     def doEpilog(self):

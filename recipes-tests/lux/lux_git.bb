@@ -12,7 +12,7 @@ SRCREV = "ec04d30d335bc522eb67880035d1d5de2013e34f"
 S = "${WORKDIR}/git"
 
 DEPENDS = "erlang-native"
-RDEPENDS_${PN} = "erlang"
+RDEPENDS:${PN} = "erlang"
 
 
 inherit autotools-brokensep

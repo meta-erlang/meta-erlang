@@ -22,8 +22,8 @@ do_install() {
     install -m 0755 ${S}/_build/${REBAR3_PROFILE}/bin/elvis ${D}/${bindir}/elvis
 }
 
-FILES_${PN} = "${bindir}/elvis"
-FILES_${PN}-dbg += "/.debug"
+FILES:${PN} = "${bindir}/elvis"
+FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"
 

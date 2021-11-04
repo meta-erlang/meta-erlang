@@ -12,7 +12,7 @@ SECTION = "net"
 DEPENDS = "erlang-native \
            ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
-RDEPENDS_${PN} = "erlang erlang-compiler erlang-crypto erlang-xmerl erlang-ssl erlang-public-key erlang-asn1"
+RDEPENDS:${PN} = "erlang erlang-compiler erlang-crypto erlang-xmerl erlang-ssl erlang-public-key erlang-asn1"
 
 LICENSE = "BSD-3-Clause"
 
@@ -30,7 +30,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep systemd
 
-SYSTEMD_SERVICE_${PN} = "yaws.service"
+SYSTEMD_SERVICE:${PN} = "yaws.service"
 
 export yawsdir = "${libdir}/yaws-${PV}"
 
@@ -39,7 +39,7 @@ EXTRA_OECONF = "\
 
 EXTRA_OEMAKE = "WARNINGS_AS_ERRORS="
 
-do_install_append() {
+do_install:append() {
 	# Install systemd unit files
 	install -d ${D}${systemd_unitdir}/system
 	install -m 0644 ${S}/scripts/systemd/yaws.service ${D}${systemd_unitdir}/system
@@ -69,14 +69,14 @@ do_install_append() {
 	fi
 }
 
-CONFFILES_${PN} = "${sysconfdir}/yaws/yaws.conf"
+CONFFILES:${PN} = "${sysconfdir}/yaws/yaws.conf"
 
-ALLOW_EMPTY_${PN}-examples = "1"
-DESCRIPTION_${PN}-examples = ""
-RDEPENDS_${PN}-examples = "${PN}"
-FILES_${PN}-examples = "${libdir}/yaws-*/examples /var/yaws/www/*"
+ALLOW_EMPTY:${PN}-examples = "1"
+DESCRIPTION:${PN}-examples = ""
+RDEPENDS:${PN}-examples = "${PN}"
+FILES:${PN}-examples = "${libdir}/yaws-*/examples /var/yaws/www/*"
 
-FILES_${PN} += " ${libdir}/yaws-*"
+FILES:${PN} += " ${libdir}/yaws-*"
 
 PACKAGE_BEFORE_PN = "${PN}-examples"
 

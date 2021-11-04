@@ -23,5 +23,5 @@ do_install() {
         install -m 0644 ${WORKDIR}/erlinit.config ${D}/${sysconfdir}/erlinit.config
 }
 
-FILES_${PN} = "${base_sbindir} ${sysconfdir}"
-FILES_${PN}-dbg += "/.debug"
+FILES:${PN} = "${base_sbindir} ${sysconfdir}"
+FILES:${PN}-dbg += "/.debug"
