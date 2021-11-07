@@ -3,13 +3,15 @@ HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=815ca599c9df247a0c7f619bab123dad"
 SECTION = "network"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
            file://rabbitmq-server \
            file://rabbitmq-server.service \
            file://rabbitmq-server-setup \
            file://rabbitmq.conf \
+           file://volatiles.99_rabbitmq-server \
+           file://rabbitmq-server-volatiles.conf \
            "
 
 SRC_URI[md5sum] = "ea8d933817ce2f4c398d70d87e75ac64"
@@ -84,6 +86,9 @@ do_install() {
     chmod 750 ${D}/${sysconfdir}/rabbitmq
     chown -R root.rabbitmq ${D}/${sysconfdir}/rabbitmq
 
+    install -d ${D}${sysconfdir}/default/volatiles
+    install -m 0644 ${WORKDIR}/volatiles.99_rabbitmq-server ${D}${sysconfdir}/default/volatiles/99_rabbitmq-server
+
     install -m 644 ${WORKDIR}/rabbitmq.conf ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
     chown root.rabbitmq ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
 
@@ -96,8 +101,10 @@ do_install() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${WORKDIR}/rabbitmq-server.service ${D}${systemd_unitdir}/system
-	install -d ${D}${bindir}
-	install -m 0755 ${WORKDIR}/rabbitmq-server-setup ${D}${bindir}
+	    install -d ${D}${bindir}
+	    install -m 0755 ${WORKDIR}/rabbitmq-server-setup ${D}${bindir}
+        install -d ${D}${sysconfdir}/tmpfiles.d/
+        install -m 0644 ${WORKDIR}/rabbitmq-server-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/rabbitmq-server.conf
     fi
 }
 
