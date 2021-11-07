@@ -3,17 +3,19 @@ HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=815ca599c9df247a0c7f619bab123dad"
 SECTION = "network"
-PR = "r1"
+PR = "r0"
 
 SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
            file://rabbitmq-server \
            file://rabbitmq-server.service \
            file://rabbitmq-server-setup \
            file://rabbitmq.conf \
+           file://volatiles.99_rabbitmq-server \
+           file://rabbitmq-server-volatiles.conf \
            "
 
-SRC_URI[md5sum] = "ea8d933817ce2f4c398d70d87e75ac64"
-SRC_URI[sha256sum] = "5eb0ff3fa7e2bd2bd863d6d29c6d476346ed85ee1f5e5218f10e4a1d540724e5"
+SRC_URI[md5sum] = "1449afe5b09f6b367a683aeed8b38b36"
+SRC_URI[sha256sum] = "97bee9385373c3cdd08fe31b9f01a20a503b1c81af02d23437ff64d76195ee55"
 
 DEPENDS = " \
     python3-native \
@@ -27,8 +29,7 @@ DEPENDS = " \
     coreutils-native\
 "
 
-RDEPENDS:${PN} = "erlang erlang-modules \
-                  ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'socat', '', d)}"
+RDEPENDS_${PN} = "erlang erlang-modules"
 
 do_unpack:append() {
     bb.build.exec_func('do_fetch_deps', d)
@@ -84,20 +85,23 @@ do_install() {
     chmod 750 ${D}/${sysconfdir}/rabbitmq
     chown -R root.rabbitmq ${D}/${sysconfdir}/rabbitmq
 
+    install -d ${D}${sysconfdir}/default/volatiles
+    install -m 0644 ${WORKDIR}/volatiles.99_rabbitmq-server ${D}${sysconfdir}/default/volatiles/99_rabbitmq-server
+
     install -m 644 ${WORKDIR}/rabbitmq.conf ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
     chown root.rabbitmq ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
-
-	install -d ${D}${bindir}
-	install -m 0755 ${WORKDIR}/rabbitmq-server-setup ${D}${bindir}
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/rabbitmq-server ${D}${sysconfdir}/init.d/rabbitmq-server
+        install -m 0755 ${WORKDIR}/rabbitmq-server-setup ${D}${bindir}
     fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${WORKDIR}/rabbitmq-server.service ${D}${systemd_unitdir}/system
+        install -d ${D}${sysconfdir}/tmpfiles.d/
+        install -m 0644 ${WORKDIR}/rabbitmq-server-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/rabbitmq-server.conf
     fi
 }
 
