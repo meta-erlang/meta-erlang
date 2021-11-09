@@ -1,0 +1,27 @@
+From de5ec431ff28c8e348e31a4e921bbf97340baa55 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Thu, 27 May 2021 22:41:43 -0300
+Subject: [PATCH] Allow use of autoconf 2.71
+
+Upstream-Status: Inappropriate [Yocto specific]
+---
+ otp_build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/otp_build b/otp_build
+index 19dba80542..e90071c5c7 100755
+--- a/otp_build
++++ b/otp_build
+@@ -19,7 +19,7 @@
+ # %CopyrightEnd%
+ #
+ 
+-USE_AUTOCONF_VERSION=2.69
++USE_AUTOCONF_VERSION=2.71
+ 
+ aclocal_dirs="make ./lib/crypto ./lib/erl_interface ./lib/odbc ./lib/wx ./lib/megaco"
+ autoconf_aux_dirs="./lib/common_test/priv/auxdir ./lib/erl_interface/src/auxdir ./lib/common_test/test_server ./lib/wx/autoconf"
+-- 
+2.25.1
+
