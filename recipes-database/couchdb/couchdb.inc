@@ -16,7 +16,7 @@ inherit autotools-brokensep erlang systemd update-rc.d useradd
 # couchdb supports: 1.8.5, 60, 68
 SPIDERMONKEY_VERSION ?= "60"
 
-CONFIGUREOPTS = "--with-curl --spidermonkey-version ${SPIDERMONKEY_VERSION} --disable-docs"
+CONFIGUREOPTS = "--spidermonkey-version ${SPIDERMONKEY_VERSION} --disable-docs"
 EXTRA_OECONF:remove = "--disable-static"
 
 ERL_INTERFACE_VERSION = "`pkg-config --modversion erl_ei`"
