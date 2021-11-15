@@ -68,7 +68,7 @@ Or add ```IMAGE_INSTALL_append = " erlang"``` in _conf/local.conf_ file and run
 ```bitbake core-image-minimal``` to get an image with erlang support.
 
 Also, there are a set of [recipe examples](recipes-examples) demonstrating how to integrate Erlang/Elixir
-projects into YP/OE. The examples tried to cover some common use cases when dealing with cross compiled  
+projects into YP/OE. The examples tried to cover some common use cases when dealing with cross compiled
 applications.
 
 ## Supported versions
@@ -96,21 +96,25 @@ Erlang:
  * [maint-24](https://github.com/erlang/otp/tree/maint-24)
  * [maint-23](https://github.com/erlang/otp/tree/maint-23)
  * [maint-22](https://github.com/erlang/otp/tree/maint-22)
- * [maint-21](https://github.com/erlang/otp/tree/maint-21)
 
 Elixir:
 
+* [v1.12](https://github.com/elixir-lang/elixir/tree/v1.12)
 * [v1.11](https://github.com/elixir-lang/elixir/tree/v1.11)
 * [v1.10](https://github.com/elixir-lang/elixir/tree/v1.10)
 * [v1.9](https://github.com/elixir-lang/elixir/tree/v1.9)
 
 Yocto:
 
+* [honister](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=honister)
 * [hardknott]](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=hardknott)
 * [gatesgarth](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=gatesgarth)
 * [dunfell](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=dunfell)
 * [zeus](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=zeus)
 * [warrior](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=warrior)
+
+Even though supporting a range of versions, users are recommended to checkout specific meta-erlang branch in order to find out the correct combination between Erlang/OTP versions. Due to how Erlang/OTP and YP/OE are made, it is not
+possible always to keep some versions without backporting or fixing cross compilation issues.
 
 ## Other Information
 
