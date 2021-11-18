@@ -20,6 +20,7 @@ SETUP=/usr/bin/rabbitmq-server-setup
 DAEMON=/usr/bin/rabbitmq-server
 CONTROL=/usr/bin/rabbitmqctl
 USER=rabbitmq
+GROUP=rabbitmq
 ROTATE_SUFFIX=
 INIT_LOG_DIR=/var/log/rabbitmq
 PID_FILE=/var/run/rabbitmq/pid
@@ -61,12 +62,12 @@ start_rabbitmq () {
         ensure_pid_dir
         ensure_log_dir
         set +e
-        RABBITMQ_PID_FILE=$PID_FILE start-stop-daemon --pidfile=$PID_FILE --exec $DAEMON --background --start
-        $CONTROL wait $PID_FILE >/dev/null 2>&1
+        RABBITMQ_PID_FILE=$PID_FILE start-stop-daemon --pidfile=$PID_FILE \
+            --exec $DAEMON --background --chuid $USER:$GROUP --start
         RETVAL=$?
         set -e
         case "$RETVAL" in
-            69)
+            0)
                 echo SUCCESS
                 if [ -n "$LOCK_FILE" ] ; then
                     touch $LOCK_FILE
