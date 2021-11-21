@@ -9,8 +9,7 @@ HOMEPAGE = "http://yaws.hyber.org/"
 
 SECTION = "net"
 
-DEPENDS = "erlang-native \
-           ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+DEPENDS = "erlang-native"
 
 RDEPENDS:${PN} = "erlang erlang-compiler erlang-crypto erlang-xmerl erlang-ssl erlang-public-key erlang-asn1"
 
@@ -20,11 +19,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d697daa4658cdb1e2074fd1f1b4f2a4"
 
 SRC_URI = "git://github.com/klacke/yaws;protocol=https \
            file://yaws.conf \
-           file://yaws.init"
+           file://yaws.init \
+           file://0001-Fix-libpam-header-include.patch"
 
-PV = "2.0.7+git${SRCPV}"
-PR = "r2"
-SRCREV = "66dfd84b16590cef119e1f2e25cb9b15a4299640"
+PV = "2.1.0+git${SRCPV}"
+PR = "r0"
+SRCREV = "b2282da62a49d43ed196413875c58580ceab9972"
 
 S = "${WORKDIR}/git"
 
@@ -34,8 +34,9 @@ SYSTEMD_SERVICE:${PN} = "yaws.service"
 
 export yawsdir = "${libdir}/yaws-${PV}"
 
-EXTRA_OECONF = "\
-                ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)}"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
+
+PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
 
 EXTRA_OEMAKE = "WARNINGS_AS_ERRORS="
 
