@@ -12,7 +12,7 @@ DEPENDS:append:class-native = " ncurses-native zlib-native openssl-native"
 DEPENDS:append:class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openssl nativesdk-ncurses"
 
 
-SRC_URI = "git://github.com/erlang/otp;branch=master \
+SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
     file://environment.d-erlang.sh.in"
 SRC_URI += "file://fix-wx-configure.patch"
 SRC_URI += "file://otp-0002-Remove-rpath.patch"

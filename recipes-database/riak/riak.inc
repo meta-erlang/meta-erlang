@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 PR = "r1"
 
 SRC_URI = " \
-    git://github.com/basho/riak;branch=develop-3.0 \
+    git://github.com/basho/riak;branch=develop-3.0;protocol=https \
     file://Makefile.c_src.canola \
     file://rebar.config.canola \
     file://Makefile.c_src.syslog \
