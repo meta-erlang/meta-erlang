@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ff253ad767462c46be284da12dda33e8"
 SECTION = "network"
 PR = "r0"
 
-SRC_URI = "git://github.com/erlang/otp;branch=master \
+SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://epmd.init \
            file://epmd.service \
            file://epmd.socket \

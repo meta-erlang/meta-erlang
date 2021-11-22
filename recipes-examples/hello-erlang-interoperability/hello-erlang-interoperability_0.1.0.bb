@@ -7,7 +7,7 @@ S = "${WORKDIR}/${BPN}"
 
 SRCREV = "bddabf5e67b6acc3ce6be91319dd180a74101183"
 PV = "0.1.0-git${SRCPV}"
-SRC_URI = "git://github.com/meta-erlang/hello-world;branch=master;subpath=${BPN}"
+SRC_URI = "git://github.com/meta-erlang/hello-world;branch=master;subpath=${BPN};protocol=https"
 
 inherit rebar3
 

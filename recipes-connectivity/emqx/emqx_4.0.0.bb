@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files/${PV}:"
 
 SRC_URI += "\
     file://0001-Use-a-fixed-emqx-rel-tag-name.patch \
-    git://github.com/emqx/emqx-rel;branch=release-4.0 \
+    git://github.com/emqx/emqx-rel;branch=release-4.0;protocol=https \
     "
 
 REBAR3_PROFILE = "emqx"
