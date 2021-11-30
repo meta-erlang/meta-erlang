@@ -106,8 +106,11 @@ Elixir:
 
 Yocto:
 
+meta-erlang provides specific branches for each YP/OE release. So, please stick with one of the supported branches
+to avoid compatible probles:
+
 * [honister](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=honister)
-* [hardknott]](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=hardknott)
+* [hardknott](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=hardknott)
 * [gatesgarth](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=gatesgarth)
 * [dunfell](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=dunfell)
 * [zeus](https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/?h=zeus)
