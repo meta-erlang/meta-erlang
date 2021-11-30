@@ -16,7 +16,7 @@ SRC_URI = "\
 
 REBAR3_RELEASE_NAME = "emqx"
 
-inherit rebar3
+inherit rebar3-brokensep
 
 do_compile:prepend() {
     install -D ${WORKDIR}/Makefile.c_src.bcrypt ${S}/_build/${REBAR3_PROFILE}/lib/bcrypt/c_src/Makefile
