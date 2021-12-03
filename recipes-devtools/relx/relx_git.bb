@@ -8,7 +8,7 @@ SRCREV = "1e15397a4924804f248facc18ccd07076baef7a4"
 PV = "3.19.0-git${SRCPV}"
 PR = "r0"
 
-SRC_URI = "git://github.com/erlware/relx;branch=master"
+SRC_URI = "git://github.com/erlware/relx;branch=master;protocol=https"
 
 DEPENDS += "erlang-native"
 

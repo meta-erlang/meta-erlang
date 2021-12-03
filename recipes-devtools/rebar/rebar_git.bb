@@ -8,7 +8,7 @@ SRCREV = "365ac649dc818619757f96a699ddb174f004cff9"
 PV = "2.6.1-git${SRCPV}"
 PR = "r0"
 
-SRC_URI = "git://github.com/rebar/rebar;branch=master"
+SRC_URI = "git://github.com/rebar/rebar;branch=master;protocol=https"
 
 DEPENDS += "erlang-native"
 

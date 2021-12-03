@@ -21,7 +21,7 @@ LICENSE = "GPL-2.0"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=81d50b500048941f0838c57e6a7c5ed0"
 
-SRC_URI = "git://github.com/processone/ejabberd;protocol=https \
+SRC_URI = "git://github.com/processone/ejabberd;protocol=https;branch=master \
            file://0001-Fix-escript-path.patch \
            file://ejabberd.init"
 

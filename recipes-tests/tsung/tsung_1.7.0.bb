@@ -16,7 +16,7 @@ LICENSE = "GPL-2.0"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "git://github.com/processone/tsung;protocol=https \
+SRC_URI = "git://github.com/processone/tsung;protocol=https;branch=master \
           file://0001-Disable-crosscompile-before-checking-erlang-native-e.patch \
           file://0002-Use-sh-instead-of-bash.patch"
 

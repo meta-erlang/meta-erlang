@@ -18,7 +18,7 @@ LICENSE = "BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5d697daa4658cdb1e2074fd1f1b4f2a4"
 
-SRC_URI = "git://github.com/klacke/yaws;protocol=https \
+SRC_URI = "git://github.com/klacke/yaws;protocol=https;branch=master \
            file://yaws.conf \
            file://yaws.init"
 
