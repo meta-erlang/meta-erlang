@@ -8,7 +8,7 @@ SRCREV = "1ba101eff091ce79f2437c95f50cca5d2ab62426"
 PV = "0.1.0-git${SRCPV}"
 PR = "r0"
 
-SRC_URI = "git://github.com/joaohf/relsync;branch=master"
+SRC_URI = "git://github.com/joaohf/relsync;branch=master;protocol=https"
 
 inherit rebar3
 

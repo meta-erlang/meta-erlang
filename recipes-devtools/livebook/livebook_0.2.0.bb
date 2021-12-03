@@ -7,7 +7,7 @@ S = "${WORKDIR}/git"
 
 SRCREV = "2de997cef5bd809ccea382fb09a54c946e07e3dc"
 PV = "0.2.0-git${SRCPV}"
-SRC_URI = "git://github.com/elixir-nx/livebook;branch=main \
+SRC_URI = "git://github.com/elixir-nx/livebook;branch=main;protocol=https \
            file://livebook.service \
            file://livebook.conf"
 
