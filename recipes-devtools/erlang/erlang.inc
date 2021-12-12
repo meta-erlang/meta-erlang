@@ -25,10 +25,11 @@ inherit autotools-brokensep
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG:class-native ??= ""
-PACKAGECONFIG:class-nativesdk = ""
+PACKAGECONFIG:class-nativesdk ??= ""
 PACKAGECONFIG[odbc] = "--with-odbc,--without-odbc,libodbc"
 PACKAGECONFIG[lttng] = "--with-dynamic-trace=lttng,--without-dynamic-trace,lttng-ust"
-PACKAGECONFIG[wx] = "--with-observer,--without-observer,wxwidgets,"
+PACKAGECONFIG[wx] = "--with-wx,,wxwidgets"
+PACKAGECONFIG[observer] = "--with-observer,--without-observer,wxwidgets,"
 PACKAGECONFIG[sctp] = ",,,lksctp-tools"
 PACKAGECONFIG[java] = ",--without-javac,,"
 PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
@@ -139,6 +140,10 @@ do_install:prepend:class-native() {
 do_install:append:class-nativesdk() {
     rm -f ${D}/${libdir}/erlang/Install
     chown -R root:root ${D}${libdir}/erlang
+
+    create_wrapper ${D}${bindir}/erl \
+        FONTCONFIG_PATH=/etc/fonts \
+        GTK_THEME=Adwaita
 }
 
 do_install:append:class-target() {
