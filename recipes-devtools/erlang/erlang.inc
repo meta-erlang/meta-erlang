@@ -128,8 +128,6 @@ do_install:class-target() {
 
     rm -f ${D}/${libdir}/erlang/Install
 
-    # Actually wx is not suitable with erlang embedded
-    rm -rf ${D}/${libdir}/erlang/lib/wx-*
     chown -R root:root ${D}${libdir}/erlang
 }
 
