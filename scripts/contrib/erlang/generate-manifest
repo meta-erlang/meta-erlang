@@ -189,6 +189,7 @@ COMMON_MODULES = [
     Module("megaco"),
     Module("mnesia"),
     Module("observer"),
+    Module("wx"),
     Module("orber"),
     Module("os-mon"),
     Module("otp-mibs"),
