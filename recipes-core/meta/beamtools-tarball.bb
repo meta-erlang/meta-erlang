@@ -24,9 +24,7 @@ TARGET_OS = "none"
 
 SDK_PACKAGE_ARCHS += "beamtools-dummy-${SDKPKGSUFFIX}"
 
-# should be defined in conf/local.conf configuration file
-ERLANG_VERSION = "${PREFERRED_VERSION_erlang}"
-ELIXIR_VERSION = "${PREFERRED_VERSION_elixir}"
+require conf/include/beamtools.inc
 
 TOOLCHAIN_OUTPUTNAME ?= "${SDK_ARCH}-beamtools-nativesdk-standalone-${DISTRO_VERSION}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}"
 
