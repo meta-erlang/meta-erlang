@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://epmd.init \
            file://epmd.service \
            file://epmd.socket \
-           file://erlang-fix-build-issue-in-Yocto.patch \
            file://fix-wx-configure.patch \
           "
 
@@ -34,9 +33,10 @@ NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET}"
 
+OTP_BUILD_CONFIGURE_OPTS ?= "update_configure --no-commit"
+
 do_configure() {
-    cd ${S}; ./otp_build autoconf; cd -
-    cd ${S}/erts; autoreconf; cd -
+    cd ${S}; ./otp_build ${OTP_BUILD_CONFIGURE_OPTS}; cd -
 
     . ${CONFIG_SITE}
 
@@ -64,8 +64,11 @@ do_install() {
         install -m 0755 ${WORKDIR}/epmd.init ${D}${sysconfdir}/init.d/epmd
     fi
 
+    # get the correct triple, as we are not calling any make install rule
+    TARGET_SYS_GNU=`${S}/erts/autoconf/config.sub ${TARGET_SYS}`
+
     install -d ${D}/${sbindir}
-    install -m 0755 ${S}/bin/${TARGET_SYS}/epmd ${D}/${sbindir}/epmd
+    install -m 0755 ${S}/bin/${TARGET_SYS_GNU}/epmd ${D}/${sbindir}/epmd
 }
 
 inherit useradd update-rc.d systemd
