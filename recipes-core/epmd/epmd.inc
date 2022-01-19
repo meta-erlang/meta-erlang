@@ -33,8 +33,6 @@ NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET}"
 
-TARGET_SYS_GNU = "${TARGET_SYS}-gnu"
-
 do_configure() {
     cd ${S}; ./otp_build autoconf; cd -
 
@@ -63,6 +61,9 @@ do_install() {
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/epmd.init ${D}${sysconfdir}/init.d/epmd
     fi
+
+    # get the correct triple, as we are not calling any make install rule
+    TARGET_SYS_GNU=`${S}/erts/autoconf/config.sub ${TARGET_SYS}`
 
     install -d ${D}/${sbindir}
     install -m 0755 ${S}/bin/${TARGET_SYS_GNU}/epmd ${D}/${sbindir}/epmd
