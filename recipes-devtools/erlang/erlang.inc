@@ -14,7 +14,6 @@ DEPENDS:append:class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openss
 
 SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
     file://environment.d-erlang.sh.in"
-SRC_URI += "file://fix-wx-configure.patch"
 SRC_URI += "file://otp-0002-Remove-rpath.patch"
 
 S = "${WORKDIR}/git"
@@ -53,8 +52,9 @@ EXTRA_OECONF:class-native ??= " \
 EXTRA_OECONF:class-nativesdk ??= " \
     --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-zlib=${STAGING_DIR_NATIVE}/usr \
     "
+EXTRA_OECONF:class-target ??= " --with-ssl-rpath=no"
 
-CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET}"
+CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET} ac_cv_header_GL_gl_h=yes ac_cv_header_OpenGL_gl_h=yes"
 CACHED_CONFIGUREVARS:class-native += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
 CACHED_CONFIGUREVARS:class-nativesdk += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
 
