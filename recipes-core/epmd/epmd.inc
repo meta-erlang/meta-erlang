@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://epmd.init \
            file://epmd.service \
            file://epmd.socket \
-           file://fix-wx-configure.patch \
           "
 
 S = "${WORKDIR}/git"
@@ -31,7 +30,7 @@ EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
 
 NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
-CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET}"
+CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET} ac_cv_header_GL_gl_h=yes ac_cv_header_OpenGL_gl_h=yes"
 
 OTP_BUILD_CONFIGURE_OPTS ?= "update_configure --no-commit"
 
