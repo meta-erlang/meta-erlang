@@ -29,7 +29,7 @@ DEPENDS = " \
     coreutils-native\
 "
 
-RDEPENDS_${PN} = "erlang erlang-modules"
+RDEPENDS:${PN} = "erlang erlang-modules"
 
 do_unpack:append() {
     bb.build.exec_func('do_fetch_deps', d)
