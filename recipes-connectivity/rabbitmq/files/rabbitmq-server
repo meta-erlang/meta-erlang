@@ -48,6 +48,14 @@ ensure_log_dir () {
     fi
 }
 
+ensure_cookie () {
+   if [ ! -f /var/lib/rabbitmq/.erlang.cookie ] ; then
+        date +%s | sha256sum | base64 | head -c 32 > /var/lib/rabbitmq/.erlang.cookie
+   fi
+   chmod 400 /var/lib/rabbitmq/.erlang.cookie
+   chown ${USER}:${GROUP} /var/lib/rabbitmq/.erlang.cookie
+}
+
 remove_pid () {
     rm -f ${PID_FILE}
     rmdir `dirname ${PID_FILE}` || :
@@ -61,6 +69,7 @@ start_rabbitmq () {
         RETVAL=0
         ensure_pid_dir
         ensure_log_dir
+        ensure_cookie
         set +e
         RABBITMQ_PID_FILE=$PID_FILE start-stop-daemon --pidfile=$PID_FILE \
             --exec $DAEMON --background --chuid $USER:$GROUP --start
