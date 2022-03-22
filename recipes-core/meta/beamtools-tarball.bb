@@ -10,6 +10,7 @@ TOOLCHAIN_HOST_TASK ?= "\
     nativesdk-rebar3 \
     nativesdk-erlfmt \
     nativesdk-elvis \
+    nativesdk-erlang-ls \
     nativesdk-erlang \
     nativesdk-erlang-modules-dev \
     nativesdk-elixir \
