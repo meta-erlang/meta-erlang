@@ -1,0 +1,103 @@
+#! /bin/sh
+
+NAME=vernemq
+VERNECTL=/usr/lib/vernemq/bin/vernemq
+SCRIPTNAME=/etc/init.d/$NAME
+
+#
+# Function that starts the vernemq service
+#
+do_start()
+{
+    # Return
+    #   0 if vernemq has been started
+    #   1 if vernemq was already running
+    #   2 if vernemq could not be started
+    $VERNECTL start
+
+    local RC=$?
+    if [ $RC -gt 1 -o $RC -lt 0 ]; then
+        return 2;
+    fi
+
+    return $RC
+}
+
+#
+# Function that stops the vernemq service
+#
+do_stop()
+{
+    # Return
+    #   0 if vernemq has been stopped
+    #   1 if vernemq was already stopped
+    #   other if a failure occurred
+    $VERNECTL stop
+}
+
+#
+# Function that graceful reload the vernemqi service
+#
+do_reload() {
+    # Return
+    #   0 if vernemq has been restarted
+    #   1 if vernemq was not started in the first place
+    #   other if a failure occurred
+    $VERNECTL restart
+}
+
+# Checks the status of vernemq service
+do_status() {
+    $VERNECTL ping > /dev/null && echo $"$NAME is running" && return 0
+    echo $"$NAME is stopped" && return 2
+}
+
+case "$1" in
+    start)
+        echo -n "Starting $NAME "
+        do_start
+        case "$?" in
+            0|1) exit 0 ;;
+            2) exit 1 ;;
+        esac
+        ;;
+    stop)
+        echo -n "Stopping $NAME "
+        do_stop
+        case "$?" in
+            0|1) exit 0 ;;
+            *) exit 1 ;;
+        esac
+        ;;
+    status)
+        do_status
+        ;;
+    reload|force-reload)
+        echo -n "Reloading $NAME "
+        do_reload
+        ES=$?
+        exit $ES
+        ;;
+    restart)
+        echo -n "Restarting $NAME "
+        do_stop
+        case "$?" in
+            0|1)
+                do_start
+                case "$?" in
+                    0)  exit 0 ;;
+                    1)  exit 1 ;; # Old process is still running
+                    *)  exit 1 ;; # Failed to start
+                esac
+                ;;
+            *)
+                # Failed to stop
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $SCRIPTNAME {start|stop|status|restart|reload|force-reload}" >&2
+        exit 3
+        ;;
+esac
