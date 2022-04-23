@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
     file://environment.d-erlang.sh.in"
 SRC_URI += "file://fix-wx-configure.patch"
 SRC_URI += "file://otp-0002-Remove-rpath.patch"
+SRC_URI += "file://0001-Add-pkg-config-support-for-erl_interface.patch"
 
 S = "${WORKDIR}/git"
 
@@ -50,6 +51,10 @@ EXTRA_OECONF_class-native += " \
     "
 EXTRA_OECONF_class-nativesdk += " \
     --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-incl=${STAGING_DIR_NATIVE}/usr \
+    "
+
+EXTRA_OECONF += " \
+    --enable-pkg-config \
     "
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET}"
