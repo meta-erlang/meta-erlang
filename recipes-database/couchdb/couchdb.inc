@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1d6953f3b9af3e202ed075fc3019b801"
 
 SRC_URI = " \
-    https://downloads.apache.org/couchdb/source/${PV}/apache-couchdb-${PV}.tar.gz \
+    ${APACHE_MIRROR}/${BPN}/source/${PV}/apache-couchdb-${PV}.tar.gz \
     file://couchdb.service \
     file://couchdb.init \
 "
