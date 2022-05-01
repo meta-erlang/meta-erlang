@@ -25,8 +25,8 @@ do_install_append() {
 }
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM:${PN} = "--system livebook"
-USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/livebook -g livebook livebook"
+GROUPADD_PARAM_${PN} = "--system livebook"
+USERADD_PARAM_${PN}  = "--system --create-home --home /var/lib/livebook -g livebook livebook"
 
 SYSTEMD_SERVICE_${PN} = "livebook.service"
 
