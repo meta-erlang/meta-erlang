@@ -135,13 +135,19 @@ do_install:prepend:class-native() {
     export TARGET=${HOST_SYS}
 }
 
+do_install:append:class-native() {
+    create_wrapper ${D}${bindir}/erl \
+	OPENSSL_MODULES=${libdir}/ossl-modules
+}
+
 do_install:append:class-nativesdk() {
     rm -f ${D}/${libdir}/erlang/Install
     chown -R root:root ${D}${libdir}/erlang
 
     create_wrapper ${D}${bindir}/erl \
         FONTCONFIG_PATH=/etc/fonts \
-        GTK_THEME=Adwaita
+        GTK_THEME=Adwaita \
+	OPENSSL_MODULES=${libdir}/ossl-modules
 }
 
 do_install:append:class-target() {
