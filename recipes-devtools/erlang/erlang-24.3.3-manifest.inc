@@ -408,7 +408,7 @@ FILES:${PN}-crypto-staticdev="${libdir}/erlang/lib/crypto-*/lib/*.a ${libdir}/er
 
 ALLOW_EMPTY:${PN}-crypto="1"
 DESCRIPTION:${PN}-crypto=""
-RDEPENDS:${PN}-crypto=""
+RDEPENDS:${PN}-crypto="openssl"
 FILES:${PN}-crypto="${libdir}/erlang/lib/crypto-* "
 
 ALLOW_EMPTY:${PN}-debugger-doc="1"

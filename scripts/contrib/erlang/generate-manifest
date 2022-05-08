@@ -69,7 +69,7 @@ class Module(object):
             [pn + "-dbg", "", "", debug_paths % sanitized_formatter],
             [pn + "-dev", "", "", dev_paths % sanitized_formatter],
             [pn + "-staticdev", "", "", staticdev_paths % sanitized_formatter],
-            [pn, "", "", base_paths % sanitized_formatter],
+            [pn, description, dependencies, base_paths % sanitized_formatter],
         ]
 
 
@@ -166,7 +166,8 @@ COMMON_MODULES = [
                   "/cosTransactions-*/priv/lib/.debug",
                   "/cosTransactions-*/priv/obj/.debug",
                   "/cosTransactions-*/priv/bin/.debug"]),
-    Module("crypto"),
+    Module("crypto",
+           dependencies="openssl"),
     Module("debugger"),
     Module("dialyzer",
            base=["${bindir}/%(name)s",
