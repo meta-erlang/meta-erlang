@@ -78,11 +78,11 @@ meta-erlang tries to support a well balanced range of Erlang, Elixir and Yocto P
 As meta-erlang provides multiple versions for the same recipes, pay attention to configure the variable [PREFERRED_VERSION](https://docs.yoctoproject.org/ref-manual/ref-variables.html?highlight=preferred_version#term-PREFERRED_VERSION) in one of the configuration file like _local.conf_, _site.conf_, _auto.conf_ or _distro/include_ files. Like this:
 
 ```
-PREFERRED_VERSION_erlang = "23.1.3"
-PREFERRED_VERSION_erlang-native = "23.1.3"
+PREFERRED_VERSION_erlang = "24.3.3"
+PREFERRED_VERSION_erlang-native = "24.3.3"
 
-PREFERRED_VERSION_elixir = "1.10.0"
-PREFERRED_VERSION_elixir-native = "1.10.0"
+PREFERRED_VERSION_elixir = "1.13.3"
+PREFERRED_VERSION_elixir-native = "1.13.3"
 ```
 
 However if you have any specific requirements for a special recipe version, you can always add it in your application/middleware layer.
@@ -95,16 +95,12 @@ Erlang:
 
  * [maint-25](https://github.com/erlang/otp/tree/maint-25)
  * [maint-24](https://github.com/erlang/otp/tree/maint-24)
- * [maint-23](https://github.com/erlang/otp/tree/maint-23)
- * [maint-22](https://github.com/erlang/otp/tree/maint-22)
 
 Elixir:
 
 * [v1.13](https://github.com/elixir-lang/elixir/tree/v1.13)
 * [v1.12](https://github.com/elixir-lang/elixir/tree/v1.12)
 * [v1.11](https://github.com/elixir-lang/elixir/tree/v1.11)
-* [v1.10](https://github.com/elixir-lang/elixir/tree/v1.10)
-* [v1.9](https://github.com/elixir-lang/elixir/tree/v1.9)
 
 Yocto:
 
