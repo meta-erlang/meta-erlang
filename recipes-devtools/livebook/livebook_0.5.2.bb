@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/elixir-nx/livebook;branch=main;protocol=https \
 RDEPENDS:${PN} = "erlang erlang-modules elixir"
 
 inherit mix systemd useradd
+do_configure[network] = "1"
 
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
