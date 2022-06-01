@@ -1,6 +1,6 @@
 include elixir.inc
 
-SRCREV = "b63f8f541e9d8951dbbcb39a8551bd74a3fe9a59"
+SRCREV = "7e4fbe657dbf9c3e19e3d2bd6c17cc6d724b4710"
 SRC_URI = "git://github.com/elixir-lang/elixir;branch=v1.13;protocol=https"
 
 PR = "r0"
