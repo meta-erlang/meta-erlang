@@ -78,11 +78,11 @@ meta-erlang tries to support a well balanced range of Erlang, Elixir and Yocto P
 As meta-erlang provides multiple versions for the same recipes, pay attention to configure the variable [PREFERRED_VERSION](https://docs.yoctoproject.org/ref-manual/ref-variables.html?highlight=preferred_version#term-PREFERRED_VERSION) in one of the configuration file like _local.conf_, _site.conf_, _auto.conf_ or _distro/include_ files. Like this:
 
 ```
-PREFERRED_VERSION_erlang = "24.3.3"
-PREFERRED_VERSION_erlang-native = "24.3.3"
+PREFERRED_VERSION_erlang = "24.3.4"
+PREFERRED_VERSION_erlang-native = "24.3.4"
 
-PREFERRED_VERSION_elixir = "1.13.3"
-PREFERRED_VERSION_elixir-native = "1.13.3"
+PREFERRED_VERSION_elixir = "1.13.4"
+PREFERRED_VERSION_elixir-native = "1.13.4"
 ```
 
 However if you have any specific requirements for a special recipe version, you can always add it in your application/middleware layer.
