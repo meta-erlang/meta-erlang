@@ -58,7 +58,7 @@ do_compile() {
 }
 
 do_install() {
-    oe_runmake 'DESTDIR=${D}' 'PREFIX=/usr' 'RMQ_BINDIR=${D}/${bindir}' install install-man
+    oe_runmake 'DESTDIR=${D}' 'PREFIX=/usr' 'RMQ_ROOTDIR=${libdir}/erlang' 'RMQ_BINDIR=${D}/${bindir}' install install-man
     # Info dir listing isn't interesting at this point so remove it if it exists.
     if [ -e "${D}${infodir}/dir" ]; then
         rm -f ${D}${infodir}/dir
