@@ -10,6 +10,8 @@ MIX_ENV ?= "prod"
 # erlang system libs, target system was striped
 INSANE_SKIP:${PN} += "already-stripped"
 
+do_configure[network] = "1"
+
 MIX_RELEASE_NAME="${@get_release_name("${PN}")}"
 MIX_RELEASE_VERSION="${@get_release_version("${PV}")}"
 MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}"
