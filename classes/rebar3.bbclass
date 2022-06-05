@@ -12,6 +12,8 @@ export REBAR_BASE_DIR = "${B}"
 # erlang system libs, target system was striped
 INSANE_SKIP:${PN} += "already-stripped"
 
+do_configure[network] = "1"
+
 REBAR3_PROFILE ?= ""
 REBAR3_RELEASE_NAME ?= "${@make_release_name("${PN}")}"
 REBAR3_RELEASE ?= "${REBAR3_RELEASE_NAME}-${@get_erlang_release("${PV}")}"
