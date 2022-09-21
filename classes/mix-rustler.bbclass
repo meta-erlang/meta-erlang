@@ -18,10 +18,6 @@ DEPENDS:append:class-native = " rust-native"
 # where the issue occured
 export RUST_BACKTRACE = "1"
 
-# The directory of the Cargo.toml relative to the root directory, per default
-# assume there's a Cargo.toml directly in the root directory
-CARGO_SRC_DIR ??= ""
-
 RUSTFLAGS ??= ""
 
 export RUSTFLAGS
