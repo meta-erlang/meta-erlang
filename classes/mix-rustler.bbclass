@@ -10,8 +10,8 @@ CARGO = "cargo"
 BASEDEPENDS:append = " cargo-native"
 
 # Ensure we get the right rust variant
-DEPENDS:append:class-target = " virtual/${TARGET_PREFIX}rust ${RUSTLIB_DEP}"
-DEPENDS:append:class-nativesdk = " virtual/${TARGET_PREFIX}rust ${RUSTLIB_DEP}"
+DEPENDS:append:class-target = " rust-native ${RUSTLIB_DEP}"
+DEPENDS:append:class-nativesdk = " rust-native ${RUSTLIB_DEP}"
 DEPENDS:append:class-native = " rust-native"
 
 # In case something fails in the build process, give a bit more feedback on
@@ -21,7 +21,7 @@ export RUST_BACKTRACE = "1"
 RUSTFLAGS ??= ""
 
 export RUSTFLAGS
-export RUST_TARGET = "${HOST_SYS}"
+export RUST_TARGET = "${RUST_TARGET_SYS}"
 
 do_configure:append() {
     mix_do_configure
