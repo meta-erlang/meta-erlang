@@ -107,6 +107,7 @@ Yocto:
 meta-erlang provides specific branches for each YP/OE release. So, please stick with one of the supported branches
 to avoid compatible probles:
 
+* [langdale](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=master)
 * [kirkstone](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=kirkstone)
 * [honister](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=honister)
 * [hardknott](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=hardknott)
