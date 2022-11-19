@@ -92,6 +92,7 @@ Following the [OTP Versions Tree](http://erlang.org/download/otp_versions_tree.h
 
 Erlang:
 
+ * [maint-24](https://github.com/erlang/otp/tree/maint-24)
  * [maint-23](https://github.com/erlang/otp/tree/maint-23)
  * [maint-22](https://github.com/erlang/otp/tree/maint-22)
  * [maint-21](https://github.com/erlang/otp/tree/maint-21)
@@ -99,6 +100,9 @@ Erlang:
 
 Elixir:
 
+* [v1.14](https://github.com/elixir-lang/elixir/tree/v1.14)
+* [v1.13](https://github.com/elixir-lang/elixir/tree/v1.13)
+* [v1.12](https://github.com/elixir-lang/elixir/tree/v1.12)
 * [v1.11](https://github.com/elixir-lang/elixir/tree/v1.11)
 * [v1.10](https://github.com/elixir-lang/elixir/tree/v1.10)
 * [v1.9](https://github.com/elixir-lang/elixir/tree/v1.9)
