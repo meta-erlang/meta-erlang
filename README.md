@@ -98,6 +98,7 @@ Erlang:
 
 Elixir:
 
+* [v1.14](https://github.com/elixir-lang/elixir/tree/v1.14)
 * [v1.13](https://github.com/elixir-lang/elixir/tree/v1.13)
 * [v1.12](https://github.com/elixir-lang/elixir/tree/v1.12)
 * [v1.11](https://github.com/elixir-lang/elixir/tree/v1.11)
@@ -107,7 +108,7 @@ Yocto:
 meta-erlang provides specific branches for each YP/OE release. So, please stick with one of the supported branches
 to avoid compatible probles:
 
-* [langdale](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=master)
+* [langdale](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=langdale)
 * [kirkstone](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=kirkstone)
 * [honister](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=honister)
 * [hardknott](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=hardknott)
