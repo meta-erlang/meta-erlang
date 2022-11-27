@@ -101,7 +101,6 @@ Elixir:
 * [v1.14](https://github.com/elixir-lang/elixir/tree/v1.14)
 * [v1.13](https://github.com/elixir-lang/elixir/tree/v1.13)
 * [v1.12](https://github.com/elixir-lang/elixir/tree/v1.12)
-* [v1.11](https://github.com/elixir-lang/elixir/tree/v1.11)
 
 Yocto:
 
