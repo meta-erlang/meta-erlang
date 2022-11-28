@@ -19,6 +19,8 @@ do_configure() {
 }
 
 do_compile() {
+    # Use erlc deterministic build, https://github.com/elixir-lang/elixir/issues/8986
+    export ERL_COMPILER_OPTIONS="deterministic"
     oe_runmake
 }
 
