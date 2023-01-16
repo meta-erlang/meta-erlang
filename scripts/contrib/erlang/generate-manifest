@@ -218,6 +218,8 @@ COMMON_MODULES = [
                  "${libdir}/erlang/releases",
                  "${libdir}/erlang/bin",
                  "${libdir}/erlang/erts-*/bin"]),
+    Module("ftp"),
+    Module("tftp"),
 ]
 
 
