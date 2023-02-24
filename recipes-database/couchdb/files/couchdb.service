@@ -1,6 +1,7 @@
 [Unit]
 Description=Apache CouchDB
-After=network.target remote-fs.target
+Wants=network-online.target
+After=network-online.target remote-fs.target
 
 [Service]
 User=couchdb
