@@ -9,12 +9,11 @@ SRC_URI = " \
     file://couchdb.init \
 "
 
-PR = "r1"
+PR = "r2"
 
-inherit autotools-brokensep erlang systemd update-rc.d useradd
+inherit autotools-brokensep pkgconfig erlang systemd update-rc.d useradd
 
-# couchdb supports: 1.8.5, 60, 68
-SPIDERMONKEY_VERSION ?= "60"
+SPIDERMONKEY_VERSION ?= "91"
 
 CONFIGUREOPTS = "--spidermonkey-version ${SPIDERMONKEY_VERSION} --disable-docs"
 EXTRA_OECONF:remove = "--disable-static"
@@ -52,23 +51,25 @@ do_install:append() {
     chown -R couchdb.couchdb ${D}/opt/couchdb
 
     install -d ${D}/var/lib/couchdb
-    install -d ${D}/var/volatile/log/couchdb
 
     # Install systemd unit files
-    install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/couchdb.service ${D}${systemd_unitdir}/system
-    sed -i -e 's,%bindir%,/opt/couchdb/bin,g' \
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/couchdb.service ${D}${systemd_unitdir}/system
+        sed -i -e 's,%bindir%,/opt/couchdb/bin,g' \
 	       ${D}${systemd_unitdir}/system/couchdb.service
+    fi
 
     # Install init.d
-    install -Dm 0755 ${WORKDIR}/couchdb.init ${D}/${sysconfdir}/init.d/couchdb
+    if ${@bb.utils.contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
+        install -Dm 0755 ${WORKDIR}/couchdb.init ${D}/${sysconfdir}/init.d/couchdb
+    fi
 }
 
 FILES:${PN} += " \
     /etc \
     /opt/couchdb \
     /var/lib/couchdb \
-    /var/volatile/log/couchdb \
 "
 
 DEPENDS += " \
@@ -76,7 +77,7 @@ DEPENDS += " \
     erlang \
     erlang-native \
     icu \
-    mozjs \
+    mozjs-91 \
     openssl \
     rebar-native \
 "
