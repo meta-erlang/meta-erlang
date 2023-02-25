@@ -17,6 +17,7 @@ MIX_RELEASE_VERSION="${@get_release_version("${PV}")}"
 MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}"
 
 export MIX_HOME = "${WORKDIR}/mix"
+export ERL_COMPILER_OPTIONS="deterministic"
 
 ERLANG_ERTS_VERSION = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
 
