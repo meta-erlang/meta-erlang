@@ -5,11 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7f313310d7132582da56ae0c7feeb2d2"
 
 SRC_URI = "git://github.com/erlang-ls/erlang_ls;branch=main;protocol=https"
 
-SRCREV = "9eed7d4e865b6ad8a653cb495944bda53bf82db1"
+SRCREV = "229175ec35afddbb5c5a0ac2cf25423d7aa0b6ab"
 
 S = "${WORKDIR}/git"
 
 PR = "r0"
+
+export ERL_COMPILER_OPTIONS="deterministic"
 
 DEPENDS += "rebar3-native erlang-native"
 
