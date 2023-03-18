@@ -24,6 +24,8 @@ export REBAR3_TARGET_SYSTEM = "${STAGING_LIBDIR}/erlang"
 export REBAR3_TARGET_INCLUDE_ERTS = "${REBAR3_TARGET_SYSTEM}"
 export REBAR3_TARGET_SYSTEM_LIBS = "${REBAR3_TARGET_SYSTEM}/lib"
 
+export REBAR_CACHE_DIR = "${WORKDIR}/rebar3-cache"
+
 # rebar3 new cmake
 export ERTS_INCLUDE_DIR = "${STAGING_LIBDIR}/erlang/usr/include"
 export ERL_INTERFACE_INCLUDE_DIR = "${STAGING_LIBDIR}/erlang/usr/include"
