@@ -11,9 +11,11 @@ S = "${WORKDIR}/git"
 
 PR = "r0"
 
+inherit rebar3-brokensep
+
 export ERL_COMPILER_OPTIONS="deterministic"
 
-DEPENDS += "rebar3-native erlang-native"
+DEPENDS += "erlang-native"
 
 do_compile () {
     make
