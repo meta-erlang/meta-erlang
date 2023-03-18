@@ -9,6 +9,8 @@ S = "${WORKDIR}/git"
 SRCREV = "0f3ce8841efca3c97b7774f96d65fcc46a39651f"
 PR = "r0"
 
+inherit rebar3
+
 DEPENDS += "rebar3-native"
 
 REBAR3_PROFILE = "release"
