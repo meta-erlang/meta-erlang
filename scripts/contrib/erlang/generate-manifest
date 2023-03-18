@@ -226,8 +226,8 @@ COMMON_MODULES = [
 
 
 SPEC = {
-    '24.3.4.8': {
-        'ERTS_VERSION': '12.3.2.8',
+    '24.3.4.10': {
+        'ERTS_VERSION': '12.3.2.10',
         'ERL_INTERFACE_VERSION': '5.2.2',
         'modules': COMMON_MODULES,
     },
