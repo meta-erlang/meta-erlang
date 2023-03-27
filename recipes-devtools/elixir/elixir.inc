@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
 DEPENDS += "erlang-native"
 DEPENDS:append:class-native = " erlang-native"
 
-SRC_URI = "git://github.com/elixir-lang/elixir;branch=master;protocol=https"
+SRC_URI += "file://environment.d-elixir.sh"
 
 S = "${WORKDIR}/git"
 
@@ -26,6 +26,11 @@ do_compile() {
 
 do_install() {
     oe_runmake install PREFIX=${D}${prefix}
+}
+
+do_install:prepend:class-nativesdk() {
+    mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
+    install -m 644 ${WORKDIR}/environment.d-elixir.sh ${D}${SDKPATHNATIVE}/environment-setup.d/elixir.sh
 }
 
 BBCLASSEXTEND = "native nativesdk"
@@ -154,3 +159,5 @@ RDEPENDS:${PN}-modules-dev = "${PN}-modules ${PN}-mix-doc ${PN}-mix-dev ${PN}-mi
             ${PN}-doc ${PN}-dev ${PN}-staticdev \
             "
 ALLOW_EMPTY:${PN}-modules-dev = "1"
+
+FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/elixir.sh"
