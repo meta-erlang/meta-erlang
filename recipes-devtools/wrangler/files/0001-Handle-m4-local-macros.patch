@@ -1,0 +1,32 @@
+From 4e6d0051f865ada218ca31cad69f752f5d0d45d1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sat, 18 Mar 2023 21:45:54 -0300
+Subject: [PATCH] Handle m4 local macros
+
+---
+ configure.ac               | 2 ++
+ aclocal.m4 => m4/erlang.m4 | 0
+ 2 files changed, 2 insertions(+)
+ rename aclocal.m4 => m4/erlang.m4 (100%)
+
+diff --git a/configure.ac b/configure.ac
+index 746131b..4848c4c 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -4,6 +4,8 @@
+ AC_PREREQ(2.53)
+ AC_INIT()
+ 
++AC_CONFIG_MACRO_DIRS([m4])
++
+ # Checks for programs.
+ AC_PROG_CC
+ AC_PROG_MAKE_SET
+diff --git a/aclocal.m4 b/m4/erlang.m4
+similarity index 100%
+rename from aclocal.m4
+rename to m4/erlang.m4
+-- 
+2.34.1
+
