@@ -1,0 +1,54 @@
+From 0fbf3b3a18b40602e6b7ed0c94ff5d66aa8bab6d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sat, 18 Mar 2023 22:25:00 -0300
+Subject: [PATCH] Add header guards to suffix_tree.h
+
+---
+ c_src/suffixtree/suffix_tree.c | 3 +++
+ c_src/suffixtree/suffix_tree.h | 8 +++++---
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/c_src/suffixtree/suffix_tree.c b/c_src/suffixtree/suffix_tree.c
+index 1a2aaa9..05ca2a1 100644
+--- a/c_src/suffixtree/suffix_tree.c
++++ b/c_src/suffixtree/suffix_tree.c
+@@ -86,6 +86,9 @@ typedef enum RULE_2_TYPE   {new_son, split}                RULE_2_TYPE;
+ /* Signals whether last matching position is the last one of the current edge */
+ typedef enum LAST_POS_TYPE {last_char_in_edge, other_char} LAST_POS_TYPE;
+ 
++/* Error return value for some functions. Initialized  in ST_CreateTree. */
++WORD    ST_ERROR;
++
+ /* Used for statistic measures of speed. */
+ WORD counter;
+ /* Used for statistic measures of space. */
+diff --git a/c_src/suffixtree/suffix_tree.h b/c_src/suffixtree/suffix_tree.h
+index 70a39da..e01bf29 100644
+--- a/c_src/suffixtree/suffix_tree.h
++++ b/c_src/suffixtree/suffix_tree.h
+@@ -21,12 +21,12 @@ This library is free software; you can redistribute it and/or modify it
+ under the same terms as Perl itself.
+ *******************************************************************************/
+ 
++#ifndef SUFFIX_TREE_H
++#define SUFFIX_TREE_H
++
+ /* A type definition for a 32 bits variable - a double word. */
+ #define     WORD      unsigned int   
+ 
+-/* Error return value for some functions. Initialized  in ST_CreateTree. */
+-WORD    ST_ERROR;
+-
+ /******************************************************************************/
+ /*                           DATA STRUCTURES                                  */
+ /******************************************************************************/
+@@ -182,3 +182,5 @@ SUFFIX_TREE* ST_Add_Freq_And_Range(SUFFIX_TREE* tree);
+ SUFFIX_TREE* ST_ExtendRanges(SUFFIX_TREE* tree, long overlap_allowed);
+ 
+ void clone_detection_by_suffix_tree(char *filename, long minlen, long minclones, long overlap_allowed);
++
++#endif
+-- 
+2.34.1
+

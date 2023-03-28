@@ -1,0 +1,28 @@
+From 05b5618da172b8990df925575575f5e1a3b35f30 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sat, 18 Mar 2023 22:11:17 -0300
+Subject: [PATCH] Fix run test code
+
+---
+ configure.ac | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 4848c4c..999903b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -26,7 +26,9 @@ AC_RUN_IFELSE(
+ 	    [AC_MSG_NOTICE(found 64-bit Erlang)
+ 	     CBIT=-m64],
+ 	    [AC_MSG_NOTICE(found 32-bit Erlang)
+-	     CBIT=-m32])
++	     CBIT=-m32],
++            [AC_MSG_NOTICE(found 64-bit Erlang)
++	     CBIT=-m64])
+ 
+ # where to install Erlang applications
+ AC_ERLANG_SUBST_INSTALL_LIB_DIR
+-- 
+2.34.1
+
