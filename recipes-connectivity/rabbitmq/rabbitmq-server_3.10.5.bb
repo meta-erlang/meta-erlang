@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=815ca599c9df247a0c7f619bab123dad"
 SECTION = "network"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
            file://rabbitmq-server \
@@ -84,14 +84,14 @@ do_install() {
 
     # Create rabbitmq config directory
     install -d ${D}${sysconfdir}/rabbitmq
-    chmod 750 ${D}/${sysconfdir}/rabbitmq
-    chown -R root.rabbitmq ${D}/${sysconfdir}/rabbitmq
+    chmod 2750 ${D}/${sysconfdir}/rabbitmq
+    chown -R rabbitmq.rabbitmq ${D}/${sysconfdir}/rabbitmq
 
     install -d ${D}${sysconfdir}/default/volatiles
     install -m 0644 ${WORKDIR}/volatiles.99_rabbitmq-server ${D}${sysconfdir}/default/volatiles/99_rabbitmq-server
 
     install -m 644 ${WORKDIR}/rabbitmq.conf ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
-    chown root.rabbitmq ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
+    chown rabbitmq.rabbitmq ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
