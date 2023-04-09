@@ -2,6 +2,8 @@
             {platform_define, "^[0-9]+", namespaced_types},
             {platform_define, "^[2-9][1-9]\..*", dirty_file_nif}]}.
 
+{minimum_otp_vsn, "22.0"}.
+
 {profiles,
  [
   {prod,

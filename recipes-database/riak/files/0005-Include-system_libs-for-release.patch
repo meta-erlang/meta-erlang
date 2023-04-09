@@ -1,0 +1,26 @@
+From 710040bbc1d2c9c35dc167d72ccfaef58779d782 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sun, 9 Apr 2023 17:07:09 -0300
+Subject: [PATCH 5/5] Include system_libs for release
+
+Upstream-Status: Inappropriate [OE-Specific]
+---
+ rebar.config | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/rebar.config b/rebar.config
+index 966fb725..7e54b644 100644
+--- a/rebar.config
++++ b/rebar.config
+@@ -68,6 +68,7 @@
+ 
+     {dev_mode, false},
+     {include_erts, true},
++    {system_libs, true},
+     {use_nodetool, true},
+ 
+     {overlay, [
+-- 
+2.34.1
+

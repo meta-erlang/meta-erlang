@@ -1,4 +1,6 @@
 %%-*- mode: erlang -*-
+{minimum_otp_vsn, "22.0"}.
+
 {eunit_opts, [verbose]}.
 
 {plugins, [{eqc_rebar, {git, "https://github.com/Quviq/eqc-rebar", {branch, "master"}}}]}.
@@ -10,11 +12,13 @@
 
 {erl_opts, [warnings_as_errors, debug_info]}.
 
-{artifacts, ["priv/eleveldb.so"]}.
-
-{pre_hooks, [
-	{"(linux|darwin|solaris)", clean, "c_src/build_deps.sh clean"},
-	{"(linux|darwin|solaris)", 'get-deps', "c_src/build_deps.sh get-deps"},
-	{"(linux|darwin|solaris)", compile, "c_src/build_deps.sh"}
+{profiles, [
+    {gha, [{erl_opts, [{d, 'GITHUBEXCLUDE'}]}]}
 ]}.
 
+{artifacts, ["priv/eleveldb.so"]}.
+
+{pre_hooks, [{'get-deps', "make -C c_src get-deps compile"},
+             {compile, "make -C c_src compile"}]}.
+
+{post_hooks, [{clean, "make -C c_src clean"}]}.
