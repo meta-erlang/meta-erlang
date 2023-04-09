@@ -1,0 +1,24 @@
+From 7a10921dda03fdaaef9c7fa53aec8947d9237b50 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sat, 8 Apr 2023 21:52:56 -0300
+Subject: [PATCH 2/5] Remove /bin/bash dependency
+
+Upstream-Status: Inappropriate [OE-Specific]
+---
+ rel/files/riak | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/rel/files/riak b/rel/files/riak
+index 1c7c6864..8853f9b4 100755
+--- a/rel/files/riak
++++ b/rel/files/riak
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ 
+ RUNNER_GEN_DIR={{platform_gen_dir}}
+ RELX_RIAK={{platform_bin_dir}}/riak
+-- 
+2.34.1
+

@@ -1,0 +1,27 @@
+From 1975bd835941d4a9f7efeb3d7c13061a0012d928 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sat, 8 Apr 2023 21:47:04 -0300
+Subject: [PATCH 1/5] Use rebar3 from system
+
+Upstream-Status: Inappropriate [OE-Specific]
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 844e7070..33799704 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,7 +5,7 @@ PKG_BUILD        = 1
+ BASE_DIR         = $(shell pwd)
+ ERLANG_BIN       = $(shell dirname $(shell which erl 2>/dev/null) 2>/dev/null)
+ OTP_VER          = $(shell erl -eval 'erlang:display(erlang:system_info(otp_release)), halt().' -noshell)
+-REBAR           ?= $(BASE_DIR)/rebar3
++REBAR           ?= rebar3
+ OVERLAY_VARS    ?=
+ TEST_IGNORE     ?= riak basho_bench
+ TEST_DEPS_DIR   ?= _build/test/lib
+-- 
+2.34.1
+
