@@ -1,0 +1,24 @@
+From 9b752efcf4d52ffaaa8ad97aa66666d7acf6b834 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sat, 8 Apr 2023 23:39:58 -0300
+Subject: [PATCH 4/5] Remove /bin/bash dependency for riak-admin
+
+Upstream-Status: Inappropriate [OE-Specific]
+---
+ rel/files/riak-admin | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/rel/files/riak-admin b/rel/files/riak-admin
+index 2f0d8f48..85765607 100755
+--- a/rel/files/riak-admin
++++ b/rel/files/riak-admin
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ # -*- tab-width:4;indent-tabs-mode:nil -*-
+ # ex: ts=4 sw=4 et
+ 
+-- 
+2.34.1
+

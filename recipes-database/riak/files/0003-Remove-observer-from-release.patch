@@ -1,0 +1,26 @@
+From a941a4875729e3d4368b9a10a8e9c61ecc7fe632 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sat, 8 Apr 2023 23:32:04 -0300
+Subject: [PATCH 3/5] Remove observer from release
+
+Upstream-Status: Inappropriate [OE-Specific]
+---
+ rebar.config | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/rebar.config b/rebar.config
+index 7a772b9d..966fb725 100644
+--- a/rebar.config
++++ b/rebar.config
+@@ -50,7 +50,6 @@
+      riak_sysmon,
+      os_mon,
+      crypto,
+-     observer,
+      runtime_tools,
+      xmerl,
+      mochiweb,
+-- 
+2.34.1
+

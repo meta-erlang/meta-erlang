@@ -4,9 +4,8 @@ Description=Riak KV Database
 [Service]
 User=riak
 ExecStart=/usr/lib/riak/bin/riak foreground
-ExecStop=/usr/sbin/riak stop
-Type=riak
-PIDFile=/run/riak/riak.pid
+ExecStop=/usr/lib/riak/bin/riak stop
+Type=simple
 EnvironmentFile=-/etc/default/riak
 RuntimeDirectory=riak
 
