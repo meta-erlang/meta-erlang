@@ -7,9 +7,10 @@ SRC_URI = " \
     ${APACHE_MIRROR}/${BPN}/source/${PV}/apache-couchdb-${PV}.tar.gz \
     file://couchdb.service \
     file://couchdb.init \
+    file://0001-Remove-defensive-check-for-SpiderMonkey.patch \
 "
 
-PR = "r2"
+PR = "r0"
 
 inherit autotools-brokensep pkgconfig erlang systemd update-rc.d useradd
 
@@ -35,6 +36,8 @@ USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/couchdb -g couchd
 
 S = "${WORKDIR}/apache-couchdb-${PV}"
 
+export ERL_COMPILER_OPTIONS="deterministic"
+
 do_configure:append() {
     sed -i "s:-I/usr/include/mozjs-${SPIDERMONKEY_VERSION}:-I${STAGING_INCDIR}/mozjs-${SPIDERMONKEY_VERSION}:g" ${B}/src/couch/rebar.config.script
     sed -i "s:-L/usr/local/lib:\$LDFLAGS:g" ${B}/src/couch/rebar.config.script
@@ -49,6 +52,10 @@ do_install:append() {
     install -d ${D}/opt
     cp -r ${B}/rel/couchdb ${D}/opt/
     chown -R couchdb.couchdb ${D}/opt/couchdb
+
+    # Cleanup installed filed (there are some build output files there)
+    rm -rf ${D}/opt/couchdb/lib/couch-${PV}/priv/couch_js
+    rm -rf ${D}/opt/couchdb/lib/couch-${PV}/priv/couch_ejson_compare
 
     install -d ${D}/var/lib/couchdb
 
