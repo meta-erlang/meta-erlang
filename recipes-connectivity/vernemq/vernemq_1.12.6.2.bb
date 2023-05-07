@@ -17,7 +17,7 @@ LICENSE = "Apache-2.0"
 
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=11fe9db289207b0e40d83d07f5e0727e"
 
-SRC_URI = "git://github.com/vernemq/vernemq;protocol=https;branch=master \
+SRC_URI = "git://github.com/vernemq/vernemq;protocol=https;branch=main \
            file://vars.config \
            file://vm.args \
            file://vernemq.conf \
@@ -30,17 +30,23 @@ SRC_URI = "git://github.com/vernemq/vernemq;protocol=https;branch=master \
            file://Makefile.c_src.eleveldb \
            file://Makefile.c_src.bcrypt \
            file://Makefile.c_src.vmq_passwd \
+           file://0001-Enable-system_libs-when-making-a-release.patch \
+           file://0002-Enable-cuttlefish.patch \
           "
 
-SRCREV = "50adf26e093a4d5a073964be2b322494e411a126"
+SRCREV = "26f93a202b6120af9fac8931324a5e61fc29821f"
 PR = "r0"
 
 S = "${WORKDIR}/git"
 
 inherit rebar3-brokensep useradd update-rc.d systemd
 
+do_compile[network] = "1"
+
 REBAR3_RELEASE_NAME = "vernemq"
 REBAR3_PROFILE = "default"
+
+export ERL_COMPILER_OPTIONS="deterministic"
 
 do_compile:prepend() {
     # fix dependency: eleveldb
