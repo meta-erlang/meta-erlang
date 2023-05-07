@@ -2,12 +2,12 @@ SUMMARY = "Test automation framework with Expect style execution of commands"
 DESCRIPTION = "Lux (LUcid eXpect scripting) is a test automation framework with Expect style execution of commands. See [Expect][] for more info about the origin."
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c6aa54a157ba92156983bf01e1eb7728"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=efd539ca98d0bacb6f03446d3b1ddaa2"
 
 SRC_URI = "git://github.com/hawk/lux;protocol=https;branch=master"
 
-PV = "2.6+git${SRCPV}"
-SRCREV = "ec04d30d335bc522eb67880035d1d5de2013e34f"
+PV = "2.8.1+git${SRCPV}"
+SRCREV = "3e72cd3474d2668199aec7d2549d852ffe65c8bf"
 
 S = "${WORKDIR}/git"
 
