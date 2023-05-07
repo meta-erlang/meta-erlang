@@ -22,9 +22,9 @@ SRC_URI = "git://github.com/klacke/yaws;protocol=https;branch=master \
            file://yaws.init \
            file://0001-Fix-libpam-header-include.patch"
 
-PV = "2.1.0+git${SRCPV}"
+PV = "2.1.1+git${SRCPV}"
 PR = "r0"
-SRCREV = "b2282da62a49d43ed196413875c58580ceab9972"
+SRCREV = "4ef3fa2a1dd7b0a663ea0e83cfc58d046fd80527"
 
 S = "${WORKDIR}/git"
 
@@ -38,7 +38,11 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
 
 PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
 
+export YAWS_DETERMINISTIC_BUILD = "true"
+#EXTRA_OECONF:append = " --enable-deterministic-build --with-source-date-epoch=1683409604"
 EXTRA_OEMAKE = "WARNINGS_AS_ERRORS="
+
+PARALLEL_MAKEINST = ""
 
 do_install:append() {
 	# Install systemd unit files
@@ -49,8 +53,8 @@ do_install:append() {
 		${D}${systemd_unitdir}/system/yaws.service
 
 	# Remove python from cgi example
-	sed -i -e 's,#!/usr/bin/python,#!/bin/sh,g' \
-		${D}/var/yaws/www/cgi-bin/foo.py
+	#sed -i -e 's,#!/usr/bin/python,#!/bin/sh,g' \
+	#	${D}/var/yaws/www/cgi-bin/foo.py
 
 	# Fix host-user-contaminated
 	chown -R root:root ${D}/var/yaws/www
