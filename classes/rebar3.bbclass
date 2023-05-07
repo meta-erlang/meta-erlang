@@ -39,9 +39,12 @@ def get_full_profile(p):
 
 def get_erlang_release(v):
     import re
-    m = re.match("^([0-9]+)\.([0-9]+)\.([0-9]+)", v)
+    m = re.fullmatch("^([0-9]+)\.([0-9]+)\.([0-9]+)", v)
     if m:
         return "%s.%s.%s" % (m.group(1), m.group(2), m.group(3))
+    m = re.fullmatch("^([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)", v)
+    if m:
+        return "%s.%s.%s.%s" % (m.group(1), m.group(2), m.group(3), m.group(4))
     return v
 
 def make_release_name(v):
