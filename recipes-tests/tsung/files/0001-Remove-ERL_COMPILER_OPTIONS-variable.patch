@@ -1,0 +1,31 @@
+From e3ee3f555800cf605acc7753962dceb7d6305e77 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sun, 7 May 2023 18:12:40 -0300
+Subject: [PATCH] Remove ERL_COMPILER_OPTIONS variable
+
+We want to pass deterministic build flags to ERL_COMPILER_OPTIONS via
+environment variable.
+
+Upstream-Status: Inappropriate [embedded specific]
+---
+ Makefile.in | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index 2906962..5bc10a6 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -41,9 +41,6 @@ DTD=@DTD@
+ 
+ SVN_REVISION=$Revision$
+ 
+-ERL_COMPILER_OPTIONS="[warn_unused_vars]"
+-export ERL_COMPILER_OPTIONS
+-
+ ifeq ($(TYPE),debug)
+ OPT =+debug_info -DDEBUG
+ else
+-- 
+2.34.1
+
