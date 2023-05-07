@@ -12,20 +12,23 @@ DEPENDS = "erlang-native"
 
 RDEPENDS:${PN} = "erlang erlang-compiler erlang-crypto erlang-xmerl erlang-ssl erlang-public-key erlang-asn1 erlang-inets erlang-os-mon"
 
-LICENSE = "GPL-2.0"
+LICENSE = "GPL-2.0-only"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "git://github.com/processone/tsung;protocol=https;branch=master \
           file://0001-Disable-crosscompile-before-checking-erlang-native-e.patch \
-          file://0002-Use-sh-instead-of-bash.patch"
+          file://0002-Use-sh-instead-of-bash.patch \
+          file://0001-Remove-ERL_COMPILER_OPTIONS-variable.patch"
 
-SRCREV = "cf6195d0ddad0b445947258febc2681e741a9764"
-PR = "r1"
+SRCREV = "8f0bddadca6baa05fd1935080e24b312bde053b5"
+PR = "r0"
 
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep
+
+export ERL_COMPILER_OPTIONS="deterministic"
 
 do_install:append() {
 	# Fix tsung scripts
@@ -34,13 +37,6 @@ do_install:append() {
 	sed -i -e 's,^ERL=.*$,ERL=${libdir}/erlang/bin/erl,g' \
 		${D}/${bindir}/tsung-recorder
 }
-
-#ALLOW_EMPTY:${PN}-examples = "1"
-#DESCRIPTION:${PN}-examples = ""
-#RDEPENDS:${PN}-examples = "${PN}"
-#FILES:${PN}-examples = "${libdir}/yaws-*/examples /var/yaws/www/*"
-
-#FILES:${PN} += " ${libdir}/yaws-*"
 
 
 ALLOW_EMPTY:${PN}-tools = "1"
