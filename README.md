@@ -94,13 +94,11 @@ Following the [OTP Versions Tree](http://erlang.org/download/otp_versions_tree.h
 Erlang:
 
  * [maint-25](https://github.com/erlang/otp/tree/maint-25)
- * [maint-24](https://github.com/erlang/otp/tree/maint-24)
 
 Elixir:
 
 * [v1.14](https://github.com/elixir-lang/elixir/tree/v1.14)
 * [v1.13](https://github.com/elixir-lang/elixir/tree/v1.13)
-* [v1.12](https://github.com/elixir-lang/elixir/tree/v1.12)
 
 Yocto:
 
