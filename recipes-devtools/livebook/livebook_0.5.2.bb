@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/elixir-nx/livebook;branch=main;protocol=https \
            file://livebook.service \
            file://livebook.conf" 
 
-RDEPENDS:${PN} = "erlang erlang-modules elixir"
+RDEPENDS:${PN} = "erlang erlang-modules elixir elixir-mix"
 
 inherit mix systemd useradd
 
