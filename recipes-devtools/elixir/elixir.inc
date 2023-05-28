@@ -12,7 +12,12 @@ SRC_URI += "file://environment.d-elixir.sh"
 
 S = "${WORKDIR}/git"
 
+PARALLEL_MAKE = ""
+PARALLEL_MAKEINST = ""
+
 PACKAGECONFIG ??= ""
+
+export ERL_COMPILER_OPTIONS="deterministic"
 
 do_configure() {
     :
@@ -20,7 +25,6 @@ do_configure() {
 
 do_compile() {
     # Use erlc deterministic build, https://github.com/elixir-lang/elixir/issues/8986
-    export ERL_COMPILER_OPTIONS="deterministic"
     oe_runmake
 }
 
