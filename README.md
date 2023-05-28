@@ -93,6 +93,7 @@ Following the [OTP Versions Tree](http://erlang.org/download/otp_versions_tree.h
 
 Erlang:
 
+ * [maint-26](https://github.com/erlang/otp/tree/maint-26)
  * [maint-25](https://github.com/erlang/otp/tree/maint-25)
  * [maint-24](https://github.com/erlang/otp/tree/maint-24)
 
