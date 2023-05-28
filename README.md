@@ -34,19 +34,6 @@ For erlang lksctp run-time support:
   layers: meta-networking
   branch: master
 
-
-## Contributing
-
-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-erlang]' in the subject'
-
-When sending single patches, please using something like:
-
-```
-git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-erlang][PATCH
-```
-
-Interim layer maintainer: João Henrique Freitas <joaohf@gmail.com>
-
 ## Usage instructions
 
 Use the _bitbake-layers add-layer_ command to add the meta-erlang to the configuration file:
@@ -78,11 +65,11 @@ meta-erlang tries to support a well balanced range of Erlang, Elixir and Yocto P
 As meta-erlang provides multiple versions for the same recipes, pay attention to configure the variable [PREFERRED_VERSION](https://docs.yoctoproject.org/ref-manual/ref-variables.html?highlight=preferred_version#term-PREFERRED_VERSION) in one of the configuration file like _local.conf_, _site.conf_, _auto.conf_ or _distro/include_ files. Like this:
 
 ```
-PREFERRED_VERSION_erlang = "24.3.4"
-PREFERRED_VERSION_erlang-native = "24.3.4"
+PREFERRED_VERSION_erlang = "26.0"
+PREFERRED_VERSION_erlang-native = "26.0"
 
-PREFERRED_VERSION_elixir = "1.13.4"
-PREFERRED_VERSION_elixir-native = "1.13.4"
+PREFERRED_VERSION_elixir = "1.14.4"
+PREFERRED_VERSION_elixir-native = "1.14.4"
 ```
 
 However if you have any specific requirements for a special recipe version, you can always add it in your application/middleware layer.
@@ -93,6 +80,7 @@ Following the [OTP Versions Tree](http://erlang.org/download/otp_versions_tree.h
 
 Erlang:
 
+ * [maint-26](https://github.com/erlang/otp/tree/maint-26)
  * [maint-25](https://github.com/erlang/otp/tree/maint-25)
 
 Elixir:
@@ -105,6 +93,7 @@ Yocto:
 meta-erlang provides specific branches for each YP/OE release. So, please stick with one of the supported branches
 to avoid compatible probles:
 
+* [mickledore](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=mickledore)
 * [langdale](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=langdale)
 * [kirkstone](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=kirkstone)
 * [honister](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=honister)
