@@ -26,6 +26,8 @@ PV = "1.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+PARALLEL_MAKE = ""
+
 export ERL_COMPILER_OPTIONS="deterministic"
 
 inherit autotools-brokensep
