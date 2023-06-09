@@ -1,4 +1,0 @@
-require rebar3.inc
-
-PR = "1"
-SRCREV = "45817ea83df33005397c2838a384953349440714"
