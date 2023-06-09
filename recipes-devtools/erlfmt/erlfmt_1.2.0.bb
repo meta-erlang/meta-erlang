@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dcbf253b3d6d09ae7e64cb34b4d0ec33"
 SRC_URI = "git://github.com/WhatsApp/erlfmt.git;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
-SRCREV = "b856b95e4a16b48f7b269792af5b844e30c31d9b"
+SRCREV = "7f1bed6391195f318d267e06d6fa62f0c33d3112"
 PV .= "+git${SRCPV}"
 
 inherit rebar3
