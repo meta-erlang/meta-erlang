@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=815ca599c9df247a0c7f619bab123dad"
 SECTION = "network"
-PR = "r2"
+PR = "r0"
 
 SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
            file://rabbitmq-server \
@@ -14,8 +14,8 @@ SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/
            file://rabbitmq-server-volatiles.conf \
            "
 
-SRC_URI[md5sum] = "b75f8171cdeded9aa596a2e4a1d521b8"
-SRC_URI[sha256sum] = "bcbb65f198671da28ba77842cb52bcf4968abaec54ec930961e2523c65c27e4e"
+SRC_URI[md5sum] = "4a552c505634f60dfd2ceddd94050631"
+SRC_URI[sha256sum] = "ab25a845281004d7afef6e9fa691e963a19f44598946d044e359800539a64655"
 
 DEPENDS = " \
     python3-native \
