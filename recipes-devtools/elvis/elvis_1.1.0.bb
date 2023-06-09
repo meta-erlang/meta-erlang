@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=92ca8142cc86af13840e0d8e92d2c68c"
 SRC_URI = "git://github.com/inaka/elvis.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
-SRCREV = "0f3ce8841efca3c97b7774f96d65fcc46a39651f"
+SRCREV = "cbf27d6ab7621a773539ff4a1c434f33c8f3e535"
 PR = "r0"
 
 inherit rebar3
