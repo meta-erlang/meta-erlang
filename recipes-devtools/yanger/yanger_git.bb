@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b6e74f10aa07de2cf633fab938ca24ba"
 SRC_URI = "git://github.com/mbj4668/yanger.git;branch=master;protocol=https;destsuffix=yanger"
 
 S = "${WORKDIR}/yanger"
-SRCREV = "7f200aa475cacc05cbdef798c78a1fbeddfd1363"
+SRCREV = "34b4de450fb644bbe4134f803df243b5b5d5dcd0"
 PV .= "+git${SRCPV}"
 
 DEPENDS = "libxml2 erlang erlang-native"
