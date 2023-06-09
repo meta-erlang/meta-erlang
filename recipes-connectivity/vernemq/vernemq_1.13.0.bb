@@ -34,7 +34,7 @@ SRC_URI = "git://github.com/vernemq/vernemq;protocol=https;branch=main \
            file://0002-Enable-cuttlefish.patch \
           "
 
-SRCREV = "26f93a202b6120af9fac8931324a5e61fc29821f"
+SRCREV = "57d248529b52f346e94a7d54c3d5655e0ede105f"
 PR = "r0"
 
 S = "${WORKDIR}/git"
