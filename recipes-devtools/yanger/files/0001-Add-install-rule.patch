@@ -1,0 +1,43 @@
+From 4d4ccd0eaf9c9b02e3940d03dc58ad0569c9eb8c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joao.freitas@ekinops.com>
+Date: Tue, 14 Jun 2022 14:52:53 -0300
+Subject: [PATCH] Add install rule
+
+A simple rule to install yanger files.
+---
+ Makefile | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index 44e6da6..a023cb3 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,5 +1,7 @@
+ SUBDIRS = c_src src plugins
+ 
++PREFIX ?= /usr/lib
++
+ all:
+ 	@set -e ; \
+ 	  for d in $(SUBDIRS) ; do \
+@@ -20,6 +22,16 @@ include vsn.mk
+ dialyzer:
+ 	dialyzer -DVSN=\"$(VSN)\" -pa ../yanger/ebin --src src/*.erl
+ 
++install:
++	install -d $(DESTDIR)$(PREFIX)/yanger/priv
++	install -d $(DESTDIR)$(PREFIX)/yanger/modules
++	install -d $(DESTDIR)$(PREFIX)/yanger/ebin
++	install -d $(DESTDIR)$(PREFIX)/yanger/bin
++	install -m 0664 -t $(DESTDIR)$(PREFIX)/yanger/priv priv/*
++	install -m 0664 -t $(DESTDIR)$(PREFIX)/yanger/modules modules/*
++	install -m 0664 -t $(DESTDIR)$(PREFIX)/yanger/ebin ebin/*
++	install -m 0775 bin/yanger $(DESTDIR)$(PREFIX)/yanger/bin
++
+ # requires 'lux' in the PATH (https://github.com/hawk/lux)
+ # the tree test requires 'pyang' (https://github.com/mbj4668/pyang)
+ # checked out next to 'yanger' and in the PATH
+-- 
+2.25.1
+
