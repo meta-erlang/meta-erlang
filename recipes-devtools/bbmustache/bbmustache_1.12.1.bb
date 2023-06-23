@@ -20,11 +20,11 @@ do_compile() {
 
 do_install() {
     install -d 0755 ${D}/${bindir}
-    install -m 0755 ${S}/_build/${REBAR3_PROFILE}/bin/bbmustache ${D}/${bindir}/bbmustache
+    install -m 0755 ${B}/${REBAR3_PROFILE}/bin/bbmustache ${D}/${bindir}/bbmustache
 }
 
-FILES_${PN} = "${bindir}/bbmustache"
-FILES_${PN}-dbg += "/.debug"
+FILES:${PN} = "${bindir}/bbmustache"
+FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"
 
