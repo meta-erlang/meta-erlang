@@ -1,0 +1,48 @@
+From 4ea6930d1e145e7ed254e92edb0f3f1c64c7fd6d Mon Sep 17 00:00:00 2001
+From: Kas User <kas@example.com>
+Date: Fri, 30 Jun 2023 01:21:44 +0000
+Subject: [PATCH] Use pkg-config to get erl_erts
+
+Also add LDFLAGS to LD.
+---
+ c_src/Makefile | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/c_src/Makefile b/c_src/Makefile
+index 87a524d..02b1647 100644
+--- a/c_src/Makefile
++++ b/c_src/Makefile
+@@ -27,12 +27,15 @@ endif
+ 
+ CFLAGS  += $(CWARNINGS)
+ 
++ERL_ERTS_CFLAGS ?= $(shell pkg-config --cflags erl_erts)
++ifeq ($(ERL_ERTS_CFLAGS),)
+ ERL_EVAL    = 'io:format("~s", [os:getenv("ROOTDIR")]), erlang:halt(0)'
+ ERL_ROOTDIR = $(shell erl -noinput -eval $(ERL_EVAL))
+ ifneq ($(findstring /, $(ERL_ROOTDIR)),)
+-  CFLAGS += -I$(ERL_ROOTDIR)/usr/include
++  ERL_ERTS_CFLAGS += -I$(ERL_ROOTDIR)/usr/include
+ endif
+-
++endif
++CFLAGS += $(ERL_ERTS_CFLAGS)
+ XML_CFLAGS ?= $(shell pkg-config --cflags libxml-2.0)
+ ifeq ($(XML_CFLAGS),)
+   XML_CFLAGS = -I/usr/include/libxml2
+@@ -62,10 +65,10 @@ all: $(PRIV_FILES)
+ $(OBJS): $(C_HEADERS)
+ 
+ $(PARSER_NIF): $(OBJS)
+-	$(LD) $(LDDRV_FLAGS) -o $@ $^ $(LIBS)
++	$(LD) $(LDFLAGS) $(LDDRV_FLAGS) -o $@ $^ $(LIBS)
+ 
+ $(REGEX_NIF): w3cregex_nif.o
+-	$(LD) $(LDDRV_FLAGS) -o $@ $^ $(LIBS)
++	$(LD) $(LDFLAGS) $(LDDRV_FLAGS) -o $@ $^ $(LIBS)
+ 
+ debug:
+ 	$(MAKE) DEBUG=true all
+-- 
+2.30.2
+

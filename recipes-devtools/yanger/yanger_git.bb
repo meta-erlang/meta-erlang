@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b6e74f10aa07de2cf633fab938ca24ba"
 SRC_URI = "git://github.com/mbj4668/yanger.git;branch=master;protocol=https;destsuffix=yanger \
     file://environment.d-yanger.sh \
     file://0001-Add-install-rule.patch \
+    file://0001-Use-pkg-config-to-get-erl_erts.patch \
     file://yanger.sh"
 
 S = "${WORKDIR}/yanger"
@@ -15,6 +16,8 @@ PV .= "+git${SRCPV}"
 DEPENDS = "libxml2 erlang erlang-native"
 
 inherit pkgconfig
+
+#export ERL_COMPILER_OPTIONS="deterministic"
 
 do_compile() {
     cd ${S}
