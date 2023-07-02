@@ -1,5 +1,5 @@
 
-inherit erlang
+inherit erlang pkgconfig
 
 DEPENDS += "elixir-native"
 
