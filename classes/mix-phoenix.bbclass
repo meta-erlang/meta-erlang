@@ -1,10 +1,8 @@
 inherit mix
 
-DEPENDS += "nodejs-native"
+do_compile[network] = "1"
 
 # see https://hexdocs.pm/phoenix/releases.html
 do_compile:append() {
-    npm install --prefix ./assets
-    npm run deploy --prefix ./assets
-    mix phx.digest
+    mix assets.deploy
 }
