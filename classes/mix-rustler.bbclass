@@ -23,6 +23,8 @@ RUSTFLAGS ??= ""
 export RUSTFLAGS
 export RUST_TARGET = "${RUST_TARGET_SYS}"
 
+do_compile[network] = "1"
+
 do_configure:append() {
     mix_do_configure
 }
