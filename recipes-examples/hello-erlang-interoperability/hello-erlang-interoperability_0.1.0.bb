@@ -12,3 +12,4 @@ SRC_URI = "git://github.com/meta-erlang/hello-world;branch=master;subpath=${BPN}
 inherit rebar3
 
 REBAR3_PROFILE = "prod"
+REBAR3_RELEASE = "${REBAR3_RELEASE_NAME}-0.1.0"

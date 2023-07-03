@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/meta-erlang/hello-world;branch=master;subpath=${BPN}
 inherit rebar3
 
 REBAR3_PROFILE = "prod"
+REBAR3_RELEASE = "${REBAR3_RELEASE_NAME}-0.1.0"
 
 # This is how we can `patch` files that were fetched by rebar3_do_configure()
 do_compile:prepend() {
