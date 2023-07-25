@@ -24,7 +24,7 @@ SRC_URI = "git://github.com/klacke/yaws;protocol=https;branch=master \
 
 PV = "2.1.1+git${SRCPV}"
 PR = "r0"
-SRCREV = "be1123cd06d206d9e2817a28b12f8a3347a2f57f"
+SRCREV = "8f633eed10f2862ff83a851925f2525cbd5a00c2"
 
 S = "${WORKDIR}/git"
 
@@ -40,7 +40,7 @@ PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
 
 # Disable deterministic builds due some bugs when calling make install
 #export YAWS_DETERMINISTIC_BUILD = "true"
-#EXTRA_OECONF:append = " --enable-deterministic-build --with-source-date-epoch=1683409604"
+EXTRA_OECONF:append = " --enable-deterministic-build --with-source-date-epoch=1683409604"
 
 EXTRA_OEMAKE = "WARNINGS_AS_ERRORS="
 
@@ -77,16 +77,12 @@ do_install:append() {
 
         # Remove any volatile files
         rm -rf ${D}/var/log
+
+        # Remove code examples
+        rm -rf ${D}/var/yaws/www/*
+        rm -rf ${D}/${libdir}/yaws-*/examples
 }
 
 CONFFILES:${PN} = "${sysconfdir}/yaws/yaws.conf"
 
-ALLOW_EMPTY:${PN}-examples = "1"
-DESCRIPTION:${PN}-examples = ""
-RDEPENDS:${PN}-examples = "${PN}"
-FILES:${PN}-examples = "${libdir}/yaws-*/examples /var/yaws/www/*"
-
 FILES:${PN} += " ${libdir}/yaws-*"
-
-PACKAGE_BEFORE_PN = "${PN}-examples"
-
