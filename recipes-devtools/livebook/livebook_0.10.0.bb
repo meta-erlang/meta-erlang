@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "7d24982b57c7e66d63c398cadd1f0a5df8d9de66"
-PV = "0.9.2-git${SRCPV}"
-SRC_URI = "git://github.com/elixir-nx/livebook;branch=main;protocol=https \
+SRCREV = "060ac4b8263c550d05607b75e065a7929b0bf658"
+PV = "0.10.0-git${SRCPV}"
+SRC_URI = "git://github.com/livebook-dev/livebook;branch=v0.10;protocol=https \
            file://livebook.service \
            file://livebook.conf" 
 
