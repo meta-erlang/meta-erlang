@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 S = "${WORKDIR}/git"
 SRCREV = "1ba101eff091ce79f2437c95f50cca5d2ab62426"
-PV = "0.1.0-git${SRCPV}"
-PR = "r1"
+PV = "0.1.0+git${SRCPV}"
+PR = "r2"
 
 SRC_URI = "git://github.com/joaohf/relsync;branch=master;protocol=https"
 
