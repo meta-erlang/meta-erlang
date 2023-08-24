@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 
 S = "${WORKDIR}/git"
 SRCREV = "365ac649dc818619757f96a699ddb174f004cff9"
-PV = "2.6.1-git${SRCPV}"
-PR = "r0"
+PV = "2.6.1+git${SRCPV}"
+PR = "r1"
 
 SRC_URI = "git://github.com/rebar/rebar;branch=master;protocol=https"
 
