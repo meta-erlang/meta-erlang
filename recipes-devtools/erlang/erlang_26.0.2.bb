@@ -13,7 +13,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files/26:"
 
 OTP_BUILD_CONFIGURE_OPTS = "update_configure --no-commit"
 
-EXTRA_OECONF:class-target += " --with-ssl-rpath=no --enable-deterministic-build"
+EXTRA_OECONF:append:class-target = " --enable-deterministic-build"
 
 PACKAGECONFIG = "pkgconfig"
 PACKAGECONFIG:class-native = "pkgconfig"
