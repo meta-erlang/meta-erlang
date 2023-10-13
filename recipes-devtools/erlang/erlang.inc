@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
 
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep
+inherit autotools-brokensep pkgconfig
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG:class-native ??= ""
