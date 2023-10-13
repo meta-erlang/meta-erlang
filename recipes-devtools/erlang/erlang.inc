@@ -20,7 +20,7 @@ S = "${WORKDIR}/git"
 
 PARALLEL_MAKE = ""
 
-inherit autotools-brokensep
+inherit autotools-brokensep pkgconfig
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG:class-native ??= ""
