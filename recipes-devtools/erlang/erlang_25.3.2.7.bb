@@ -9,6 +9,7 @@ SRC_URI += "file://0002-erl_interface-Add-pkg-config-support-for-erl_interfa.pat
 SRC_URI += "file://0001-wx-Enable-wx-cross-compilation.patch"
 SRC_URI += "file://0001-Fix-reproducibility-issue.patch"
 SRC_URI += "file://0001-Use-autoconf-2.72c.patch"
+SRC_URI += "file://0001-Fix-for-Werror-format-security.patch"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/25:"
 
