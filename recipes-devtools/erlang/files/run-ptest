@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cd /usr/lib/erlang/ptest/tests/test_server
+erl -noinput -eval 'ts:install()' -s init stop
+
+if erl -noinput -eval 'ts:run(emulator,[batch])' -s init stop ; then
+    echo "PASS: emulator"
+else
+    echo "FAIL: emulator"
+fi
+
+if erl -noinput -eval 'ts:run(kernel,[batch])' -s init stop ; then
+    echo "PASS: emulator"
+else
+    echo "FAIL: emulator"
+fi

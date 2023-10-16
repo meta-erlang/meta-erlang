@@ -11,16 +11,19 @@ DEPENDS:append:class-target = " erlang-native ncurses zlib openssl"
 DEPENDS:append:class-native = " ncurses-native zlib-native openssl-native"
 DEPENDS:append:class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openssl nativesdk-ncurses"
 
+RDEPENDS:${PN}-ptest += "bash erlang-modules openssh tmux"
 
 SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
-    file://environment.d-erlang.sh.in"
-SRC_URI += "file://otp-0002-Remove-rpath.patch"
+           file://environment.d-erlang.sh.in \
+           file://run-ptest \
+           file://otp-0002-Remove-rpath.patch \
+           "
 
 S = "${WORKDIR}/git"
 
 PARALLEL_MAKE = ""
 
-inherit autotools-brokensep pkgconfig
+inherit ptest autotools-brokensep pkgconfig
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG:class-native ??= ""
@@ -62,6 +65,8 @@ OTP_BUILD_CONFIGURE_OPTS ?= "autoconf"
 
 # https://github.com/erlang/otp/issues/4821 setting EGREP to make AC_EGREP_CPP works
 export EGREP = "egrep"
+
+export ERL_TOP = "${S}"
 
 do_configure:class-target() {
     cd ${S}; ./otp_build ${OTP_BUILD_CONFIGURE_OPTS}; cd -
@@ -157,8 +162,52 @@ do_install:append:class-nativesdk() {
 }
 
 do_install:append:class-target() {
-	# remove erlang code that does not need to be loaded by the erlang runtime
-	rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin
+    # remove erlang code that does not need to be loaded by the erlang runtime
+    rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin
+}
+
+do_configure_ptest() {
+    xcomp=${WORKDIR}/erl-xcomp-oe.conf
+    echo 'erl_xcomp_build=${BUILD_SYS}' > $xcomp
+    echo 'erl_xcomp_host=${TARGET_SYS}' >> $xcomp
+    echo 'erl_xcomp_configure_flags="--without-wx --enable-deterministic-build"' >> $xcomp
+    echo 'erl_xcomp_sysroot=${STAGING_DIR_TARGET}' >> $xcomp
+    echo 'export CC="${TARGET_PREFIX}gcc ${TARGET_CC_ARCH} --sysroot=${STAGING_DIR_TARGET}"' >> $xcomp
+    echo 'export CXX="${TARGET_PREFIX}g++ ${TARGET_CC_ARCH} --sysroot=${STAGING_DIR_TARGET}"' >> $xcomp
+    echo 'export CPP="${TARGET_PREFIX}gcc -E ${TARGET_CC_ARCH} --sysroot=${STAGING_DIR_TARGET}"' >> $xcomp
+    echo 'export AS="${TARGET_PREFIX}as ${TARGET_AS_ARCH}"' >> $xcomp
+    echo 'export LD="${TARGET_PREFIX}ld ${TARGET_LD_ARCH} ${STAGING_DIR_TARGET}"' >> $xcomp
+    echo 'export GDB=${TARGET_PREFIX}gdb' >> $xcomp
+    echo 'export STRIP=${TARGET_PREFIX}strip' >> $xcomp
+    echo 'export RANLIB=${TARGET_PREFIX}ranlib' >> $xcomp
+    echo 'export OBJCOPY=${TARGET_PREFIX}objcopy' >> $xcomp
+    echo 'export OBJDUMP=${TARGET_PREFIX}objdump' >> $xcomp
+    echo 'export READELF=${TARGET_PREFIX}readelf' >> $xcomp
+    echo 'export AR=${TARGET_PREFIX}ar' >> $xcomp
+    echo 'export NM=${TARGET_PREFIX}nm' >> $xcomp
+    echo 'export M4=m4' >> $xcomp
+    echo 'export TARGET_PREFIX=${TARGET_PREFIX}' >> $xcomp
+    echo 'export CONFIGURE_FLAGS="--target=${TARGET_SYS} --host=${TARGET_SYS} --build=${SDK_ARCH}-linux --with-libtool-sysroot=${STAGING_DIR_TARGET}"' >> $xcomp
+    echo 'export CFLAGS="${TARGET_CFLAGS}"' >> $xcomp
+    echo 'export CXXFLAGS="${TARGET_CXXFLAGS}"' >> $xcomp
+    echo 'export LDFLAGS="${TARGET_LDFLAGS}"' >> $xcomp
+    echo 'export CPPFLAGS="${TARGET_CPPFLAGS}"' >> $xcomp
+    echo 'export KCFLAGS="--sysroot=${STAGING_DIR_TARGET}"' >> $xcomp
+    echo 'export ARCH=${ARCH}' >> $xcomp
+    echo 'export CROSS_COMPILE=${TARGET_PREFIX}' >> $xcomp
+}
+
+do_compile_ptest() {
+    # need a full erlang build before call release_tests
+    oe_runmake release_tests
+    cd ${S}/release/tests/test_server
+    erl -noshell -eval 'ts:install([{xcomp, "${WORKDIR}/erl-xcomp-oe.conf"}])' -s ts compile_testcases -s init stop
+}
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}
+    cp -r ${S}/release/tests ${D}${PTEST_PATH}
+    find ${D}${PTEST_PATH} -name '*.o' -delete
 }
 
 FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/erlang.sh"

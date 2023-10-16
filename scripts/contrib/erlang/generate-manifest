@@ -319,7 +319,9 @@ class MakefileMaker:
         # generate package line
         #
 
-        packageLine = 'PACKAGES="${PN}-dbg '
+        packageLine = 'PACKAGES="'
+        packageLine += "${@bb.utils.contains('PTEST_ENABLED', '1', '${PN}-ptest', '', d)} "
+        packageLine += '${PN}-dbg '
         for name in self.packages:
             if name.startswith("${PN}-distutils"):
                 if name == "${PN}-distutils":
