@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 
 # generate Erlang Manifest for the OpenEmbedded build system
 # (C) 2016 Maciej Borzecki <maciej.borzecki@open-rnd.pl>
@@ -350,7 +350,7 @@ class MakefileMaker:
         # generate package variables
         #
 
-        for name, data in self.packages.iteritems():
+        for name, data in self.packages.items():
             desc, deps, files, keepfiles = data
 
             #
@@ -392,7 +392,7 @@ class MakefileMaker:
 
         pkgtoskip = ('-dbg', '-doc', '-staticdev', '-dev')
 
-        for name, data in sorted(self.packages.iteritems()):
+        for name, data in sorted(self.packages.items()):
             if name.endswith(pkgtoskip):
                 continue
             if name not in ['${PN}-dev', '${PN}-distutils-staticdev']:
@@ -405,7 +405,7 @@ class MakefileMaker:
         self.out('DESCRIPTION:${PN}-modules-dev="All Erlang modules for developers"')
         line = 'RDEPENDS:${PN}-modules-dev="${PN}-modules '
 
-        for name, data in sorted(self.packages.iteritems()):
+        for name, data in sorted(self.packages.items()):
             if not name.endswith(pkgtoskip) or name.endswith('-dbg'):
                 continue
             if name not in ['${PN}-dev', '${PN}-distutils-staticdev']:
