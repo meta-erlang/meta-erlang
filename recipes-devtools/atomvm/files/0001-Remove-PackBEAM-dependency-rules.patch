@@ -1,0 +1,147 @@
+From c6c5d835bb20879aaf64cd31ead6d4ae7046a7a9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sun, 29 Oct 2023 11:25:43 -0300
+Subject: [PATCH] Remove PackBEAM dependency rules
+
+---
+ CMakeLists.txt                 |  6 +++++-
+ CMakeModules/BuildElixir.cmake | 10 +++++-----
+ CMakeModules/BuildErlang.cmake | 22 +++++++++++-----------
+ 3 files changed, 21 insertions(+), 17 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 091435a1..4a7772ad 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -28,6 +28,7 @@ find_package(Elixir)
+ 
+ option(AVM_DISABLE_FP "Disable floating point support." OFF)
+ option(AVM_DISABLE_SMP "Disable SMP." OFF)
++option(AVM_DISABLE_PACKBEAM_BUILD "Disable PackBEAM build." OFF)
+ option(AVM_USE_32BIT_FLOAT "Use 32 bit floats." OFF)
+ option(AVM_VERBOSE_ABORT "Print module and line number on VM abort" OFF)
+ option(AVM_RELEASE "Build an AtomVM release" ON)
+@@ -47,7 +48,10 @@ if(NOT AVM_BUILD_RUNTIME_ONLY)
+     add_subdirectory(tests)
+ endif()
+ 
+-add_subdirectory(tools/packbeam)
++if(NOT AVM_DISABLE_PACKBEAM_BUILD)
++    add_subdirectory(tools/packbeam)
++endif()
++
+ add_subdirectory(tools/uf2tool)
+ 
+ if (NOT "${CMAKE_GENERATOR}" MATCHES "Xcode")
+diff --git a/CMakeModules/BuildElixir.cmake b/CMakeModules/BuildElixir.cmake
+index 40065072..f5beeb54 100644
+--- a/CMakeModules/BuildElixir.cmake
++++ b/CMakeModules/BuildElixir.cmake
+@@ -45,12 +45,12 @@ macro(pack_archive avm_name)
+ 
+     add_custom_target(
+         ${avm_name} ALL
+-        DEPENDS ${avm_name}_beams PackBEAM
+-        COMMAND ${CMAKE_BINARY_DIR}/tools/packbeam/PackBEAM -a ${INCLUDE_LINES} ${avm_name}.avm ${BEAMS}
++        DEPENDS ${avm_name}_beams
++        COMMAND PackBEAM -a ${INCLUDE_LINES} ${avm_name}.avm ${BEAMS}
+         COMMENT "Packing archive ${avm_name}.avm"
+         VERBATIM
+     )
+-    add_dependencies(${avm_name} ${avm_name}_beams PackBEAM)
++    add_dependencies(${avm_name} ${avm_name}_beams)
+ 
+ endmacro()
+ 
+@@ -87,10 +87,10 @@ macro(pack_runnable avm_name main)
+ 
+     add_custom_target(
+         ${avm_name} ALL
+-        COMMAND ${CMAKE_BINARY_DIR}/tools/packbeam/PackBEAM ${INCLUDE_LINES} ${avm_name}.avm Elixir.${main}.beam ${ARCHIVES}
++        COMMAND PackBEAM ${INCLUDE_LINES} ${avm_name}.avm Elixir.${main}.beam ${ARCHIVES}
+         COMMENT "Packing runnable ${avm_name}.avm"
+         VERBATIM
+     )
+-    add_dependencies(${avm_name} ${avm_name}_main ${ARCHIVE_TARGETS} PackBEAM)
++    add_dependencies(${avm_name} ${avm_name}_main ${ARCHIVE_TARGETS})
+ 
+ endmacro()
+diff --git a/CMakeModules/BuildErlang.cmake b/CMakeModules/BuildErlang.cmake
+index b4c97d38..b787693f 100644
+--- a/CMakeModules/BuildErlang.cmake
++++ b/CMakeModules/BuildErlang.cmake
+@@ -44,13 +44,13 @@ macro(pack_archive avm_name)
+ 
+     add_custom_target(
+         ${avm_name} ALL
+-        DEPENDS ${avm_name}_beams PackBEAM
++        DEPENDS ${avm_name}_beams
+         #DEPENDS ${pack_archive_${avm_name}_beams}
+-        COMMAND ${CMAKE_BINARY_DIR}/tools/packbeam/PackBEAM -a ${INCLUDE_LINES} ${avm_name}.avm ${pack_archive_${avm_name}_beams}
++        COMMAND PackBEAM -a ${INCLUDE_LINES} ${avm_name}.avm ${pack_archive_${avm_name}_beams}
+         COMMENT "Packing archive ${avm_name}.avm"
+         VERBATIM
+     )
+-    add_dependencies(${avm_name} ${avm_name}_beams PackBEAM)
++    add_dependencies(${avm_name} ${avm_name}_beams)
+ 
+ endmacro()
+ 
+@@ -74,11 +74,11 @@ macro(pack_lib avm_name)
+ 
+     add_custom_target(
+         ${avm_name} ALL
+-        COMMAND ${CMAKE_BINARY_DIR}/tools/packbeam/PackBEAM -a ${INCLUDE_LINES} ${avm_name}.avm ${pack_lib_${avm_name}_archives}
++        COMMAND PackBEAM -a ${INCLUDE_LINES} ${avm_name}.avm ${pack_lib_${avm_name}_archives}
+         COMMENT "Packing runnable ${avm_name}.avm"
+         VERBATIM
+     )
+-    add_dependencies(${avm_name} ${pack_lib_${avm_name}_archive_targets} PackBEAM)
++    add_dependencies(${avm_name} ${pack_lib_${avm_name}_archive_targets})
+     if(TARGET ${avm_name}_main)
+         add_dependencies(${avm_name} ${avm_name}_main)
+     endif()
+@@ -139,11 +139,11 @@ macro(pack_runnable avm_name main)
+ 
+     add_custom_target(
+         ${avm_name} ALL
+-        COMMAND ${CMAKE_BINARY_DIR}/tools/packbeam/PackBEAM ${INCLUDE_LINES} ${avm_name}.avm ${main}.beam ${pack_runnable_${avm_name}_archives}
++        COMMAND PackBEAM ${INCLUDE_LINES} ${avm_name}.avm ${main}.beam ${pack_runnable_${avm_name}_archives}
+         COMMENT "Packing runnable ${avm_name}.avm"
+         VERBATIM
+     )
+-    add_dependencies(${avm_name} ${avm_name}_main ${pack_runnable_${avm_name}_archive_targets} PackBEAM)
++    add_dependencies(${avm_name} ${avm_name}_main ${pack_runnable_${avm_name}_archive_targets})
+ endmacro()
+ 
+ 
+@@ -165,12 +165,12 @@ macro(pack_test test_avm_name)
+     add_custom_target(
+         ${test_avm_name} ALL
+         COMMAND erlc +debug_info -I ${CMAKE_SOURCE_DIR}/libs/include ${CMAKE_CURRENT_SOURCE_DIR}/tests.erl
+-        COMMAND ${CMAKE_BINARY_DIR}/tools/packbeam/PackBEAM ${INCLUDE_LINES} ${CMAKE_CURRENT_BINARY_DIR}/${test_avm_name}.avm ${CMAKE_CURRENT_BINARY_DIR}/tests.beam ${pack_test_${test_avm_name}_archives}
++        COMMAND PackBEAM ${INCLUDE_LINES} ${CMAKE_CURRENT_BINARY_DIR}/${test_avm_name}.avm ${CMAKE_CURRENT_BINARY_DIR}/tests.beam ${pack_test_${test_avm_name}_archives}
+         DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tests.erl
+         COMMENT "Packing runnable ${test_avm_name}.avm"
+         VERBATIM
+     )
+-    add_dependencies(${test_avm_name} ${pack_test_${test_avm_name}_archive_targets} PackBEAM)
++    add_dependencies(${test_avm_name} ${pack_test_${test_avm_name}_archive_targets})
+ 
+ endmacro()
+ 
+@@ -200,11 +200,11 @@ macro(pack_uf2 avm_name main)
+ 
+     add_custom_target(
+         ${avm_name}.avm ALL
+-        COMMAND ${CMAKE_BINARY_DIR}/tools/packbeam/PackBEAM ${avm_name}.avm ${main}.beam ${pack_uf2_${avm_name}_archives}
++        COMMAND PackBEAM ${avm_name}.avm ${main}.beam ${pack_uf2_${avm_name}_archives}
+         COMMENT "Packing runnable ${avm_name}.avm"
+         VERBATIM
+     )
+-    add_dependencies(${avm_name}.avm ${avm_name}_main ${pack_uf2_${avm_name}_archive_targets} PackBEAM)
++    add_dependencies(${avm_name}.avm ${avm_name}_main ${pack_uf2_${avm_name}_archive_targets})
+ 
+     add_custom_target(
+         ${avm_name}.uf2 ALL
