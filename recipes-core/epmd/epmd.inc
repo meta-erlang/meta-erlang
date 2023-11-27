@@ -15,8 +15,6 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "erlang-native ncurses zlib"
 
-PARALLEL_MAKE = ""
-
 inherit autotools-brokensep
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
