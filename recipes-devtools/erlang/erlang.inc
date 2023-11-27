@@ -21,8 +21,6 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
 
 S = "${WORKDIR}/git"
 
-PARALLEL_MAKE = ""
-
 inherit ptest autotools-brokensep pkgconfig
 
 PACKAGECONFIG ??= ""
