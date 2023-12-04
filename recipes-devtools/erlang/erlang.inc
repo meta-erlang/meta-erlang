@@ -18,8 +18,6 @@ SRC_URI += "file://otp-0002-Remove-rpath.patch"
 
 S = "${WORKDIR}/git"
 
-PARALLEL_MAKE = ""
-
 inherit autotools-brokensep
 
 PACKAGECONFIG ??= ""
