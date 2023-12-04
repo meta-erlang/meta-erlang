@@ -20,8 +20,6 @@ SRC_URI += "file://0001-Add-pkg-config-support-for-erl_interface.patch"
 
 S = "${WORKDIR}/git"
 
-PARALLEL_MAKE = ""
-
 inherit autotools-brokensep
 
 PACKAGECONFIG ??= ""
