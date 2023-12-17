@@ -1,7 +1,7 @@
-From beec1b658e17da6a11c79e3d7fbcff8fa0865d0d Mon Sep 17 00:00:00 2001
+From 74985134035f6b4acd506095a8bc62fe21908982 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
-Date: Sun, 15 Oct 2023 21:25:29 -0300
+Date: Sun, 15 Oct 2023 21:30:38 -0300
 Subject: [PATCH] Use autoconf 2.72c
 
 Upstream-Status: Inappropriate [OE specific]
@@ -10,7 +10,7 @@ Upstream-Status: Inappropriate [OE specific]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/otp_build b/otp_build
-index c9d118c2a4..740a6e6ac5 100755
+index 7b35b39fc2..939efc35a8 100755
 --- a/otp_build
 +++ b/otp_build
 @@ -19,7 +19,7 @@
@@ -18,7 +18,7 @@ index c9d118c2a4..740a6e6ac5 100755
  #
  
 -USE_AUTOCONF_VERSION=2.71
-+USE_AUTOCONF_VERSION=2.72c
++USE_AUTOCONF_VERSION=2.72d
  
  autoconf_aux_dirs="./erts/autoconf ./lib/common_test/test_server"
  
