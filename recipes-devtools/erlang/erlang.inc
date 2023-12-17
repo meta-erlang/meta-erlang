@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://environment.d-erlang.sh.in \
            file://run-ptest \
            file://otp-0002-Remove-rpath.patch \
+           file://pr-gh-7952-Fix-build-on-Yocto.patch \
            "
 
 S = "${WORKDIR}/git"
