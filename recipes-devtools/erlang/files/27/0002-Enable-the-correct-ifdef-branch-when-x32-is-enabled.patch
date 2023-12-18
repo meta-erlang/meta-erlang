@@ -1,8 +1,8 @@
-From ca5b8634984601f90056aa72e15820f7723c5fed Mon Sep 17 00:00:00 2001
+From 44d4e1a578c36aadeb6c1b72666fd27d9bab985f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 3 Sep 2023 15:57:18 -0300
-Subject: [PATCH 2/2] Enable the correct ifdef branch when x32 is enabled
+Subject: [PATCH] Enable the correct ifdef branch when x32 is enabled
 
 ---
  erts/lib_src/pthread/ethread.c | 4 ++--
@@ -30,6 +30,3 @@ index da4f1af11d..6b610d075c 100644
      /*
       * When position independent code is used in 32-bit mode, the B register
       * is used for storage of global offset table address, and we may not
--- 
-2.40.1
-
