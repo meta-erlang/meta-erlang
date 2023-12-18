@@ -1,10 +1,11 @@
-From b1e96e4d8cf61019c38142ca411d0f9e956e3926 Mon Sep 17 00:00:00 2001
+From 405d6a2456a31df5c35527a9c2e7dae131d6bbed Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Thu, 26 Oct 2023 21:13:39 -0300
 Subject: [PATCH] Fix for -Werror=format-security
 
 Have to pass either a string literal or format string to sprintf().
+
 ---
  erts/emulator/test/driver_SUITE_data/sys_info_drv_impl.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
@@ -28,6 +29,3 @@ index 7c22e2c365..6639d67105 100644
      }
      driver_free(sip);
      return res;
--- 
-2.40.1
-
