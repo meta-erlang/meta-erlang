@@ -1,19 +1,20 @@
-From 69dc49bab447b045b7539fc6fec8f2ff80a9d55f Mon Sep 17 00:00:00 2001
+From c262b9a2b0228ceb14437da556ada7080aa69d63 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sat, 22 May 2021 22:52:27 -0300
 Subject: [PATCH] Remove rpath
 
 Upstream-Status: Inappropriate
+
 ---
  lib/crypto/c_src/Makefile.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/lib/crypto/c_src/Makefile.in b/lib/crypto/c_src/Makefile.in
-index 2eee53bd31..5da20a43a6 100644
+index aedc9e7a13..b27c2aa01b 100644
 --- a/lib/crypto/c_src/Makefile.in
 +++ b/lib/crypto/c_src/Makefile.in
-@@ -136,7 +136,7 @@ endif
+@@ -147,7 +147,7 @@ endif
  endif
  
  ifeq ($(DYNAMIC_OR_WIN_CRYPTO_LIB),yes)
@@ -22,6 +23,3 @@ index 2eee53bd31..5da20a43a6 100644
  CRYPTO_LINK_LIB=$(SSL_DED_LD_RUNTIME_LIBRARY_PATH) -L$(SSL_LIBDIR) -l$(SSL_CRYPTO_LIBNAME)
  EXTRA_FLAGS = -DHAVE_DYNAMIC_CRYPTO_LIB
  else
--- 
-2.25.1
-

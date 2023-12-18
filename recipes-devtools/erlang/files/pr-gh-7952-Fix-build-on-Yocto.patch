@@ -1,4 +1,4 @@
-From c38fc7c62e818273870340f3faf83cc3905e1cf1 Mon Sep 17 00:00:00 2001
+From 5e32fa9b363f5877a898e28490c0104fe10eeb8c Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?John=20H=C3=B6gberg?= <john@erlang.org>
 Date: Wed, 13 Dec 2023 16:34:04 +0100
 Subject: [PATCH] otp: Fix build on Yocto
@@ -8,6 +8,7 @@ A workaround to avoid breaking "micro level process accounting on
 workaround (pre-2009) and the comment is unclear about what
 actually breaks, we'll try removing it to see if this is still a
 problem.
+
 ---
  erts/configure                    |  9 ---------
  erts/emulator/sys/unix/sys_time.c | 10 ----------
@@ -15,7 +16,7 @@ problem.
  3 files changed, 28 deletions(-)
 
 diff --git a/erts/configure b/erts/configure
-index 7ade76d84c66..79e289d3c619 100755
+index 7ade76d84c..79e289d3c6 100755
 --- a/erts/configure
 +++ b/erts/configure
 @@ -24349,15 +24349,6 @@ else $as_nop
@@ -35,7 +36,7 @@ index 7ade76d84c66..79e289d3c619 100755
  #include <unistd.h>
  #include <string.h>
 diff --git a/erts/emulator/sys/unix/sys_time.c b/erts/emulator/sys/unix/sys_time.c
-index eb2c47bb207d..f60e3450a18d 100644
+index eb2c47bb20..f60e3450a1 100644
 --- a/erts/emulator/sys/unix/sys_time.c
 +++ b/erts/emulator/sys/unix/sys_time.c
 @@ -22,16 +22,6 @@
@@ -56,7 +57,7 @@ index eb2c47bb207d..f60e3450a18d 100644
  #include "sys.h"
  #include "global.h"
 diff --git a/make/autoconf/otp.m4 b/make/autoconf/otp.m4
-index f54310159916..984ee1ad0b20 100644
+index f543101599..984ee1ad0b 100644
 --- a/make/autoconf/otp.m4
 +++ b/make/autoconf/otp.m4
 @@ -2705,15 +2705,6 @@ dnl
