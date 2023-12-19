@@ -1,8 +1,10 @@
-From 3a1c17a7195391ff605c0eb5574f6dda17af612b Mon Sep 17 00:00:00 2001
+From 8f30d7dd822783934c05b9aa9181adc4fabf3230 Mon Sep 17 00:00:00 2001
+From: OpenEmbedded <oe.patch@oe>
+Date: Tue, 30 Mar 2021 23:17:29 -0300
+Subject: [PATCH] Add pkg-config support for erl_interface
+
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
-Date: Tue, 30 Mar 2021 23:17:29 -0300
-Subject: [PATCH 1/2] Add pkg-config support for erl_interface
 
 pkg-config is a helper tool used when compiling applications and
 libraries.
@@ -26,6 +28,7 @@ pkg-config file. And one could enable it using --enable-pkg-config
 argument when calling configure script.
 
 Upstream-Status: Pending
+
 ---
  configure.src                     | 12 ++++++++++++
  lib/erl_interface/configure.in    | 19 +++++++++++++++++--
@@ -158,12 +161,12 @@ index 0000000000..0b5d439af1
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lei
 diff --git a/lib/erl_interface/src/Makefile.in b/lib/erl_interface/src/Makefile.in
-index e3ee72ad67..fc196f53fd 100644
+index ddfcad87f1..fb1657e9f6 100644
 --- a/lib/erl_interface/src/Makefile.in
 +++ b/lib/erl_interface/src/Makefile.in
-@@ -42,6 +42,10 @@ include $(TARGET)/eidefs.mk
+@@ -44,6 +44,10 @@ include $(ERL_TOP)/make/output.mk
  
- include $(ERL_TOP)/make/output.mk
+ include openssl/openssl.mk
  
 +prefix          = @prefix@
 +exec_prefix     = @exec_prefix@
@@ -172,7 +175,7 @@ index e3ee72ad67..fc196f53fd 100644
  EBINDIR=../ebin
  
  APP_FILE= erl_interface.app
-@@ -117,6 +121,8 @@ INSTALL_DIR = @INSTALL_DIR@
+@@ -120,6 +124,8 @@ INSTALL_DIR = @INSTALL_DIR@
  INSTALL_DATA = @INSTALL_DATA@
  INSTALL_PROGRAM = @INSTALL_PROGRAM@
  
@@ -181,7 +184,7 @@ index e3ee72ad67..fc196f53fd 100644
  # The default library (no extra extension in name) is for Unix with
  # thread support if exists.  For windows MD is the default.
  #
-@@ -679,7 +685,18 @@ EXTRA = \
+@@ -685,7 +691,18 @@ EXTRA = \
  	README.internal \
  	$(TARGET)/eidefs.mk
  
@@ -201,6 +204,3 @@ index e3ee72ad67..fc196f53fd 100644
  	$(INSTALL_DIR) "$(RELSYSDIR)/include"
  	$(INSTALL_DIR) "$(RELSYSDIR)/lib"
  	$(INSTALL_DIR) "$(RELSYSDIR)/bin"
--- 
-2.32.0
-

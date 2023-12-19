@@ -1,4 +1,4 @@
-From 71c0f0f1ca28c6f068568981c8adea0968cabfd0 Mon Sep 17 00:00:00 2001
+From a994f64df163c576a5363e613cecee7922d0d728 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Fri, 21 May 2021 18:33:19 -0300
@@ -9,7 +9,7 @@ Subject: [PATCH] Fix unsafe compilation path in the wx configure script
  1 file changed, 3 insertions(+), 14 deletions(-)
 
 diff --git a/lib/wx/configure.in b/lib/wx/configure.in
-index 8194ec37d0..1744a6332e 100644
+index 4d1e331ea3..3647f07f23 100644
 --- a/lib/wx/configure.in
 +++ b/lib/wx/configure.in
 @@ -266,23 +266,12 @@ if test X"$host_os" != X"win32" ; then
@@ -39,6 +39,3 @@ index 8194ec37d0..1744a6332e 100644
         	fi
      fi
  else
--- 
-2.25.1
-
