@@ -1,8 +1,8 @@
-From cf98be1772f875e416040dde029b834d51493735 Mon Sep 17 00:00:00 2001
+From 4e3a5b897ba5338c7ef31074b1c5b7e105e8084e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 20 Feb 2022 18:55:59 -0300
-Subject: [PATCH 1/2] erts: add pkg-config support for erts
+Subject: [PATCH] erts: add pkg-config support for erts
 
 This commit introduces the file erl_erts.pc which will be installed
 in the standard pkg-config directory.
@@ -17,6 +17,7 @@ Returns the correct libs and cflags that can be used by build tools
    -I/cross/sysroots/core2-32-vendor-linux/usr/lib/erlang/erts-11.1.8/include
 
 Upstream-Status: Pending
+
 ---
  erts/configure.ac         | 21 +++++++++++++++++++++
  erts/emulator/Makefile.in | 19 ++++++++++++++++++-
@@ -25,7 +26,7 @@ Upstream-Status: Pending
  create mode 100644 erts/erl_erts.pc.in
 
 diff --git a/erts/configure.ac b/erts/configure.ac
-index e3a3915fa5..d2cfa5f284 100644
+index e095b68ab2..2227f73661 100644
 --- a/erts/configure.ac
 +++ b/erts/configure.ac
 @@ -21,6 +21,8 @@ dnl %CopyrightEnd%
@@ -47,7 +48,7 @@ index e3a3915fa5..d2cfa5f284 100644
  dnl We check if -Werror was given on command line and if so
  dnl we disable it for the configure and only use it when
  dnl actually building erts
-@@ -3580,6 +3585,21 @@ AC_MSG_RESULT([yes])
+@@ -3629,6 +3634,21 @@ AC_MSG_RESULT([yes])
  DEBUG_CFLAGS="-g -O0 $no_opt_CFLAGS"
  AC_SUBST(DEBUG_CFLAGS)
  
@@ -69,7 +70,7 @@ index e3a3915fa5..d2cfa5f284 100644
  dnl ----------------------------------------------------------------------
  dnl Output the result.
  dnl ----------------------------------------------------------------------
-@@ -3593,6 +3613,7 @@ AC_CONFIG_FILES([
+@@ -3642,6 +3662,7 @@ AC_CONFIG_FILES([
    include/internal/$host/erts_internal.mk:include/internal/erts_internal.mk.in
    lib_src/$host/Makefile:lib_src/Makefile.in
    ../make/$host/otp.mk:../make/otp.mk.in
@@ -78,7 +79,7 @@ index e3a3915fa5..d2cfa5f284 100644
  
  AC_CONFIG_FILES([../make/make_emakefile:../make/make_emakefile.in],
 diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
-index 606bfc013f..6c18c00466 100644
+index 85b0e32442..bb67a7e34c 100644
 --- a/erts/emulator/Makefile.in
 +++ b/erts/emulator/Makefile.in
 @@ -23,6 +23,12 @@ include ../vsn.mk
@@ -94,7 +95,7 @@ index 606bfc013f..6c18c00466 100644
  ENABLE_ALLOC_TYPE_VARS = @ENABLE_ALLOC_TYPE_VARS@
  JIT_ENABLED=@JIT_ENABLED@
  JIT_ARCH=@JIT_ARCH@
-@@ -522,12 +528,23 @@ ifeq ($(TARGET),win32)
+@@ -533,12 +539,23 @@ ifeq ($(TARGET),win32)
  RELEASE_INCLUDES += sys/$(ERLANG_OSTYPE)/erl_win_dyn_driver.h
  endif
  
@@ -156,6 +157,3 @@ index 0000000000..d32955b51a
 +Version: ${version}
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lerts
--- 
-2.32.0
-
