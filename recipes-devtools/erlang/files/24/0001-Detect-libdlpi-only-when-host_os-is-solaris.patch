@@ -1,19 +1,20 @@
-From ca957adbb7f4138a4dd6eec673e325e8e1796822 Mon Sep 17 00:00:00 2001
+From 4ba8f488a0adf073dea987d4b4b97ee0aadf34af Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Thu, 4 Nov 2021 08:16:22 -0300
 Subject: [PATCH] Detect libdlpi only when host_os is solaris
 
 Upstream-Status: Inappropriate [OE specific]
+
 ---
  erts/configure.in | 87 +++++++++++++++++++++++++----------------------
  1 file changed, 46 insertions(+), 41 deletions(-)
 
 diff --git a/erts/configure.in b/erts/configure.in
-index d0ce30074f..c46768b0f9 100644
+index 8d0936d691..f03935623d 100644
 --- a/erts/configure.in
 +++ b/erts/configure.in
-@@ -1694,47 +1694,52 @@ fi
+@@ -1721,47 +1721,52 @@ fi
  AC_SUBST(SYSTEMD_DAEMON_LIBS)
  
  
@@ -107,6 +108,3 @@ index d0ce30074f..c46768b0f9 100644
  
  AC_CHECK_HEADER(sys/resource.h,
  	[AC_DEFINE(HAVE_SYS_RESOURCE_H, 1,
--- 
-2.30.2
-
