@@ -1,0 +1,31 @@
+From 7e337a7725e1278e708c3c3ebbacb0c785189f6a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Thu, 26 Oct 2023 21:13:39 -0300
+Subject: [PATCH] Fix for -Werror=format-security
+
+Have to pass either a string literal or format string to sprintf().
+
+---
+ erts/emulator/test/driver_SUITE_data/sys_info_drv_impl.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/erts/emulator/test/driver_SUITE_data/sys_info_drv_impl.c b/erts/emulator/test/driver_SUITE_data/sys_info_drv_impl.c
+index 7c22e2c365..6639d67105 100644
+--- a/erts/emulator/test/driver_SUITE_data/sys_info_drv_impl.c
++++ b/erts/emulator/test/driver_SUITE_data/sys_info_drv_impl.c
+@@ -142,12 +142,12 @@ control(ErlDrvData drv_data,
+     if (memcmp(((char *) sip) + ERL_DRV_SYS_INFO_SIZE,
+ 	       (char *) &deadbeef[0],
+ 	       sizeof(deadbeef)) != 0) {
+-	res = sprintf(str, beyond_end_format);
++	res = sprintf(str, "%s", beyond_end_format);
+     }
+     else {
+ 	res = sys_info_drv_sprintf_sys_info(sip, str);
+ 	if (res > slen)
+-	    res = sprintf(str, buf_overflow_format);
++	    res = sprintf(str, "%s", buf_overflow_format);
+     }
+     driver_free(sip);
+     return res;

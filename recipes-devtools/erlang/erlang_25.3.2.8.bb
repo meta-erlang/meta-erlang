@@ -11,7 +11,7 @@ SRC_URI += "file://0001-Fix-reproducibility-issue.patch"
 SRC_URI += "file://0001-Use-autoconf-2.72d.patch"
 SRC_URI += "file://0001-Fix-for-Werror-format-security.patch"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/files/25:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files/25/${PV}:${THISDIR}/files/25:"
 
 OTP_BUILD_CONFIGURE_OPTS = "update_configure --no-commit"
 

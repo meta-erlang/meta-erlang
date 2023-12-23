@@ -1,8 +1,8 @@
-From f17eba160dd68bb8b138fc4a7b41c0b7ec30efaf Mon Sep 17 00:00:00 2001
+From fb96dee0a1e4f6eaf864f5434436c0fa161d9b89 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 20 Feb 2022 21:51:03 -0300
-Subject: [PATCH 2/2] erl_interface: Add pkg-config support for erl_interface
+Subject: [PATCH] erl_interface: Add pkg-config support for erl_interface
 
 pkg-config is a helper tool used when compiling applications and
 libraries.
@@ -27,6 +27,7 @@ pkg-config file. And one could enable it using --enable-pkg-config
 argument when calling configure script.
 
 Upstream-Status: Pending
+
 ---
  configure.src                     | 14 +++++++++++++-
  lib/erl_interface/configure.ac    | 19 +++++++++++++++++--
@@ -36,7 +37,7 @@ Upstream-Status: Pending
  create mode 100644 lib/erl_interface/erl_ei.pc.in
 
 diff --git a/configure.src b/configure.src
-index f0afd5c6ee..13b634d49a 100644
+index d320c4520b..0621daf45b 100644
 --- a/configure.src
 +++ b/configure.src
 @@ -52,6 +52,7 @@ help=no
@@ -47,7 +48,7 @@ index f0afd5c6ee..13b634d49a 100644
  while test $# != 0; do
      case $1 in
  	-srcdir=* | --srcdir=*)
-@@ -144,7 +145,10 @@ while test $# != 0; do
+@@ -148,7 +149,10 @@ while test $# != 0; do
          flgs_val=`echo "$1" | sed 's/^[^=]*=//'`
  	    eval $flgs_var=\$flgs_val
  	    ;;
@@ -59,7 +60,7 @@ index f0afd5c6ee..13b634d49a 100644
  	    help=all;;
          --help* | -help* | -h)
  	    help=$1;;
-@@ -312,6 +316,14 @@ else
+@@ -316,6 +320,14 @@ else
      esac
  fi
  
@@ -162,7 +163,7 @@ index 0000000000..0b5d439af1
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lei
 diff --git a/lib/erl_interface/src/Makefile.in b/lib/erl_interface/src/Makefile.in
-index 30264dcba6..9c4df8af82 100644
+index 0a5ae800be..959adf8d98 100644
 --- a/lib/erl_interface/src/Makefile.in
 +++ b/lib/erl_interface/src/Makefile.in
 @@ -42,6 +42,10 @@ include $(TARGET)/eidefs.mk
@@ -185,7 +186,7 @@ index 30264dcba6..9c4df8af82 100644
  # The default library (no extra extension in name) is for Unix with
  # thread support if exists.  For windows MD is the default.
  #
-@@ -682,7 +688,18 @@ EXTRA = \
+@@ -685,7 +691,18 @@ EXTRA = \
  	README.internal \
  	$(TARGET)/eidefs.mk
  
@@ -205,6 +206,3 @@ index 30264dcba6..9c4df8af82 100644
  	$(INSTALL_DIR) "$(RELSYSDIR)/include"
  	$(INSTALL_DIR) "$(RELSYSDIR)/lib"
  	$(INSTALL_DIR) "$(RELSYSDIR)/bin"
--- 
-2.32.0
-

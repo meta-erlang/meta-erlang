@@ -1,4 +1,4 @@
-From 5e32fa9b363f5877a898e28490c0104fe10eeb8c Mon Sep 17 00:00:00 2001
+From 2e6dcf04795c4456e2ad7215418d725b25fcf894 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?John=20H=C3=B6gberg?= <john@erlang.org>
 Date: Wed, 13 Dec 2023 16:34:04 +0100
 Subject: [PATCH] otp: Fix build on Yocto
@@ -16,10 +16,10 @@ problem.
  3 files changed, 28 deletions(-)
 
 diff --git a/erts/configure b/erts/configure
-index 7ade76d84c..79e289d3c6 100755
+index 336bdede38..50ce59c301 100755
 --- a/erts/configure
 +++ b/erts/configure
-@@ -24349,15 +24349,6 @@ else $as_nop
+@@ -24103,15 +24103,6 @@ else $as_nop
  /* end confdefs.h.  */
  
  /* gethrvtime procfs ioctl test */
@@ -57,10 +57,10 @@ index eb2c47bb20..f60e3450a1 100644
  #include "sys.h"
  #include "global.h"
 diff --git a/make/autoconf/otp.m4 b/make/autoconf/otp.m4
-index f543101599..984ee1ad0b 100644
+index a522fae3bd..bc694d0150 100644
 --- a/make/autoconf/otp.m4
 +++ b/make/autoconf/otp.m4
-@@ -2705,15 +2705,6 @@ dnl
+@@ -2698,15 +2698,6 @@ dnl
  AC_MSG_CHECKING([if gethrvtime works and how to use it])
  AC_RUN_IFELSE([AC_LANG_SOURCE([[
  /* gethrvtime procfs ioctl test */
