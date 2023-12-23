@@ -1,8 +1,14 @@
-From a59c64c373722270292737c1c7a812f9c67a4560 Mon Sep 17 00:00:00 2001
+From 2923b32ce907820a5942b881f229e8f7268cc09a Mon Sep 17 00:00:00 2001
+From: OpenEmbedded <oe.patch@oe>
+Date: Thu, 11 Feb 2021 21:07:21 -0300
+Subject: [PATCH] erl_interface: Add pkg-config support for erl_interface
+
+From: OpenEmbedded <oe.patch@oe>
+
+From: OpenEmbedded <oe.patch@oe>
+
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
-Date: Tue, 30 Mar 2021 23:17:29 -0300
-Subject: [PATCH 1/2] Add pkg-config support for erl_interface
 
 pkg-config is a helper tool used when compiling applications and
 libraries.
@@ -18,7 +24,8 @@ Returns the correct libs and cflags that can be used by build tools
 (like autotools);
 
     -I/cross/sysroots/core2-32-vendor-linux/usr/lib/erlang/lib/erl_interface-4.0.2/include
-    -L/cross/sysroots/core2-32-vendor-linux/usr/lib/erlang/lib/erl_interface-4.0.2/lib -lei
+    -L/cross/sysroots/core2-32-vendor-linux/usr/lib/erlang/lib/erl_interface-4.0.2/lib
+-lei
 
 In order to enable the pkg-config installation a new configure option,
 --enable-pkg-config, was introduced. The default is not install the
@@ -26,16 +33,17 @@ pkg-config file. And one could enable it using --enable-pkg-config
 argument when calling configure script.
 
 Upstream-Status: Pending
+
 ---
- configure.src                     | 12 ++++++++++++
- lib/erl_interface/configure.in    | 18 ++++++++++++++++--
+ configure.src                     | 14 +++++++++++++-
+ lib/erl_interface/configure.ac    | 19 +++++++++++++++++--
  lib/erl_interface/erl_ei.pc.in    | 31 +++++++++++++++++++++++++++++++
  lib/erl_interface/src/Makefile.in | 19 ++++++++++++++++++-
- 4 files changed, 77 insertions(+), 3 deletions(-)
+ 4 files changed, 79 insertions(+), 4 deletions(-)
  create mode 100644 lib/erl_interface/erl_ei.pc.in
 
 diff --git a/configure.src b/configure.src
-index f0afd5c6ee..6ea2147b03 100644
+index d320c4520b..0621daf45b 100644
 --- a/configure.src
 +++ b/configure.src
 @@ -52,6 +52,7 @@ help=no
@@ -46,17 +54,19 @@ index f0afd5c6ee..6ea2147b03 100644
  while test $# != 0; do
      case $1 in
  	-srcdir=* | --srcdir=*)
-@@ -144,6 +145,9 @@ while test $# != 0; do
+@@ -148,7 +149,10 @@ while test $# != 0; do
          flgs_val=`echo "$1" | sed 's/^[^=]*=//'`
  	    eval $flgs_var=\$flgs_val
  	    ;;
+-	--help=r* | -help=r*)
 +        --enable-pkg-config)
-+	    pkg_config=yes
-+	    ;;
- 	--help=r* | -help=r*)
++            pkg_config=yes
++            ;;
++        --help=r* | -help=r*)
  	    help=all;;
          --help* | -help* | -h)
-@@ -312,6 +316,14 @@ else
+ 	    help=$1;;
+@@ -316,6 +320,14 @@ else
      esac
  fi
  
@@ -65,17 +75,17 @@ index f0afd5c6ee..6ea2147b03 100644
 +      ;;
 +    yes)
 +      config_arguments="$config_arguments --enable-pkg-config"
-+      ;;
++    ;;
 +esac
-+
++    
  config_arguments="$config_arguments --disable-option-checking"
  
  if test $bootstrap_only = no; then
-diff --git a/lib/erl_interface/configure.in b/lib/erl_interface/configure.in
-index fa07048424..d4982da9c7 100644
---- a/lib/erl_interface/configure.in
-+++ b/lib/erl_interface/configure.in
-@@ -24,8 +24,8 @@
+diff --git a/lib/erl_interface/configure.ac b/lib/erl_interface/configure.ac
+index d24e3f48eb..f5aaa90f92 100644
+--- a/lib/erl_interface/configure.ac
++++ b/lib/erl_interface/configure.ac
+@@ -22,8 +22,8 @@
  
  # Find the erl_interface version number and set m4 macro to it.
  # We do this because AC_INIT can't handle shell variables. Still broken.
@@ -84,11 +94,11 @@ index fa07048424..d4982da9c7 100644
 +m4_define([ei_version],`grep EI_VSN $srcdir/vsn.mk | sed 's/^.*=[ ]*//' | awk 'NR==1{print $1}'`)
 +#dnl m4_define(EI_VERSION,regexp(m4_include(VERSION),[version \([-.0-9A-Za-z]+\)],[\1]))
  
- AC_INIT()
+ AC_INIT
+ AC_CONFIG_SRCDIR([include/ei.h])
+@@ -56,6 +56,9 @@ AC_CONFIG_AUX_DIR([${ERL_TOP}/make/autoconf])
  
-@@ -58,6 +58,9 @@ else
-     host_os=win32
- fi
+ ERL_CANONICAL_SYSTEM_TYPE
  
 +EI_VERSION=ei_version
 +AC_SUBST(EI_VERSION)
@@ -96,9 +106,9 @@ index fa07048424..d4982da9c7 100644
  TARGET=$host
  AC_SUBST(TARGET)
  
-@@ -85,6 +88,16 @@ AC_ARG_ENABLE(mask-real-errno,
-   esac ],
- [ mask_real_errno=yes ])
+@@ -92,6 +95,17 @@ AC_ARG_ENABLE(ei-dynamic-lib,
+ [ DYNAMIC_LIB=no ])
+ AC_SUBST(DYNAMIC_LIB)
  
 +AC_ARG_ENABLE(pkg-config,
 +[  --enable-pkg-config install pkg-config file],
@@ -110,15 +120,17 @@ index fa07048424..d4982da9c7 100644
 +
 +ENABLE_PKG_CONFIG=$enable_pkg_config
 +AC_SUBST(ENABLE_PKG_CONFIG)
- 
++
  dnl ----------------------------------------------------------------------
  dnl Checks for programs
-@@ -374,4 +387,5 @@ LDFLAGS="$LDFLAGS $sanitizers"
- AC_OUTPUT(
- 	src/$host/Makefile:src/Makefile.in
+ dnl ----------------------------------------------------------------------
+@@ -388,5 +402,6 @@ LDFLAGS="$LDFLAGS $sanitizers"
+ 
+ AC_CONFIG_FILES([src/$host/Makefile:src/Makefile.in
  	src/$host/eidefs.mk:src/eidefs.mk.in
-+	src/$host/erl_ei.pc:erl_ei.pc.in
- 	)
++        src/$host/erl_ei.pc:erl_ei.pc.in
+ 	])
+ AC_OUTPUT
 diff --git a/lib/erl_interface/erl_ei.pc.in b/lib/erl_interface/erl_ei.pc.in
 new file mode 100644
 index 0000000000..0b5d439af1
@@ -157,12 +169,12 @@ index 0000000000..0b5d439af1
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lei
 diff --git a/lib/erl_interface/src/Makefile.in b/lib/erl_interface/src/Makefile.in
-index 56fdaa608e..42e4488ca8 100644
+index fa1ea3cd39..384efda7d6 100644
 --- a/lib/erl_interface/src/Makefile.in
 +++ b/lib/erl_interface/src/Makefile.in
-@@ -42,6 +42,10 @@ include $(TARGET)/eidefs.mk
+@@ -44,6 +44,10 @@ include $(ERL_TOP)/make/output.mk
  
- include $(ERL_TOP)/make/output.mk
+ include openssl/openssl.mk
  
 +prefix          = @prefix@
 +exec_prefix     = @exec_prefix@
@@ -171,7 +183,7 @@ index 56fdaa608e..42e4488ca8 100644
  EBINDIR=../ebin
  
  APP_FILE= erl_interface.app
-@@ -114,6 +118,8 @@ INSTALL_DIR = @INSTALL_DIR@
+@@ -120,6 +124,8 @@ INSTALL_DIR = @INSTALL_DIR@
  INSTALL_DATA = @INSTALL_DATA@
  INSTALL_PROGRAM = @INSTALL_PROGRAM@
  
@@ -180,13 +192,13 @@ index 56fdaa608e..42e4488ca8 100644
  # The default library (no extra extension in name) is for Unix with
  # thread support if exists.  For windows MD is the default.
  #
-@@ -667,7 +673,18 @@ EXTRA = \
+@@ -688,7 +694,18 @@ EXTRA = \
  	README.internal \
  	$(TARGET)/eidefs.mk
  
 -release: opt
 +PKG-CONFIG = \
-+	$(TARGET)/erl_ei.pc
++   $(TARGET)/erl_ei.pc
 +
 +ifdef ENABLE_PKG_CONFIG
 +pkg-config:
@@ -195,11 +207,8 @@ index 56fdaa608e..42e4488ca8 100644
 +else
 +pkg-config:
 +endif
-+
++	
 +release: opt pkg-config
  	$(INSTALL_DIR) "$(RELSYSDIR)/include"
  	$(INSTALL_DIR) "$(RELSYSDIR)/lib"
  	$(INSTALL_DIR) "$(RELSYSDIR)/bin"
--- 
-2.30.2
-

@@ -1,4 +1,4 @@
-From ff497d82c677d9219f103dd7f640b8d127ebc798 Mon Sep 17 00:00:00 2001
+From b7fbee1b3cc405e377fb62bcf4b7e030690de659 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Tue, 30 Mar 2021 23:17:11 -0300
@@ -26,7 +26,7 @@ Upstream-Status: Pending
  create mode 100644 erts/erl_erts.pc.in
 
 diff --git a/erts/configure.in b/erts/configure.in
-index beff4275f8..8d0936d691 100644
+index d7828ca14f..41cf77611e 100644
 --- a/erts/configure.in
 +++ b/erts/configure.in
 @@ -21,11 +21,16 @@ dnl %CopyrightEnd%
@@ -46,7 +46,7 @@ index beff4275f8..8d0936d691 100644
  dnl We check if -Werror was given on command line and if so
  dnl we disable it for the configure and only use it when
  dnl actually building erts
-@@ -3625,6 +3630,21 @@ CFLAGS="$CFLAGS $sanitizers"
+@@ -3634,6 +3639,21 @@ CFLAGS="$CFLAGS $sanitizers"
  LDFLAGS="$LDFLAGS $sanitizers"
  ])
  
@@ -68,7 +68,7 @@ index beff4275f8..8d0936d691 100644
  dnl ----------------------------------------------------------------------
  dnl Output the result.
  dnl ----------------------------------------------------------------------
-@@ -3638,6 +3658,7 @@ AC_CONFIG_FILES([
+@@ -3647,6 +3667,7 @@ AC_CONFIG_FILES([
    include/internal/$host/erts_internal.mk:include/internal/erts_internal.mk.in
    lib_src/$host/Makefile:lib_src/Makefile.in
    ../make/$host/otp.mk:../make/otp.mk.in
@@ -77,7 +77,7 @@ index beff4275f8..8d0936d691 100644
  
  AC_CONFIG_FILES([../make/make_emakefile:../make/make_emakefile.in],
 diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
-index 63cf156d4a..2d2dc05ee2 100644
+index d819155451..2da35c91e6 100644
 --- a/erts/emulator/Makefile.in
 +++ b/erts/emulator/Makefile.in
 @@ -23,6 +23,12 @@ include ../vsn.mk
@@ -93,7 +93,7 @@ index 63cf156d4a..2d2dc05ee2 100644
  ENABLE_ALLOC_TYPE_VARS = @ENABLE_ALLOC_TYPE_VARS@
  JIT_ENABLED=@JIT_ENABLED@
  JIT_ARCH=@JIT_ARCH@
-@@ -517,12 +523,23 @@ ifeq ($(TARGET),win32)
+@@ -506,12 +512,23 @@ ifeq ($(TARGET),win32)
  RELEASE_INCLUDES += sys/$(ERLANG_OSTYPE)/erl_win_dyn_driver.h
  endif
  

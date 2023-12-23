@@ -1,32 +1,31 @@
-From bd295c5592f71997ebddcf4f21bfff0d484d9c58 Mon Sep 17 00:00:00 2001
+From eeddf19aacd21efce02fcafbee80479b424e9ef0 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
-Date: Fri, 18 Feb 2022 21:24:49 -0300
-Subject: [PATCH] wx: Enable wx cross compilation
+Date: Sat, 11 Dec 2021 13:32:50 -0300
+Subject: [PATCH] Enable wx cross compilation
 
 Upstream-Status: Inappropriate [OE specific]
 
 ---
- lib/wx/configure.ac     | 5 -----
+ lib/wx/configure.in     | 4 +---
  lib/wx/wxwin-nothrow.m4 | 3 ---
- 2 files changed, 8 deletions(-)
+ 2 files changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/lib/wx/configure.ac b/lib/wx/configure.ac
-index db930a7e84..220237db9c 100644
---- a/lib/wx/configure.ac
-+++ b/lib/wx/configure.ac
-@@ -336,11 +336,6 @@ dnl
+diff --git a/lib/wx/configure.in b/lib/wx/configure.in
+index 91b08c29e3..c81c8285e4 100644
+--- a/lib/wx/configure.in
++++ b/lib/wx/configure.in
+@@ -324,9 +324,7 @@ AC_SUBST(ERLANG_ROOT_DIR)
+ dnl
  dnl  Check for wxwidgets
  dnl 
- AS_IF(
--  [test "$cross_compiling" = "yes"],
--  [
+-if test "$cross_compiling" = "yes"; then
 -    WX_MSG_ERROR([Cross compilation of the wx driver is not supported yet, wx will NOT be usable])
--  ],
--
-   [test  X"$MIXED_VC" = X"no"],
-   [
+-elif test  X"$MIXED_VC" = X"no"; then
++if test  X"$MIXED_VC" = X"no"; then
      m4_include(wxwin-nothrow.m4)
+ 
+     AM_OPTIONS_WXCONFIG
 diff --git a/lib/wx/wxwin-nothrow.m4 b/lib/wx/wxwin-nothrow.m4
 index 83a6005d01..7cb34a3270 100644
 --- a/lib/wx/wxwin-nothrow.m4

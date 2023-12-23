@@ -1,4 +1,4 @@
-From bd295c5592f71997ebddcf4f21bfff0d484d9c58 Mon Sep 17 00:00:00 2001
+From 7a1568d460f3710d9526e0e3b60f92e6407eb16e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Fri, 18 Feb 2022 21:24:49 -0300
@@ -12,7 +12,7 @@ Upstream-Status: Inappropriate [OE specific]
  2 files changed, 8 deletions(-)
 
 diff --git a/lib/wx/configure.ac b/lib/wx/configure.ac
-index db930a7e84..220237db9c 100644
+index cee2c92d5b..63be14f7d5 100644
 --- a/lib/wx/configure.ac
 +++ b/lib/wx/configure.ac
 @@ -336,11 +336,6 @@ dnl
