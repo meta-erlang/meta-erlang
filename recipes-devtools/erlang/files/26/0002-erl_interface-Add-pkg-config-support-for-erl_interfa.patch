@@ -1,10 +1,8 @@
-From 62043dce052b484db78e730fa9e5d2d99216eea3 Mon Sep 17 00:00:00 2001
-From: OpenEmbedded <oe.patch@oe>
-Date: Thu, 11 Feb 2021 21:07:21 -0300
-Subject: [PATCH] erl_interface: Add pkg-config support for erl_interface
-
+From a2eeeb939a972ccbe371a9eb25b9c592e2d666d7 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
+Date: Thu, 11 Feb 2021 21:07:21 -0300
+Subject: [PATCH] erl_interface: Add pkg-config support for erl_interface
 
 pkg-config is a helper tool used when compiling applications and
 libraries.
