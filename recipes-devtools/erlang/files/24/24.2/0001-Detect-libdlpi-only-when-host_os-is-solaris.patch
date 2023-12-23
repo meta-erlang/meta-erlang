@@ -1,4 +1,4 @@
-From 4ba8f488a0adf073dea987d4b4b97ee0aadf34af Mon Sep 17 00:00:00 2001
+From 76eee8b2ddaf92a05bada51442e660c1ede6b7e8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Thu, 4 Nov 2021 08:16:22 -0300
@@ -11,10 +11,10 @@ Upstream-Status: Inappropriate [OE specific]
  1 file changed, 46 insertions(+), 41 deletions(-)
 
 diff --git a/erts/configure.in b/erts/configure.in
-index 8d0936d691..f03935623d 100644
+index 41cf77611e..63561a1876 100644
 --- a/erts/configure.in
 +++ b/erts/configure.in
-@@ -1721,47 +1721,52 @@ fi
+@@ -1730,47 +1730,52 @@ fi
  AC_SUBST(SYSTEMD_DAEMON_LIBS)
  
  

@@ -1,4 +1,4 @@
-From 8733050409ab4e851805dccb7ea89a7dce7aa353 Mon Sep 17 00:00:00 2001
+From dab2aaabda3d53dfb6c05cd87bcad53a255340b5 Mon Sep 17 00:00:00 2001
 From: OpenEmbedded <oe.patch@oe>
 Date: Thu, 11 Feb 2021 21:07:21 -0300
 Subject: [PATCH] erl_interface: Add pkg-config support for erl_interface
@@ -39,7 +39,7 @@ Upstream-Status: Pending
  create mode 100644 lib/erl_interface/erl_ei.pc.in
 
 diff --git a/configure.src b/configure.src
-index d320c4520b..0621daf45b 100644
+index f0afd5c6ee..13b634d49a 100644
 --- a/configure.src
 +++ b/configure.src
 @@ -52,6 +52,7 @@ help=no
@@ -50,7 +50,7 @@ index d320c4520b..0621daf45b 100644
  while test $# != 0; do
      case $1 in
  	-srcdir=* | --srcdir=*)
-@@ -148,7 +149,10 @@ while test $# != 0; do
+@@ -144,7 +145,10 @@ while test $# != 0; do
          flgs_val=`echo "$1" | sed 's/^[^=]*=//'`
  	    eval $flgs_var=\$flgs_val
  	    ;;
@@ -62,7 +62,7 @@ index d320c4520b..0621daf45b 100644
  	    help=all;;
          --help* | -help* | -h)
  	    help=$1;;
-@@ -316,6 +320,14 @@ else
+@@ -312,6 +316,14 @@ else
      esac
  fi
  
@@ -165,12 +165,12 @@ index 0000000000..0b5d439af1
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lei
 diff --git a/lib/erl_interface/src/Makefile.in b/lib/erl_interface/src/Makefile.in
-index fa1ea3cd39..384efda7d6 100644
+index 0a5ae800be..959adf8d98 100644
 --- a/lib/erl_interface/src/Makefile.in
 +++ b/lib/erl_interface/src/Makefile.in
-@@ -44,6 +44,10 @@ include $(ERL_TOP)/make/output.mk
+@@ -42,6 +42,10 @@ include $(TARGET)/eidefs.mk
  
- include openssl/openssl.mk
+ include $(ERL_TOP)/make/output.mk
  
 +prefix          = @prefix@
 +exec_prefix     = @exec_prefix@
@@ -179,7 +179,7 @@ index fa1ea3cd39..384efda7d6 100644
  EBINDIR=../ebin
  
  APP_FILE= erl_interface.app
-@@ -120,6 +124,8 @@ INSTALL_DIR = @INSTALL_DIR@
+@@ -117,6 +121,8 @@ INSTALL_DIR = @INSTALL_DIR@
  INSTALL_DATA = @INSTALL_DATA@
  INSTALL_PROGRAM = @INSTALL_PROGRAM@
  
@@ -188,7 +188,7 @@ index fa1ea3cd39..384efda7d6 100644
  # The default library (no extra extension in name) is for Unix with
  # thread support if exists.  For windows MD is the default.
  #
-@@ -688,7 +694,18 @@ EXTRA = \
+@@ -685,7 +691,18 @@ EXTRA = \
  	README.internal \
  	$(TARGET)/eidefs.mk
  

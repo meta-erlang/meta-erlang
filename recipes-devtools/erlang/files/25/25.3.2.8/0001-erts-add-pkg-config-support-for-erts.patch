@@ -1,8 +1,8 @@
-From ff497d82c677d9219f103dd7f640b8d127ebc798 Mon Sep 17 00:00:00 2001
+From 52fdbee788b63775ebbc2afa1bb658fe32eea73e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
-Date: Tue, 30 Mar 2021 23:17:11 -0300
-Subject: [PATCH] Add pkg-config support for erts
+Date: Sun, 20 Feb 2022 18:55:59 -0300
+Subject: [PATCH] erts: add pkg-config support for erts
 
 This commit introduces the file erl_erts.pc which will be installed
 in the standard pkg-config directory.
@@ -19,24 +19,26 @@ Returns the correct libs and cflags that can be used by build tools
 Upstream-Status: Pending
 
 ---
- erts/configure.in         | 21 +++++++++++++++++++++
+ erts/configure.ac         | 21 +++++++++++++++++++++
  erts/emulator/Makefile.in | 19 ++++++++++++++++++-
  erts/erl_erts.pc.in       | 31 +++++++++++++++++++++++++++++++
  3 files changed, 70 insertions(+), 1 deletion(-)
  create mode 100644 erts/erl_erts.pc.in
 
-diff --git a/erts/configure.in b/erts/configure.in
-index beff4275f8..8d0936d691 100644
---- a/erts/configure.in
-+++ b/erts/configure.in
-@@ -21,11 +21,16 @@ dnl %CopyrightEnd%
+diff --git a/erts/configure.ac b/erts/configure.ac
+index e095b68ab2..2227f73661 100644
+--- a/erts/configure.ac
++++ b/erts/configure.ac
+@@ -21,6 +21,8 @@ dnl %CopyrightEnd%
  dnl The string "FIXME convbreak" means that there is a break of
  dnl autoconf convention that should be cleaned up.
  
 +m4_define([erts_version],`grep VSN $srcdir/vsn.mk | sed 's/^.*=[ ]*//' | awk 'NR==1{print $1}'`)
 +
- AC_INIT(vsn.mk)
- AC_PREREQ(2.59)
+ AC_INIT
+ AC_CONFIG_SRCDIR([emulator/beam/erl_process.c])
+ AC_PREREQ([2.71])
+@@ -29,6 +31,9 @@ m4_include([otp.m4])
  
  LM_PRECIOUS_VARS
  
@@ -46,20 +48,20 @@ index beff4275f8..8d0936d691 100644
  dnl We check if -Werror was given on command line and if so
  dnl we disable it for the configure and only use it when
  dnl actually building erts
-@@ -3625,6 +3630,21 @@ CFLAGS="$CFLAGS $sanitizers"
- LDFLAGS="$LDFLAGS $sanitizers"
- ])
+@@ -3629,6 +3634,21 @@ AC_MSG_RESULT([yes])
+ DEBUG_CFLAGS="-g -O0 $no_opt_CFLAGS"
+ AC_SUBST(DEBUG_CFLAGS)
  
 +dnl ----------------------------------------------------------------------
 +dnl Enable pkg-config.
 +dnl ----------------------------------------------------------------------
 +
 +AC_ARG_ENABLE(pkg-config,
-+       [  --enable-pkg-config install pkg-config file],
-+       [ case "$enableval" in
-+           no) enable_pkg_config= ;;
-+           *)  enable_pkg_config=yes ;;
-+         esac ],
++    [  --enable-pkg-config install pkg-config file],
++    [ case "$enableval" in
++          no) enable_pkg_config= ;;
++          *)  enable_pkg_config=yes ;;
++      esac ],
 +[ enable_pkg_config= ])
 +
 +ENABLE_PKG_CONFIG=$enable_pkg_config
@@ -68,7 +70,7 @@ index beff4275f8..8d0936d691 100644
  dnl ----------------------------------------------------------------------
  dnl Output the result.
  dnl ----------------------------------------------------------------------
-@@ -3638,6 +3658,7 @@ AC_CONFIG_FILES([
+@@ -3642,6 +3662,7 @@ AC_CONFIG_FILES([
    include/internal/$host/erts_internal.mk:include/internal/erts_internal.mk.in
    lib_src/$host/Makefile:lib_src/Makefile.in
    ../make/$host/otp.mk:../make/otp.mk.in
@@ -77,7 +79,7 @@ index beff4275f8..8d0936d691 100644
  
  AC_CONFIG_FILES([../make/make_emakefile:../make/make_emakefile.in],
 diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
-index 63cf156d4a..2d2dc05ee2 100644
+index 85b0e32442..bb67a7e34c 100644
 --- a/erts/emulator/Makefile.in
 +++ b/erts/emulator/Makefile.in
 @@ -23,6 +23,12 @@ include ../vsn.mk
@@ -93,7 +95,7 @@ index 63cf156d4a..2d2dc05ee2 100644
  ENABLE_ALLOC_TYPE_VARS = @ENABLE_ALLOC_TYPE_VARS@
  JIT_ENABLED=@JIT_ENABLED@
  JIT_ARCH=@JIT_ARCH@
-@@ -517,12 +523,23 @@ ifeq ($(TARGET),win32)
+@@ -533,12 +539,23 @@ ifeq ($(TARGET),win32)
  RELEASE_INCLUDES += sys/$(ERLANG_OSTYPE)/erl_win_dyn_driver.h
  endif
  
