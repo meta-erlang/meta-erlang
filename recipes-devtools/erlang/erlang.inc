@@ -92,10 +92,16 @@ do_compile:prepend:class-nativesdk() {
     export TARGET=${HOST_SYS}
 }
 
+do_compile:append:class-nativesdk() {
+    oe_runmake docs DOC_TARGETS=chunks
+}
+
 do_compile:class-target() {
     TARGET=${TARGET_SYS} \
     PATH=${NATIVE_BIN}:$PATH \
     oe_runmake
+
+    oe_runmake docs DOC_TARGETS=chunks
 }
 
 do_install:prepend:class-native() {
@@ -116,6 +122,7 @@ do_install:class-target() {
     TARGET=${TARGET_SYS} \
     PATH=${NATIVE_BIN}:$PATH \
     oe_runmake 'DESTDIR=${D}' install
+    oe_runmake 'DESTDIR=${D}' install-docs DOC_TARGETS=chunks
     for f in erl start
         do sed -i -e 's:ROOTDIR=.*:ROOTDIR=${libdir}/erlang:' \
             ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/$f ${D}/${libdir}/erlang/bin/$f
@@ -138,6 +145,8 @@ do_install:append:class-native() {
 }
 
 do_install:append:class-nativesdk() {
+    oe_runmake 'DESTDIR=${D}' install-docs DOC_TARGETS=chunks
+
     rm -f ${D}/${libdir}/erlang/Install
     chown -R root:root ${D}${libdir}/erlang
 
