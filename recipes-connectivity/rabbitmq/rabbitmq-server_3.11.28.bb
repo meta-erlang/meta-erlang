@@ -14,8 +14,8 @@ SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/
            file://rabbitmq-server-volatiles.conf \
            "
 
-SRC_URI[md5sum] = "4a552c505634f60dfd2ceddd94050631"
-SRC_URI[sha256sum] = "ab25a845281004d7afef6e9fa691e963a19f44598946d044e359800539a64655"
+SRC_URI[md5sum] = "3f66edcc403bc735a1aae0f465a75a09"
+SRC_URI[sha256sum] = "85e3b3621b6a127214f13b753f9afd9776d8652f6b1469e49d98027f75f41caa"
 
 DEPENDS = " \
     python3-native \
