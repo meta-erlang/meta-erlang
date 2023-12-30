@@ -35,6 +35,8 @@ PACKAGECONFIG[sctp] = ",,,lksctp-tools"
 PACKAGECONFIG[java] = ",--without-javac,,"
 PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
 
+RRECOMMENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
+
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
