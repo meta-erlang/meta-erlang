@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ff253ad767462c46be284da12dda33e8"
 
 BBCLASSEXTEND = "native nativesdk"
 
-DEPENDS:append:class-target = " erlang-native ncurses zlib openssl"
+DEPENDS:append:class-target = " erlang-native openssl"
 DEPENDS:append:class-native = " ncurses-native zlib-native openssl-native"
 DEPENDS:append:class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openssl nativesdk-ncurses"
 
@@ -17,16 +17,21 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://environment.d-erlang.sh.in \
            file://run-ptest \
            file://otp-0002-Remove-rpath.patch \
-           file://pr-gh-7952-Fix-build-on-Yocto.patch \
-           "
+           file://0001-erts-add-pkg-config-support-for-erts.patch \
+           file://0002-erl_interface-Add-pkg-config-support-for-erl_interfa.patch \
+           file://0001-wx-Enable-wx-cross-compilation.patch \
+           file://0001-Fix-reproducibility-issue.patch \
+           file://0001-Use-autoconf-2.72d.patch"
 
 S = "${WORKDIR}/git"
 
 inherit ptest autotools-brokensep pkgconfig
 
-PACKAGECONFIG ??= ""
-PACKAGECONFIG:class-native ??= ""
-PACKAGECONFIG:class-nativesdk ??= ""
+PACKAGECONFIG ?= "pkgconfig zlib termcap"
+PACKAGECONFIG:class-native ?= "pkgconfig"
+PACKAGECONFIG:class-nativesdk ?= "pkgconfig wx observer"
+PACKAGECONFIG[zlib] = "--disable-builtin-zlib,--enable-builtin-zlib,zlib"
+PACKAGECONFIG[termcap] = "--with-termcap,--without-termcap,ncurses"
 PACKAGECONFIG[odbc] = "--with-odbc,--without-odbc,libodbc"
 PACKAGECONFIG[lttng] = "--with-dynamic-trace=lttng,--without-dynamic-trace,lttng-ust"
 PACKAGECONFIG[wx] = "--with-wx,,wxwidgets"
@@ -41,12 +46,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
 
-
-# EXTRA_OECONF:append:arm = " --disable-smp-support --disable-hipe"
-# EXTRA_OECONF:append:armeb = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF:append:mipsel = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF:append_sh3 = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF:append:sh4 = " --disable-smp-support --disable-hipe"
+OTP_BUILD_CONFIGURE_OPTS = "update_configure --no-commit"
 
 NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
@@ -56,7 +56,7 @@ EXTRA_OECONF:class-native ??= " \
 EXTRA_OECONF:class-nativesdk ??= " \
     --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-zlib=${STAGING_DIR_NATIVE}/usr \
     "
-EXTRA_OECONF:class-target ??= " --with-ssl-rpath=no"
+EXTRA_OECONF:class-target ??= " --with-ssl-rpath=no --enable-deterministic-build"
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET} ac_cv_header_GL_gl_h=yes ac_cv_header_OpenGL_gl_h=yes"
 CACHED_CONFIGUREVARS:class-native += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
