@@ -1,4 +1,4 @@
-From 0878bad0dc2748ee9ca6c6a06e51327816669abd Mon Sep 17 00:00:00 2001
+From 405d88da526a402cbf272c477bf4d724e8a871c8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 15 Oct 2023 21:30:38 -0300
@@ -19,7 +19,7 @@ index 7b35b39fc2..8af65f4d8b 100755
  #
  
 -USE_AUTOCONF_VERSION=2.71
-+USE_AUTOCONF_VERSION=2.72d
++USE_AUTOCONF_VERSION=2.72c
  
  autoconf_aux_dirs="./erts/autoconf ./lib/common_test/test_server"
  
