@@ -21,7 +21,7 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://0002-erl_interface-Add-pkg-config-support-for-erl_interfa.patch \
            file://0001-wx-Enable-wx-cross-compilation.patch \
            file://0001-Fix-reproducibility-issue.patch \
-           file://0001-Use-autoconf-2.72d.patch"
+           file://0001-Use-autoconf-2.72c.patch"
 
 S = "${WORKDIR}/git"
 
