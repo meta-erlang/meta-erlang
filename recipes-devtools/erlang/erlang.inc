@@ -29,7 +29,7 @@ inherit ptest autotools-brokensep pkgconfig
 
 PACKAGECONFIG ?= "pkgconfig zlib termcap"
 PACKAGECONFIG:class-native ?= "pkgconfig"
-PACKAGECONFIG:class-nativesdk ?= "pkgconfig wx observer"
+PACKAGECONFIG:class-nativesdk ?= "pkgconfig wx observer termcap"
 PACKAGECONFIG[zlib] = "--disable-builtin-zlib,--enable-builtin-zlib,zlib"
 PACKAGECONFIG[termcap] = "--with-termcap,--without-termcap,ncurses"
 PACKAGECONFIG[odbc] = "--with-odbc,--without-odbc,libodbc"
