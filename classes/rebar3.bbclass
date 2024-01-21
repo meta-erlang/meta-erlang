@@ -16,7 +16,7 @@ do_configure[network] = "1"
 
 export ERL_COMPILER_OPTIONS="deterministic"
 
-REBAR3_PROFILE ?= ""
+REBAR3_PROFILE ?= "default"
 REBAR3_RELEASE_NAME ?= "${@make_release_name("${PN}")}"
 REBAR3_RELEASE ?= "${REBAR3_RELEASE_NAME}-${@get_erlang_release("${PV}")}"
 
