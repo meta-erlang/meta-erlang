@@ -1,4 +1,4 @@
-From b788666de23420702b08e4c6b539857775748366 Mon Sep 17 00:00:00 2001
+From 04749fc3228b095eecd6e39018e22599862f3684 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sat, 6 May 2023 23:04:09 -0300
@@ -15,7 +15,7 @@ Upstream-Status: Inappropriate [embedded specific]
  1 file changed, 8 deletions(-)
 
 diff --git a/configure b/configure
-index 3fe870091..ff15aaa12 100755
+index d71042447..f7579b880 100755
 --- a/configure
 +++ b/configure
 @@ -242,14 +242,6 @@ if [ "${ERLANG_OS}" = "unix" ]; then
@@ -32,7 +32,7 @@ index 3fe870091..ff15aaa12 100755
 -    fi
  fi
  
- echo "==> configuring couchdb in rel/couchdb.config"
+ # If we're in a release tarball and we don't have proper, then mark it as skipped
 -- 
-2.34.1
+2.40.1
 
