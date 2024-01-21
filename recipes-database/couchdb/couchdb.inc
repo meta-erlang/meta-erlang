@@ -53,6 +53,10 @@ do_install:append() {
     cp -r ${B}/rel/couchdb ${D}/opt/
     chown -R couchdb.couchdb ${D}/opt/couchdb
 
+    # Remove tmp build path
+    sed -i -e "s,${B}/rel/couchdb,/opt/couchdb,g" \
+        ${D}/opt/couchdb/releases/RELEASES
+
     # Cleanup installed filed (there are some build output files there)
     rm -rf ${D}/opt/couchdb/lib/couch-${PV}/priv/couch_js
     rm -rf ${D}/opt/couchdb/lib/couch-${PV}/priv/couch_ejson_compare
