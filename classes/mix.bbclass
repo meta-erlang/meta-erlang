@@ -34,10 +34,10 @@ mix_do_configure() {
         mix local.rebar --force
     fi
     mix local.hex --force
-    mix deps.get
 }
 
 mix_do_compile() {
+    mix deps.get
     MIX_ENV=${MIX_ENV} mix compile
 }
 
