@@ -11,14 +11,18 @@ S = "${WORKDIR}/git"
 
 PR = "r0"
 
-DEPENDS += "rebar3-native erlang-native"
+inherit rebar3
+
+REBAR3_PROFILE = "default"
 
 do_compile () {
-    make
+    cd ${S}
+    rebar3 as ${REBAR3_PROFILE} escriptize
 }
 
 do_install() {
-    PREFIX=${D}/${prefix} make -e install
+    install -d 0755 ${D}/${bindir}
+    install -m 0755 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/bin/erlang_ls ${D}/${bindir}/erlang_ls
 }
 
 FILES:${PN} = "${bindir}/erlang_ls ${bindir}/els_dap"
