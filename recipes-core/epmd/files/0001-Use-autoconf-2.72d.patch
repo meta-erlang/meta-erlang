@@ -18,7 +18,7 @@ index 7b35b39fc2..939efc35a8 100755
  #
  
 -USE_AUTOCONF_VERSION=2.71
-+USE_AUTOCONF_VERSION=2.72c
++USE_AUTOCONF_VERSION=2.72d
  
  autoconf_aux_dirs="./erts/autoconf ./lib/common_test/test_server"
  
