@@ -6,7 +6,7 @@ SECTION = "network"
 PR = "r0"
 
 SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
-           file://0001-Use-autoconf-2.72c.patch \
+           file://0001-Use-autoconf-2.72d.patch \
            file://epmd.init \
            file://epmd.service \
            file://epmd.socket \
