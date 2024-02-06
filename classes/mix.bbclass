@@ -12,6 +12,9 @@ INSANE_SKIP:${PN} += "already-stripped"
 
 do_configure[network] = "1"
 
+HEX_ORGANIZATION_TOKEN ?= ""
+HEX_ORGANIZATION ?= ""
+
 MIX_RELEASE_NAME="${@get_release_name("${PN}")}"
 MIX_RELEASE_VERSION="${@get_release_version("${PV}")}"
 MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}"
@@ -36,10 +39,17 @@ mix_do_configure() {
         mix local.rebar --force
     fi
     mix local.hex --force
+
+    # If the User configures HEX_ORGANIZATION and HEX_ORGANIZATION_TOKEN,
+    # that means mix hex.organization auth command will be called here.
+    if [ "${HEX_ORGANIZATION}" != "" -a "${HEX_ORGANIZATION_TOKEN}" != "" ]; then
+        mix hex.organization auth ${HEX_ORGANIZATION} --key ${HEX_ORGANIZATION_TOKEN}
+    fi
+
+    mix deps.get
 }
 
 mix_do_compile() {
-    mix deps.get
     MIX_ENV=${MIX_ENV} mix compile
 }
 
