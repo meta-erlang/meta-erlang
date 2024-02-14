@@ -5,7 +5,7 @@ the [Yocto Project](https://www.yoctoproject.org/) build system:
 
 ## Documentation
 
-See [meta-erlang documentation](https://meta-erlang.github.io/).
+See [meta-erlang documentation](https://meta-erlang.github.io/docs/kirkstone/).
 
 ## Dependencies
 
@@ -35,18 +35,6 @@ For erlang lksctp run-time support:
   branch: master
 
 
-## Contributing
-
-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-erlang]' in the subject'
-
-When sending single patches, please using something like:
-
-```
-git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-erlang][PATCH
-```
-
-Interim layer maintainer: João Henrique Freitas <joaohf@gmail.com>
-
 ## Usage instructions
 
 Use the _bitbake-layers add-layer_ command to add the meta-erlang to the configuration file:
@@ -74,6 +62,8 @@ applications.
 ## Supported versions
 
 meta-erlang tries to support a well balanced range of Erlang, Elixir and Yocto Project versions. The purpose is to provide up-to-date recipes following the latest fixes found in Erlang and Elixir projects as well keeping the old recipes to not break compatibility.
+
+Please, before building Erlang/Elixir applications, check out the PREFERRED_VERSION for each application on the [meta-erlang application documentation](https://meta-erlang.github.io/docs/kirkstone/category/applications/).
 
 As meta-erlang provides multiple versions for the same recipes, pay attention to configure the variable [PREFERRED_VERSION](https://docs.yoctoproject.org/ref-manual/ref-variables.html?highlight=preferred_version#term-PREFERRED_VERSION) in one of the configuration file like _local.conf_, _site.conf_, _auto.conf_ or _distro/include_ files. Like this:
 
