@@ -5,7 +5,7 @@ the [Yocto Project](https://www.yoctoproject.org/) build system:
 
 ## Documentation
 
-See [meta-erlang documentation](https://meta-erlang.github.io/).
+See [meta-erlang documentation](https://meta-erlang.github.io/docs/master/).
 
 ## Dependencies
 
@@ -62,6 +62,8 @@ applications.
 
 meta-erlang tries to support a well balanced range of Erlang, Elixir and Yocto Project versions. The purpose is to provide up-to-date recipes following the latest fixes found in Erlang and Elixir projects as well keeping the old recipes to not break compatibility.
 
+Please, before building Erlang/Elixir applications, check out the PREFERRED_VERSION for each application on the [meta-erlang application documentation](https://meta-erlang.github.io/docs/master/category/applications/).
+
 As meta-erlang provides multiple versions for the same recipes, pay attention to configure the variable [PREFERRED_VERSION](https://docs.yoctoproject.org/ref-manual/ref-variables.html?highlight=preferred_version#term-PREFERRED_VERSION) in one of the configuration file like _local.conf_, _site.conf_, _auto.conf_ or _distro/include_ files. Like this:
 
 ```
@@ -88,6 +90,7 @@ Elixir:
 * [v1.16](https://github.com/elixir-lang/elixir/tree/v1.16)
 * [v1.15](https://github.com/elixir-lang/elixir/tree/v1.15)
 * [v1.14](https://github.com/elixir-lang/elixir/tree/v1.14)
+* [v1.13](https://github.com/elixir-lang/elixir/tree/v1.13)
 
 Yocto:
 
