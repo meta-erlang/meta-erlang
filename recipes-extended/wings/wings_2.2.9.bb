@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/dgud/wings;protocol=https;branch=master;destsuffix=w
     file://0001-Release-unix-without-makeself.sh.patch"
 
 PV .= "+git${SRCPV}"
-SRCREV = "d2768dce7590d8c49b6f1a94684690965e7bdd37"
+SRCREV = "fe24fac17ce09af34ea202582d4160f52cfb935c"
 
 S = "${WORKDIR}/wings"
 
