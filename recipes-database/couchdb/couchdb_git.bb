@@ -1,23 +1,34 @@
 DESCRIPTION = "A document-oriented NoSQL database"
 HOMEPAGE = "https://couchdb.apache.org/"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1d6953f3b9af3e202ed075fc3019b801"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3d29035bf5fb8431e5e032be2bc5c6ab"
 
-SRC_URI = " \
-    ${APACHE_MIRROR}/${BPN}/source/${PV}/apache-couchdb-${PV}.tar.gz \
+SRC_URI = "git://github.com/apache/couchdb;protocol=https;branch=qjs \
+    file://0001-WIP.patch \
     file://couchdb.service \
     file://couchdb.init \
-    file://0001-Remove-defensive-check-for-SpiderMonkey.patch \
 "
+
+PV = "3.3.3+git${SRCPV}"
+SRCREV = "f2c205f82f79f528b049b72d1736335133b116d5"
+
+S = "${WORKDIR}/git"
 
 PR = "r0"
 
 inherit autotools-brokensep pkgconfig erlang systemd update-rc.d useradd
 
-SPIDERMONKEY_VERSION ?= "91"
-
-CONFIGUREOPTS = "--spidermonkey-version ${SPIDERMONKEY_VERSION} --disable-docs"
+CONFIGUREOPTS = "--js-engine=quickjs --disable-spidermonkey --disable-docs \
+    --disable-fauxton \
+    --rebar ${STAGING_BINDIR_NATIVE}/rebar \
+    --rebar3 ${STAGING_BINDIR_NATIVE}/rebar3 \
+    --erlfmt ${STAGING_BINDIR_NATIVE}/erlfmt \
+"
 EXTRA_OECONF:remove = "--disable-static"
+
+export REBAR = "${STAGING_BINDIR_NATIVE}/rebar"
+export REBAR3 = "${STAGING_BINDIR_NATIVE}/rebar3"
+export ERLFMT = "${STAGING_BINDIR_NATIVE}/erlfmt"
 
 ERL_INTERFACE_VERSION = "`pkg-config --modversion erl_ei`"
 export ERL_CFLAGS = "`pkg-config --cflags-only-I erl_ei` -I${STAGING_LIBDIR}/erlang/usr/include"
@@ -34,12 +45,12 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "--system couchdb"
 USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/couchdb -g couchdb couchdb"
 
-S = "${WORKDIR}/apache-couchdb-${PV}"
-
 export ERL_COMPILER_OPTIONS="deterministic"
 
+do_configure[network] = "1"
+
 do_configure:append() {
-    sed -i "s:-I/usr/include/mozjs-${SPIDERMONKEY_VERSION}:-I${STAGING_INCDIR}/mozjs-${SPIDERMONKEY_VERSION}:g" ${B}/src/couch/rebar.config.script
+    #sed -i "s:-I/usr/include/mozjs-${SPIDERMONKEY_VERSION}:-I${STAGING_INCDIR}/mozjs-${SPIDERMONKEY_VERSION}:g" ${B}/src/couch/rebar.config.script
     sed -i "s:-L/usr/local/lib:\$LDFLAGS:g" ${B}/src/couch/rebar.config.script
 
     # include target erts
@@ -51,7 +62,7 @@ do_configure:append() {
 do_install:append() {
     install -d ${D}/opt
     cp -r ${B}/rel/couchdb ${D}/opt/
-    chown -R couchdb.couchdb ${D}/opt/couchdb
+    chown -R couchdb:couchdb ${D}/opt/couchdb
 
     # Remove tmp build path
     sed -i -e "s,${B}/rel/couchdb,/opt/couchdb,g" \
@@ -88,9 +99,11 @@ DEPENDS += " \
     erlang \
     erlang-native \
     icu \
-    mozjs-91 \
     openssl \
     rebar-native \
+    rebar3-native \
+    erlfmt-native \
+    quickjs-native \
 "
 
 INSANE_SKIP:${PN} = "already-stripped"
