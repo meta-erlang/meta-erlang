@@ -4,11 +4,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 
 S = "${WORKDIR}/git"
-SRCREV = "b6d309417c502ca243f810e5313bea36951ef038"
-PV = "2.6.4+git${SRCPV}"
-PR = "r1"
+SRCREV = "9e60c709fdf759b614ab1441f36f51936bb5bbd4"
+PV = "2.6.2-1+git${SRCPV}"
+PR = "r2"
 
-SRC_URI = "git://github.com/rebar/rebar;branch=master;protocol=https"
+SRC_URI = "git://github.com/apache/couchdb-rebar;branch=main;protocol=https"
 
 DEPENDS += "erlang-native"
 
