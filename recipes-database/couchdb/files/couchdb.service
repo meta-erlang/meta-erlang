@@ -1,0 +1,17 @@
+[Unit]
+Description=Apache CouchDB
+Wants=network-online.target
+After=network-online.target remote-fs.target
+
+[Service]
+User=couchdb
+Group=couchdb
+
+ExecStart=%bindir%/couchdb -o /dev/stdout -e /dev/stderr
+
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

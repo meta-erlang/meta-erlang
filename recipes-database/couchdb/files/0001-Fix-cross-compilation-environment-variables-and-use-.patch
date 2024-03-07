@@ -1,0 +1,66 @@
+From 88682ffa1c62afd89aee4a05cddc492b9b287ea9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Mon, 10 Mar 2025 11:41:39 -0300
+Subject: [PATCH] Fix cross compilation environment variables and use
+ quickjs-native
+
+Upstream-Status: Inappropriate [OE-Specific]
+---
+ src/couch_quickjs/build_js.escript |  4 +---
+ src/couch_quickjs/quickjs/Makefile | 10 +++++-----
+ 2 files changed, 6 insertions(+), 8 deletions(-)
+
+diff --git a/src/couch_quickjs/build_js.escript b/src/couch_quickjs/build_js.escript
+index 1da48ee87..6cf90cc4c 100644
+--- a/src/couch_quickjs/build_js.escript
++++ b/src/couch_quickjs/build_js.escript
+@@ -72,9 +72,7 @@ concat_js_files(JsScript, CoffeeScript) ->
+ compile_bytecode(Js, CBytecode) ->
+     % cp_if_different/2 is used to to avoid triggering a re-compile if nothing changed
+     Tmp = CBytecode ++ ".tmp",
+-    {ok, Cwd} = file:get_cwd(),
+-    CompileCmd = Cwd ++ "/quickjs/qjsc -c -N bytecode -o c_src/" ++ Tmp ++ " priv/" ++ Js,
+-    os:cmd(CompileCmd),
++    os:cmd("qjsc -c -N bytecode -o c_src/" ++ Tmp ++ " priv/" ++ Js),
+     Changed = cp_if_different("c_src/" ++ Tmp, "c_src/" ++ CBytecode),
+     rm("c_src/" ++ Tmp),
+     Changed.
+diff --git a/src/couch_quickjs/quickjs/Makefile b/src/couch_quickjs/quickjs/Makefile
+index cf88a723a..051d2657f 100644
+--- a/src/couch_quickjs/quickjs/Makefile
++++ b/src/couch_quickjs/quickjs/Makefile
+@@ -122,13 +122,13 @@ else ifdef CONFIG_COSMO
+   AR=cosmoar
+ else
+   HOST_CC=gcc
+-  CC=$(CROSS_PREFIX)gcc
++  CC?=$(CROSS_PREFIX)gcc
+   CFLAGS+=-g -Wall -MMD -MF $(OBJDIR)/$(@F).d
+   CFLAGS += -Wno-array-bounds -Wno-format-truncation
+   ifdef CONFIG_LTO
+-    AR=$(CROSS_PREFIX)gcc-ar
++    AR?=$(CROSS_PREFIX)gcc-ar
+   else
+-    AR=$(CROSS_PREFIX)ar
++    AR?=$(CROSS_PREFIX)ar
+   endif
+ endif
+ STRIP?=$(CROSS_PREFIX)strip
+@@ -273,11 +273,11 @@ $(QJSC): $(OBJDIR)/qjsc.host.o \
+ 
+ endif #CROSS_PREFIX
+ 
+-QJSC_DEFINES:=-DCONFIG_CC=\"$(QJSC_CC)\" -DCONFIG_PREFIX=\"$(PREFIX)\"
++#QJSC_DEFINES:=-DCONFIG_CC="zz" -DCONFIG_PREFIX=\"$(PREFIX)\"
+ ifdef CONFIG_LTO
+ QJSC_DEFINES+=-DCONFIG_LTO
+ endif
+-QJSC_HOST_DEFINES:=-DCONFIG_CC=\"$(HOST_CC)\" -DCONFIG_PREFIX=\"$(PREFIX)\"
++#QJSC_HOST_DEFINES:=-DCONFIG_CC="zz" -DCONFIG_PREFIX=\"$(PREFIX)\"
+ 
+ $(OBJDIR)/qjsc.o: CFLAGS+=$(QJSC_DEFINES)
+ $(OBJDIR)/qjsc.host.o: CFLAGS+=$(QJSC_HOST_DEFINES)
+-- 
+2.43.0
+
