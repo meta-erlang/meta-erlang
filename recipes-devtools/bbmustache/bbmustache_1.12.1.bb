@@ -8,7 +8,7 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 SRC_URI = "git://github.com//soranoba/bbmustache.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
-SRCREV = "7631da97b0c4de54753257e126cb6f983d0c4b83"
+SRCREV = "529a6658e7b4963c208d6c97de88bd5936c2e3b2"
 PV .= "+git${SRCPV}"
 
 inherit rebar3
@@ -30,3 +30,4 @@ FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"
 
+PV = "1.12.2"
