@@ -12,10 +12,15 @@ LIC_FILES_CHKSUM = "file://license.terms;md5=889fe8682ad9d17b3067710663f6436e \
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 SRC_URI = "git://github.com/dgud/wings;protocol=https;branch=master;destsuffix=wings \
-    file://0001-Release-unix-without-makeself.sh.patch"
+           file://0001-Release-unix-without-makeself.sh.patch \
+           file://0004-Fix-triple-quote-warning.patch \
+           file://0002-New-FBX-importer-and-exporter-imports-and-exports-ge.patch \
+           file://0003-wpc_fbx_p-Fixes-to-transparency-and-material-names.patch \
+           file://0001-x3d_import-Fixed-transparency-added-gzip-support.patch \
+           "
 
 PV .= "+git${SRCPV}"
-SRCREV = "fe24fac17ce09af34ea202582d4160f52cfb935c"
+SRCREV = "4d3e856e666202dcefbf0103a2f6638ae03f1129"
 
 S = "${WORKDIR}/wings"
 
@@ -50,3 +55,5 @@ do_install () {
 }
 
 INSANE_SKIP:${PN} += "split-strip already-stripped ldflags"
+
+PV = "2.3"

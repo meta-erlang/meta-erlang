@@ -1,4 +1,4 @@
-From 84cd8520216e34e3c1d4b979958d5afbc3b51ebd Mon Sep 17 00:00:00 2001
+From 9507e98cd2b40e4c68bd813b6da03c9ce1002a65 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sat, 17 Feb 2024 18:58:52 -0300
@@ -23,6 +23,3 @@ index 7719b633..63590b26 100755
      ok.
  
  win_release(Root, WingsVsn) ->
--- 
-2.40.1
-
