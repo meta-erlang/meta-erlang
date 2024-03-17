@@ -8,7 +8,7 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 SRC_URI = "git://github.com/WhatsApp/erlfmt.git;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
-SRCREV = "7f1bed6391195f318d267e06d6fa62f0c33d3112"
+SRCREV = "6672a5ef2086487de994cd244b1f2b06f615075a"
 PV .= "+git${SRCPV}"
 
 inherit rebar3
@@ -30,3 +30,4 @@ FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"
 
+PV = "1.3.0"
