@@ -3,6 +3,8 @@ DESCRIPTION = "Command-line interface for Elvis, the Erlang style reviewer."
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=92ca8142cc86af13840e0d8e92d2c68c"
 
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
+
 SRC_URI = "git://github.com/inaka/elvis.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"

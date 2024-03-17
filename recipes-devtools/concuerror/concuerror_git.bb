@@ -3,6 +3,8 @@ DESCRIPTION = "Concuerror is a stateless model checking tool for Erlang programs
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e93694aa036c6db13d9595526cea51a7"
 
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
+
 SRC_URI = "git://github.com/parapluu/Concuerror.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"

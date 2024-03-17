@@ -3,6 +3,8 @@ DESCRIPTION = "Binary pattern match Based Mustache template engine for Erlang/OT
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c8bd59ddfba7a079b8ea1531f0692a49"
 
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
+
 SRC_URI = "git://github.com//soranoba/bbmustache.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
