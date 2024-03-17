@@ -1,6 +1,7 @@
 SUMMARY = "Extensible YANG validator"
 DESCRIPTION = "Extensible YANG validator."
 LICENSE = "Apache-2.0"
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b6e74f10aa07de2cf633fab938ca24ba"
 
 SRC_URI = "git://github.com/mbj4668/yanger.git;branch=master;protocol=https;destsuffix=yanger \

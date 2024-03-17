@@ -3,6 +3,8 @@ SECTION = "devel"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
 
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
+
 S = "${WORKDIR}/git"
 
 SRCREV = "060ac4b8263c550d05607b75e065a7929b0bf658"

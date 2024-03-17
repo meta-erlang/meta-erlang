@@ -9,6 +9,8 @@ HOMEPAGE = "http://yaws.hyber.org/"
 
 SECTION = "net"
 
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
+
 DEPENDS = "erlang-native"
 
 RDEPENDS:${PN} = "erlang erlang-compiler erlang-crypto erlang-xmerl erlang-ssl erlang-public-key erlang-asn1"

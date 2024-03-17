@@ -6,6 +6,8 @@ Wrangler language server, as well as emacs and Eclipse."
 
 HOMEPAGE = "https://refactoringtools.github.io/docs/wrangler/"
 
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
+
 DEPENDS = "erlang-native"
 
 #RDEPENDS:${PN} = "erlang erlang-compiler erlang-crypto erlang-xmerl erlang-ssl erlang-public-key erlang-asn1 erlang-inets erlang-os-mon"

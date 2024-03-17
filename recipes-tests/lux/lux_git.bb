@@ -4,6 +4,8 @@ DESCRIPTION = "Lux (LUcid eXpect scripting) is a test automation framework with 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=efd539ca98d0bacb6f03446d3b1ddaa2"
 
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
+
 SRC_URI = "git://github.com/hawk/lux;protocol=https;branch=master"
 
 PV = "2.8.1+git${SRCPV}"

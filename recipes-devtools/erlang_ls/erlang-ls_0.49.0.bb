@@ -3,6 +3,8 @@ DESCRIPTION = "An Erlang server implementing Microsoft's Language Server Protoco
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7f313310d7132582da56ae0c7feeb2d2"
 
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
+
 SRC_URI = "git://github.com/erlang-ls/erlang_ls;branch=main;protocol=https"
 
 SRCREV = "3e54aaefbab1dc94b17258de22e9e9d50cd71ad1"

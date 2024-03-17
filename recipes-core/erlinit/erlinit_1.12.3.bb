@@ -3,6 +3,8 @@ DESCRIPTION = "This is a replacement for /sbin/init that launches an Erlang/OTP 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9a690f6d9d9ecde5e7332edfb7183ba0"
 
+RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
+
 S = "${WORKDIR}/git"
 SRCREV = "77101dba98d44e88bf95b8801e203916424ca304"
 PR = "r0"
