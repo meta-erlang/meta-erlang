@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/mbj4668/yanger.git;branch=master;protocol=https;dest
     file://yanger.sh"
 
 S = "${WORKDIR}/yanger"
-SRCREV = "34b4de450fb644bbe4134f803df243b5b5d5dcd0"
+SRCREV = "019155d70a5b89a6a22a0985ca5a445412451892"
 PV .= "+git${SRCPV}"
 
 DEPENDS = "libxml2 erlang erlang-native"
