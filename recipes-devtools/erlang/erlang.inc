@@ -138,10 +138,6 @@ do_install:class-target() {
     PATH=${NATIVE_BIN}:$PATH \
     oe_runmake 'DESTDIR=${D}' install
     oe_runmake 'DESTDIR=${D}' install-docs DOC_TARGETS=chunks
-    for f in erl start
-        do sed -i -e 's:ROOTDIR=.*:ROOTDIR=${libdir}/erlang:' \
-            ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/$f ${D}/${libdir}/erlang/bin/$f
-    done
 
     cp ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/dyn_erl ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/erl
 
