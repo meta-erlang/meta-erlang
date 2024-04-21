@@ -1,7 +1,7 @@
 
 DEPENDS += "erlang erlang-native"
 
-base_erlang_release = "${libdir_native}/${BPN}"
+base_erlang_release = "${libdir}/${BPN}"
 erlang_release = "${D}/${base_erlang_release}"
 
 ALLOW_EMPTY:${PN}-staticdev = "1"
