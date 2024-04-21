@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7f313310d7132582da56ae0c7feeb2d2"
 
 SRC_URI = "git://github.com/erlang-ls/erlang_ls;branch=main;protocol=https"
 
-SRCREV = "b151f9d9a4a1dde1118ae2822226500e2fa69125"
+SRCREV = "63b18395ac313cc4a975b30c54749ab172c6848c"
 
 S = "${WORKDIR}/git"
 
