@@ -1,4 +1,4 @@
-From 5356d54cd25c0156a483a92cf66d2094db27fae7 Mon Sep 17 00:00:00 2001
+From cc309f4c1363c6fc64aad69eb51653c8f92ee97d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Thu, 11 Feb 2021 21:07:21 -0300
@@ -27,7 +27,6 @@ pkg-config file. And one could enable it using --enable-pkg-config
 argument when calling configure script.
 
 Upstream-Status: Pending
-
 ---
  configure.src                     | 14 +++++++++++++-
  lib/erl_interface/configure.ac    | 19 +++++++++++++++++--
@@ -37,7 +36,7 @@ Upstream-Status: Pending
  create mode 100644 lib/erl_interface/erl_ei.pc.in
 
 diff --git a/configure.src b/configure.src
-index d320c4520b..0621daf45b 100644
+index 24b21fd70e..427106ccbb 100644
 --- a/configure.src
 +++ b/configure.src
 @@ -52,6 +52,7 @@ help=no
@@ -76,7 +75,7 @@ index d320c4520b..0621daf45b 100644
  
  if test $bootstrap_only = no; then
 diff --git a/lib/erl_interface/configure.ac b/lib/erl_interface/configure.ac
-index e660965299..21f5ad534a 100644
+index 4874fd0313..5feb7fa190 100644
 --- a/lib/erl_interface/configure.ac
 +++ b/lib/erl_interface/configure.ac
 @@ -22,8 +22,8 @@
@@ -118,7 +117,7 @@ index e660965299..21f5ad534a 100644
  dnl ----------------------------------------------------------------------
  dnl Checks for programs
  dnl ----------------------------------------------------------------------
-@@ -368,5 +382,6 @@ ERL_DED_FLAGS
+@@ -345,5 +359,6 @@ LM_TRY_ENABLE_CFLAG([-fno-strict-aliasing], [CFLAGS])
  
  AC_CONFIG_FILES([src/$host/Makefile:src/Makefile.in
  	src/$host/eidefs.mk:src/eidefs.mk.in
@@ -163,7 +162,7 @@ index 0000000000..0b5d439af1
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lei
 diff --git a/lib/erl_interface/src/Makefile.in b/lib/erl_interface/src/Makefile.in
-index fa1ea3cd39..384efda7d6 100644
+index 04eecfb937..11480445f9 100644
 --- a/lib/erl_interface/src/Makefile.in
 +++ b/lib/erl_interface/src/Makefile.in
 @@ -44,6 +44,10 @@ include $(ERL_TOP)/make/output.mk

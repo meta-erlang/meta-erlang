@@ -1,4 +1,4 @@
-From b3a295ea8c2f801be6da381a812c7e9b4c5c18e3 Mon Sep 17 00:00:00 2001
+From e523904b7cd9ed2a04744d69c3d5750796d29755 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 22 Jan 2023 10:54:12 -0300
@@ -12,13 +12,12 @@ builds.
 The approach here is to remove well know flags with build host paths.
 
 1: https://reproducible-builds.org/docs/build-path/
-
 ---
  erts/emulator/Makefile.in | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
-index e0da7b3abc..b9ad93b9a1 100644
+index d317c36fc3..0c6b1dca0e 100644
 --- a/erts/emulator/Makefile.in
 +++ b/erts/emulator/Makefile.in
 @@ -590,7 +590,8 @@ ifeq ($(TARGET), win32)
