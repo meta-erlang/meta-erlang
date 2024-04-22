@@ -1,4 +1,4 @@
-From cb9438ed54852aafe13f6b2b64ab4383cfd9cc3f Mon Sep 17 00:00:00 2001
+From a8a8236ae70fa83d01208c345ac224b4fc54e59f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 20 Feb 2022 18:55:59 -0300
@@ -17,7 +17,6 @@ Returns the correct libs and cflags that can be used by build tools
    -I/cross/sysroots/core2-32-vendor-linux/usr/lib/erlang/erts-11.1.8/include
 
 Upstream-Status: Pending
-
 ---
  erts/configure.ac         | 21 +++++++++++++++++++++
  erts/emulator/Makefile.in | 19 ++++++++++++++++++-
@@ -26,7 +25,7 @@ Upstream-Status: Pending
  create mode 100644 erts/erl_erts.pc.in
 
 diff --git a/erts/configure.ac b/erts/configure.ac
-index a63d391fb3..9d1617ecbc 100644
+index 61f9fe48a5..7e1041e397 100644
 --- a/erts/configure.ac
 +++ b/erts/configure.ac
 @@ -21,6 +21,8 @@ dnl %CopyrightEnd%
@@ -37,7 +36,7 @@ index a63d391fb3..9d1617ecbc 100644
 +
  AC_INIT
  AC_CONFIG_SRCDIR([emulator/beam/erl_process.c])
- AC_PREREQ([2.71])
+ AC_PREREQ([2.72])
 @@ -29,6 +31,9 @@ m4_include([otp.m4])
  
  LM_PRECIOUS_VARS
@@ -48,7 +47,7 @@ index a63d391fb3..9d1617ecbc 100644
  dnl We check if -Werror was given on command line and if so
  dnl we disable it for the configure and only use it when
  dnl actually building erts
-@@ -3587,6 +3592,21 @@ AC_MSG_RESULT([yes])
+@@ -3655,6 +3660,21 @@ AC_MSG_RESULT([yes])
  DEBUG_CFLAGS="-g -O0 $no_opt_CFLAGS"
  AC_SUBST(DEBUG_CFLAGS)
  
@@ -70,7 +69,7 @@ index a63d391fb3..9d1617ecbc 100644
  dnl ----------------------------------------------------------------------
  dnl Output the result.
  dnl ----------------------------------------------------------------------
-@@ -3600,6 +3620,7 @@ AC_CONFIG_FILES([
+@@ -3668,6 +3688,7 @@ AC_CONFIG_FILES([
    include/internal/$host/erts_internal.mk:include/internal/erts_internal.mk.in
    lib_src/$host/Makefile:lib_src/Makefile.in
    ../make/$host/otp.mk:../make/otp.mk.in
@@ -79,7 +78,7 @@ index a63d391fb3..9d1617ecbc 100644
  
  AC_CONFIG_FILES([../make/make_emakefile:../make/make_emakefile.in],
 diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
-index 1eb26e9a13..e0da7b3abc 100644
+index e93f052d75..d317c36fc3 100644
 --- a/erts/emulator/Makefile.in
 +++ b/erts/emulator/Makefile.in
 @@ -23,6 +23,12 @@ include ../vsn.mk

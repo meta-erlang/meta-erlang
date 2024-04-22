@@ -1,4 +1,4 @@
-From f106ba7679d3948365ac0d9236ba33f3db92d369 Mon Sep 17 00:00:00 2001
+From 1dc028a1a1b62a78fcce6c996428edd274d15701 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 3 Sep 2023 15:56:42 -0300
@@ -9,7 +9,7 @@ Subject: [PATCH] Enable x32 support for crypto configure
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/lib/crypto/configure.ac b/lib/crypto/configure.ac
-index c80e1cf2af..5cd5a2c636 100644
+index b5b5914247..9804f1e3c0 100644
 --- a/lib/crypto/configure.ac
 +++ b/lib/crypto/configure.ac
 @@ -397,7 +397,7 @@ search_subdirs="lib"
