@@ -55,5 +55,3 @@ do_install () {
 }
 
 INSANE_SKIP:${PN} += "split-strip already-stripped ldflags"
-
-PV = "2.3"
