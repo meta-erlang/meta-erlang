@@ -29,5 +29,3 @@ FILES:${PN} = "${bindir}/erlfmt"
 FILES:${PN}-dbg += "/.debug"
 
 BBCLASSEXTEND = "native nativesdk"
-
-PV = "1.3.0"
