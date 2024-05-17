@@ -18,6 +18,7 @@ TOOLCHAIN_HOST_TASK ?= "\
     nativesdk-elixir \
     nativesdk-elixir-modules-dev \
     nativesdk-livebook \
+    nativesdk-exdoc \
     "
 
 MULTIMACH_TARGET_SYS = "${SDK_ARCH}-nativesdk${SDK_VENDOR}-${SDK_OS}"
