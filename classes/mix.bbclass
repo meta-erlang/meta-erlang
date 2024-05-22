@@ -3,7 +3,7 @@ inherit erlang pkgconfig
 
 DEPENDS += "elixir-native"
 
-B = "${S}"
+B ?= "${S}"
 
 MIX_ENV ?= "prod"
 
@@ -59,7 +59,7 @@ mix_do_install() {
     MIX_TARGET_INCLUDE_ERTS="${STAGING_LIBDIR}/erlang/erts-${ERLANG_ERTS_VERSION}" \
     MIX_ENV=${MIX_ENV} mix release --overwrite --path ${erlang_release}
 
-    chown root:root -R ${erlang_release}    
+    chown root:root -R ${erlang_release}
 }
 
 EXPORT_FUNCTIONS do_configure do_compile do_install
