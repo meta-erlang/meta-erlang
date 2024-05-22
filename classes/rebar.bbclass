@@ -3,4 +3,4 @@ inherit erlang
 
 DEPENDS += "rebar-native"
 
-B = "${S}"
+B ?= "${S}"

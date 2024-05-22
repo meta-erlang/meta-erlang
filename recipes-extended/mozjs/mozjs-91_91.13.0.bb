@@ -27,7 +27,7 @@ DEPENDS += "zlib cargo-native python3 icu"
 DEPENDS:remove:mipsarch = "icu"
 DEPENDS:remove:powerpc:toolchain-clang = "icu"
 
-B = "${WORKDIR}/build"
+B ?= "${WORKDIR}/build"
 
 export PYTHONPATH = "${S}/build:${S}/third_party/python/PyYAML/lib3:${S}/testing/mozbase/mozfile:${S}/python/mozboot:${S}/third_party/python/distro:${S}/testing/mozbase/mozinfo:${S}/config:${S}/testing/mozbase/manifestparser:${S}/third_party/python/pytoml:${S}/testing/mozbase/mozprocess:${S}/third_party/python/six:${S}/python/mozbuild:${S}/python/mozbuild/mozbuild:${S}/python/mach:${S}/third_party/python/jsmin:${S}/python/mozversioncontrol"
 
