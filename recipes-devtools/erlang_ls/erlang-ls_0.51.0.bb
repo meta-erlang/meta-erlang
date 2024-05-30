@@ -7,7 +7,8 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 SRC_URI = "git://github.com/erlang-ls/erlang_ls;branch=main;protocol=https"
 
-SRCREV = "63b18395ac313cc4a975b30c54749ab172c6848c"
+SRCREV = "8700e96fba0087248ea27be2a7b09b9f3dc4ea44"
+PV .= "+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
