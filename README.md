@@ -67,11 +67,11 @@ Please, before building Erlang/Elixir applications, check out the PREFERRED_VERS
 As meta-erlang provides multiple versions for the same recipes, pay attention to configure the variable [PREFERRED_VERSION](https://docs.yoctoproject.org/ref-manual/ref-variables.html?highlight=preferred_version#term-PREFERRED_VERSION) in one of the configuration file like _local.conf_, _site.conf_, _auto.conf_ or _distro/include_ files. Like this:
 
 ```
-PREFERRED_VERSION_erlang = "26.2.1"
-PREFERRED_VERSION_erlang-native = "26.2.1"
+PREFERRED_VERSION_erlang = "27.0"
+PREFERRED_VERSION_erlang-native = "27.0"
 
-PREFERRED_VERSION_elixir = "1.16.0"
-PREFERRED_VERSION_elixir-native = "1.16.0"
+PREFERRED_VERSION_elixir = "1.16.3"
+PREFERRED_VERSION_elixir-native = "1.16.3"
 ```
 
 However if you have any specific requirements for a special recipe version, you can always add it in your application/middleware layer.
