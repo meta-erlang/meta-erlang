@@ -11,13 +11,11 @@ TOOLCHAIN_HOST_TASK ?= "\
     nativesdk-erlfmt \
     nativesdk-elvis \
     nativesdk-erlang-ls \
-    nativesdk-wrangler \
     nativesdk-concuerror \
     nativesdk-erlang \
     nativesdk-erlang-modules-dev \
     nativesdk-elixir \
     nativesdk-elixir-modules-dev \
-    nativesdk-livebook \
     nativesdk-exdoc \
     "
 
