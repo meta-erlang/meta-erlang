@@ -50,41 +50,41 @@ export ERL_COMPILER_OPTIONS="deterministic"
 
 do_compile:prepend() {
     # fix dependency: eleveldb
-    install -D ${WORKDIR}/build_deps.sh.eleveldb ${REBAR_BASE_DIR}/default/lib/eleveldb/c_src/build_deps.sh
-    install -D ${WORKDIR}/Makefile.c_src.eleveldb ${REBAR_BASE_DIR}/default/lib/eleveldb/c_src/Makefile
-    install -D ${WORKDIR}/rebar.config.eleveldb ${REBAR_BASE_DIR}/default/lib/eleveldb/rebar.config
+    install -D ${UNPACKDIR}/build_deps.sh.eleveldb ${REBAR_BASE_DIR}/default/lib/eleveldb/c_src/build_deps.sh
+    install -D ${UNPACKDIR}/Makefile.c_src.eleveldb ${REBAR_BASE_DIR}/default/lib/eleveldb/c_src/Makefile
+    install -D ${UNPACKDIR}/rebar.config.eleveldb ${REBAR_BASE_DIR}/default/lib/eleveldb/rebar.config
 
     # fix dependency: bcrypt
-    install -D ${WORKDIR}/Makefile.c_src.bcrypt ${REBAR_BASE_DIR}/default/lib/bcrypt/c_src/Makefile
+    install -D ${UNPACKDIR}/Makefile.c_src.bcrypt ${REBAR_BASE_DIR}/default/lib/bcrypt/c_src/Makefile
 
     # fix dependency: vmq_passwd
-    install -D ${WORKDIR}/Makefile.c_src.vmq_passwd ${S}/apps/vmq_passwd/c_src/Makefile
+    install -D ${UNPACKDIR}/Makefile.c_src.vmq_passwd ${S}/apps/vmq_passwd/c_src/Makefile
 }
 
 do_install:prepend() {
     cd ${S}
-    cat ${WORKDIR}/vars.config > vars.generated
+    cat ${UNPACKDIR}/vars.config > vars.generated
     echo "{app_version, \"${PV}\"}." >> vars.generated
 }
 
 do_install:append() {
     install -d ${D}${sysconfdir}/vernemq
-    install -m 0644 ${WORKDIR}/vm.args ${D}${sysconfdir}/vernemq/vm.args
-    install -m 0644 ${WORKDIR}/vernemq.conf ${D}${sysconfdir}/vernemq/vernemq.conf
+    install -m 0644 ${UNPACKDIR}/vm.args ${D}${sysconfdir}/vernemq/vm.args
+    install -m 0644 ${UNPACKDIR}/vernemq.conf ${D}${sysconfdir}/vernemq/vernemq.conf
     chown -R vernemq.vernemq ${D}${sysconfdir}/vernemq
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/vernemq.service ${D}${systemd_unitdir}/system
+        install -m 0644 ${UNPACKDIR}/vernemq.service ${D}${systemd_unitdir}/system
         install -d ${D}${sysconfdir}/tmpfiles.d/
-        install -m 0644 ${WORKDIR}/vernemq-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/vernemq.conf
+        install -m 0644 ${UNPACKDIR}/vernemq-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/vernemq.conf
     fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
         install -d ${D}${sysconfdir}/init.d
-        install -m 0755 ${WORKDIR}/vernemq.init ${D}${sysconfdir}/init.d/vernemq
+        install -m 0755 ${UNPACKDIR}/vernemq.init ${D}${sysconfdir}/init.d/vernemq
         install -d ${D}${sysconfdir}/default/volatiles
-        install -m 0644 ${WORKDIR}/volatiles.99_vernemq ${D}${sysconfdir}/default/volatiles/99_vernemq
+        install -m 0644 ${UNPACKDIR}/volatiles.99_vernemq ${D}${sysconfdir}/default/volatiles/99_vernemq
     fi
 }
 

@@ -20,7 +20,7 @@ do_install() {
         install -d 0755 ${D}/${base_sbindir}
         install -d 0755 ${D}/${sysconfdir}
 	install -m 0755 ${S}/erlinit ${D}/${base_sbindir}/init
-        install -m 0644 ${WORKDIR}/erlinit.config ${D}/${sysconfdir}/erlinit.config
+        install -m 0644 ${UNPACKDIR}/erlinit.config ${D}/${sysconfdir}/erlinit.config
 }
 
 FILES:${PN} = "${base_sbindir} ${sysconfdir}"

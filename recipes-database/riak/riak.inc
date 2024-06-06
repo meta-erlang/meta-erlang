@@ -54,24 +54,24 @@ export ERL_COMPILER_OPTIONS="deterministic"
 
 do_compile:prepend() {
      # ebloom
-     install -D ${WORKDIR}/Makefile.c_src.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/c_src/Makefile
-     install -D ${WORKDIR}/rebar.config.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/rebar.config    
+     install -D ${UNPACKDIR}/Makefile.c_src.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/c_src/Makefile
+     install -D ${UNPACKDIR}/rebar.config.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/rebar.config    
      # bitcask
-     install -D ${WORKDIR}/Makefile.c_src.bitcask ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bitcask/c_src/Makefile
-     install -D ${WORKDIR}/rebar.config.bitcask ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bitcask/rebar.config
+     install -D ${UNPACKDIR}/Makefile.c_src.bitcask ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bitcask/c_src/Makefile
+     install -D ${UNPACKDIR}/rebar.config.bitcask ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bitcask/rebar.config
      # lz4
-     install -D ${WORKDIR}/Makefile.c_src.lz4 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/lz4/c_src/Makefile
-     install -D ${WORKDIR}/rebar.config.lz4 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/lz4/rebar.config
+     install -D ${UNPACKDIR}/Makefile.c_src.lz4 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/lz4/c_src/Makefile
+     install -D ${UNPACKDIR}/rebar.config.lz4 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/lz4/rebar.config
      # riak_ensemble
-    install -D ${WORKDIR}/Makefile.c_src.riak_ensemble ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/riak_ensemble/c_src/Makefile
-    install -D ${WORKDIR}/rebar.config.riak_ensemble ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/riak_ensemble/rebar.config
+    install -D ${UNPACKDIR}/Makefile.c_src.riak_ensemble ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/riak_ensemble/c_src/Makefile
+    install -D ${UNPACKDIR}/rebar.config.riak_ensemble ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/riak_ensemble/rebar.config
      # fix dependency: canola
-     install -D ${WORKDIR}/Makefile.c_src.canola ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/canola/c_src/Makefile
-     install -D ${WORKDIR}/rebar.config.canola ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/canola/rebar.config
+     install -D ${UNPACKDIR}/Makefile.c_src.canola ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/canola/c_src/Makefile
+     install -D ${UNPACKDIR}/rebar.config.canola ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/canola/rebar.config
      # fix dependency: eleveldb
-     install -D ${WORKDIR}/0001-Switch-to-shared-snappy-library-link.patch ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/0001-Switch-to-shared-snappy-library-link.patch
-     install -D ${WORKDIR}/Makefile.c_src.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/Makefile
-     install -D ${WORKDIR}/rebar.config.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/rebar.config
+     install -D ${UNPACKDIR}/0001-Switch-to-shared-snappy-library-link.patch ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/0001-Switch-to-shared-snappy-library-link.patch
+     install -D ${UNPACKDIR}/Makefile.c_src.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/Makefile
+     install -D ${UNPACKDIR}/rebar.config.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/rebar.config
 }
 
 do_install:append() {
@@ -79,10 +79,10 @@ do_install:append() {
     sed -i -e "s|^#!.*/bin/bash|#!/bin/sh|" ${erlang_release}/bin/hooks/builtin/wait_for_process
     
     # Install systemd unit files
-    install -Dm 0644 ${WORKDIR}/riak.service ${D}${systemd_unitdir}/system/riak.service
+    install -Dm 0644 ${UNPACKDIR}/riak.service ${D}${systemd_unitdir}/system/riak.service
 
     # Install init.d
-    install -Dm 0755 ${WORKDIR}/riak.init ${D}/${sysconfdir}/init.d/riak
+    install -Dm 0755 ${UNPACKDIR}/riak.init ${D}/${sysconfdir}/init.d/riak
 
     install -d ${erlang_release}/log
     chown -R riak.riak ${erlang_release}/log
