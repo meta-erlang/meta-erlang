@@ -88,22 +88,22 @@ do_install() {
     chown -R rabbitmq.rabbitmq ${D}/${sysconfdir}/rabbitmq
 
     install -d ${D}${sysconfdir}/default/volatiles
-    install -m 0644 ${WORKDIR}/volatiles.99_rabbitmq-server ${D}${sysconfdir}/default/volatiles/99_rabbitmq-server
+    install -m 0644 ${UNPACKDIR}/volatiles.99_rabbitmq-server ${D}${sysconfdir}/default/volatiles/99_rabbitmq-server
 
-    install -m 644 ${WORKDIR}/rabbitmq.conf ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
+    install -m 644 ${UNPACKDIR}/rabbitmq.conf ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
     chown rabbitmq.rabbitmq ${D}/${sysconfdir}/rabbitmq/rabbitmq.conf
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
-        install -m 0755 ${WORKDIR}/rabbitmq-server ${D}${sysconfdir}/init.d/rabbitmq-server
-        install -m 0755 ${WORKDIR}/rabbitmq-server-setup ${D}${bindir}
+        install -m 0755 ${UNPACKDIR}/rabbitmq-server ${D}${sysconfdir}/init.d/rabbitmq-server
+        install -m 0755 ${UNPACKDIR}/rabbitmq-server-setup ${D}${bindir}
     fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/rabbitmq-server.service ${D}${systemd_unitdir}/system
+        install -m 0644 ${UNPACKDIR}/rabbitmq-server.service ${D}${systemd_unitdir}/system
         install -d ${D}${sysconfdir}/tmpfiles.d/
-        install -m 0644 ${WORKDIR}/rabbitmq-server-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/rabbitmq-server.conf
+        install -m 0644 ${UNPACKDIR}/rabbitmq-server-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/rabbitmq-server.conf
     fi
 }
 

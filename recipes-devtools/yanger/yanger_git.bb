@@ -28,7 +28,7 @@ do_compile() {
 do_install() {
     oe_runmake install DESTDIR=${D} PREFIX=${libdir}
     install -d ${D}${bindir}
-    install -m 0755 ${WORKDIR}/yanger.sh ${D}${bindir}/yanger
+    install -m 0755 ${UNPACKDIR}/yanger.sh ${D}${bindir}/yanger
 
     # install yanger wrapper to find the yanger installation path
     sed -i -e "s:%ROOTDIR%:${libdir}/yanger:g" ${D}${bindir}/yanger
@@ -37,7 +37,7 @@ do_install() {
 do_install:append:class-nativesdk() {
     # install environment setup to load yang modules
     mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d 
-    install -m 644 ${WORKDIR}/environment.d-yanger.sh ${D}${SDKPATHNATIVE}/environment-setup.d/yanger.sh
+    install -m 644 ${UNPACKDIR}/environment.d-yanger.sh ${D}${SDKPATHNATIVE}/environment-setup.d/yanger.sh
 }
 
 BBCLASSEXTEND = "native nativesdk"

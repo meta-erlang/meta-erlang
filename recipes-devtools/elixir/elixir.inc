@@ -34,7 +34,7 @@ do_install() {
 
 do_install:prepend:class-nativesdk() {
     mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
-    install -m 644 ${WORKDIR}/environment.d-elixir.sh ${D}${SDKPATHNATIVE}/environment-setup.d/elixir.sh
+    install -m 644 ${UNPACKDIR}/environment.d-elixir.sh ${D}${SDKPATHNATIVE}/environment-setup.d/elixir.sh
 }
 
 BBCLASSEXTEND = "native nativesdk"

@@ -25,15 +25,15 @@ inherit mix systemd useradd
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${sysconfdir}
-        install -m 0644 ${WORKDIR}/livebook.conf ${D}${sysconfdir}
+        install -m 0644 ${UNPACKDIR}/livebook.conf ${D}${sysconfdir}
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/livebook.service ${D}${systemd_unitdir}/system
+        install -m 0644 ${UNPACKDIR}/livebook.service ${D}${systemd_unitdir}/system
     fi
 }
 
 do_install:append:class-nativesdk () {
     install -d ${D}${SDKPATHNATIVE}/environment-setup.d
-    install -m 644 ${WORKDIR}/environment.d-livebook.sh \
+    install -m 644 ${UNPACKDIR}/environment.d-livebook.sh \
         ${D}${SDKPATHNATIVE}/environment-setup.d/livebook.sh
 
     sed -i -e 's|^RELEASE_ROOT=.*|RELEASE_ROOT=${LIVEBOOK_OE_RELEASE_ROOT}|' \

@@ -17,5 +17,5 @@ REBAR3_RELEASE = "${REBAR3_RELEASE_NAME}-0.1.0"
 
 # This is how we can `patch` files that were fetched by rebar3_do_configure()
 do_compile:prepend() {
-    install -D ${WORKDIR}/Makefile.c_src.bcrypt ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bcrypt/c_src/Makefile
+    install -D ${UNPACKDIR}/Makefile.c_src.bcrypt ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bcrypt/c_src/Makefile
 }

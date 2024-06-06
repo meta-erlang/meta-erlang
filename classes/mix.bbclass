@@ -19,7 +19,7 @@ MIX_RELEASE_NAME="${@get_release_name("${PN}")}"
 MIX_RELEASE_VERSION="${@get_release_version("${PV}")}"
 MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}"
 
-export MIX_HOME = "${WORKDIR}/mix"
+export MIX_HOME = "${UNPACKDIR}/mix"
 export MIX_ARCHIVES = "${MIX_HOME}/archives"
 
 export ERL_COMPILER_OPTIONS="deterministic"

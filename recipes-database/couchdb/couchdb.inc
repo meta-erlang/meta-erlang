@@ -66,14 +66,14 @@ do_install:append() {
     # Install systemd unit files
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/couchdb.service ${D}${systemd_unitdir}/system
+        install -m 0644 ${UNPACKDIR}/couchdb.service ${D}${systemd_unitdir}/system
         sed -i -e 's,%bindir%,/opt/couchdb/bin,g' \
 	       ${D}${systemd_unitdir}/system/couchdb.service
     fi
 
     # Install init.d
     if ${@bb.utils.contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
-        install -Dm 0755 ${WORKDIR}/couchdb.init ${D}/${sysconfdir}/init.d/couchdb
+        install -Dm 0755 ${UNPACKDIR}/couchdb.init ${D}/${sysconfdir}/init.d/couchdb
     fi
 }
 
