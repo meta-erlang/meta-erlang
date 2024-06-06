@@ -24,7 +24,7 @@ do_install() {
 
 do_install:append:class-nativesdk() {
     mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
-    install -m 644 ${WORKDIR}/environment.d-rebar3.sh ${D}${SDKPATHNATIVE}/environment-setup.d/rebar3.sh
+    install -m 644 ${UNPACKDIR}/environment.d-rebar3.sh ${D}${SDKPATHNATIVE}/environment-setup.d/rebar3.sh
 }
 
 FILES:${PN} = "${bindir}/rebar3"
