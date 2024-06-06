@@ -53,13 +53,13 @@ do_compile() {
 do_install() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/epmd.service ${D}${systemd_system_unitdir}
-        install -m 0644 ${WORKDIR}/epmd.socket ${D}${systemd_system_unitdir}
+        install -m 0644 ${UNPACKDIR}/epmd.service ${D}${systemd_system_unitdir}
+        install -m 0644 ${UNPACKDIR}/epmd.socket ${D}${systemd_system_unitdir}
     fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
-        install -m 0755 ${WORKDIR}/epmd.init ${D}${sysconfdir}/init.d/epmd
+        install -m 0755 ${UNPACKDIR}/epmd.init ${D}${sysconfdir}/init.d/epmd
     fi
 
     # get the correct triple, as we are not calling any make install rule

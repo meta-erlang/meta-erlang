@@ -70,11 +70,11 @@ do_install:append() {
 		${D}/${bindir}/yaws
 
 	# Install yaws.conf from this recipe
-	install ${WORKDIR}/yaws.conf ${D}/${sysconfdir}/yaws/yaws.conf
+	install ${UNPACKDIR}/yaws.conf ${D}/${sysconfdir}/yaws/yaws.conf
 	
 	# Install init.d
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-		install ${WORKDIR}/yaws.init ${D}/${sysconfdir}/init.d/yaws
+		install ${UNPACKDIR}/yaws.init ${D}/${sysconfdir}/init.d/yaws
 	fi
 
         # Remove any volatile files

@@ -132,9 +132,9 @@ do_install:prepend:class-nativesdk() {
 
     sed -i -e 's,@ERTS_VERSION@,${ERTS_VERSION},g' \
         -e 's,@ERL_INTERFACE_VERSION@,${ERL_INTERFACE_VERSION},g' \
-         ${WORKDIR}/environment.d-erlang.sh.in
+         ${UNPACKDIR}/environment.d-erlang.sh.in
     mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
-    install -m 644 ${WORKDIR}/environment.d-erlang.sh.in ${D}${SDKPATHNATIVE}/environment-setup.d/erlang.sh
+    install -m 644 ${UNPACKDIR}/environment.d-erlang.sh.in ${D}${SDKPATHNATIVE}/environment-setup.d/erlang.sh
 }
 
 do_install:class-target() {
@@ -177,7 +177,7 @@ do_install:append:class-target() {
 }
 
 do_configure_ptest() {
-    xcomp=${WORKDIR}/erl-xcomp-oe.conf
+    xcomp=${UNPACKDIR}/erl-xcomp-oe.conf
     echo 'erl_xcomp_build=${BUILD_SYS}' > $xcomp
     echo 'erl_xcomp_host=${TARGET_SYS}' >> $xcomp
     echo 'erl_xcomp_configure_flags="--without-wx --enable-deterministic-build"' >> $xcomp
@@ -211,7 +211,7 @@ do_compile_ptest() {
     # need a full erlang build before call release_tests
     oe_runmake release_tests
     cd ${S}/release/tests/test_server
-    erl -noshell -eval 'ts:install([{xcomp, "${WORKDIR}/erl-xcomp-oe.conf"}])' -s ts compile_testcases -s init stop
+    erl -noshell -eval 'ts:install([{xcomp, "${UNPACKDIR}/erl-xcomp-oe.conf"}])' -s ts compile_testcases -s init stop
 }
 
 do_install_ptest() {

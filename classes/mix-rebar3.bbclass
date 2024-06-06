@@ -5,4 +5,4 @@ inherit mix
 
 DEPENDS += "rebar3-native"
 
-export MIX_REBAR3 ?= "${WORKDIR}/recipe-sysroot-native/usr/bin/rebar3"
+export MIX_REBAR3 ?= "${UNPACKDIR}/recipe-sysroot-native/usr/bin/rebar3"

@@ -20,7 +20,7 @@ export ERL_COMPILER_OPTIONS="deterministic"
 
 REBAR3_PROFILE ?= "default"
 
-export REBAR_CACHE_DIR = "${WORKDIR}/rebar3-cache"
+export REBAR_CACHE_DIR = "${UNPACKDIR}/rebar3-cache"
 
 atomvm_do_configure() {
     # This is needed since the default is to be in ${B}. In fact all the task
