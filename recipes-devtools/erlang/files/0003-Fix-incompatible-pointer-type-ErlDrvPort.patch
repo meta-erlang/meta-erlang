@@ -1,0 +1,43 @@
+From df794924c390b3277d5688448a05b4caa6dd0220 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Fri, 7 Jun 2024 21:41:07 -0300
+Subject: [PATCH 3/3] Fix incompatible pointer type 'ErlDrvPort'
+
+With GCC 14 series the following error exists:
+
+unlink_signal_drv.c: In function 'start':
+unlink_signal_drv.c:77:17: error: assignment to 'ErlDrvData' {aka
+'struct _erl_drv_data *'} from incompatible pointer type 'ErlDrvPort'
+{aka 'struct _erl_drv_port *'} [-Wincompatible-pointer-types]
+   77 |     state->port = port;
+      |                 ^
+unlink_signal_drv.c: In function 'output':
+unlink_signal_drv.c:86:27: error: passing argument 1 of
+'driver_set_timer' from incompatible pointer type
+[-Wincompatible-pointer-types]
+   86 |     driver_set_timer(state->port, 2);
+      |                      ~~~~~^~~~~~
+      |                           |
+      |                           ErlDrvData {aka struct _erl_drv_data
+*}
+---
+ erts/emulator/test/signal_SUITE_data/unlink_signal_drv.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/erts/emulator/test/signal_SUITE_data/unlink_signal_drv.c b/erts/emulator/test/signal_SUITE_data/unlink_signal_drv.c
+index f441e31182..ba80c8f5ad 100644
+--- a/erts/emulator/test/signal_SUITE_data/unlink_signal_drv.c
++++ b/erts/emulator/test/signal_SUITE_data/unlink_signal_drv.c
+@@ -61,7 +61,7 @@ DRIVER_INIT(unlink_signal_entry)
+ }
+ 
+ typedef struct {
+-    ErlDrvData port;
++    ErlDrvPort port;
+     int timeout_count;
+ } us_drv_state;
+ 
+-- 
+2.40.1
+
