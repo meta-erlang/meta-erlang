@@ -1,0 +1,61 @@
+From 79ca6572491307f6ba7bc8eebfdfe4639b433c4f Mon Sep 17 00:00:00 2001
+From: Kas User <kas@example.com>
+Date: Wed, 27 Mar 2024 00:46:11 +0000
+Subject: [PATCH] WIP
+
+---
+ src/couch_quickjs/build_js.escript |  2 +-
+ src/couch_quickjs/quickjs/Makefile | 10 +++++-----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/src/couch_quickjs/build_js.escript b/src/couch_quickjs/build_js.escript
+index 49b298fe0..bddc6582e 100644
+--- a/src/couch_quickjs/build_js.escript
++++ b/src/couch_quickjs/build_js.escript
+@@ -72,7 +72,7 @@ concat_js_files(JsScript, CoffeeScript) ->
+ compile_bytecode(Js, CBytecode) ->
+     % cp_if_different/2 is used to to avoid triggering a re-compile if nothing changed
+     Tmp = CBytecode ++ ".tmp",
+-    os:cmd("quickjs/qjsc -c -N bytecode -o c_src/" ++ Tmp ++ " priv/" ++ Js),
++    os:cmd("qjsc -c -N bytecode -o c_src/" ++ Tmp ++ " priv/" ++ Js),
+     Changed = cp_if_different("c_src/" ++ Tmp, "c_src/" ++ CBytecode),
+     rm("c_src/" ++ Tmp),
+     Changed.
+diff --git a/src/couch_quickjs/quickjs/Makefile b/src/couch_quickjs/quickjs/Makefile
+index 0270a6ad8..7108a35f1 100644
+--- a/src/couch_quickjs/quickjs/Makefile
++++ b/src/couch_quickjs/quickjs/Makefile
+@@ -121,13 +121,13 @@ else ifdef CONFIG_COSMO
+   AR=cosmoar
+ else
+   HOST_CC=gcc
+-  CC=$(CROSS_PREFIX)gcc
++  CC?=$(CROSS_PREFIX)gcc
+   CFLAGS+=-g -Wall -MMD -MF $(OBJDIR)/$(@F).d
+   CFLAGS += -Wno-array-bounds -Wno-format-truncation
+   ifdef CONFIG_LTO
+-    AR=$(CROSS_PREFIX)gcc-ar
++    AR?=$(CROSS_PREFIX)gcc-ar
+   else
+-    AR=$(CROSS_PREFIX)ar
++    AR?=$(CROSS_PREFIX)ar
+   endif
+ endif
+ STRIP?=$(CROSS_PREFIX)strip
+@@ -256,11 +256,11 @@ $(QJSC): $(OBJDIR)/qjsc.host.o \
+ 
+ endif #CROSS_PREFIX
+ 
+-QJSC_DEFINES:=-DCONFIG_CC=\"$(QJSC_CC)\" -DCONFIG_PREFIX=\"$(PREFIX)\"
++#QJSC_DEFINES:=-DCONFIG_CC="zz" -DCONFIG_PREFIX=\"$(PREFIX)\"
+ ifdef CONFIG_LTO
+ QJSC_DEFINES+=-DCONFIG_LTO
+ endif
+-QJSC_HOST_DEFINES:=-DCONFIG_CC=\"$(HOST_CC)\" -DCONFIG_PREFIX=\"$(PREFIX)\"
++#QJSC_HOST_DEFINES:=-DCONFIG_CC="zz" -DCONFIG_PREFIX=\"$(PREFIX)\"
+ 
+ $(OBJDIR)/qjsc.o: CFLAGS+=$(QJSC_DEFINES)
+ $(OBJDIR)/qjsc.host.o: CFLAGS+=$(QJSC_HOST_DEFINES)
+-- 
+2.40.1
+
