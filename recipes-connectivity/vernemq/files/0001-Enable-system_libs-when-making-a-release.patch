@@ -1,0 +1,26 @@
+From a9b14e6655a0988ba9464d9a021e84dac0c40c1d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sun, 7 May 2023 17:46:15 -0300
+Subject: [PATCH 1/2] Enable system_libs when making a release
+
+Upstream-Status: Inappropriate [embedded specific]
+---
+ rebar.config | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/rebar.config b/rebar.config
+index 49f6623c..40305325 100644
+--- a/rebar.config
++++ b/rebar.config
+@@ -93,6 +93,7 @@
+     {overlay_vars, "vars.generated"},
+     {dev_mode, false},
+     {include_erts, true},
++    {system_libs, true},
+     {include_src, false},
+     % we're using the runner from files/runner (ex. node_package)
+     {extended_start_script, false},
+-- 
+2.34.1
+
