@@ -39,7 +39,7 @@ PR = "r0"
 
 S = "${WORKDIR}/git"
 
-inherit rebar3-brokensep useradd update-rc.d systemd
+inherit rebar3-brokensep useradd update-rc.d systemd erlang-version
 
 do_compile[network] = "1"
 
@@ -47,6 +47,11 @@ REBAR3_RELEASE_NAME = "vernemq"
 REBAR3_PROFILE = "default"
 
 export ERL_COMPILER_OPTIONS="deterministic"
+
+export ERL_CFLAGS = "-I${STAGING_LIBDIR}/erlang/lib/${@get_erlang_application(d, "erl_interface")}/include \
+                     -I${STAGING_LIBDIR}/erlang/${@get_erlang_application(d, "erts")}/include"
+
+export ERL_EI_LIBDIR = "${STAGING_LIBDIR}/erlang/lib/${@get_erlang_application(d, "erl_interface")}/lib"
 
 do_compile:prepend() {
     # fix dependency: eleveldb
