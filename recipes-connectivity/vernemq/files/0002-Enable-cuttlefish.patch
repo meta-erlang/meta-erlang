@@ -1,0 +1,30 @@
+From 3524406572cf0a8a2802106eacd46bea0aa7c1dc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sun, 7 May 2023 17:58:58 -0300
+Subject: [PATCH 2/2] Enable cuttlefish
+
+For some reason the CUTTLEFISH variable is set by the full path for
+cuttlefish dependency. But the correct value should be 'on'.
+
+Upstream-Status: Inappropriate [embedded specific]
+---
+ files/env.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/files/env.sh b/files/env.sh
+index 4b46a116..269d3ed9 100755
+--- a/files/env.sh
++++ b/files/env.sh
+@@ -132,7 +132,7 @@ NODETOOL_LITE="$ERTS_PATH/escript $ERTS_PATH/nodetool"
+ ## Are we using cuttlefish (http://github.com/basho/cuttlefish)
+ ## for configuration. This needs to come after the $ERTS_PATH
+ ## definition
+-CUTTLEFISH="{{cuttlefish}}"
++CUTTLEFISH="on"
+ if [ -z "$CUTTLEFISH" ]; then
+     CUTTLEFISH_COMMAND_PREFIX=""
+ else
+-- 
+2.34.1
+

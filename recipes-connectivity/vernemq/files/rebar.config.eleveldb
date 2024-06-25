@@ -1,0 +1,18 @@
+%%-*- mode: erlang -*-
+{eunit_opts, [verbose]}.
+
+{xref_checks,[undefined_function_calls,undefined_functions,locals_not_used,
+    deprecated_function_calls, deprecated_functions]}.
+
+{port_sources, ["c_src/*.cc"]}.
+
+{erl_opts, [warnings_as_errors, debug_info]}.
+
+{artifacts, ["priv/eleveldb.so"]}.
+
+{pre_hooks, [
+	{"(linux|darwin|solaris)", clean, "c_src/build_deps.sh clean"},
+	{"(linux|darwin|solaris)", 'get-deps', "c_src/build_deps.sh get-deps"},
+	{"(linux|darwin|solaris)", compile, "c_src/build_deps.sh"}
+]}.
+

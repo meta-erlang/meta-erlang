@@ -1,0 +1,17 @@
+[Unit]
+Description=Runner for VerneMQ
+After=network.target
+
+[Service]
+WorkingDirectory=/var/lib/vernemq
+User=vernemq
+Group=vernemq
+ExecStart=/usr/lib/vernemq/bin/vernemq start
+ExecStop=/usr/lib/vernemq/bin/vernemq stop
+Type=forking
+Restart=always
+RestartSec=45
+LimitNOFILE=300000
+
+[Install]
+WantedBy=multi-user.target
