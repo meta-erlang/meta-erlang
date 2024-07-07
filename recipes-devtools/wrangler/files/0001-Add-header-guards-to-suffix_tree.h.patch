@@ -4,6 +4,7 @@ From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
 Date: Sat, 18 Mar 2023 22:25:00 -0300
 Subject: [PATCH] Add header guards to suffix_tree.h
 
+Upstream-Status: Inappropriate [oe specific]
 ---
  c_src/suffixtree/suffix_tree.c | 3 +++
  c_src/suffixtree/suffix_tree.h | 8 +++++---

@@ -4,6 +4,7 @@ From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
 Date: Sat, 18 Mar 2023 22:11:17 -0300
 Subject: [PATCH] Fix run test code
 
+Upstream-Status: Inappropriate [oe specific]
 ---
  configure.ac | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
