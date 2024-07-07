@@ -21,6 +21,8 @@ unlink_signal_drv.c:86:27: error: passing argument 1 of
       |                           |
       |                           ErlDrvData {aka struct _erl_drv_data
 *}
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/8553]
 ---
  erts/emulator/test/signal_SUITE_data/unlink_signal_drv.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

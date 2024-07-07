@@ -13,6 +13,7 @@ The approach here is to remove well know flags with build host paths.
 
 1: https://reproducible-builds.org/docs/build-path/
 
+Upstream-Status: Inappropriate [oe specific]
 ---
  erts/emulator/Makefile.in | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)

@@ -26,7 +26,7 @@ In order to enable the pkg-config installation a new configure option,
 pkg-config file. And one could enable it using --enable-pkg-config
 argument when calling configure script.
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/4527]
 ---
  configure.src                     | 14 +++++++++++++-
  lib/erl_interface/configure.ac    | 19 +++++++++++++++++--

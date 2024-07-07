@@ -4,7 +4,7 @@ From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
 Date: Sat, 22 May 2021 22:52:27 -0300
 Subject: [PATCH] Remove rpath
 
-Upstream-Status: Inappropriate
+Upstream-Status: Inappropriate [oe specific]
 ---
  lib/crypto/c_src/Makefile.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

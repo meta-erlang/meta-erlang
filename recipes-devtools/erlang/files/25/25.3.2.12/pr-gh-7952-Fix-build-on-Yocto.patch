@@ -9,6 +9,7 @@ workaround (pre-2009) and the comment is unclear about what
 actually breaks, we'll try removing it to see if this is still a
 problem.
 
+Upstream-Status: Backport [OTP 26]
 ---
  erts/configure                    |  9 ---------
  erts/emulator/sys/unix/sys_time.c | 10 ----------

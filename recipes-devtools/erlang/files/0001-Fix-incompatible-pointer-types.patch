@@ -18,6 +18,8 @@ In file included from fp_drv.c:43:
 note: expected 'void **' but argument is of type 'char **'
   487 | EXTERN int erl_drv_thread_join(ErlDrvTid, void **respp);
       |                                           ~~~~~~~^~~~~
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/8553]
 ---
  erts/emulator/test/float_SUITE_data/fp_drv.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
