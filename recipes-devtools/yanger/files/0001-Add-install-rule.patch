@@ -5,6 +5,8 @@ Date: Tue, 14 Jun 2022 14:52:53 -0300
 Subject: [PATCH] Add install rule
 
 A simple rule to install yanger files.
+
+Upstream-Status: Inappropriate [oe specific]
 ---
  Makefile | 12 ++++++++++++
  1 file changed, 12 insertions(+)
