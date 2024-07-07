@@ -16,6 +16,7 @@ TOOLCHAIN_HOST_TASK ?= "\
     nativesdk-erlang-modules-dev \
     nativesdk-elixir \
     nativesdk-elixir-modules-dev \
+    nativesdk-livebook \
     nativesdk-exdoc \
     "
 
