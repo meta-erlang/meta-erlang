@@ -5,6 +5,8 @@ Subject: [PATCH] New FBX importer and exporter, imports and exports
  geometries, UVs, materials, textures.
 
 NOTE: New FBX importer/exporter.
+
+Upstream-Status: Backport [https://github.com/dgud/wings/tree/master]
 ---
  plugins_src/import_export/Makefile         |    2 +
  plugins_src/import_export/fbx_p_import.erl | 2110 ++++++++++++++++++++

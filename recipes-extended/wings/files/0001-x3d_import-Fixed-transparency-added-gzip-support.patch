@@ -3,6 +3,7 @@ From: Edward Blake <mail@edwardlblake.com>
 Date: Wed, 18 Oct 2023 16:56:12 -0400
 Subject: [PATCH] x3d_import: Fixed transparency, added gzip support
 
+Upstream-Status: Backport [https://github.com/dgud/wings/tree/master]
 ---
  plugins_src/import_export/x3d_import.erl | 42 +++++++++++++++++++++---
  1 file changed, 37 insertions(+), 5 deletions(-)

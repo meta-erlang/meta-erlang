@@ -3,6 +3,7 @@ From: Edward Blake <mail@edwardlblake.com>
 Date: Fri, 27 Oct 2023 10:38:36 -0400
 Subject: [PATCH] wpc_fbx_p: Fixes to transparency and material names.
 
+Upstream-Status: Backport [https://github.com/dgud/wings/tree/master]
 ---
  plugins_src/import_export/fbx_p_import.erl | 35 +++++++++++++++++-----
  plugins_src/import_export/wpc_fbx_p.erl    |  6 ++--
