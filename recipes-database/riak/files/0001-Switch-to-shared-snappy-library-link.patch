@@ -4,6 +4,7 @@ From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
 Date: Sat, 24 Oct 2020 15:08:57 +0000
 Subject: [PATCH] Switch to shared snappy library link
 
+Upstream-Status: Inappropriate [oe specific]
 ---
  build_detect_platform | 9 ++-------
  1 file changed, 2 insertions(+), 7 deletions(-)
