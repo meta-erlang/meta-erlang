@@ -4,6 +4,8 @@ Date: Fri, 30 Jun 2023 01:21:44 +0000
 Subject: [PATCH] Use pkg-config to get erl_erts
 
 Also add LDFLAGS to LD.
+
+Upstream-Status: Inappropriate [oe specific]
 ---
  c_src/Makefile | 11 +++++++----
  1 file changed, 7 insertions(+), 4 deletions(-)
