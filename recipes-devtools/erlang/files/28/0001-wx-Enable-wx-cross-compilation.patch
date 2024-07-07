@@ -1,0 +1,42 @@
+From 4da7859cb9870571d7df68fbe0056dd8be9c3440 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Fri, 18 Feb 2022 21:24:49 -0300
+Subject: [PATCH] wx: Enable wx cross compilation
+
+Upstream-Status: Inappropriate [OE specific]
+---
+ lib/wx/configure.ac     | 5 -----
+ lib/wx/wxwin-nothrow.m4 | 3 ---
+ 2 files changed, 8 deletions(-)
+
+diff --git a/lib/wx/configure.ac b/lib/wx/configure.ac
+index ba34c709fc..752317117f 100644
+--- a/lib/wx/configure.ac
++++ b/lib/wx/configure.ac
+@@ -344,11 +344,6 @@ dnl
+ dnl  Check for wxwidgets
+ dnl 
+ AS_IF(
+-  [test "$cross_compiling" = "yes"],
+-  [
+-    WX_MSG_ERROR([Cross compilation of the wx driver is not supported yet, wx will NOT be usable])
+-  ],
+-
+   [test  X"$MIXED_VC" = X"no"],
+   [
+     m4_include(wxwin-nothrow.m4)
+diff --git a/lib/wx/wxwin-nothrow.m4 b/lib/wx/wxwin-nothrow.m4
+index 83a6005d01..7cb34a3270 100644
+--- a/lib/wx/wxwin-nothrow.m4
++++ b/lib/wx/wxwin-nothrow.m4
+@@ -188,9 +188,6 @@ AC_DEFUN([WX_CONFIG_CHECK],
+      wx_config_args="$wx_config_args --prefix=$wx_config_prefix"
+      WX_LOOKUP_PATH="$WX_LOOKUP_PATH:$wx_config_prefix/bin"
+   fi
+-  if test "$cross_compiling" = "yes"; then
+-     wx_config_args="$wx_config_args --host=$host_alias"
+-  fi
+ 
+   dnl don't search the PATH if WX_CONFIG_NAME is absolute filename
+   if test -x "$WX_CONFIG_NAME" ; then

@@ -1,0 +1,34 @@
+From e523904b7cd9ed2a04744d69c3d5750796d29755 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sun, 22 Jan 2023 10:54:12 -0300
+Subject: [PATCH] Fix reproducibility issue
+
+make_compiler_flags writes CFLAGS, LDFLAGS and config.h output to
+erl_compile_flags.h. However, that makes some host build path goes to the
+final binary leading errors when there are checks for reproducibility
+builds.
+
+The approach here is to remove well know flags with build host paths.
+
+1: https://reproducible-builds.org/docs/build-path/
+
+Upstream-Status: Inappropriate [oe specific]
+---
+ erts/emulator/Makefile.in | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
+index d317c36fc3..0c6b1dca0e 100644
+--- a/erts/emulator/Makefile.in
++++ b/erts/emulator/Makefile.in
+@@ -590,7 +590,8 @@ ifeq ($(TARGET), win32)
+ TMPVAR := $(shell LANG=C $(PERL) utils/make_compiler_flags -o $(TTF_DIR)/erl_compile_flags.h -v CONFIG_H "N/A" -v CFLAGS "$(CFLAGS)" -v LDFLAGS "$(LDFLAGS)")
+ else
+ # We force this to be run every time this makefile is executed
+-TMPVAR := $(shell LANG=C $(PERL) utils/make_compiler_flags -o $(TTF_DIR)/erl_compile_flags.h -f CONFIG_H "$(ERL_TOP)/erts/$(TARGET)/config.h" -v CFLAGS "$(CFLAGS)" -v LDFLAGS "$(LDFLAGS)")
++TMPVAR0 := $(shell LANG=C $(PERL) utils/make_compiler_flags -o $(TTF_DIR)/erl_compile_flags.h -f CONFIG_H "$(ERL_TOP)/erts/$(TARGET)/config.h" -v CFLAGS "$(CFLAGS)" -v LDFLAGS "$(LDFLAGS)")
++TMPVAR1 := $(shell sed -i -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' -e 's@[^ ]*-I[^ "]*@@g' $(TTF_DIR)/erl_compile_flags.h)
+ endif
+ 
+ GENERATE =
