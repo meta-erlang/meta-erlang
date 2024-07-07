@@ -8,6 +8,8 @@ Previous commit 5a80cfd03987a70f4496dc7a78e1d2f4066cc171, started
 building preloaded beam files when there is a working compiler. However,
 when deterministic build is enable the flag for ERL_COMPILE_FLAGS was
 wrong due a missing '+'.
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/8146]
 ---
  erts/preloaded/src/Makefile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

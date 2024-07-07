@@ -6,6 +6,7 @@ Subject: [PATCH] Fix for -Werror=format-security
 
 Have to pass either a string literal or format string to sprintf().
 
+Upstream-Status: Backport [OTP 26]
 ---
  erts/emulator/test/driver_SUITE_data/sys_info_drv_impl.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

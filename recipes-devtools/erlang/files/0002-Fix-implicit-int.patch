@@ -12,6 +12,8 @@ dead_port.c:43:26: error: return type defaults to 'int' [-Wimplicit-int]
 dead_port.c:50:1: note: in expansion of macro 'MAIN'
    50 | MAIN(argc, argv)
       | ^~~~
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/8553]
 ---
  erts/emulator/test/port_SUITE_data/dead_port.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

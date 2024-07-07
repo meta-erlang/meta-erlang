@@ -4,6 +4,7 @@ From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
 Date: Sun, 3 Sep 2023 15:57:18 -0300
 Subject: [PATCH] Enable the correct ifdef branch when x32 is enabled
 
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/7636]
 ---
  erts/lib_src/pthread/ethread.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
