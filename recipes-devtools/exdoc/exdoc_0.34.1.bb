@@ -7,7 +7,7 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "ed0ffcdece145e2703eb306890f8505bba9eecbd"
+SRCREV = "e54c4e717c72106a0bfd8f84646d9c2b4533ce0d"
 PR = "r0"
 SRC_URI = "git://github.com/elixir-lang/ex_doc;branch=main;protocol=https" 
 
