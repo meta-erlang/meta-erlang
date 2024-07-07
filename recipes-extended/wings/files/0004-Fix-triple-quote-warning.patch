@@ -4,6 +4,8 @@ Date: Mon, 25 Dec 2023 22:49:31 -0800
 Subject: [PATCH] Fix triple quote warning
 
 https://www.erlang.org/docs/26/general_info/upcoming_incompatibilities#triple-quoted-strings
+
+Upstream-Status: Backport [https://github.com/dgud/wings/tree/master]
 ---
  plugins_src/import_export/wpc_yafaray.erl | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
