@@ -4,6 +4,7 @@ From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
 Date: Sat, 18 Mar 2023 21:45:54 -0300
 Subject: [PATCH] Handle m4 local macros
 
+Upstream-Status: Inappropriate [oe specific]
 ---
  configure.ac               | 2 ++
  aclocal.m4 => m4/erlang.m4 | 0
