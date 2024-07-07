@@ -4,6 +4,7 @@ From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
 Date: Thu, 26 Mar 2020 23:30:16 +0100
 Subject: [PATCH] Use sh instead of bash
 
+Upstream-Status: Inappropriate [oe specific]
 ---
  tsung-recorder.sh.in | 2 +-
  tsung.sh.in          | 2 +-
