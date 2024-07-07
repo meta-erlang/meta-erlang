@@ -5,6 +5,7 @@ Date: Wed, 25 Mar 2020 23:39:02 +0100
 Subject: [PATCH] Disable crosscompile before checking erlang native
  environment
 
+Upstream-Status: Inappropriate [oe specific]
 ---
  configure.ac | 4 ++++
  1 file changed, 4 insertions(+)
