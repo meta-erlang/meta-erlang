@@ -4,6 +4,7 @@ From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
 Date: Sun, 29 Oct 2023 11:25:43 -0300
 Subject: [PATCH] Remove PackBEAM dependency rules
 
+Upstream-Status: Inappropriate [oe specific]
 ---
  CMakeLists.txt                 |  6 +++++-
  CMakeModules/BuildElixir.cmake | 10 +++++-----
