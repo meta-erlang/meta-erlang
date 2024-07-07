@@ -7,10 +7,10 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "e2dc2da6c808914a254bbe06b520817f997ea19d"
+SRCREV = "bf6f127c93956fdf4c87d29ba06e7ff8c697101b"
 PV .= "+git${SRCPV}"
 PR = "r0"
-SRC_URI = "git://github.com/livebook-dev/livebook;branch=v0.12;protocol=https \
+SRC_URI = "git://github.com/livebook-dev/livebook;branch=v0.13;protocol=https \
            file://livebook.service \
            file://livebook.conf" 
 
