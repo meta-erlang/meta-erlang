@@ -22,9 +22,6 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://0001-wx-Enable-wx-cross-compilation.patch \
            file://0001-Fix-reproducibility-issue.patch \
            file://0001-Use-autoconf-2.72e.patch \
-           file://0001-Fix-incompatible-pointer-types.patch \
-           file://0002-Fix-implicit-int.patch \
-           file://0003-Fix-incompatible-pointer-type-ErlDrvPort.patch \
            "
 
 S = "${WORKDIR}/git"

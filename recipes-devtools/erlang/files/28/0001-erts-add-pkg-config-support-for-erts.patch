@@ -1,0 +1,158 @@
+From a8a8236ae70fa83d01208c345ac224b4fc54e59f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sun, 20 Feb 2022 18:55:59 -0300
+Subject: [PATCH] erts: add pkg-config support for erts
+
+This commit introduces the file erl_erts.pc which will be installed
+in the standard pkg-config directory.
+
+Thus, using pkg-config like this:
+
+    pkg-config --libs --cflags erl_erts
+
+Returns the correct libs and cflags that can be used by build tools
+(like autotools):
+
+   -I/cross/sysroots/core2-32-vendor-linux/usr/lib/erlang/erts-11.1.8/include
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/4527]
+---
+ erts/configure.ac         | 21 +++++++++++++++++++++
+ erts/emulator/Makefile.in | 19 ++++++++++++++++++-
+ erts/erl_erts.pc.in       | 31 +++++++++++++++++++++++++++++++
+ 3 files changed, 70 insertions(+), 1 deletion(-)
+ create mode 100644 erts/erl_erts.pc.in
+
+diff --git a/erts/configure.ac b/erts/configure.ac
+index 61f9fe48a5..7e1041e397 100644
+--- a/erts/configure.ac
++++ b/erts/configure.ac
+@@ -21,6 +21,8 @@ dnl %CopyrightEnd%
+ dnl The string "FIXME convbreak" means that there is a break of
+ dnl autoconf convention that should be cleaned up.
+ 
++m4_define([erts_version],`grep VSN $srcdir/vsn.mk | sed 's/^.*=[ ]*//' | awk 'NR==1{print $1}'`)
++
+ AC_INIT
+ AC_CONFIG_SRCDIR([emulator/beam/erl_process.c])
+ AC_PREREQ([2.72])
+@@ -29,6 +31,9 @@ m4_include([otp.m4])
+ 
+ LM_PRECIOUS_VARS
+ 
++ERTS_VERSION=erts_version
++AC_SUBST(ERTS_VERSION)
++
+ dnl We check if -Werror was given on command line and if so
+ dnl we disable it for the configure and only use it when
+ dnl actually building erts
+@@ -3655,6 +3660,21 @@ AC_MSG_RESULT([yes])
+ DEBUG_CFLAGS="-g -O0 $no_opt_CFLAGS"
+ AC_SUBST(DEBUG_CFLAGS)
+ 
++dnl ----------------------------------------------------------------------
++dnl Enable pkg-config.
++dnl ----------------------------------------------------------------------
++
++AC_ARG_ENABLE(pkg-config,
++    [  --enable-pkg-config install pkg-config file],
++    [ case "$enableval" in
++          no) enable_pkg_config= ;;
++          *)  enable_pkg_config=yes ;;
++      esac ],
++[ enable_pkg_config= ])
++
++ENABLE_PKG_CONFIG=$enable_pkg_config
++AC_SUBST(ENABLE_PKG_CONFIG)
++
+ dnl ----------------------------------------------------------------------
+ dnl Output the result.
+ dnl ----------------------------------------------------------------------
+@@ -3668,6 +3688,7 @@ AC_CONFIG_FILES([
+   include/internal/$host/erts_internal.mk:include/internal/erts_internal.mk.in
+   lib_src/$host/Makefile:lib_src/Makefile.in
+   ../make/$host/otp.mk:../make/otp.mk.in
++  emulator/$host/erl_erts.pc:erl_erts.pc.in
+ ])
+ 
+ AC_CONFIG_FILES([../make/make_emakefile:../make/make_emakefile.in],
+diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
+index e93f052d75..d317c36fc3 100644
+--- a/erts/emulator/Makefile.in
++++ b/erts/emulator/Makefile.in
+@@ -23,6 +23,12 @@ include ../vsn.mk
+ include $(ERL_TOP)/make/$(TARGET)/otp.mk
+ -include $(TARGET)/gen_git_version.mk
+ 
++prefix = @prefix@
++exec_prefix = @exec_prefix@
++libdir = @libdir@
++
++ENABLE_PKG_CONFIG = @ENABLE_PKG_CONFIG@
++
+ ENABLE_ALLOC_TYPE_VARS = @ENABLE_ALLOC_TYPE_VARS@
+ JIT_ENABLED=@JIT_ENABLED@
+ JIT_ARCH=@JIT_ARCH@
+@@ -531,12 +537,23 @@ ifeq ($(TARGET),win32)
+ RELEASE_INCLUDES += sys/$(ERLANG_OSTYPE)/erl_win_dyn_driver.h
+ endif
+ 
++PKG-CONFIG = \
++	$(TARGET)/erl_erts.pc
++
++ifdef ENABLE_PKG_CONFIG
++pkg-config:
++	$(INSTALL_DIR) "$(DESTDIR)/$(libdir)/pkgconfig"
++	$(INSTALL_DATA) $(PKG-CONFIG) "$(DESTDIR)/$(libdir)/pkgconfig"
++else
++pkg-config:
++endif
++
+ .PHONY: release_spec
+ ifdef VOID_EMULATOR
+ release_spec:
+ 	@echo $(VOID_EMULATOR)' - omitted target release_spec (install)'
+ else
+-release_spec: all
++release_spec: all pkg-config
+ 	$(INSTALL_DIR) "$(RELSYSDIR)"
+ 	$(INSTALL_DIR) "$(RELSYSDIR)/src"
+ 	$(INSTALL_DIR) "$(RELSYSDIR)/include"
+diff --git a/erts/erl_erts.pc.in b/erts/erl_erts.pc.in
+new file mode 100644
+index 0000000000..d32955b51a
+--- /dev/null
++++ b/erts/erl_erts.pc.in
+@@ -0,0 +1,31 @@
++/*
++ * %CopyrightBegin%
++ *
++ * Copyright Ericsson AB 1998-2021. All Rights Reserved.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ *
++ * %CopyrightEnd%
++ */
++prefix=@prefix@/lib/erlang/erts
++version=@ERTS_VERSION@
++includedir=${prefix}-${version}/include
++libdir=${prefix}-${version}/lib
++
++Name: erl_erts
++Description: The Erlang Runtime System Application, ERTS, contains \
++             include file for erlang driver and \
++             Native Implemented Functions writers.
++Version: ${version}
++Cflags: -I${includedir}
++Libs: -L${libdir} -lerts

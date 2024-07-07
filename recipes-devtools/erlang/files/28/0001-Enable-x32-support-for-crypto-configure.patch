@@ -1,0 +1,24 @@
+From 1dc028a1a1b62a78fcce6c996428edd274d15701 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sun, 3 Sep 2023 15:56:42 -0300
+Subject: [PATCH] Enable x32 support for crypto configure
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/7636]
+---
+ lib/crypto/configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/crypto/configure.ac b/lib/crypto/configure.ac
+index b5b5914247..9804f1e3c0 100644
+--- a/lib/crypto/configure.ac
++++ b/lib/crypto/configure.ac
+@@ -397,7 +397,7 @@ search_subdirs="lib"
+ if test "$ac_cv_sizeof_void_p" = "8"; then
+    search_subdirs="$search_subdirs lib64 lib/64"
+ else
+-   search_subdirs="$search_subdirs lib32 lib/32"
++   search_subdirs="$search_subdirs lib32 lib/32 libx32"
+ fi
+ test "$multiarch_dir" = "" || search_subdirs="lib/$multiarch_dir $search_subdirs"
+ test "$with_ssl_lib_subdir" = "" || search_subdirs="$with_ssl_lib_subdir $search_subdirs"
