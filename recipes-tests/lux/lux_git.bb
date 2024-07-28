@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=21bbf7065a9eec106e1fa9d32381c9af"
 
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
-SRC_URI = "git://github.com/hawk/lux;protocol=https;branch=master"
+SRC_URI = "git://github.com/hawk/lux;protocol=https;branch=master \
+           file://remove-code_lib_dir.patch"
 
 PV = "2.9.1"
 SRCREV = "4452c53f8f4ac072e9396d882c18c876129feb41"
