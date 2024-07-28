@@ -1,0 +1,49 @@
+From 8d2ea10194804507ff37cdf8fb69a91ac22307b3 Mon Sep 17 00:00:00 2001
+From: Oleksii Sholik <oleksii@sholik.dev>
+Date: Wed, 29 May 2024 00:19:37 +0300
+Subject: [PATCH] Remove occurrences of code:lib_dir/2 which is deprecated
+ since OTP 27
+
+Upstream-Status: Submitted [https://github.com/hawk/lux/pull/53]
+
+---
+ bin/lux           | 5 +++--
+ src/lux_suite.erl | 2 +-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/bin/lux b/bin/lux
+index 68ef212d..ff9a729f 100755
+--- a/bin/lux
++++ b/bin/lux
+@@ -145,7 +145,7 @@ ensure_lux_app_dir(Retry) ->
+ 
+ ensure_lux_app_dir(Retry, Mandatory) ->
+     AppName = ?APPLICATION,
+-    case code:lib_dir(AppName, ebin) of
++    case code:lib_dir(AppName) of
+         {error, _Reason} when Retry =:= true ->
+             %% Add application ebin to the code path and see if it works
+             ThisEscript = resolve_path(escript:script_name()),
+@@ -196,7 +196,8 @@ ensure_lux_app_dir(Retry, Mandatory) ->
+                         [AppName, Reason]);
+         {error, _Reason} ->
+             "unknown";
+-        EbinDir ->
++        AppDir ->
++            EbinDir = filename:join([AppDir, "ebin"]),
+             filename:dirname(EbinDir)
+     end.
+ 
+diff --git a/src/lux_suite.erl b/src/lux_suite.erl
+index f8ee4b27..336528ab 100644
+--- a/src/lux_suite.erl
++++ b/src/lux_suite.erl
+@@ -1239,7 +1239,7 @@ parse_post_case_cmds(R) ->
+ parse_config(R) ->
+     %% Default opts
+     DefaultBase = "luxcfg",
+-    PrivDir = code:lib_dir(?APPLICATION, priv),
++    PrivDir = filename:join(code:lib_dir(?APPLICATION), "priv"),
+     DefaultDir = lux_utils:normalize_filename(PrivDir),
+     DefaultFile = filename:join([DefaultDir, DefaultBase]),
+     {DefaultOpts, DefaultWarnings} = parse_config_file(R, DefaultFile),
