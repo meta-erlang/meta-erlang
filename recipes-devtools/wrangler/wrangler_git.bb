@@ -21,7 +21,7 @@ SRC_URI = "git://github.com/RefactoringTools/wrangler;protocol=https;branch=mast
            file://0001-Fix-run-test-code.patch \
            file://0001-Add-header-guards-to-suffix_tree.h.patch" 
 
-SRCREV = "e8b0159e136768f81a5ffb6d6d6ddd79ae55b007"
+SRCREV = "5ae964bf708b38162561b81502933339919b3a70"
 PR = "r0"
 
 PV = "1.2+git${SRCPV}"
