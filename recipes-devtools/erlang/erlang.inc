@@ -28,6 +28,8 @@ S = "${WORKDIR}/git"
 
 inherit ptest autotools-brokensep pkgconfig
 
+PTEST_BUILD_HOST_FILES = "Emakefile Makefile variables conf_vars"
+
 PACKAGECONFIG ?= "pkgconfig zlib termcap"
 PACKAGECONFIG:class-native ?= "pkgconfig"
 PACKAGECONFIG:class-nativesdk ?= "pkgconfig wx observer termcap"
@@ -218,3 +220,9 @@ do_install_ptest() {
 }
 
 FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/erlang.sh"
+
+# Erlang tests ignores +deterministic flag because it may depends on additional
+# module meta data. https://github.com/erlang/otp/issues/8602
+# It's safer to keep this behaviour and skip buildpaths for erlang-ptest package.
+# For additional details see: https://github.com/erlang/otp/commit/da001d9d75f2cac4ebc577d362a21ebff58080c6
+INSANE_SKIP:${PN}-ptest += "buildpaths"
