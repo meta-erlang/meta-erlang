@@ -165,3 +165,12 @@ RDEPENDS:${PN}-modules-dev = "${PN}-modules ${PN}-mix-doc ${PN}-mix-dev ${PN}-mi
 ALLOW_EMPTY:${PN}-modules-dev = "1"
 
 FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/elixir.sh"
+
+# Some elixir modules includes a 'location' when using macros. For example: use Agent.
+# That leads to some buildpaths included into elixir modules. Here, we are ignoring
+# buildpaths for some packages. For all details see: https://github.com/meta-erlang/meta-erlang/issues/328
+
+# for iex and logger which is packaged together with elixir
+INSANE_SKIP:${PN} += "buildpaths"
+INSANE_SKIP:${PN}-ex-unit += "buildpaths"
+INSANE_SKIP:${PN}-mix += "buildpaths"
