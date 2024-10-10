@@ -1,2 +1,2 @@
-SRCREV ?= "66a3f273b4de65b01bd58baa10e107080f23d15e"
+SRCREV ?= "3b6ef27a06f07e5c24c52955618296a0f0ffab9d"
 PV = "28.0-rc0+git${SRCPV}" 
