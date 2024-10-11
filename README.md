@@ -123,3 +123,11 @@ A list of all the packages provided can be found in the manifest file,
 at recipes-devtools/erlang/erlang-${PV}-manifest.inc. This file needs
 to be re-generated and new SRCREVs need to be added whenever the version
 hanges.
+
+## Contributing
+
+You can send patches using the GitHub pull request process.
+
+## Maintainers
+
+* João Henrique Ferreira de Freitas `<joaohf@gmail.com>`
