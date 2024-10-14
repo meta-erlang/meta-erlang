@@ -1,16 +1,43 @@
 #!/bin/bash
 
-cd /usr/lib/erlang/ptest/tests/test_server
+TESTS="emulator kernel"
+
+PTEST_PATH=@PTEST_PATH@
+
+passed=0
+failed=0
+all=0
+
+LOGS=""
+
+cd ${PTEST_PATH}/tests/test_server
 erl -noinput -eval 'ts:install()' -s init stop
 
-if erl -noinput -eval 'ts:run(emulator,[batch])' -s init stop ; then
-    echo "PASS: emulator"
-else
-    echo "FAIL: emulator"
-fi
+for i in $TESTS; do
+    LOG="${PTEST_PATH}/erlang_ptest_${i}_$(date +%Y%m%d-%H%M%S).log"
 
-if erl -noinput -eval 'ts:run(kernel,[batch])' -s init stop ; then
-    echo "PASS: emulator"
-else
-    echo "FAIL: emulator"
-fi
+    erl -noinput -eval "ts:run(${i},[batch])" -s init stop 2>&1 | tee ${LOG}
+
+    grep -q "ok, 0 failed," ${LOG}
+    if [ $? -eq 0 ]; then
+        echo "PASS: $i"
+        passed=$((passed + 1))
+        all=$((all + 1))
+    else
+        echo "FAIL: $i"
+        failed=$((failed + 1))
+        all=$((all + 1))
+    fi
+
+    LOGS+=" $LOG"
+done
+
+echo "=== commont test Summary ==="
+for l in $LOGS; do
+    grep "TEST COMPLETE" $l
+done
+
+echo "=== Test Summary ==="
+echo "TOTAL: ${all}"
+echo "PASSED: ${passed}"
+echo "FAILED: ${failed}"
