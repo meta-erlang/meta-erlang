@@ -217,6 +217,7 @@ do_install_ptest() {
     install -d ${D}${PTEST_PATH}
     cp -r ${S}/release/tests ${D}${PTEST_PATH}
     find ${D}${PTEST_PATH} -name '*.o' -delete
+    sed -i s:@PTEST_PATH@:${PTEST_PATH}:g ${D}${PTEST_PATH}/run-ptest
 }
 
 FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/erlang.sh"
