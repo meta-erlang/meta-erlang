@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# avoid elixir warning about locale
+ELIXIR_ERL_OPTIONS="+fnu"
+export LANG="en_US.utf8"
+
+TESTS="erlang stdlib ex_unit logger eex mix iex"
+
+PTEST_PATH=@PTEST_PATH@
+
+passed=0
+failed=0
+all=0
+
+LOGS=""
+
+cd ${PTEST_PATH}/elixir
+
+for i in $TESTS; do
+    LOG="${PTEST_PATH}/elixir_ptest_${i}_$(date +%Y%m%d-%H%M%S).log"
+
+    make test_${i} 2>&1 | tee ${LOG} > /dev/null
+
+    case $i in
+        erlang)
+            grep -q "All [[:digit:]]* tests passed" ${LOG}
+            STATUS=$?
+            ;;
+        *)
+            grep -q " tests, 0 failures" ${LOG}
+            STATUS=$?
+            ;;
+    esac
+    
+    if [ $STATUS -eq 0 ]; then
+        echo "PASS: $i"
+        passed=$((passed + 1))
+        all=$((all + 1))
+    else
+        echo "FAIL: $i"
+        failed=$((failed + 1))
+        all=$((all + 1))
+    fi
+
+    LOGS+=" $LOG"
+done
+
+echo "=== Test Summary ==="
+echo "TOTAL: ${all}"
+echo "PASSED: ${passed}"
+echo "FAILED: ${failed}"
