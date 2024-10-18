@@ -8,7 +8,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
 DEPENDS += "erlang-native"
 DEPENDS:append:class-native = " erlang-native"
 
-SRC_URI += "file://environment.d-elixir.sh"
+RDEPENDS:${PN}-ptest += "make bash erlang-modules git"
+
+SRC_URI += "\
+    file://environment.d-elixir.sh \
+    file://run-ptest"
 
 S = "${WORKDIR}/git"
 
@@ -17,24 +21,38 @@ PARALLEL_MAKEINST = ""
 
 PACKAGECONFIG ??= ""
 
-export ERL_COMPILER_OPTIONS="deterministic"
+inherit ptest
 
 do_configure() {
     :
 }
 
 do_compile() {
-    # Use erlc deterministic build, https://github.com/elixir-lang/elixir/issues/8986
-    oe_runmake
+    if ${@bb.utils.contains('DISTRO_FEATURES','ptest','false', 'true',d)}; then
+        # Use erlc deterministic build, https://github.com/elixir-lang/elixir/issues/8986
+        export ERL_COMPILER_OPTIONS="deterministic"
+    fi
+    oe_runmake    
 }
 
 do_install() {
+    if ${@bb.utils.contains('DISTRO_FEATURES','ptest','false', 'true',d)}; then
+        # Use erlc deterministic build, https://github.com/elixir-lang/elixir/issues/8986
+        export ERL_COMPILER_OPTIONS="deterministic"
+    fi
     oe_runmake install PREFIX=${D}${prefix}
 }
 
 do_install:prepend:class-nativesdk() {
     mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
     install -m 644 ${UNPACKDIR}/environment.d-elixir.sh ${D}${SDKPATHNATIVE}/environment-setup.d/elixir.sh
+}
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}
+    cp -pR ${S} ${D}${PTEST_PATH}/elixir
+    rm -rf ${D}${PTEST_PATH}/elixir/.git
+    sed -i s:@PTEST_PATH@:${PTEST_PATH}:g ${D}${PTEST_PATH}/run-ptest
 }
 
 BBCLASSEXTEND = "native nativesdk"
@@ -45,10 +63,10 @@ PROVIDES += "${PN}-mix-doc ${PN}-mix-dbg ${PN}-mix-dev ${PN}-mix-staticdev ${PN}
              ${PN}-doc ${PN}-dbg ${PN}-dev ${PN}-staticdev ${PN} \
              "
 
-PACKAGES = "${PN}-mix-doc ${PN}-mix-dbg ${PN}-mix-dev ${PN}-mix-staticdev ${PN}-mix \
+PACKAGE_BEFORE_PN = "${PN}-mix-doc ${PN}-mix-dbg ${PN}-mix-dev ${PN}-mix-staticdev ${PN}-mix \
              ${PN}-ex-unit-doc ${PN}-ex-unit-dbg ${PN}-ex-unit-dev ${PN}-ex-unit-staticdev ${PN}-ex-unit \
              ${PN}-eex-doc ${PN}-eex-dbg ${PN}-eex-dev ${PN}-eex-staticdev ${PN}-eex \
-             ${PN}-doc ${PN}-dbg ${PN}-dev ${PN}-staticdev ${PN} ${PN}-modules ${PN}-modules-dev \
+             ${PN}-modules ${PN}-modules-dev \
              "
 
 ALLOW_EMPTY:${PN}-mix-doc = "1"
@@ -174,3 +192,7 @@ FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/elix
 INSANE_SKIP:${PN} += "buildpaths"
 INSANE_SKIP:${PN}-ex-unit += "buildpaths"
 INSANE_SKIP:${PN}-mix += "buildpaths"
+
+# Disabled in order to run ptest
+INSANE_SKIP:${PN}-eex += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'buildpaths', '', d)}"
+INSANE_SKIP:${PN}-ptest += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'buildpaths', '', d)}"
