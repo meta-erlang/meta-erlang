@@ -18,6 +18,7 @@ TOOLCHAIN_HOST_TASK ?= "\
     nativesdk-elixir-modules-dev \
     nativesdk-livebook \
     nativesdk-exdoc \
+    nativesdk-gleam \
     "
 
 MULTIMACH_TARGET_SYS = "${SDK_ARCH}-nativesdk${SDK_VENDOR}-${SDK_OS}"
@@ -30,10 +31,10 @@ SDK_PACKAGE_ARCHS += "beamtools-dummy-${SDKPKGSUFFIX}"
 
 require conf/include/beamtools.inc
 
-TOOLCHAIN_OUTPUTNAME ?= "${SDK_ARCH}-beamtools-nativesdk-standalone-${DISTRO_VERSION}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}"
+TOOLCHAIN_OUTPUTNAME ?= "${SDK_ARCH}-beamtools-nativesdk-standalone-${DISTRO_VERSION}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}-gleam-${GLEAM_VERSION}"
 
 SDK_TITLE = "BEAM tools"
-SDK_VERSION = "${@d.getVar('DISTRO_VERSION').replace('snapshot-${METADATA_REVISION}', 'snapshot')}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}"
+SDK_VERSION = "${@d.getVar('DISTRO_VERSION').replace('snapshot-${METADATA_REVISION}', 'snapshot')}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}-gleam-${GLEAM_VERSION}"
 SDKPATHINSTALL = "/opt/beamtools/${SDK_VERSION}"
 
 RDEPENDS = "${TOOLCHAIN_HOST_TASK}"
@@ -119,4 +120,5 @@ beamtools_add_version () {
 	local versionfile=$1
 	echo 'Erlang: ${ERLANG_VERSION}' >> $versionfile
 	echo 'Elixir: ${ELIXIR_VERSION}' >> $versionfile
+	echo 'Gleam: ${GLEAM_VERSION}' >> $versionfile
 }
