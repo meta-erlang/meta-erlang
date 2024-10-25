@@ -58,6 +58,7 @@ EXTRA_OECONF:class-native ??= " \
     "
 EXTRA_OECONF:class-nativesdk ??= " \
     --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-zlib=${STAGING_DIR_NATIVE}/usr \
+    --enable-deterministic-build \
     "
 EXTRA_OECONF:class-target ??= " --with-ssl-rpath=no --enable-deterministic-build"
 
@@ -147,10 +148,6 @@ do_install:class-target() {
     rm -f ${D}/${libdir}/erlang/Install
 
     chown -R root:root ${D}${libdir}/erlang
-}
-
-do_install:prepend:class-native() {
-    export TARGET=${HOST_SYS}
 }
 
 do_install:append:class-native() {
