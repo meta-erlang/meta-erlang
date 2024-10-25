@@ -1,7 +1,13 @@
-# OpenEmbedded/Yocto Project layer for Erlang and Elixir support
+# OpenEmbedded/Yocto Project layer for Erlang, Elixir and Gleam support
 
-This layer provides support for [Erlang](https://www.erlang.org/) and [Elixir](https://elixir-lang.org/) for use with [OpenEmbedded](http://www.openembedded.org/wiki/Main_Page) and/or
-the [Yocto Project](https://www.yoctoproject.org/) build system:
+This layer provides support for the following BEAM languages:
+
+* [Erlang](https://www.erlang.org/)
+* [Elixir](https://elixir-lang.org/)
+* [Gleam](https://gleam.run/)
+
+For use with [OpenEmbedded](http://www.openembedded.org/wiki/Main_Page) and/or
+the [Yocto Project](https://www.yoctoproject.org/) build system.
 
 ## Documentation
 
@@ -72,6 +78,8 @@ PREFERRED_VERSION_erlang-native = "27.0"
 
 PREFERRED_VERSION_elixir = "1.16.3"
 PREFERRED_VERSION_elixir-native = "1.16.3"
+
+PREFERRED_VERSION_gleam-native = "1.5.1"
 ```
 
 However if you have any specific requirements for a special recipe version, you can always add it in your application/middleware layer.
@@ -92,6 +100,10 @@ Elixir:
 * [v1.15](https://github.com/elixir-lang/elixir/tree/v1.15)
 * [v1.14](https://github.com/elixir-lang/elixir/tree/v1.14)
 * [v1.13](https://github.com/elixir-lang/elixir/tree/v1.13)
+
+Gleam:
+
+* [1.5.1](https://github.com/gleam-lang/gleam/releases/tag/v1.5.1)
 
 Yocto:
 
