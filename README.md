@@ -110,6 +110,7 @@ Yocto:
 meta-erlang provides specific branches for each YP/OE release. So, please stick with one of the supported branches
 to avoid compatible problems:
 
+* [styhead](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=styhead)
 * [scarthgap](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=scarthgap)
 * [nanbield](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=nanbield)
 * [mickledore](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=mickledore)
