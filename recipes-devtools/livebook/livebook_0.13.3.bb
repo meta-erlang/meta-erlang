@@ -23,9 +23,9 @@ RDEPENDS:${PN} = "erlang erlang-modules elixir elixir-mix"
 inherit mix systemd useradd
 
 do_install:append() {
+    install -d ${D}${sysconfdir}
+    install -m 0644 ${UNPACKDIR}/livebook.conf ${D}${sysconfdir}
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-        install -d ${D}${sysconfdir}
-        install -m 0644 ${UNPACKDIR}/livebook.conf ${D}${sysconfdir}
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${UNPACKDIR}/livebook.service ${D}${systemd_unitdir}/system
     fi
