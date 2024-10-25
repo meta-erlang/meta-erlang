@@ -1,0 +1,9 @@
+[Unit]
+Description=gleam echo server example
+
+[Service]
+WorkingDirectory=/usr/lib/hello-gleam-echo-server
+ExecStart=/usr/lib/hello-gleam-echo-server/entrypoint.sh run
+
+[Install]
+WantedBy=multi-user.target
