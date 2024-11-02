@@ -1,5 +1,5 @@
 
-inherit erlang pkgconfig
+inherit erlang pkgconfig hexpm
 
 DEPENDS += "gleam-native rebar3-native"
 
