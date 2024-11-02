@@ -54,3 +54,8 @@ SYSTEMD_AUTO_ENABLE = "enable"
 BBCLASSEXTEND = "nativesdk"
 
 FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/livebook.sh"
+
+# Some elixir modules includes a 'location' when using macros. For example: use Agent.
+# That leads to some buildpaths included into elixir modules. Here, we are ignoring
+# buildpaths for some packages. For all details see: https://github.com/meta-erlang/meta-erlang/issues/328
+INSANE_SKIP:${PN} += "buildpaths"
