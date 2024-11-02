@@ -1,5 +1,5 @@
 
-inherit erlang pkgconfig
+inherit erlang hexpm pkgconfig
 
 DEPENDS += "rebar3-native gawk-native"
 
