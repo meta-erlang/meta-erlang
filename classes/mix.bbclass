@@ -50,7 +50,8 @@ mix_do_configure() {
 }
 
 mix_do_compile() {
-    MIX_ENV=${MIX_ENV} mix compile
+    MIX_ENV=${MIX_ENV} mix deps.compile --force
+    MIX_ENV=${MIX_ENV} mix compile --force
 }
 
 mix_do_install() {
