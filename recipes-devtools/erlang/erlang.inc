@@ -13,7 +13,12 @@ DEPENDS:append:class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openss
 
 RDEPENDS:${PN}-ptest += "bash erlang-modules openssh tmux"
 
+PACKAGES =+ "epmd"
+
 SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
+           file://epmd.socket \
+           file://epmd.service \
+           file://epmd.init \
            file://environment.d-erlang.sh.in \
            file://run-ptest \
            file://otp-0002-Remove-rpath.patch \
@@ -30,7 +35,7 @@ inherit ptest autotools-brokensep pkgconfig
 
 PTEST_BUILD_HOST_FILES = "Emakefile Makefile variables conf_vars"
 
-PACKAGECONFIG ?= "pkgconfig zlib termcap"
+PACKAGECONFIG ?= "pkgconfig zlib termcap ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG:class-native ?= "pkgconfig"
 PACKAGECONFIG:class-nativesdk ?= "pkgconfig wx observer termcap"
 PACKAGECONFIG[zlib] = "--disable-builtin-zlib,--enable-builtin-zlib,zlib"
@@ -42,6 +47,7 @@ PACKAGECONFIG[observer] = "--with-observer,--without-observer,wxwidgets,"
 PACKAGECONFIG[sctp] = ",,,lksctp-tools"
 PACKAGECONFIG[java] = ",--without-javac,,"
 PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
+PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
 
 RRECOMMENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
 
@@ -170,6 +176,17 @@ do_install:append:class-nativesdk() {
 do_install:append:class-target() {
     # remove erlang code that does not need to be loaded by the erlang runtime
     rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin
+
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${UNPACKDIR}/epmd.service ${D}${systemd_system_unitdir}
+        install -m 0644 ${UNPACKDIR}/epmd.socket ${D}${systemd_system_unitdir}
+    fi
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/init.d
+        install -m 0755 ${UNPACKDIR}/epmd.init ${D}${sysconfdir}/init.d/epmd
+    fi
 }
 
 do_configure_ptest() {
@@ -224,3 +241,23 @@ FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/erla
 # It's safer to keep this behaviour and skip buildpaths for erlang-ptest package.
 # For additional details see: https://github.com/erlang/otp/commit/da001d9d75f2cac4ebc577d362a21ebff58080c6
 INSANE_SKIP:${PN}-ptest += "buildpaths"
+
+# For epmd support
+inherit useradd update-rc.d systemd
+
+USERADD_PACKAGES = "epmd"
+GROUPADD_PARAM:epmd = "--system epmd"
+USERADD_PARAM:epmd  = "--system --create-home --home /var/lib/epmd \
+                        -g epmd epmd"
+
+INITSCRIPT_PACKAGES = "epmd"
+INITSCRIPT_NAME:epmd = "epmd"
+INITSCRIPT_PARAMS:epmd = "defaults"
+
+SYSTEMD_PACKAGES = "epmd"
+SYSTEMD_SERVICE:epmd = "epmd.service epmd.socket"
+SYSTEMD_AUTO_ENABLE:epmd = "enable"
+
+DESCRIPTION:epmd = "Erlang Port Mapper Daemon"
+RDEPENDS:epmd = "${PN}-epmd"
+FILES:epmd = "${systemd_system_unitdir}/epmd.service ${systemd_system_unitdir}/epmd.socket"

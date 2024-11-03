@@ -1,6 +1,6 @@
-include erlang.inc
 include erlang-${PV}.inc
 require erlang-${PV}-manifest.inc
+include erlang.inc
 
 PR = "r0"
 
