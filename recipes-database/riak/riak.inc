@@ -33,7 +33,9 @@ SRC_URI += " \
     file://Makefile.c_src.ebloom \
     file://rebar.config.ebloom"
 
-inherit rebar3-brokensep useradd systemd update-rc.d
+inherit rebar3-brokensep useradd systemd update-rc.d features_check
+
+REQUIRED_DISTRO_FEATURES = "pam"
 
 INITSCRIPT_NAME = "riak"
 INITSCRIPT_PARAMS = "defaults"
