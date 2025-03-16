@@ -276,8 +276,8 @@ SPEC = {
         'ERL_INTERFACE_VERSION': '5.5.1',
         'modules': COMMON_MODULES,
     },
-    '27.1.2': {
-        'ERTS_VERSION': '15.1.2',
+    '27.3': {
+        'ERTS_VERSION': '15.2.3',
         'ERL_INTERFACE_VERSION': '5.5.2',
         'modules': COMMON_MODULES,
     },
