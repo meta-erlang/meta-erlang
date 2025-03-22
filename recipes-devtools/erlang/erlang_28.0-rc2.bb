@@ -1,6 +1,6 @@
+include erlang-28.0-rc2.inc
+require erlang-28.0-rc2-manifest.inc
 include erlang.inc
-include erlang-28.0-rc0.inc
-require erlang-28.0-rc0-manifest.inc
 
 PR = "r0"
 
