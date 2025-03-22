@@ -1,7 +1,7 @@
-From a8a8236ae70fa83d01208c345ac224b4fc54e59f Mon Sep 17 00:00:00 2001
+From 1d8ea62f566fc5b0b2cc658c8bf3c25348bc8387 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
-Date: Sun, 20 Feb 2022 18:55:59 -0300
+Date: Fri, 21 Mar 2025 18:53:33 -0300
 Subject: [PATCH] erts: add pkg-config support for erts
 
 This commit introduces the file erl_erts.pc which will be installed
@@ -25,7 +25,7 @@ Upstream-Status: Submitted [https://github.com/erlang/otp/pull/4527]
  create mode 100644 erts/erl_erts.pc.in
 
 diff --git a/erts/configure.ac b/erts/configure.ac
-index 61f9fe48a5..7e1041e397 100644
+index f76fa03074..c4b3cbd407 100644
 --- a/erts/configure.ac
 +++ b/erts/configure.ac
 @@ -21,6 +21,8 @@ dnl %CopyrightEnd%
@@ -37,19 +37,19 @@ index 61f9fe48a5..7e1041e397 100644
  AC_INIT
  AC_CONFIG_SRCDIR([emulator/beam/erl_process.c])
  AC_PREREQ([2.72])
-@@ -29,6 +31,9 @@ m4_include([otp.m4])
+@@ -31,6 +33,9 @@ LM_PRECIOUS_VARS
  
- LM_PRECIOUS_VARS
+ ERL_PUSH_WERROR
  
 +ERTS_VERSION=erts_version
 +AC_SUBST(ERTS_VERSION)
 +
- dnl We check if -Werror was given on command line and if so
- dnl we disable it for the configure and only use it when
- dnl actually building erts
-@@ -3655,6 +3660,21 @@ AC_MSG_RESULT([yes])
- DEBUG_CFLAGS="-g -O0 $no_opt_CFLAGS"
- AC_SUBST(DEBUG_CFLAGS)
+ dnl How to set srcdir absolute is taken from the GNU Emacs distribution
+ #### Make srcdir absolute, if it isn't already.  It's important to
+ #### avoid running the path through pwd unnecessary, since pwd can
+@@ -3701,6 +3706,21 @@ AC_DEFINE_UNQUOTED(ERTS_EMU_CMDLINE_FLAGS,
+ [The only reason ERTS_EMU_CMDLINE_FLAGS exists is to force modification
+  of config.h when the emulator command line flags are modified by configure])
  
 +dnl ----------------------------------------------------------------------
 +dnl Enable pkg-config.
@@ -69,7 +69,7 @@ index 61f9fe48a5..7e1041e397 100644
  dnl ----------------------------------------------------------------------
  dnl Output the result.
  dnl ----------------------------------------------------------------------
-@@ -3668,6 +3688,7 @@ AC_CONFIG_FILES([
+@@ -3714,6 +3734,7 @@ AC_CONFIG_FILES([
    include/internal/$host/erts_internal.mk:include/internal/erts_internal.mk.in
    lib_src/$host/Makefile:lib_src/Makefile.in
    ../make/$host/otp.mk:../make/otp.mk.in
@@ -78,7 +78,7 @@ index 61f9fe48a5..7e1041e397 100644
  
  AC_CONFIG_FILES([../make/make_emakefile:../make/make_emakefile.in],
 diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
-index e93f052d75..d317c36fc3 100644
+index 9b6bbf06d3..7650074720 100644
 --- a/erts/emulator/Makefile.in
 +++ b/erts/emulator/Makefile.in
 @@ -23,6 +23,12 @@ include ../vsn.mk
@@ -94,7 +94,7 @@ index e93f052d75..d317c36fc3 100644
  ENABLE_ALLOC_TYPE_VARS = @ENABLE_ALLOC_TYPE_VARS@
  JIT_ENABLED=@JIT_ENABLED@
  JIT_ARCH=@JIT_ARCH@
-@@ -531,12 +537,23 @@ ifeq ($(TARGET),win32)
+@@ -550,12 +556,23 @@ ifeq ($(TARGET),win32)
  RELEASE_INCLUDES += sys/$(ERLANG_OSTYPE)/erl_win_dyn_driver.h
  endif
  
@@ -156,3 +156,6 @@ index 0000000000..d32955b51a
 +Version: ${version}
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lerts
+-- 
+2.43.0
+
