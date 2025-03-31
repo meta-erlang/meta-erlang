@@ -35,19 +35,25 @@ inherit ptest autotools-brokensep pkgconfig
 
 PTEST_BUILD_HOST_FILES = "Emakefile Makefile variables conf_vars"
 
-PACKAGECONFIG ?= "pkgconfig zlib termcap ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-PACKAGECONFIG:class-native ?= "pkgconfig"
-PACKAGECONFIG:class-nativesdk ?= "pkgconfig wx observer termcap"
+# Default erlang applications based on class (target, native and nativesdk):
+ERLANG_APPLICATIONS:remove:class-target = "odbc wx observer debugger et reltool jinterface megaco dialyzer emacs"
+ERLANG_APPLICATIONS:remove:class-native = "odbc wx observer debugger et jinterface megaco emacs"
+ERLANG_APPLICATIONS:remove:class-nativesdk = "odbc jinterface megaco"
+
+PACKAGECONFIG:class-target ?= "pkgconfig zlib termcap ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} ${ERLANG_APPLICATIONS}"
+PACKAGECONFIG:class-native ?= "pkgconfig ${ERLANG_APPLICATIONS}"
+PACKAGECONFIG:class-nativesdk ?= "pkgconfig termcap ${ERLANG_APPLICATIONS}"
+
 PACKAGECONFIG[zlib] = "--disable-builtin-zlib,--enable-builtin-zlib,zlib"
 PACKAGECONFIG[termcap] = "--with-termcap,--without-termcap,ncurses"
-PACKAGECONFIG[odbc] = "--with-odbc,--without-odbc,libodbc"
 PACKAGECONFIG[lttng] = "--with-dynamic-trace=lttng,--without-dynamic-trace,lttng-ust"
-PACKAGECONFIG[wx] = "--with-wx,,wxwidgets"
-PACKAGECONFIG[observer] = "--with-observer,--without-observer,wxwidgets,"
-PACKAGECONFIG[sctp] = ",,,lksctp-tools"
-PACKAGECONFIG[java] = ",--without-javac,,"
 PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
 PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
+PACKAGECONFIG[static-drivers] = "--enable-static-drivers,--disable-static-drivers,,"
+PACKAGECONFIG[static-nifs] = "--enable-static-nifs,--disable-static-nifs,,"
+
+PACKAGECONFIG[sctp] = ",,--disable-sctp,lksctp-tools"
+PACKAGECONFIG[java] = ",--without-javac,,"
 
 RRECOMMENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
 
@@ -60,17 +66,20 @@ OTP_BUILD_CONFIGURE_OPTS = "update_configure --no-commit"
 NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 EXTRA_OECONF:class-native ??= " \
-    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-zlib=${STAGING_DIR_NATIVE}/usr \
+    --with-ssl=${STAGING_EXECPREFIXDIR} --with-ssl-zlib=${STAGING_EXECPREFIXDIR} \
     "
 EXTRA_OECONF:class-nativesdk ??= " \
-    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-zlib=${STAGING_DIR_NATIVE}/usr \
+    --with-ssl=${STAGING_EXECPREFIXDIR} --with-ssl-zlib=${STAGING_EXECPREFIXDIR} \
     --enable-deterministic-build \
     "
 EXTRA_OECONF:class-target ??= " --with-ssl-rpath=no --enable-deterministic-build"
 
+# Due multilib wxwidgets, it's necessary to pass additional arguments to wx-config script.
+WX_CONFIG = "'${STAGING_BINDIR_CROSS}/wx-config --prefix=${STAGING_EXECPREFIXDIR} --baselib=${baselib}'"
+
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET} ac_cv_header_GL_gl_h=yes ac_cv_header_OpenGL_gl_h=yes"
 CACHED_CONFIGUREVARS:class-native += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
-CACHED_CONFIGUREVARS:class-nativesdk += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
+CACHED_CONFIGUREVARS:class-nativesdk += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE} ac_cv_path_WX_CONFIG_PATH=${WX_CONFIG}"
 
 OTP_BUILD_CONFIGURE_OPTS ?= "autoconf"
 
@@ -186,6 +195,12 @@ do_install:append:class-target() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${UNPACKDIR}/epmd.init ${D}${sysconfdir}/init.d/epmd
+    fi
+
+    # only install dialyzer if it is present in PACKAGECONFIG
+    if ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', 'false', 'true', d)}; then
+        rm ${D}${libdir}/erlang/bin/dialyzer
+        rm ${D}${bindir}/dialyzer
     fi
 }
 
