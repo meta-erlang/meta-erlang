@@ -77,193 +77,233 @@ PACKAGECONFIG[xmerl] = "--with-xmerl,--without-xmerl,,"
 ERTS_VERSION = "16.0"
 ERL_INTERFACE_VERSION = "5.6"
 PROVIDES+="\
+    ${PN}-sasl-examples \
     ${PN}-sasl-doc \
     ${PN}-sasl-dbg \
     ${PN}-sasl-dev \
     ${PN}-sasl-staticdev \
     ${PN}-sasl \
+    ${PN}-stdlib-examples \
     ${PN}-stdlib-doc \
     ${PN}-stdlib-dbg \
     ${PN}-stdlib-dev \
     ${PN}-stdlib-staticdev \
     ${PN}-stdlib \
+    ${PN}-kernel-examples \
     ${PN}-kernel-doc \
     ${PN}-kernel-dbg \
     ${PN}-kernel-dev \
     ${PN}-kernel-staticdev \
     ${PN}-kernel \
+    ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'emacs', '${PN}-emacs-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'emacs', '${PN}-emacs', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools', '', d)} \
+    ${PN}-typer-examples \
     ${PN}-typer-doc \
     ${PN}-typer-dbg \
     ${PN}-typer-dev \
     ${PN}-typer-staticdev \
     ${PN}-typer \
+    ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc', '', d)} \
+    ${PN}-epmd-examples \
     ${PN}-epmd \
+    ${PN}-erts-examples \
     ${PN}-erts-doc \
     ${PN}-erts-dbg \
     ${PN}-erts-dev \
@@ -276,193 +316,233 @@ PROVIDES+="\
     ${PN} \
 "
 RPROVIDES:${PN}:class-native+="\
+    ${PN}-sasl-examples-native \
     ${PN}-sasl-doc-native \
     ${PN}-sasl-dbg-native \
     ${PN}-sasl-dev-native \
     ${PN}-sasl-staticdev-native \
     ${PN}-sasl-native \
+    ${PN}-stdlib-examples-native \
     ${PN}-stdlib-doc-native \
     ${PN}-stdlib-dbg-native \
     ${PN}-stdlib-dev-native \
     ${PN}-stdlib-staticdev-native \
     ${PN}-stdlib-native \
+    ${PN}-kernel-examples-native \
     ${PN}-kernel-doc-native \
     ${PN}-kernel-dbg-native \
     ${PN}-kernel-dev-native \
     ${PN}-kernel-staticdev-native \
     ${PN}-kernel-native \
+    ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'emacs', '${PN}-emacs-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'emacs', '${PN}-emacs', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools', '', d)} \
+    ${PN}-typer-examples-native \
     ${PN}-typer-doc-native \
     ${PN}-typer-dbg-native \
     ${PN}-typer-dev-native \
     ${PN}-typer-staticdev-native \
     ${PN}-typer-native \
+    ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc', '', d)} \
+    ${PN}-epmd-examples-native \
     ${PN}-epmd-native \
+    ${PN}-erts-examples-native \
     ${PN}-erts-doc-native \
     ${PN}-erts-dbg-native \
     ${PN}-erts-dev-native \
@@ -477,193 +557,233 @@ RPROVIDES:${PN}:class-native+="\
 
 PACKAGES="\
     ${PN}-dbg \
+    ${PN}-sasl-examples \
     ${PN}-sasl-doc \
     ${PN}-sasl-dbg \
     ${PN}-sasl-dev \
     ${PN}-sasl-staticdev \
     ${PN}-sasl \
+    ${PN}-stdlib-examples \
     ${PN}-stdlib-doc \
     ${PN}-stdlib-dbg \
     ${PN}-stdlib-dev \
     ${PN}-stdlib-staticdev \
     ${PN}-stdlib \
+    ${PN}-kernel-examples \
     ${PN}-kernel-doc \
     ${PN}-kernel-dbg \
     ${PN}-kernel-dev \
     ${PN}-kernel-staticdev \
     ${PN}-kernel \
+    ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'emacs', '${PN}-emacs-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'emacs', '${PN}-emacs', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools', '', d)} \
+    ${PN}-typer-examples \
     ${PN}-typer-doc \
     ${PN}-typer-dbg \
     ${PN}-typer-dev \
     ${PN}-typer-staticdev \
     ${PN}-typer \
+    ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-dbg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc', '', d)} \
+    ${PN}-epmd-examples \
     ${PN}-epmd \
+    ${PN}-erts-examples \
     ${PN}-erts-doc \
     ${PN}-erts-dbg \
     ${PN}-erts-dev \
@@ -675,10 +795,15 @@ PACKAGES="\
     ${PN} \
     ${PN}-modules ${PN}-modules-dev"
 
+ALLOW_EMPTY:${PN}-sasl-examples="1"
+DESCRIPTION:${PN}-sasl-examples=""
+RDEPENDS:${PN}-sasl-examples=""
+FILES:${PN}-sasl-examples="${libdir}/erlang/lib/sasl-*/examples "
+
 ALLOW_EMPTY:${PN}-sasl-doc="1"
 DESCRIPTION:${PN}-sasl-doc=""
 RDEPENDS:${PN}-sasl-doc=""
-FILES:${PN}-sasl-doc="${libdir}/erlang/lib/sasl-*/examples ${libdir}/erlang/lib/sasl-*/doc ${libdir}/erlang/lib/sasl-*/man "
+FILES:${PN}-sasl-doc="${libdir}/erlang/lib/sasl-*/doc ${libdir}/erlang/lib/sasl-*/man "
 
 ALLOW_EMPTY:${PN}-sasl-dbg="1"
 DESCRIPTION:${PN}-sasl-dbg=""
@@ -700,10 +825,15 @@ DESCRIPTION:${PN}-sasl=""
 RDEPENDS:${PN}-sasl=""
 FILES:${PN}-sasl="${libdir}/erlang/lib/sasl-* "
 
+ALLOW_EMPTY:${PN}-stdlib-examples="1"
+DESCRIPTION:${PN}-stdlib-examples=""
+RDEPENDS:${PN}-stdlib-examples=""
+FILES:${PN}-stdlib-examples="${libdir}/erlang/lib/stdlib-*/examples "
+
 ALLOW_EMPTY:${PN}-stdlib-doc="1"
 DESCRIPTION:${PN}-stdlib-doc=""
 RDEPENDS:${PN}-stdlib-doc=""
-FILES:${PN}-stdlib-doc="${libdir}/erlang/lib/stdlib-*/examples ${libdir}/erlang/lib/stdlib-*/doc ${libdir}/erlang/lib/stdlib-*/man "
+FILES:${PN}-stdlib-doc="${libdir}/erlang/lib/stdlib-*/doc ${libdir}/erlang/lib/stdlib-*/man "
 
 ALLOW_EMPTY:${PN}-stdlib-dbg="1"
 DESCRIPTION:${PN}-stdlib-dbg=""
@@ -725,10 +855,15 @@ DESCRIPTION:${PN}-stdlib=""
 RDEPENDS:${PN}-stdlib=""
 FILES:${PN}-stdlib="${libdir}/erlang/lib/stdlib-* "
 
+ALLOW_EMPTY:${PN}-kernel-examples="1"
+DESCRIPTION:${PN}-kernel-examples=""
+RDEPENDS:${PN}-kernel-examples=""
+FILES:${PN}-kernel-examples="${libdir}/erlang/lib/kernel-*/examples "
+
 ALLOW_EMPTY:${PN}-kernel-doc="1"
 DESCRIPTION:${PN}-kernel-doc=""
 RDEPENDS:${PN}-kernel-doc=""
-FILES:${PN}-kernel-doc="${libdir}/erlang/lib/kernel-*/examples ${libdir}/erlang/lib/kernel-*/doc ${libdir}/erlang/lib/kernel-*/man "
+FILES:${PN}-kernel-doc="${libdir}/erlang/lib/kernel-*/doc ${libdir}/erlang/lib/kernel-*/man "
 
 ALLOW_EMPTY:${PN}-kernel-dbg="1"
 DESCRIPTION:${PN}-kernel-dbg=""
@@ -750,10 +885,15 @@ DESCRIPTION:${PN}-kernel=""
 RDEPENDS:${PN}-kernel=""
 FILES:${PN}-kernel="${libdir}/erlang/lib/kernel-* "
 
+ALLOW_EMPTY:${PN}-asn1-examples="1"
+DESCRIPTION:${PN}-asn1-examples=""
+RDEPENDS:${PN}-asn1-examples=""
+FILES:${PN}-asn1-examples="${libdir}/erlang/lib/asn1-*/examples "
+
 ALLOW_EMPTY:${PN}-asn1-doc="1"
 DESCRIPTION:${PN}-asn1-doc=""
 RDEPENDS:${PN}-asn1-doc=""
-FILES:${PN}-asn1-doc="${libdir}/erlang/lib/asn1-*/examples ${libdir}/erlang/lib/asn1-*/doc ${libdir}/erlang/lib/asn1-*/man "
+FILES:${PN}-asn1-doc="${libdir}/erlang/lib/asn1-*/doc ${libdir}/erlang/lib/asn1-*/man "
 
 ALLOW_EMPTY:${PN}-asn1-dbg="1"
 DESCRIPTION:${PN}-asn1-dbg=""
@@ -775,10 +915,15 @@ DESCRIPTION:${PN}-asn1=""
 RDEPENDS:${PN}-asn1=""
 FILES:${PN}-asn1="${libdir}/erlang/lib/asn1-* "
 
+ALLOW_EMPTY:${PN}-common-test-examples="1"
+DESCRIPTION:${PN}-common-test-examples=""
+RDEPENDS:${PN}-common-test-examples=""
+FILES:${PN}-common-test-examples="${libdir}/erlang/lib/common_test-*/examples "
+
 ALLOW_EMPTY:${PN}-common-test-doc="1"
 DESCRIPTION:${PN}-common-test-doc=""
 RDEPENDS:${PN}-common-test-doc=""
-FILES:${PN}-common-test-doc="${libdir}/erlang/lib/common-test-*/examples ${libdir}/erlang/lib/common-test-*/doc ${libdir}/erlang/lib/common-test-*/man "
+FILES:${PN}-common-test-doc="${libdir}/erlang/lib/common-test-*/doc ${libdir}/erlang/lib/common-test-*/man "
 
 ALLOW_EMPTY:${PN}-common-test-dbg="1"
 DESCRIPTION:${PN}-common-test-dbg=""
@@ -800,10 +945,15 @@ DESCRIPTION:${PN}-common-test=""
 RDEPENDS:${PN}-common-test=""
 FILES:${PN}-common-test="${bindir}/ct_run ${libdir}/erlang/bin/ct_run ${libdir}/erlang/lib/common_test-* ${libdir}/erlang/erts-*/bin/ct_run "
 
+ALLOW_EMPTY:${PN}-compiler-examples="1"
+DESCRIPTION:${PN}-compiler-examples=""
+RDEPENDS:${PN}-compiler-examples=""
+FILES:${PN}-compiler-examples="${libdir}/erlang/lib/compiler-*/examples "
+
 ALLOW_EMPTY:${PN}-compiler-doc="1"
 DESCRIPTION:${PN}-compiler-doc=""
 RDEPENDS:${PN}-compiler-doc=""
-FILES:${PN}-compiler-doc="${libdir}/erlang/lib/compiler-*/examples ${libdir}/erlang/lib/compiler-*/doc ${libdir}/erlang/lib/compiler-*/man "
+FILES:${PN}-compiler-doc="${libdir}/erlang/lib/compiler-*/doc ${libdir}/erlang/lib/compiler-*/man "
 
 ALLOW_EMPTY:${PN}-compiler-dbg="1"
 DESCRIPTION:${PN}-compiler-dbg=""
@@ -825,10 +975,15 @@ DESCRIPTION:${PN}-compiler=""
 RDEPENDS:${PN}-compiler=""
 FILES:${PN}-compiler="${bindir}/erlc ${libdir}/erlang/bin/erlc ${libdir}/erlang/lib/compiler-* ${libdir}/erlang/erts-*/bin/erlc "
 
+ALLOW_EMPTY:${PN}-crypto-examples="1"
+DESCRIPTION:${PN}-crypto-examples=""
+RDEPENDS:${PN}-crypto-examples=""
+FILES:${PN}-crypto-examples="${libdir}/erlang/lib/crypto-*/examples "
+
 ALLOW_EMPTY:${PN}-crypto-doc="1"
 DESCRIPTION:${PN}-crypto-doc=""
 RDEPENDS:${PN}-crypto-doc=""
-FILES:${PN}-crypto-doc="${libdir}/erlang/lib/crypto-*/examples ${libdir}/erlang/lib/crypto-*/doc ${libdir}/erlang/lib/crypto-*/man "
+FILES:${PN}-crypto-doc="${libdir}/erlang/lib/crypto-*/doc ${libdir}/erlang/lib/crypto-*/man "
 
 ALLOW_EMPTY:${PN}-crypto-dbg="1"
 DESCRIPTION:${PN}-crypto-dbg=""
@@ -850,10 +1005,15 @@ DESCRIPTION:${PN}-crypto=""
 RDEPENDS:${PN}-crypto="openssl"
 FILES:${PN}-crypto="${libdir}/erlang/lib/crypto-* "
 
+ALLOW_EMPTY:${PN}-debugger-examples="1"
+DESCRIPTION:${PN}-debugger-examples=""
+RDEPENDS:${PN}-debugger-examples=""
+FILES:${PN}-debugger-examples="${libdir}/erlang/lib/debugger-*/examples "
+
 ALLOW_EMPTY:${PN}-debugger-doc="1"
 DESCRIPTION:${PN}-debugger-doc=""
 RDEPENDS:${PN}-debugger-doc=""
-FILES:${PN}-debugger-doc="${libdir}/erlang/lib/debugger-*/examples ${libdir}/erlang/lib/debugger-*/doc ${libdir}/erlang/lib/debugger-*/man "
+FILES:${PN}-debugger-doc="${libdir}/erlang/lib/debugger-*/doc ${libdir}/erlang/lib/debugger-*/man "
 
 ALLOW_EMPTY:${PN}-debugger-dbg="1"
 DESCRIPTION:${PN}-debugger-dbg=""
@@ -875,10 +1035,15 @@ DESCRIPTION:${PN}-debugger="--with-debugger,--without-debugger,,"
 RDEPENDS:${PN}-debugger=""
 FILES:${PN}-debugger="${libdir}/erlang/lib/debugger-* "
 
+ALLOW_EMPTY:${PN}-dialyzer-examples="1"
+DESCRIPTION:${PN}-dialyzer-examples=""
+RDEPENDS:${PN}-dialyzer-examples=""
+FILES:${PN}-dialyzer-examples="${libdir}/erlang/lib/dialyzer-*/examples "
+
 ALLOW_EMPTY:${PN}-dialyzer-doc="1"
 DESCRIPTION:${PN}-dialyzer-doc=""
 RDEPENDS:${PN}-dialyzer-doc=""
-FILES:${PN}-dialyzer-doc="${libdir}/erlang/lib/dialyzer-*/examples ${libdir}/erlang/lib/dialyzer-*/doc ${libdir}/erlang/lib/dialyzer-*/man "
+FILES:${PN}-dialyzer-doc="${libdir}/erlang/lib/dialyzer-*/doc ${libdir}/erlang/lib/dialyzer-*/man "
 
 ALLOW_EMPTY:${PN}-dialyzer-dbg="1"
 DESCRIPTION:${PN}-dialyzer-dbg=""
@@ -900,10 +1065,15 @@ DESCRIPTION:${PN}-dialyzer=""
 RDEPENDS:${PN}-dialyzer=""
 FILES:${PN}-dialyzer="${bindir}/dialyzer ${libdir}/erlang/bin/dialyzer ${libdir}/erlang/lib/dialyzer-* ${libdir}/erlang/erts-*/bin/dialyzer "
 
+ALLOW_EMPTY:${PN}-diameter-examples="1"
+DESCRIPTION:${PN}-diameter-examples=""
+RDEPENDS:${PN}-diameter-examples=""
+FILES:${PN}-diameter-examples="${libdir}/erlang/lib/diameter-*/examples "
+
 ALLOW_EMPTY:${PN}-diameter-doc="1"
 DESCRIPTION:${PN}-diameter-doc=""
 RDEPENDS:${PN}-diameter-doc=""
-FILES:${PN}-diameter-doc="${libdir}/erlang/lib/diameter-*/examples ${libdir}/erlang/lib/diameter-*/doc ${libdir}/erlang/lib/diameter-*/man "
+FILES:${PN}-diameter-doc="${libdir}/erlang/lib/diameter-*/doc ${libdir}/erlang/lib/diameter-*/man "
 
 ALLOW_EMPTY:${PN}-diameter-dbg="1"
 DESCRIPTION:${PN}-diameter-dbg=""
@@ -925,10 +1095,15 @@ DESCRIPTION:${PN}-diameter=""
 RDEPENDS:${PN}-diameter=""
 FILES:${PN}-diameter="${libdir}/erlang/lib/diameter-* "
 
+ALLOW_EMPTY:${PN}-edoc-examples="1"
+DESCRIPTION:${PN}-edoc-examples=""
+RDEPENDS:${PN}-edoc-examples=""
+FILES:${PN}-edoc-examples="${libdir}/erlang/lib/edoc-*/examples "
+
 ALLOW_EMPTY:${PN}-edoc-doc="1"
 DESCRIPTION:${PN}-edoc-doc=""
 RDEPENDS:${PN}-edoc-doc=""
-FILES:${PN}-edoc-doc="${libdir}/erlang/lib/edoc-*/examples ${libdir}/erlang/lib/edoc-*/doc ${libdir}/erlang/lib/edoc-*/man "
+FILES:${PN}-edoc-doc="${libdir}/erlang/lib/edoc-*/doc ${libdir}/erlang/lib/edoc-*/man "
 
 ALLOW_EMPTY:${PN}-edoc-dbg="1"
 DESCRIPTION:${PN}-edoc-dbg=""
@@ -950,10 +1125,15 @@ DESCRIPTION:${PN}-edoc=""
 RDEPENDS:${PN}-edoc=""
 FILES:${PN}-edoc="${libdir}/erlang/lib/edoc-* "
 
+ALLOW_EMPTY:${PN}-eldap-examples="1"
+DESCRIPTION:${PN}-eldap-examples=""
+RDEPENDS:${PN}-eldap-examples=""
+FILES:${PN}-eldap-examples="${libdir}/erlang/lib/eldap-*/examples "
+
 ALLOW_EMPTY:${PN}-eldap-doc="1"
 DESCRIPTION:${PN}-eldap-doc=""
 RDEPENDS:${PN}-eldap-doc=""
-FILES:${PN}-eldap-doc="${libdir}/erlang/lib/eldap-*/examples ${libdir}/erlang/lib/eldap-*/doc ${libdir}/erlang/lib/eldap-*/man "
+FILES:${PN}-eldap-doc="${libdir}/erlang/lib/eldap-*/doc ${libdir}/erlang/lib/eldap-*/man "
 
 ALLOW_EMPTY:${PN}-eldap-dbg="1"
 DESCRIPTION:${PN}-eldap-dbg=""
@@ -975,15 +1155,25 @@ DESCRIPTION:${PN}-eldap=""
 RDEPENDS:${PN}-eldap=""
 FILES:${PN}-eldap="${libdir}/erlang/lib/eldap-* "
 
+ALLOW_EMPTY:${PN}-emacs-examples="1"
+DESCRIPTION:${PN}-emacs-examples=""
+RDEPENDS:${PN}-emacs-examples=""
+FILES:${PN}-emacs-examples="${libdir}/erlang/lib/emacs-*/examples "
+
 ALLOW_EMPTY:${PN}-emacs="1"
 DESCRIPTION:${PN}-emacs=""
 RDEPENDS:${PN}-emacs=""
 FILES:${PN}-emacs="${libdir}/erlang/lib/tools-*/emacs "
 
+ALLOW_EMPTY:${PN}-erl-docgen-examples="1"
+DESCRIPTION:${PN}-erl-docgen-examples=""
+RDEPENDS:${PN}-erl-docgen-examples=""
+FILES:${PN}-erl-docgen-examples="${libdir}/erlang/lib/erl_docgen-*/examples "
+
 ALLOW_EMPTY:${PN}-erl-docgen-doc="1"
 DESCRIPTION:${PN}-erl-docgen-doc=""
 RDEPENDS:${PN}-erl-docgen-doc=""
-FILES:${PN}-erl-docgen-doc="${libdir}/erlang/lib/erl-docgen-*/examples ${libdir}/erlang/lib/erl-docgen-*/doc ${libdir}/erlang/lib/erl-docgen-*/man "
+FILES:${PN}-erl-docgen-doc="${libdir}/erlang/lib/erl-docgen-*/doc ${libdir}/erlang/lib/erl-docgen-*/man "
 
 ALLOW_EMPTY:${PN}-erl-docgen-dbg="1"
 DESCRIPTION:${PN}-erl-docgen-dbg=""
@@ -1005,10 +1195,15 @@ DESCRIPTION:${PN}-erl-docgen=""
 RDEPENDS:${PN}-erl-docgen=""
 FILES:${PN}-erl-docgen="${libdir}/erlang/lib/erl_docgen-* "
 
+ALLOW_EMPTY:${PN}-erl-interface-examples="1"
+DESCRIPTION:${PN}-erl-interface-examples=""
+RDEPENDS:${PN}-erl-interface-examples=""
+FILES:${PN}-erl-interface-examples="${libdir}/erlang/lib/erl_interface-*/examples "
+
 ALLOW_EMPTY:${PN}-erl-interface-doc="1"
 DESCRIPTION:${PN}-erl-interface-doc=""
 RDEPENDS:${PN}-erl-interface-doc=""
-FILES:${PN}-erl-interface-doc="${libdir}/erlang/lib/erl-interface-*/examples ${libdir}/erlang/lib/erl-interface-*/doc ${libdir}/erlang/lib/erl-interface-*/man "
+FILES:${PN}-erl-interface-doc="${libdir}/erlang/lib/erl-interface-*/doc ${libdir}/erlang/lib/erl-interface-*/man "
 
 ALLOW_EMPTY:${PN}-erl-interface-dbg="1"
 DESCRIPTION:${PN}-erl-interface-dbg=""
@@ -1030,10 +1225,15 @@ DESCRIPTION:${PN}-erl-interface=""
 RDEPENDS:${PN}-erl-interface=""
 FILES:${PN}-erl-interface="${libdir}/erlang/lib/erl_interface-* "
 
+ALLOW_EMPTY:${PN}-et-examples="1"
+DESCRIPTION:${PN}-et-examples=""
+RDEPENDS:${PN}-et-examples=""
+FILES:${PN}-et-examples="${libdir}/erlang/lib/et-*/examples "
+
 ALLOW_EMPTY:${PN}-et-doc="1"
 DESCRIPTION:${PN}-et-doc=""
 RDEPENDS:${PN}-et-doc=""
-FILES:${PN}-et-doc="${libdir}/erlang/lib/et-*/examples ${libdir}/erlang/lib/et-*/doc ${libdir}/erlang/lib/et-*/man "
+FILES:${PN}-et-doc="${libdir}/erlang/lib/et-*/doc ${libdir}/erlang/lib/et-*/man "
 
 ALLOW_EMPTY:${PN}-et-dbg="1"
 DESCRIPTION:${PN}-et-dbg=""
@@ -1055,10 +1255,15 @@ DESCRIPTION:${PN}-et=""
 RDEPENDS:${PN}-et=""
 FILES:${PN}-et="${libdir}/erlang/lib/et-* "
 
+ALLOW_EMPTY:${PN}-eunit-examples="1"
+DESCRIPTION:${PN}-eunit-examples=""
+RDEPENDS:${PN}-eunit-examples=""
+FILES:${PN}-eunit-examples="${libdir}/erlang/lib/eunit-*/examples "
+
 ALLOW_EMPTY:${PN}-eunit-doc="1"
 DESCRIPTION:${PN}-eunit-doc=""
 RDEPENDS:${PN}-eunit-doc=""
-FILES:${PN}-eunit-doc="${libdir}/erlang/lib/eunit-*/examples ${libdir}/erlang/lib/eunit-*/doc ${libdir}/erlang/lib/eunit-*/man "
+FILES:${PN}-eunit-doc="${libdir}/erlang/lib/eunit-*/doc ${libdir}/erlang/lib/eunit-*/man "
 
 ALLOW_EMPTY:${PN}-eunit-dbg="1"
 DESCRIPTION:${PN}-eunit-dbg=""
@@ -1080,10 +1285,15 @@ DESCRIPTION:${PN}-eunit=""
 RDEPENDS:${PN}-eunit=""
 FILES:${PN}-eunit="${libdir}/erlang/lib/eunit-* "
 
+ALLOW_EMPTY:${PN}-ftp-examples="1"
+DESCRIPTION:${PN}-ftp-examples=""
+RDEPENDS:${PN}-ftp-examples=""
+FILES:${PN}-ftp-examples="${libdir}/erlang/lib/ftp-*/examples "
+
 ALLOW_EMPTY:${PN}-ftp-doc="1"
 DESCRIPTION:${PN}-ftp-doc=""
 RDEPENDS:${PN}-ftp-doc=""
-FILES:${PN}-ftp-doc="${libdir}/erlang/lib/ftp-*/examples ${libdir}/erlang/lib/ftp-*/doc ${libdir}/erlang/lib/ftp-*/man "
+FILES:${PN}-ftp-doc="${libdir}/erlang/lib/ftp-*/doc ${libdir}/erlang/lib/ftp-*/man "
 
 ALLOW_EMPTY:${PN}-ftp-dbg="1"
 DESCRIPTION:${PN}-ftp-dbg=""
@@ -1105,10 +1315,15 @@ DESCRIPTION:${PN}-ftp=""
 RDEPENDS:${PN}-ftp=""
 FILES:${PN}-ftp="${libdir}/erlang/lib/ftp-* "
 
+ALLOW_EMPTY:${PN}-inets-examples="1"
+DESCRIPTION:${PN}-inets-examples=""
+RDEPENDS:${PN}-inets-examples=""
+FILES:${PN}-inets-examples="${libdir}/erlang/lib/inets-*/examples "
+
 ALLOW_EMPTY:${PN}-inets-doc="1"
 DESCRIPTION:${PN}-inets-doc=""
 RDEPENDS:${PN}-inets-doc=""
-FILES:${PN}-inets-doc="${libdir}/erlang/lib/inets-*/examples ${libdir}/erlang/lib/inets-*/doc ${libdir}/erlang/lib/inets-*/man "
+FILES:${PN}-inets-doc="${libdir}/erlang/lib/inets-*/doc ${libdir}/erlang/lib/inets-*/man "
 
 ALLOW_EMPTY:${PN}-inets-dbg="1"
 DESCRIPTION:${PN}-inets-dbg=""
@@ -1130,10 +1345,15 @@ DESCRIPTION:${PN}-inets=""
 RDEPENDS:${PN}-inets=""
 FILES:${PN}-inets="${libdir}/erlang/lib/inets-* "
 
+ALLOW_EMPTY:${PN}-jinterface-examples="1"
+DESCRIPTION:${PN}-jinterface-examples=""
+RDEPENDS:${PN}-jinterface-examples=""
+FILES:${PN}-jinterface-examples="${libdir}/erlang/lib/jinterface-*/examples "
+
 ALLOW_EMPTY:${PN}-jinterface-doc="1"
 DESCRIPTION:${PN}-jinterface-doc=""
 RDEPENDS:${PN}-jinterface-doc=""
-FILES:${PN}-jinterface-doc="${libdir}/erlang/lib/jinterface-*/examples ${libdir}/erlang/lib/jinterface-*/doc ${libdir}/erlang/lib/jinterface-*/man "
+FILES:${PN}-jinterface-doc="${libdir}/erlang/lib/jinterface-*/doc ${libdir}/erlang/lib/jinterface-*/man "
 
 ALLOW_EMPTY:${PN}-jinterface-dbg="1"
 DESCRIPTION:${PN}-jinterface-dbg=""
@@ -1155,10 +1375,15 @@ DESCRIPTION:${PN}-jinterface=""
 RDEPENDS:${PN}-jinterface=""
 FILES:${PN}-jinterface="${libdir}/erlang/lib/jinterface-* "
 
+ALLOW_EMPTY:${PN}-megaco-examples="1"
+DESCRIPTION:${PN}-megaco-examples=""
+RDEPENDS:${PN}-megaco-examples=""
+FILES:${PN}-megaco-examples="${libdir}/erlang/lib/megaco-*/examples "
+
 ALLOW_EMPTY:${PN}-megaco-doc="1"
 DESCRIPTION:${PN}-megaco-doc=""
 RDEPENDS:${PN}-megaco-doc=""
-FILES:${PN}-megaco-doc="${libdir}/erlang/lib/megaco-*/examples ${libdir}/erlang/lib/megaco-*/doc ${libdir}/erlang/lib/megaco-*/man "
+FILES:${PN}-megaco-doc="${libdir}/erlang/lib/megaco-*/doc ${libdir}/erlang/lib/megaco-*/man "
 
 ALLOW_EMPTY:${PN}-megaco-dbg="1"
 DESCRIPTION:${PN}-megaco-dbg=""
@@ -1180,10 +1405,15 @@ DESCRIPTION:${PN}-megaco=""
 RDEPENDS:${PN}-megaco=""
 FILES:${PN}-megaco="${libdir}/erlang/lib/megaco-* "
 
+ALLOW_EMPTY:${PN}-mnesia-examples="1"
+DESCRIPTION:${PN}-mnesia-examples=""
+RDEPENDS:${PN}-mnesia-examples=""
+FILES:${PN}-mnesia-examples="${libdir}/erlang/lib/mnesia-*/examples "
+
 ALLOW_EMPTY:${PN}-mnesia-doc="1"
 DESCRIPTION:${PN}-mnesia-doc=""
 RDEPENDS:${PN}-mnesia-doc=""
-FILES:${PN}-mnesia-doc="${libdir}/erlang/lib/mnesia-*/examples ${libdir}/erlang/lib/mnesia-*/doc ${libdir}/erlang/lib/mnesia-*/man "
+FILES:${PN}-mnesia-doc="${libdir}/erlang/lib/mnesia-*/doc ${libdir}/erlang/lib/mnesia-*/man "
 
 ALLOW_EMPTY:${PN}-mnesia-dbg="1"
 DESCRIPTION:${PN}-mnesia-dbg=""
@@ -1205,10 +1435,15 @@ DESCRIPTION:${PN}-mnesia=""
 RDEPENDS:${PN}-mnesia=""
 FILES:${PN}-mnesia="${libdir}/erlang/lib/mnesia-* "
 
+ALLOW_EMPTY:${PN}-observer-examples="1"
+DESCRIPTION:${PN}-observer-examples=""
+RDEPENDS:${PN}-observer-examples=""
+FILES:${PN}-observer-examples="${libdir}/erlang/lib/observer-*/examples "
+
 ALLOW_EMPTY:${PN}-observer-doc="1"
 DESCRIPTION:${PN}-observer-doc=""
 RDEPENDS:${PN}-observer-doc=""
-FILES:${PN}-observer-doc="${libdir}/erlang/lib/observer-*/examples ${libdir}/erlang/lib/observer-*/doc ${libdir}/erlang/lib/observer-*/man "
+FILES:${PN}-observer-doc="${libdir}/erlang/lib/observer-*/doc ${libdir}/erlang/lib/observer-*/man "
 
 ALLOW_EMPTY:${PN}-observer-dbg="1"
 DESCRIPTION:${PN}-observer-dbg=""
@@ -1230,10 +1465,15 @@ DESCRIPTION:${PN}-observer="--with-observer,--without-observer,wxwidgets,"
 RDEPENDS:${PN}-observer=""
 FILES:${PN}-observer="${libdir}/erlang/lib/observer-* "
 
+ALLOW_EMPTY:${PN}-wx-examples="1"
+DESCRIPTION:${PN}-wx-examples=""
+RDEPENDS:${PN}-wx-examples=""
+FILES:${PN}-wx-examples="${libdir}/erlang/lib/wx-*/examples "
+
 ALLOW_EMPTY:${PN}-wx-doc="1"
 DESCRIPTION:${PN}-wx-doc=""
 RDEPENDS:${PN}-wx-doc=""
-FILES:${PN}-wx-doc="${libdir}/erlang/lib/wx-*/examples ${libdir}/erlang/lib/wx-*/doc ${libdir}/erlang/lib/wx-*/man "
+FILES:${PN}-wx-doc="${libdir}/erlang/lib/wx-*/doc ${libdir}/erlang/lib/wx-*/man "
 
 ALLOW_EMPTY:${PN}-wx-dbg="1"
 DESCRIPTION:${PN}-wx-dbg=""
@@ -1255,10 +1495,15 @@ DESCRIPTION:${PN}-wx=""
 RDEPENDS:${PN}-wx=""
 FILES:${PN}-wx="${libdir}/erlang/lib/wx-* "
 
+ALLOW_EMPTY:${PN}-os-mon-examples="1"
+DESCRIPTION:${PN}-os-mon-examples=""
+RDEPENDS:${PN}-os-mon-examples=""
+FILES:${PN}-os-mon-examples="${libdir}/erlang/lib/os_mon-*/examples "
+
 ALLOW_EMPTY:${PN}-os-mon-doc="1"
 DESCRIPTION:${PN}-os-mon-doc=""
 RDEPENDS:${PN}-os-mon-doc=""
-FILES:${PN}-os-mon-doc="${libdir}/erlang/lib/os-mon-*/examples ${libdir}/erlang/lib/os-mon-*/doc ${libdir}/erlang/lib/os-mon-*/man "
+FILES:${PN}-os-mon-doc="${libdir}/erlang/lib/os-mon-*/doc ${libdir}/erlang/lib/os-mon-*/man "
 
 ALLOW_EMPTY:${PN}-os-mon-dbg="1"
 DESCRIPTION:${PN}-os-mon-dbg=""
@@ -1280,10 +1525,15 @@ DESCRIPTION:${PN}-os-mon=""
 RDEPENDS:${PN}-os-mon=""
 FILES:${PN}-os-mon="${libdir}/erlang/lib/os_mon-* "
 
+ALLOW_EMPTY:${PN}-parsetools-examples="1"
+DESCRIPTION:${PN}-parsetools-examples=""
+RDEPENDS:${PN}-parsetools-examples=""
+FILES:${PN}-parsetools-examples="${libdir}/erlang/lib/parsetools-*/examples "
+
 ALLOW_EMPTY:${PN}-parsetools-doc="1"
 DESCRIPTION:${PN}-parsetools-doc=""
 RDEPENDS:${PN}-parsetools-doc=""
-FILES:${PN}-parsetools-doc="${libdir}/erlang/lib/parsetools-*/examples ${libdir}/erlang/lib/parsetools-*/doc ${libdir}/erlang/lib/parsetools-*/man "
+FILES:${PN}-parsetools-doc="${libdir}/erlang/lib/parsetools-*/doc ${libdir}/erlang/lib/parsetools-*/man "
 
 ALLOW_EMPTY:${PN}-parsetools-dbg="1"
 DESCRIPTION:${PN}-parsetools-dbg=""
@@ -1305,10 +1555,15 @@ DESCRIPTION:${PN}-parsetools=""
 RDEPENDS:${PN}-parsetools=""
 FILES:${PN}-parsetools="${libdir}/erlang/lib/parsetools-* "
 
+ALLOW_EMPTY:${PN}-public-key-examples="1"
+DESCRIPTION:${PN}-public-key-examples=""
+RDEPENDS:${PN}-public-key-examples=""
+FILES:${PN}-public-key-examples="${libdir}/erlang/lib/public_key-*/examples "
+
 ALLOW_EMPTY:${PN}-public-key-doc="1"
 DESCRIPTION:${PN}-public-key-doc=""
 RDEPENDS:${PN}-public-key-doc=""
-FILES:${PN}-public-key-doc="${libdir}/erlang/lib/public-key-*/examples ${libdir}/erlang/lib/public-key-*/doc ${libdir}/erlang/lib/public-key-*/man "
+FILES:${PN}-public-key-doc="${libdir}/erlang/lib/public-key-*/doc ${libdir}/erlang/lib/public-key-*/man "
 
 ALLOW_EMPTY:${PN}-public-key-dbg="1"
 DESCRIPTION:${PN}-public-key-dbg=""
@@ -1330,10 +1585,15 @@ DESCRIPTION:${PN}-public-key=""
 RDEPENDS:${PN}-public-key=""
 FILES:${PN}-public-key="${libdir}/erlang/lib/public_key-* "
 
+ALLOW_EMPTY:${PN}-reltool-examples="1"
+DESCRIPTION:${PN}-reltool-examples=""
+RDEPENDS:${PN}-reltool-examples=""
+FILES:${PN}-reltool-examples="${libdir}/erlang/lib/reltool-*/examples "
+
 ALLOW_EMPTY:${PN}-reltool-doc="1"
 DESCRIPTION:${PN}-reltool-doc=""
 RDEPENDS:${PN}-reltool-doc=""
-FILES:${PN}-reltool-doc="${libdir}/erlang/lib/reltool-*/examples ${libdir}/erlang/lib/reltool-*/doc ${libdir}/erlang/lib/reltool-*/man "
+FILES:${PN}-reltool-doc="${libdir}/erlang/lib/reltool-*/doc ${libdir}/erlang/lib/reltool-*/man "
 
 ALLOW_EMPTY:${PN}-reltool-dbg="1"
 DESCRIPTION:${PN}-reltool-dbg=""
@@ -1355,10 +1615,15 @@ DESCRIPTION:${PN}-reltool=""
 RDEPENDS:${PN}-reltool=""
 FILES:${PN}-reltool="${libdir}/erlang/lib/reltool-* "
 
+ALLOW_EMPTY:${PN}-runtime-tools-examples="1"
+DESCRIPTION:${PN}-runtime-tools-examples=""
+RDEPENDS:${PN}-runtime-tools-examples=""
+FILES:${PN}-runtime-tools-examples="${libdir}/erlang/lib/runtime_tools-*/examples "
+
 ALLOW_EMPTY:${PN}-runtime-tools-doc="1"
 DESCRIPTION:${PN}-runtime-tools-doc=""
 RDEPENDS:${PN}-runtime-tools-doc=""
-FILES:${PN}-runtime-tools-doc="${libdir}/erlang/lib/runtime-tools-*/examples ${libdir}/erlang/lib/runtime-tools-*/doc ${libdir}/erlang/lib/runtime-tools-*/man "
+FILES:${PN}-runtime-tools-doc="${libdir}/erlang/lib/runtime-tools-*/doc ${libdir}/erlang/lib/runtime-tools-*/man "
 
 ALLOW_EMPTY:${PN}-runtime-tools-dbg="1"
 DESCRIPTION:${PN}-runtime-tools-dbg=""
@@ -1380,10 +1645,15 @@ DESCRIPTION:${PN}-runtime-tools=""
 RDEPENDS:${PN}-runtime-tools=""
 FILES:${PN}-runtime-tools="${libdir}/erlang/lib/runtime_tools-* "
 
+ALLOW_EMPTY:${PN}-snmp-examples="1"
+DESCRIPTION:${PN}-snmp-examples=""
+RDEPENDS:${PN}-snmp-examples=""
+FILES:${PN}-snmp-examples="${libdir}/erlang/lib/snmp-*/examples "
+
 ALLOW_EMPTY:${PN}-snmp-doc="1"
 DESCRIPTION:${PN}-snmp-doc=""
 RDEPENDS:${PN}-snmp-doc=""
-FILES:${PN}-snmp-doc="${libdir}/erlang/lib/snmp-*/examples ${libdir}/erlang/lib/snmp-*/doc ${libdir}/erlang/lib/snmp-*/man "
+FILES:${PN}-snmp-doc="${libdir}/erlang/lib/snmp-*/doc ${libdir}/erlang/lib/snmp-*/man "
 
 ALLOW_EMPTY:${PN}-snmp-dbg="1"
 DESCRIPTION:${PN}-snmp-dbg=""
@@ -1405,10 +1675,15 @@ DESCRIPTION:${PN}-snmp=""
 RDEPENDS:${PN}-snmp=""
 FILES:${PN}-snmp="${libdir}/erlang/lib/snmp-* "
 
+ALLOW_EMPTY:${PN}-ssh-examples="1"
+DESCRIPTION:${PN}-ssh-examples=""
+RDEPENDS:${PN}-ssh-examples=""
+FILES:${PN}-ssh-examples="${libdir}/erlang/lib/ssh-*/examples "
+
 ALLOW_EMPTY:${PN}-ssh-doc="1"
 DESCRIPTION:${PN}-ssh-doc=""
 RDEPENDS:${PN}-ssh-doc=""
-FILES:${PN}-ssh-doc="${libdir}/erlang/lib/ssh-*/examples ${libdir}/erlang/lib/ssh-*/doc ${libdir}/erlang/lib/ssh-*/man "
+FILES:${PN}-ssh-doc="${libdir}/erlang/lib/ssh-*/doc ${libdir}/erlang/lib/ssh-*/man "
 
 ALLOW_EMPTY:${PN}-ssh-dbg="1"
 DESCRIPTION:${PN}-ssh-dbg=""
@@ -1430,10 +1705,15 @@ DESCRIPTION:${PN}-ssh=""
 RDEPENDS:${PN}-ssh=""
 FILES:${PN}-ssh="${libdir}/erlang/lib/ssh-* "
 
+ALLOW_EMPTY:${PN}-ssl-examples="1"
+DESCRIPTION:${PN}-ssl-examples=""
+RDEPENDS:${PN}-ssl-examples=""
+FILES:${PN}-ssl-examples="${libdir}/erlang/lib/ssl-*/examples "
+
 ALLOW_EMPTY:${PN}-ssl-doc="1"
 DESCRIPTION:${PN}-ssl-doc=""
 RDEPENDS:${PN}-ssl-doc=""
-FILES:${PN}-ssl-doc="${libdir}/erlang/lib/ssl-*/examples ${libdir}/erlang/lib/ssl-*/doc ${libdir}/erlang/lib/ssl-*/man "
+FILES:${PN}-ssl-doc="${libdir}/erlang/lib/ssl-*/doc ${libdir}/erlang/lib/ssl-*/man "
 
 ALLOW_EMPTY:${PN}-ssl-dbg="1"
 DESCRIPTION:${PN}-ssl-dbg=""
@@ -1455,10 +1735,15 @@ DESCRIPTION:${PN}-ssl=""
 RDEPENDS:${PN}-ssl=""
 FILES:${PN}-ssl="${libdir}/erlang/lib/ssl-* "
 
+ALLOW_EMPTY:${PN}-syntax-tools-examples="1"
+DESCRIPTION:${PN}-syntax-tools-examples=""
+RDEPENDS:${PN}-syntax-tools-examples=""
+FILES:${PN}-syntax-tools-examples="${libdir}/erlang/lib/syntax_tools-*/examples "
+
 ALLOW_EMPTY:${PN}-syntax-tools-doc="1"
 DESCRIPTION:${PN}-syntax-tools-doc=""
 RDEPENDS:${PN}-syntax-tools-doc=""
-FILES:${PN}-syntax-tools-doc="${libdir}/erlang/lib/syntax-tools-*/examples ${libdir}/erlang/lib/syntax-tools-*/doc ${libdir}/erlang/lib/syntax-tools-*/man "
+FILES:${PN}-syntax-tools-doc="${libdir}/erlang/lib/syntax-tools-*/doc ${libdir}/erlang/lib/syntax-tools-*/man "
 
 ALLOW_EMPTY:${PN}-syntax-tools-dbg="1"
 DESCRIPTION:${PN}-syntax-tools-dbg=""
@@ -1480,10 +1765,15 @@ DESCRIPTION:${PN}-syntax-tools=""
 RDEPENDS:${PN}-syntax-tools=""
 FILES:${PN}-syntax-tools="${libdir}/erlang/lib/syntax_tools-* "
 
+ALLOW_EMPTY:${PN}-tftp-examples="1"
+DESCRIPTION:${PN}-tftp-examples=""
+RDEPENDS:${PN}-tftp-examples=""
+FILES:${PN}-tftp-examples="${libdir}/erlang/lib/tftp-*/examples "
+
 ALLOW_EMPTY:${PN}-tftp-doc="1"
 DESCRIPTION:${PN}-tftp-doc=""
 RDEPENDS:${PN}-tftp-doc=""
-FILES:${PN}-tftp-doc="${libdir}/erlang/lib/tftp-*/examples ${libdir}/erlang/lib/tftp-*/doc ${libdir}/erlang/lib/tftp-*/man "
+FILES:${PN}-tftp-doc="${libdir}/erlang/lib/tftp-*/doc ${libdir}/erlang/lib/tftp-*/man "
 
 ALLOW_EMPTY:${PN}-tftp-dbg="1"
 DESCRIPTION:${PN}-tftp-dbg=""
@@ -1505,10 +1795,15 @@ DESCRIPTION:${PN}-tftp=""
 RDEPENDS:${PN}-tftp=""
 FILES:${PN}-tftp="${libdir}/erlang/lib/tftp-* "
 
+ALLOW_EMPTY:${PN}-tools-examples="1"
+DESCRIPTION:${PN}-tools-examples=""
+RDEPENDS:${PN}-tools-examples=""
+FILES:${PN}-tools-examples="${libdir}/erlang/lib/tools-*/examples "
+
 ALLOW_EMPTY:${PN}-tools-doc="1"
 DESCRIPTION:${PN}-tools-doc=""
 RDEPENDS:${PN}-tools-doc=""
-FILES:${PN}-tools-doc="${libdir}/erlang/lib/tools-*/examples ${libdir}/erlang/lib/tools-*/doc ${libdir}/erlang/lib/tools-*/man "
+FILES:${PN}-tools-doc="${libdir}/erlang/lib/tools-*/doc ${libdir}/erlang/lib/tools-*/man "
 
 ALLOW_EMPTY:${PN}-tools-dbg="1"
 DESCRIPTION:${PN}-tools-dbg=""
@@ -1530,10 +1825,15 @@ DESCRIPTION:${PN}-tools=""
 RDEPENDS:${PN}-tools=""
 FILES:${PN}-tools="${libdir}/erlang/lib/tools-* "
 
+ALLOW_EMPTY:${PN}-typer-examples="1"
+DESCRIPTION:${PN}-typer-examples=""
+RDEPENDS:${PN}-typer-examples=""
+FILES:${PN}-typer-examples="${libdir}/erlang/lib/typer-*/examples "
+
 ALLOW_EMPTY:${PN}-typer-doc="1"
 DESCRIPTION:${PN}-typer-doc=""
 RDEPENDS:${PN}-typer-doc=""
-FILES:${PN}-typer-doc="${libdir}/erlang/lib/typer-*/examples ${libdir}/erlang/lib/typer-*/doc ${libdir}/erlang/lib/typer-*/man "
+FILES:${PN}-typer-doc="${libdir}/erlang/lib/typer-*/doc ${libdir}/erlang/lib/typer-*/man "
 
 ALLOW_EMPTY:${PN}-typer-dbg="1"
 DESCRIPTION:${PN}-typer-dbg=""
@@ -1555,10 +1855,15 @@ DESCRIPTION:${PN}-typer=""
 RDEPENDS:${PN}-typer=""
 FILES:${PN}-typer="${bindir}/typer ${libdir}/erlang/bin/typer ${libdir}/erlang/lib/typer-* ${libdir}/erlang/erts-*/bin/typer "
 
+ALLOW_EMPTY:${PN}-xmerl-examples="1"
+DESCRIPTION:${PN}-xmerl-examples=""
+RDEPENDS:${PN}-xmerl-examples=""
+FILES:${PN}-xmerl-examples="${libdir}/erlang/lib/xmerl-*/examples "
+
 ALLOW_EMPTY:${PN}-xmerl-doc="1"
 DESCRIPTION:${PN}-xmerl-doc=""
 RDEPENDS:${PN}-xmerl-doc=""
-FILES:${PN}-xmerl-doc="${libdir}/erlang/lib/xmerl-*/examples ${libdir}/erlang/lib/xmerl-*/doc ${libdir}/erlang/lib/xmerl-*/man "
+FILES:${PN}-xmerl-doc="${libdir}/erlang/lib/xmerl-*/doc ${libdir}/erlang/lib/xmerl-*/man "
 
 ALLOW_EMPTY:${PN}-xmerl-dbg="1"
 DESCRIPTION:${PN}-xmerl-dbg=""
@@ -1580,10 +1885,15 @@ DESCRIPTION:${PN}-xmerl=""
 RDEPENDS:${PN}-xmerl=""
 FILES:${PN}-xmerl="${libdir}/erlang/lib/xmerl-* "
 
+ALLOW_EMPTY:${PN}-odbc-examples="1"
+DESCRIPTION:${PN}-odbc-examples=""
+RDEPENDS:${PN}-odbc-examples=""
+FILES:${PN}-odbc-examples="${libdir}/erlang/lib/odbc-*/examples "
+
 ALLOW_EMPTY:${PN}-odbc-doc="1"
 DESCRIPTION:${PN}-odbc-doc=""
 RDEPENDS:${PN}-odbc-doc=""
-FILES:${PN}-odbc-doc="${libdir}/erlang/lib/odbc-*/examples ${libdir}/erlang/lib/odbc-*/doc ${libdir}/erlang/lib/odbc-*/man "
+FILES:${PN}-odbc-doc="${libdir}/erlang/lib/odbc-*/doc ${libdir}/erlang/lib/odbc-*/man "
 
 ALLOW_EMPTY:${PN}-odbc-dbg="1"
 DESCRIPTION:${PN}-odbc-dbg=""
@@ -1605,15 +1915,25 @@ DESCRIPTION:${PN}-odbc=""
 RDEPENDS:${PN}-odbc=""
 FILES:${PN}-odbc="${libdir}/erlang/lib/odbc-* "
 
+ALLOW_EMPTY:${PN}-epmd-examples="1"
+DESCRIPTION:${PN}-epmd-examples=""
+RDEPENDS:${PN}-epmd-examples=""
+FILES:${PN}-epmd-examples="${libdir}/erlang/lib/epmd-*/examples "
+
 ALLOW_EMPTY:${PN}-epmd="1"
 DESCRIPTION:${PN}-epmd=""
 RDEPENDS:${PN}-epmd=""
 FILES:${PN}-epmd="${libdir}/erlang/erts-*/bin/epmd ${libdir}/erlang/bin/epmd ${bindir}/epmd "
 
+ALLOW_EMPTY:${PN}-erts-examples="1"
+DESCRIPTION:${PN}-erts-examples=""
+RDEPENDS:${PN}-erts-examples=""
+FILES:${PN}-erts-examples="${libdir}/erlang/lib/erts-*/examples "
+
 ALLOW_EMPTY:${PN}-erts-doc="1"
 DESCRIPTION:${PN}-erts-doc=""
 RDEPENDS:${PN}-erts-doc=""
-FILES:${PN}-erts-doc="${libdir}/erlang/lib/erts-*/examples ${libdir}/erlang/lib/erts-*/doc ${libdir}/erlang/lib/erts-*/man "
+FILES:${PN}-erts-doc="${libdir}/erlang/lib/erts-*/doc ${libdir}/erlang/lib/erts-*/man "
 
 ALLOW_EMPTY:${PN}-erts-dbg="1"
 DESCRIPTION:${PN}-erts-dbg=""
@@ -1638,7 +1958,7 @@ FILES:${PN}-erts="${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${lib
 ALLOW_EMPTY:${PN}-doc="1"
 DESCRIPTION:${PN}-doc=""
 RDEPENDS:${PN}-doc=""
-FILES:${PN}-doc+="${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/lib/*/examples ${libdir}/erlang/misc "
+FILES:${PN}-doc+="${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/misc "
 
 ALLOW_EMPTY:${PN}-dev="1"
 DESCRIPTION:${PN}-dev=""
@@ -1664,45 +1984,85 @@ DESCRIPTION:${PN}-modules="All Erlang modules"
 RDEPENDS:${PN}-modules="\
     ${PN} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'common-test', '${PN}-common-test-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '${PN}-crypto-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'debugger', '${PN}-debugger-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', '${PN}-dialyzer-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'diameter', '${PN}-diameter-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'edoc', '${PN}-edoc-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'eldap', '${PN}-eldap-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'emacs', '${PN}-emacs', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'emacs', '${PN}-emacs-examples', '', d)} \
     ${PN}-epmd \
+    ${PN}-epmd-examples \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-docgen', '${PN}-erl-docgen-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface', '${PN}-erl-interface-examples', '', d)} \
     ${PN}-erts \
+    ${PN}-erts-examples \
     ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'et', '${PN}-et-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-examples', '', d)} \
     ${PN}-kernel \
+    ${PN}-kernel-examples \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'mnesia', '${PN}-mnesia-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'observer', '${PN}-observer-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'os-mon', '${PN}-os-mon-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'parsetools', '${PN}-parsetools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'public-key', '${PN}-public-key-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'reltool', '${PN}-reltool-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'runtime-tools', '${PN}-runtime-tools-examples', '', d)} \
     ${PN}-sasl \
+    ${PN}-sasl-examples \
     ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'snmp', '${PN}-snmp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ssh', '${PN}-ssh-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ssl', '${PN}-ssl-examples', '', d)} \
     ${PN}-stdlib \
+    ${PN}-stdlib-examples \
     ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'syntax-tools', '${PN}-syntax-tools-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'tftp', '${PN}-tftp-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools-examples', '', d)} \
     ${PN}-typer \
+    ${PN}-typer-examples \
     ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'wx', '${PN}-wx-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'xmerl', '${PN}-xmerl-examples', '', d)} \
  "
 ALLOW_EMPTY:${PN}-modules = "1"
 
