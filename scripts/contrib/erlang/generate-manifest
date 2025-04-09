@@ -32,8 +32,7 @@ __version__ = "20180809"
 class Module(object):
     PN = '${PN}-%(name)s'
     BASE_PATHS = ["/%(name)s-*"]
-    DOC_PATHS = ["/%(name)s-*/examples",
-                 "/%(name)s-*/doc",
+    DOC_PATHS = ["/%(name)s-*/doc",
                  "/%(name)s-*/man"]
     DEBUG_PATHS = ["/%(name)s-*/bin/.debug",
                    "/%(name)s-*/lib/.debug",
@@ -45,11 +44,12 @@ class Module(object):
                  "/%(name)s-*/priv/obj"]
     STATICDEV_PATHS = ["/%(name)s-*/lib/*.a",
                        "/%(name)s-*/priv/lib/*.a"]
+    EXAMPLES_PATH = ["/%(name)s-*/examples"]
 
     def __init__(self, name, description="", dependencies="", base=[], doc=[],
-                 debug=[], dev=[], staticdev=[], packageconfig=""):
+                 debug=[], dev=[], staticdev=[], examples=True, packageconfig=""):
         self.packageconfig_enable = False
-        self.packages_enable = ['doc', 'dbg', 'dev', 'staticdev']
+        self.packages_enable = ['doc', 'dbg', 'dev', 'staticdev', 'examples']
         self.name = name
         base_formatter = {'name': name}
         sanitized_name = name.replace("-", "_")
@@ -65,6 +65,16 @@ class Module(object):
         else:
             self.packageconfig_enable = name
             self.packageconfig = f"--with-{name},--without-{name},,"
+
+        if examples == False:
+          self.packages_enable.remove('examples')
+          examples = []
+        elif examples == True:
+          examples = self.EXAMPLES_PATH
+        elif len(examples) > 0:
+            pass
+        else:
+          examples = self.EXAMPLES_PATH
 
         if doc == False:
           self.packages_enable.remove('doc')
@@ -103,9 +113,12 @@ class Module(object):
         debug_paths = ' '.join(debug)
         dev_paths = ' '.join(dev)
         staticdev_paths = ' '.join(staticdev)
+        examples_paths = ' '.join(examples)
         self.packages = []
         # doc files are not Erlang modules,
         # hence a base formatter can be used
+        if 'examples' in self.packages_enable:
+            self.packages.append([pn + "-examples", "", "", examples_paths % sanitized_formatter, self.packageconfig_enable])
         if 'doc' in self.packages_enable:
             self.packages.append([pn + "-doc", "", "", doc_paths % base_formatter, self.packageconfig_enable])
         if 'dbg' in self.packages_enable:
@@ -479,7 +492,7 @@ if __name__ == "__main__":
     #
     m.addPackage("${PN}-doc", "", "",
                  " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man "
-                 "${libdir}/erlang/lib/*/examples ${libdir}/erlang/misc",
+                 "${libdir}/erlang/misc",
                  False,
                  True)
     m.addPackage("${PN}-dev", "",
