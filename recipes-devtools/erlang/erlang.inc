@@ -52,10 +52,8 @@ PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
 PACKAGECONFIG[static-drivers] = "--enable-static-drivers,--disable-static-drivers,,"
 PACKAGECONFIG[static-nifs] = "--enable-static-nifs,--disable-static-nifs,,"
 
-PACKAGECONFIG[sctp] = ",,--disable-sctp,lksctp-tools"
+PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,kernel-module-sctp"
 PACKAGECONFIG[java] = ",--without-javac,,"
-
-RRECOMMENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
