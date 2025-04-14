@@ -42,7 +42,7 @@ ERLANG_APPLICATIONS = "\
 PACKAGECONFIG[asn1] = "--with-asn1,--without-asn1,,"
 PACKAGECONFIG[common-test] = "--with-common-test,--without-common-test,,"
 PACKAGECONFIG[compiler] = "--with-compiler,--without-compiler,,"
-PACKAGECONFIG[crypto] = "--with-crypto,--without-crypto,,"
+PACKAGECONFIG[crypto] = "--with-crypto,--without-crypto,openssl"
 PACKAGECONFIG[debugger] = "--with-debugger,--without-debugger,,"
 PACKAGECONFIG[dialyzer] = "--with-dialyzer,--without-dialyzer,,"
 PACKAGECONFIG[diameter] = "--with-diameter,--without-diameter,,"
@@ -1002,7 +1002,7 @@ FILES:${PN}-crypto-staticdev = "${libdir}/erlang/lib/crypto-*/lib/*.a ${libdir}/
 
 ALLOW_EMPTY:${PN}-crypto = "1"
 DESCRIPTION:${PN}-crypto = ""
-RDEPENDS:${PN}-crypto = "openssl"
+RDEPENDS:${PN}-crypto = ""
 FILES:${PN}-crypto = "${libdir}/erlang/lib/crypto-* "
 
 ALLOW_EMPTY:${PN}-debugger-examples = "1"

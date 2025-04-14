@@ -7,9 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ff253ad767462c46be284da12dda33e8"
 
 BBCLASSEXTEND = "native nativesdk"
 
-DEPENDS:append:class-target = " erlang-native openssl"
-DEPENDS:append:class-native = " ncurses-native zlib-native openssl-native"
-DEPENDS:append:class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openssl nativesdk-ncurses"
+DEPENDS = " erlang-native"
 
 RDEPENDS:${PN}-ptest += "bash erlang-modules openssh tmux"
 
@@ -40,10 +38,11 @@ ERLANG_APPLICATIONS:remove:class-native = "odbc wx observer debugger et jinterfa
 ERLANG_APPLICATIONS:remove:class-nativesdk = "odbc jinterface megaco"
 
 PACKAGECONFIG:class-target ?= "pkgconfig zlib termcap ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} ${ERLANG_APPLICATIONS}"
-PACKAGECONFIG:class-native ?= "pkgconfig ${ERLANG_APPLICATIONS}"
-PACKAGECONFIG:class-nativesdk ?= "pkgconfig termcap ${ERLANG_APPLICATIONS}"
+PACKAGECONFIG:class-native ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
+PACKAGECONFIG:class-nativesdk ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
 
-PACKAGECONFIG[zlib] = "--disable-builtin-zlib,--enable-builtin-zlib,zlib"
+PACKAGECONFIG[zlib] = ",,zlib,,,builtin-zlib"
+PACKAGECONFIG[builtin-zlib] = "--enable-builtin-zlib,--disable-builtin-zlib,,,,zlib"
 PACKAGECONFIG[termcap] = "--with-termcap,--without-termcap,ncurses"
 PACKAGECONFIG[lttng] = "--with-dynamic-trace=lttng,--without-dynamic-trace,lttng-ust"
 PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
@@ -63,13 +62,15 @@ OTP_BUILD_CONFIGURE_OPTS = "update_configure --no-commit"
 NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 EXTRA_OECONF:class-native ??= " \
-    --with-ssl=${STAGING_EXECPREFIXDIR} --with-ssl-zlib=${STAGING_EXECPREFIXDIR} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '--with-ssl=${STAGING_EXECPREFIXDIR} --with-ssl-zlib=${STAGING_EXECPREFIXDIR}', '', d)} \
     "
 EXTRA_OECONF:class-nativesdk ??= " \
-    --with-ssl=${STAGING_EXECPREFIXDIR} --with-ssl-zlib=${STAGING_EXECPREFIXDIR} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '--with-ssl=${STAGING_EXECPREFIXDIR} --with-ssl-zlib=${STAGING_EXECPREFIXDIR}', '', d)} \
     --enable-deterministic-build \
     "
-EXTRA_OECONF:class-target ??= " --with-ssl-rpath=no --enable-deterministic-build"
+EXTRA_OECONF:class-target ??= " \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '--with-ssl-rpath=no', '', d)} \
+    --enable-deterministic-build"
 
 # Due multilib wxwidgets, it's necessary to pass additional arguments to wx-config script.
 WX_CONFIG = "'${STAGING_BINDIR_CROSS}/wx-config --prefix=${STAGING_EXECPREFIXDIR} --baselib=${baselib}'"

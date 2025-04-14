@@ -146,7 +146,7 @@ COMMON_MODULES = [
                  "/compiler-*",
                  "${libdir}/erlang/erts-*/bin/erlc"]),
     Module("crypto",
-           dependencies="openssl"),
+           packageconfig="--with-crypto,--without-crypto,openssl"),
     Module("debugger",
            "--with-debugger,--without-debugger,,"),
     Module("dialyzer",
