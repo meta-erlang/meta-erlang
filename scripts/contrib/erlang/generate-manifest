@@ -36,6 +36,7 @@ class Module(object):
                  "/%(name)s-*/man"]
     DEBUG_PATHS = ["/%(name)s-*/bin/.debug",
                    "/%(name)s-*/lib/.debug",
+                   "/%(name)s-*/priv/.debug",
                    "/%(name)s-*/priv/lib/.debug",
                    "/%(name)s-*/priv/obj/.debug",
                    "/%(name)s-*/priv/bin/.debug"]
@@ -280,6 +281,7 @@ class MakefileMaker:
 
     def doProlog(self):
         self.out(""" """)
+        self.out('NOAUTOPACKAGEDEBUG = "1"')
         self.out('ERLANG_APPLICATIONS = "\\')
         for name, _ in sorted(self.packageconfigs.items()):
             self.out(f'    {name} \\')
@@ -346,7 +348,6 @@ class MakefileMaker:
         #
 
         packageLine = 'PACKAGES = "\\\n'
-        packageLine += '    ${PN}-dbg \\\n'
         for name, data in self.packages.items():
             _desc, _deps, _files, packageconfig, _keepfiles = data
             if name != '${PN}-dbg':
@@ -354,6 +355,7 @@ class MakefileMaker:
                     packageLine += "    ${@bb.utils.contains('PACKAGECONFIG', '%s', '%s', '', d)} \\\n" % (packageconfig, name)
                 else:
                     packageLine += "    %s \\\n" % name
+        packageLine += '    ${PN}-dbg \\\n'
         packageLine += '    ${PN}-modules ${PN}-modules-dev"'
 
         self.out(packageLine)
@@ -369,7 +371,6 @@ class MakefileMaker:
             #
             # write out the description, revision and dependencies
             #
-            self.out('ALLOW_EMPTY:%s = "1"' % (name))
             self.out('DESCRIPTION:%s = "%s"' % (name, desc))
             self.out('RDEPENDS:%s = "%s"' % (name, deps))
 
@@ -491,22 +492,23 @@ if __name__ == "__main__":
                  " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man "
                  "${libdir}/erlang/misc",
                  False,
-                 True)
+                 False)
     m.addPackage("${PN}-dev", "",
                  "${PN}-erts-dev ${PN}-kernel-dev ${PN}-stdlib-dev ${PN}-sasl-dev" ,
-                 " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src "
-                 "${libdir}/erlang/usr/include",
+                 "${libdir}/pkgconfig",
                  False,
-                 True)
+                 False)
     m.addPackage("${PN}-dbg", "", "",
                  " ${libdir}/erlang/bin/.debug ${libdir}/erlang/erts-*/bin/.debug",
                  False,
-                 True)
+                 False)
     m.addPackage("${PN}-staticdev", "", "",
                  "  ${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a "
                  "${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/*",
                  False,
-                 True)
+                 False)
     m.addPackage("${PN}", "",
-                 "${PN}-erts ${PN}-kernel ${PN}-stdlib ${PN}-sasl ${PN}-epmd", "", False, True)
+                 "${PN}-erts ${PN}-kernel ${PN}-stdlib ${PN}-sasl ${PN}-epmd", "",
+                 False,
+                 False)
     m.make()
