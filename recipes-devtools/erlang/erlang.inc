@@ -197,8 +197,11 @@ do_install:append:class-target() {
 
     # only install dialyzer if it is present in PACKAGECONFIG
     if ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', 'false', 'true', d)}; then
-        rm ${D}${libdir}/erlang/bin/dialyzer
-        rm ${D}${bindir}/dialyzer
+        for bin in typer dialyzer; do
+            rm -f ${D}${libdir}/erlang/erts-${ERTS_VERSION}/bin/$bin
+            rm -f ${D}${libdir}/erlang/bin/$bin
+            rm -f ${D}${bindir}/$bin
+        done
     fi
 }
 
