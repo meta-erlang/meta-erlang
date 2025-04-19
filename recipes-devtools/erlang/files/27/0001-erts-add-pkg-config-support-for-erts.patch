@@ -1,4 +1,4 @@
-From a8a8236ae70fa83d01208c345ac224b4fc54e59f Mon Sep 17 00:00:00 2001
+From 7e14aad4d230944abc74e6776cd67438e9c3eb2a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 20 Feb 2022 18:55:59 -0300
@@ -25,7 +25,7 @@ Upstream-Status: Pending
  create mode 100644 erts/erl_erts.pc.in
 
 diff --git a/erts/configure.ac b/erts/configure.ac
-index 61f9fe48a5..7e1041e397 100644
+index c9915291ed..f2ea6d689a 100644
 --- a/erts/configure.ac
 +++ b/erts/configure.ac
 @@ -21,6 +21,8 @@ dnl %CopyrightEnd%
@@ -47,9 +47,9 @@ index 61f9fe48a5..7e1041e397 100644
  dnl We check if -Werror was given on command line and if so
  dnl we disable it for the configure and only use it when
  dnl actually building erts
-@@ -3655,6 +3660,21 @@ AC_MSG_RESULT([yes])
- DEBUG_CFLAGS="-g -O0 $no_opt_CFLAGS"
- AC_SUBST(DEBUG_CFLAGS)
+@@ -3674,6 +3679,21 @@ AC_DEFINE_UNQUOTED(ERTS_EMU_CMDLINE_FLAGS,
+ "$STATIC_CFLAGS $CFLAGS $CXXFLAGS $DEBUG_CFLAGS $DEBUG_CXXFLAGS $EMU_THR_DEFS $DEFS $WERRORFLAGS $WFLAGS",
+ [The only reason ERTS_EMU_CMDLINE_FLAGS exists is to force modification of config.h when the emulator command line flags are modified by configure])
  
 +dnl ----------------------------------------------------------------------
 +dnl Enable pkg-config.
@@ -69,7 +69,7 @@ index 61f9fe48a5..7e1041e397 100644
  dnl ----------------------------------------------------------------------
  dnl Output the result.
  dnl ----------------------------------------------------------------------
-@@ -3668,6 +3688,7 @@ AC_CONFIG_FILES([
+@@ -3687,6 +3707,7 @@ AC_CONFIG_FILES([
    include/internal/$host/erts_internal.mk:include/internal/erts_internal.mk.in
    lib_src/$host/Makefile:lib_src/Makefile.in
    ../make/$host/otp.mk:../make/otp.mk.in
@@ -78,7 +78,7 @@ index 61f9fe48a5..7e1041e397 100644
  
  AC_CONFIG_FILES([../make/make_emakefile:../make/make_emakefile.in],
 diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
-index e93f052d75..d317c36fc3 100644
+index 86e3f0f650..2ea18f6ee2 100644
 --- a/erts/emulator/Makefile.in
 +++ b/erts/emulator/Makefile.in
 @@ -23,6 +23,12 @@ include ../vsn.mk
@@ -94,7 +94,7 @@ index e93f052d75..d317c36fc3 100644
  ENABLE_ALLOC_TYPE_VARS = @ENABLE_ALLOC_TYPE_VARS@
  JIT_ENABLED=@JIT_ENABLED@
  JIT_ARCH=@JIT_ARCH@
-@@ -531,12 +537,23 @@ ifeq ($(TARGET),win32)
+@@ -543,12 +549,23 @@ ifeq ($(TARGET),win32)
  RELEASE_INCLUDES += sys/$(ERLANG_OSTYPE)/erl_win_dyn_driver.h
  endif
  

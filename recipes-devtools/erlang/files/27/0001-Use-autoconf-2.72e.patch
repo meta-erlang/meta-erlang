@@ -1,4 +1,4 @@
-From e3e5b25554db805af2f202be1edad69d1c79c38d Mon Sep 17 00:00:00 2001
+From 35c1eb8fbf68f0af9c265ddcd70183b703fe73e2 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 15 Oct 2023 21:25:29 -0300
@@ -10,7 +10,7 @@ Upstream-Status: Inappropriate [OE specific]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/otp_build b/otp_build
-index dcd59a43c8..56f1f34e0e 100755
+index 1a84d0ea34..ab32e61f24 100755
 --- a/otp_build
 +++ b/otp_build
 @@ -19,7 +19,7 @@
