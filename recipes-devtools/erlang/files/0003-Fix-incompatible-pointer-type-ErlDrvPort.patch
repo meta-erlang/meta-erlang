@@ -1,8 +1,8 @@
-From df794924c390b3277d5688448a05b4caa6dd0220 Mon Sep 17 00:00:00 2001
+From aebf4e2fb2874f54cd83e87fa6a69606587a93a0 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Fri, 7 Jun 2024 21:41:07 -0300
-Subject: [PATCH 3/3] Fix incompatible pointer type 'ErlDrvPort'
+Subject: [PATCH] Fix incompatible pointer type 'ErlDrvPort'
 
 With GCC 14 series the following error exists:
 
@@ -38,6 +38,3 @@ index f441e31182..ba80c8f5ad 100644
      int timeout_count;
  } us_drv_state;
  
--- 
-2.40.1
-
