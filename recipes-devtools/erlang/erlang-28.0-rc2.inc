@@ -1,2 +1,0 @@
-SRCREV ?= "b7c33191648c8b280c3bc8baf5434b125e88f0ef"
-PV = "28.0-rc2+git${SRCPV}" 
