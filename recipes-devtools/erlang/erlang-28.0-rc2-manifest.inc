@@ -1953,7 +1953,7 @@ FILES:${PN}-erts-staticdev="${libdir}/erlang/lib/erts-*/lib/*.a ${libdir}/erlang
 ALLOW_EMPTY:${PN}-erts="1"
 DESCRIPTION:${PN}-erts=""
 RDEPENDS:${PN}-erts=""
-FILES:${PN}-erts="${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${libdir}/erlang/erts-*/bin "
+FILES:${PN}-erts="${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${libdir}/erlang/erts-*/bin ${libdir}/erlang/lib/erts-*/ebin "
 
 ALLOW_EMPTY:${PN}-doc="1"
 DESCRIPTION:${PN}-doc=""

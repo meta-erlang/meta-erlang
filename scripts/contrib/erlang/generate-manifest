@@ -211,7 +211,9 @@ COMMON_MODULES = [
            base=["${bindir}",
                  "${libdir}/erlang/releases",
                  "${libdir}/erlang/bin",
-                 "${libdir}/erlang/erts-*/bin"],
+                 "${libdir}/erlang/erts-*/bin",
+                 # only valid for nativesdk-erlang
+                 "${libdir}/erlang/lib/erts-*/ebin"],
            dev=["${libdir}/erlang/lib/erts-*/src",
                 "${libdir}/erlang/erts-*/*src",
                 "${libdir}/erlang/erts-*/include",
