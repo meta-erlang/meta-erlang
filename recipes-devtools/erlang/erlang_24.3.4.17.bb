@@ -11,6 +11,8 @@ SRC_URI += "file://0001-Detect-libdlpi-only-when-host_os-is-solaris.patch"
 SRC_URI += "file://0001-Enable-wx-cross-compilation.patch"
 SRC_URI += "file://otp-0002-Remove-rpath.patch"
 
+SRCREV = "e0001cd0fa553513ee8fee998a82a01ac9b7329b"
+
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/24/${PV}:${THISDIR}/files/24:"
 
 OTP_BUILD_CONFIGURE_OPTS = "update_configure --no-commit"
