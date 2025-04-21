@@ -10,6 +10,7 @@ SRC_URI += "file://0001-Fix-for-Werror-format-security.patch \
             file://0003-Fix-incompatible-pointer-type-ErlDrvPort.patch \
             file://0001-Add-missing-wx-dependencies.patch \
             file://0001-erts-fix-incompatible-pointer-type.patch \
+            file://0001-Use-autoconf-2.72.patch \
            "
 
 SRCREV = "9f6c4eb54823324d1e6f8cb95c15feb09f09044e"
