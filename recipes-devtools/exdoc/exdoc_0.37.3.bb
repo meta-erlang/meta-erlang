@@ -7,13 +7,13 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "e54c4e717c72106a0bfd8f84646d9c2b4533ce0d"
+SRCREV = "0ab3d49585fe13f1be38465d936aa4e73db6f4c1"
 PR = "r0"
 SRC_URI = "git://github.com/elixir-lang/ex_doc;branch=main;protocol=https" 
 
 RDEPENDS:${PN} = "erlang elixir"
 
-inherit mix
+inherit mix-rebar3
 
 do_compile() {
     MIX_ENV=${MIX_ENV} mix escript.build
