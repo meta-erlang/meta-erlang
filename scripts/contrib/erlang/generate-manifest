@@ -317,7 +317,7 @@ class MakefileMaker:
         # generate provides line
         #
 
-        provideLine = 'PROVIDES+="\\\n'
+        provideLine = 'PROVIDES += "\\\n'
         for name, data in self.packages.items():
             _desc, _deps, _files, packageconfig, _keepfiles = data
             if packageconfig:
@@ -326,7 +326,7 @@ class MakefileMaker:
                 provideLine += "    %s \\\n" % name
         provideLine += '"'
 
-        provideNativeLine = 'RPROVIDES:${PN}:class-native+="\\\n'
+        provideNativeLine = 'RPROVIDES:${PN}:class-native += "\\\n'
         for name, data in self.packages.items():
             _desc, _deps, _files, packageconfig, _keepfiles = data
             if packageconfig:
@@ -345,7 +345,7 @@ class MakefileMaker:
         # generate package line
         #
 
-        packageLine = 'PACKAGES="\\\n'
+        packageLine = 'PACKAGES = "\\\n'
         packageLine += '    ${PN}-dbg \\\n'
         for name, data in self.packages.items():
             _desc, _deps, _files, packageconfig, _keepfiles = data
@@ -369,14 +369,14 @@ class MakefileMaker:
             #
             # write out the description, revision and dependencies
             #
-            self.out('ALLOW_EMPTY:%s="1"' % (name))
-            self.out('DESCRIPTION:%s="%s"' % (name, desc))
-            self.out('RDEPENDS:%s="%s"' % (name, deps))
+            self.out('ALLOW_EMPTY:%s = "1"' % (name))
+            self.out('DESCRIPTION:%s = "%s"' % (name, desc))
+            self.out('RDEPENDS:%s = "%s"' % (name, deps))
 
             if keepfiles:
-                line = 'FILES:%s+="' % name
+                line = 'FILES:%s += "' % name
             else:
-                line = 'FILES:%s="' % name
+                line = 'FILES:%s = "' % name
 
             #
             # check which directories to make in the temporary directory
@@ -400,8 +400,8 @@ class MakefileMaker:
             self.out(line)
             self.out("")
 
-        self.out('DESCRIPTION:${PN}-modules="All Erlang modules"')
-        line = 'RDEPENDS:${PN}-modules="\\\n'
+        self.out('DESCRIPTION:${PN}-modules = "All Erlang modules"')
+        line = 'RDEPENDS:${PN}-modules = "\\\n'
 
         pkgtoskip = ('-dbg', '-doc', '-staticdev', '-dev')
 
@@ -419,8 +419,8 @@ class MakefileMaker:
         self.out('ALLOW_EMPTY:${PN}-modules = "1"')
         self.out("")
 
-        self.out('DESCRIPTION:${PN}-modules-dev="All Erlang modules for developers"')
-        line = 'RDEPENDS:${PN}-modules-dev="${PN}-modules \\\n'
+        self.out('DESCRIPTION:${PN}-modules-dev = "All Erlang modules for developers"')
+        line = 'RDEPENDS:${PN}-modules-dev = "${PN}-modules \\\n'
 
         for name, data in sorted(self.packages.items()):
             if not name.endswith(pkgtoskip) or name.endswith('-dbg'):

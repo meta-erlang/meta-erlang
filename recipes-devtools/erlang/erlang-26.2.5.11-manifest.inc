@@ -76,7 +76,7 @@ PACKAGECONFIG[xmerl] = "--with-xmerl,--without-xmerl,,"
 
 ERTS_VERSION = "14.2.5.9"
 ERL_INTERFACE_VERSION = "5.5.1"
-PROVIDES+="\
+PROVIDES += "\
     ${PN}-sasl-examples \
     ${PN}-sasl-doc \
     ${PN}-sasl-dbg \
@@ -315,7 +315,7 @@ PROVIDES+="\
     ${PN}-staticdev \
     ${PN} \
 "
-RPROVIDES:${PN}:class-native+="\
+RPROVIDES:${PN}:class-native += "\
     ${PN}-sasl-examples-native \
     ${PN}-sasl-doc-native \
     ${PN}-sasl-dbg-native \
@@ -555,7 +555,7 @@ RPROVIDES:${PN}:class-native+="\
     ${PN}-native \
 "
 
-PACKAGES="\
+PACKAGES = "\
     ${PN}-dbg \
     ${PN}-sasl-examples \
     ${PN}-sasl-doc \
@@ -795,1193 +795,1193 @@ PACKAGES="\
     ${PN} \
     ${PN}-modules ${PN}-modules-dev"
 
-ALLOW_EMPTY:${PN}-sasl-examples="1"
-DESCRIPTION:${PN}-sasl-examples=""
-RDEPENDS:${PN}-sasl-examples=""
-FILES:${PN}-sasl-examples="${libdir}/erlang/lib/sasl-*/examples "
-
-ALLOW_EMPTY:${PN}-sasl-doc="1"
-DESCRIPTION:${PN}-sasl-doc=""
-RDEPENDS:${PN}-sasl-doc=""
-FILES:${PN}-sasl-doc="${libdir}/erlang/lib/sasl-*/doc ${libdir}/erlang/lib/sasl-*/man "
-
-ALLOW_EMPTY:${PN}-sasl-dbg="1"
-DESCRIPTION:${PN}-sasl-dbg=""
-RDEPENDS:${PN}-sasl-dbg=""
-FILES:${PN}-sasl-dbg="${libdir}/erlang/lib/sasl-*/bin/.debug ${libdir}/erlang/lib/sasl-*/lib/.debug ${libdir}/erlang/lib/sasl-*/priv/lib/.debug ${libdir}/erlang/lib/sasl-*/priv/obj/.debug ${libdir}/erlang/lib/sasl-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-sasl-dev="1"
-DESCRIPTION:${PN}-sasl-dev=""
-RDEPENDS:${PN}-sasl-dev=""
-FILES:${PN}-sasl-dev="${libdir}/erlang/lib/sasl-*/*src ${libdir}/erlang/lib/sasl-*/include ${libdir}/erlang/lib/sasl-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-sasl-staticdev="1"
-DESCRIPTION:${PN}-sasl-staticdev=""
-RDEPENDS:${PN}-sasl-staticdev=""
-FILES:${PN}-sasl-staticdev="${libdir}/erlang/lib/sasl-*/lib/*.a ${libdir}/erlang/lib/sasl-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-sasl="1"
-DESCRIPTION:${PN}-sasl=""
-RDEPENDS:${PN}-sasl=""
-FILES:${PN}-sasl="${libdir}/erlang/lib/sasl-* "
-
-ALLOW_EMPTY:${PN}-stdlib-examples="1"
-DESCRIPTION:${PN}-stdlib-examples=""
-RDEPENDS:${PN}-stdlib-examples=""
-FILES:${PN}-stdlib-examples="${libdir}/erlang/lib/stdlib-*/examples "
-
-ALLOW_EMPTY:${PN}-stdlib-doc="1"
-DESCRIPTION:${PN}-stdlib-doc=""
-RDEPENDS:${PN}-stdlib-doc=""
-FILES:${PN}-stdlib-doc="${libdir}/erlang/lib/stdlib-*/doc ${libdir}/erlang/lib/stdlib-*/man "
-
-ALLOW_EMPTY:${PN}-stdlib-dbg="1"
-DESCRIPTION:${PN}-stdlib-dbg=""
-RDEPENDS:${PN}-stdlib-dbg=""
-FILES:${PN}-stdlib-dbg="${libdir}/erlang/lib/stdlib-*/bin/.debug ${libdir}/erlang/lib/stdlib-*/lib/.debug ${libdir}/erlang/lib/stdlib-*/priv/lib/.debug ${libdir}/erlang/lib/stdlib-*/priv/obj/.debug ${libdir}/erlang/lib/stdlib-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-stdlib-dev="1"
-DESCRIPTION:${PN}-stdlib-dev=""
-RDEPENDS:${PN}-stdlib-dev=""
-FILES:${PN}-stdlib-dev="${libdir}/erlang/lib/stdlib-*/*src ${libdir}/erlang/lib/stdlib-*/include ${libdir}/erlang/lib/stdlib-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-stdlib-staticdev="1"
-DESCRIPTION:${PN}-stdlib-staticdev=""
-RDEPENDS:${PN}-stdlib-staticdev=""
-FILES:${PN}-stdlib-staticdev="${libdir}/erlang/lib/stdlib-*/lib/*.a ${libdir}/erlang/lib/stdlib-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-stdlib="1"
-DESCRIPTION:${PN}-stdlib=""
-RDEPENDS:${PN}-stdlib=""
-FILES:${PN}-stdlib="${libdir}/erlang/lib/stdlib-* "
-
-ALLOW_EMPTY:${PN}-kernel-examples="1"
-DESCRIPTION:${PN}-kernel-examples=""
-RDEPENDS:${PN}-kernel-examples=""
-FILES:${PN}-kernel-examples="${libdir}/erlang/lib/kernel-*/examples "
-
-ALLOW_EMPTY:${PN}-kernel-doc="1"
-DESCRIPTION:${PN}-kernel-doc=""
-RDEPENDS:${PN}-kernel-doc=""
-FILES:${PN}-kernel-doc="${libdir}/erlang/lib/kernel-*/doc ${libdir}/erlang/lib/kernel-*/man "
-
-ALLOW_EMPTY:${PN}-kernel-dbg="1"
-DESCRIPTION:${PN}-kernel-dbg=""
-RDEPENDS:${PN}-kernel-dbg=""
-FILES:${PN}-kernel-dbg="${libdir}/erlang/lib/kernel-*/bin/.debug ${libdir}/erlang/lib/kernel-*/lib/.debug ${libdir}/erlang/lib/kernel-*/priv/lib/.debug ${libdir}/erlang/lib/kernel-*/priv/obj/.debug ${libdir}/erlang/lib/kernel-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-kernel-dev="1"
-DESCRIPTION:${PN}-kernel-dev=""
-RDEPENDS:${PN}-kernel-dev=""
-FILES:${PN}-kernel-dev="${libdir}/erlang/lib/kernel-*/*src ${libdir}/erlang/lib/kernel-*/include ${libdir}/erlang/lib/kernel-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-kernel-staticdev="1"
-DESCRIPTION:${PN}-kernel-staticdev=""
-RDEPENDS:${PN}-kernel-staticdev=""
-FILES:${PN}-kernel-staticdev="${libdir}/erlang/lib/kernel-*/lib/*.a ${libdir}/erlang/lib/kernel-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-kernel="1"
-DESCRIPTION:${PN}-kernel=""
-RDEPENDS:${PN}-kernel=""
-FILES:${PN}-kernel="${libdir}/erlang/lib/kernel-* "
-
-ALLOW_EMPTY:${PN}-asn1-examples="1"
-DESCRIPTION:${PN}-asn1-examples=""
-RDEPENDS:${PN}-asn1-examples=""
-FILES:${PN}-asn1-examples="${libdir}/erlang/lib/asn1-*/examples "
-
-ALLOW_EMPTY:${PN}-asn1-doc="1"
-DESCRIPTION:${PN}-asn1-doc=""
-RDEPENDS:${PN}-asn1-doc=""
-FILES:${PN}-asn1-doc="${libdir}/erlang/lib/asn1-*/doc ${libdir}/erlang/lib/asn1-*/man "
-
-ALLOW_EMPTY:${PN}-asn1-dbg="1"
-DESCRIPTION:${PN}-asn1-dbg=""
-RDEPENDS:${PN}-asn1-dbg=""
-FILES:${PN}-asn1-dbg="${libdir}/erlang/lib/asn1-*/bin/.debug ${libdir}/erlang/lib/asn1-*/lib/.debug ${libdir}/erlang/lib/asn1-*/priv/lib/.debug ${libdir}/erlang/lib/asn1-*/priv/obj/.debug ${libdir}/erlang/lib/asn1-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-asn1-dev="1"
-DESCRIPTION:${PN}-asn1-dev=""
-RDEPENDS:${PN}-asn1-dev=""
-FILES:${PN}-asn1-dev="${libdir}/erlang/lib/asn1-*/*src ${libdir}/erlang/lib/asn1-*/include ${libdir}/erlang/lib/asn1-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-asn1-staticdev="1"
-DESCRIPTION:${PN}-asn1-staticdev=""
-RDEPENDS:${PN}-asn1-staticdev=""
-FILES:${PN}-asn1-staticdev="${libdir}/erlang/lib/asn1-*/lib/*.a ${libdir}/erlang/lib/asn1-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-asn1="1"
-DESCRIPTION:${PN}-asn1=""
-RDEPENDS:${PN}-asn1=""
-FILES:${PN}-asn1="${libdir}/erlang/lib/asn1-* "
-
-ALLOW_EMPTY:${PN}-common-test-examples="1"
-DESCRIPTION:${PN}-common-test-examples=""
-RDEPENDS:${PN}-common-test-examples=""
-FILES:${PN}-common-test-examples="${libdir}/erlang/lib/common_test-*/examples "
-
-ALLOW_EMPTY:${PN}-common-test-doc="1"
-DESCRIPTION:${PN}-common-test-doc=""
-RDEPENDS:${PN}-common-test-doc=""
-FILES:${PN}-common-test-doc="${libdir}/erlang/lib/common-test-*/doc ${libdir}/erlang/lib/common-test-*/man "
-
-ALLOW_EMPTY:${PN}-common-test-dbg="1"
-DESCRIPTION:${PN}-common-test-dbg=""
-RDEPENDS:${PN}-common-test-dbg=""
-FILES:${PN}-common-test-dbg="${libdir}/erlang/lib/common_test-*/bin/.debug ${libdir}/erlang/lib/common_test-*/lib/.debug ${libdir}/erlang/lib/common_test-*/priv/lib/.debug ${libdir}/erlang/lib/common_test-*/priv/obj/.debug ${libdir}/erlang/lib/common_test-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-common-test-dev="1"
-DESCRIPTION:${PN}-common-test-dev=""
-RDEPENDS:${PN}-common-test-dev=""
-FILES:${PN}-common-test-dev="${libdir}/erlang/lib/common_test-*/*src ${libdir}/erlang/lib/common_test-*/include ${libdir}/erlang/lib/common_test-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-common-test-staticdev="1"
-DESCRIPTION:${PN}-common-test-staticdev=""
-RDEPENDS:${PN}-common-test-staticdev=""
-FILES:${PN}-common-test-staticdev="${libdir}/erlang/lib/common_test-*/lib/*.a ${libdir}/erlang/lib/common_test-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-common-test="1"
-DESCRIPTION:${PN}-common-test=""
-RDEPENDS:${PN}-common-test=""
-FILES:${PN}-common-test="${bindir}/ct_run ${libdir}/erlang/bin/ct_run ${libdir}/erlang/lib/common_test-* ${libdir}/erlang/erts-*/bin/ct_run "
-
-ALLOW_EMPTY:${PN}-compiler-examples="1"
-DESCRIPTION:${PN}-compiler-examples=""
-RDEPENDS:${PN}-compiler-examples=""
-FILES:${PN}-compiler-examples="${libdir}/erlang/lib/compiler-*/examples "
-
-ALLOW_EMPTY:${PN}-compiler-doc="1"
-DESCRIPTION:${PN}-compiler-doc=""
-RDEPENDS:${PN}-compiler-doc=""
-FILES:${PN}-compiler-doc="${libdir}/erlang/lib/compiler-*/doc ${libdir}/erlang/lib/compiler-*/man "
-
-ALLOW_EMPTY:${PN}-compiler-dbg="1"
-DESCRIPTION:${PN}-compiler-dbg=""
-RDEPENDS:${PN}-compiler-dbg=""
-FILES:${PN}-compiler-dbg="${libdir}/erlang/lib/compiler-*/bin/.debug ${libdir}/erlang/lib/compiler-*/lib/.debug ${libdir}/erlang/lib/compiler-*/priv/lib/.debug ${libdir}/erlang/lib/compiler-*/priv/obj/.debug ${libdir}/erlang/lib/compiler-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-compiler-dev="1"
-DESCRIPTION:${PN}-compiler-dev=""
-RDEPENDS:${PN}-compiler-dev=""
-FILES:${PN}-compiler-dev="${libdir}/erlang/lib/compiler-*/*src ${libdir}/erlang/lib/compiler-*/include ${libdir}/erlang/lib/compiler-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-compiler-staticdev="1"
-DESCRIPTION:${PN}-compiler-staticdev=""
-RDEPENDS:${PN}-compiler-staticdev=""
-FILES:${PN}-compiler-staticdev="${libdir}/erlang/lib/compiler-*/lib/*.a ${libdir}/erlang/lib/compiler-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-compiler="1"
-DESCRIPTION:${PN}-compiler=""
-RDEPENDS:${PN}-compiler=""
-FILES:${PN}-compiler="${bindir}/erlc ${libdir}/erlang/bin/erlc ${libdir}/erlang/lib/compiler-* ${libdir}/erlang/erts-*/bin/erlc "
-
-ALLOW_EMPTY:${PN}-crypto-examples="1"
-DESCRIPTION:${PN}-crypto-examples=""
-RDEPENDS:${PN}-crypto-examples=""
-FILES:${PN}-crypto-examples="${libdir}/erlang/lib/crypto-*/examples "
-
-ALLOW_EMPTY:${PN}-crypto-doc="1"
-DESCRIPTION:${PN}-crypto-doc=""
-RDEPENDS:${PN}-crypto-doc=""
-FILES:${PN}-crypto-doc="${libdir}/erlang/lib/crypto-*/doc ${libdir}/erlang/lib/crypto-*/man "
-
-ALLOW_EMPTY:${PN}-crypto-dbg="1"
-DESCRIPTION:${PN}-crypto-dbg=""
-RDEPENDS:${PN}-crypto-dbg=""
-FILES:${PN}-crypto-dbg="${libdir}/erlang/lib/crypto-*/bin/.debug ${libdir}/erlang/lib/crypto-*/lib/.debug ${libdir}/erlang/lib/crypto-*/priv/lib/.debug ${libdir}/erlang/lib/crypto-*/priv/obj/.debug ${libdir}/erlang/lib/crypto-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-crypto-dev="1"
-DESCRIPTION:${PN}-crypto-dev=""
-RDEPENDS:${PN}-crypto-dev=""
-FILES:${PN}-crypto-dev="${libdir}/erlang/lib/crypto-*/*src ${libdir}/erlang/lib/crypto-*/include ${libdir}/erlang/lib/crypto-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-crypto-staticdev="1"
-DESCRIPTION:${PN}-crypto-staticdev=""
-RDEPENDS:${PN}-crypto-staticdev=""
-FILES:${PN}-crypto-staticdev="${libdir}/erlang/lib/crypto-*/lib/*.a ${libdir}/erlang/lib/crypto-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-crypto="1"
-DESCRIPTION:${PN}-crypto=""
-RDEPENDS:${PN}-crypto="openssl"
-FILES:${PN}-crypto="${libdir}/erlang/lib/crypto-* "
-
-ALLOW_EMPTY:${PN}-debugger-examples="1"
-DESCRIPTION:${PN}-debugger-examples=""
-RDEPENDS:${PN}-debugger-examples=""
-FILES:${PN}-debugger-examples="${libdir}/erlang/lib/debugger-*/examples "
-
-ALLOW_EMPTY:${PN}-debugger-doc="1"
-DESCRIPTION:${PN}-debugger-doc=""
-RDEPENDS:${PN}-debugger-doc=""
-FILES:${PN}-debugger-doc="${libdir}/erlang/lib/debugger-*/doc ${libdir}/erlang/lib/debugger-*/man "
-
-ALLOW_EMPTY:${PN}-debugger-dbg="1"
-DESCRIPTION:${PN}-debugger-dbg=""
-RDEPENDS:${PN}-debugger-dbg=""
-FILES:${PN}-debugger-dbg="${libdir}/erlang/lib/debugger-*/bin/.debug ${libdir}/erlang/lib/debugger-*/lib/.debug ${libdir}/erlang/lib/debugger-*/priv/lib/.debug ${libdir}/erlang/lib/debugger-*/priv/obj/.debug ${libdir}/erlang/lib/debugger-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-debugger-dev="1"
-DESCRIPTION:${PN}-debugger-dev=""
-RDEPENDS:${PN}-debugger-dev=""
-FILES:${PN}-debugger-dev="${libdir}/erlang/lib/debugger-*/*src ${libdir}/erlang/lib/debugger-*/include ${libdir}/erlang/lib/debugger-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-debugger-staticdev="1"
-DESCRIPTION:${PN}-debugger-staticdev=""
-RDEPENDS:${PN}-debugger-staticdev=""
-FILES:${PN}-debugger-staticdev="${libdir}/erlang/lib/debugger-*/lib/*.a ${libdir}/erlang/lib/debugger-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-debugger="1"
-DESCRIPTION:${PN}-debugger="--with-debugger,--without-debugger,,"
-RDEPENDS:${PN}-debugger=""
-FILES:${PN}-debugger="${libdir}/erlang/lib/debugger-* "
-
-ALLOW_EMPTY:${PN}-dialyzer-examples="1"
-DESCRIPTION:${PN}-dialyzer-examples=""
-RDEPENDS:${PN}-dialyzer-examples=""
-FILES:${PN}-dialyzer-examples="${libdir}/erlang/lib/dialyzer-*/examples "
-
-ALLOW_EMPTY:${PN}-dialyzer-doc="1"
-DESCRIPTION:${PN}-dialyzer-doc=""
-RDEPENDS:${PN}-dialyzer-doc=""
-FILES:${PN}-dialyzer-doc="${libdir}/erlang/lib/dialyzer-*/doc ${libdir}/erlang/lib/dialyzer-*/man "
-
-ALLOW_EMPTY:${PN}-dialyzer-dbg="1"
-DESCRIPTION:${PN}-dialyzer-dbg=""
-RDEPENDS:${PN}-dialyzer-dbg=""
-FILES:${PN}-dialyzer-dbg="${libdir}/erlang/lib/dialyzer-*/bin/.debug ${libdir}/erlang/lib/dialyzer-*/lib/.debug ${libdir}/erlang/lib/dialyzer-*/priv/lib/.debug ${libdir}/erlang/lib/dialyzer-*/priv/obj/.debug ${libdir}/erlang/lib/dialyzer-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-dialyzer-dev="1"
-DESCRIPTION:${PN}-dialyzer-dev=""
-RDEPENDS:${PN}-dialyzer-dev=""
-FILES:${PN}-dialyzer-dev="${libdir}/erlang/lib/dialyzer-*/*src ${libdir}/erlang/lib/dialyzer-*/include ${libdir}/erlang/lib/dialyzer-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-dialyzer-staticdev="1"
-DESCRIPTION:${PN}-dialyzer-staticdev=""
-RDEPENDS:${PN}-dialyzer-staticdev=""
-FILES:${PN}-dialyzer-staticdev="${libdir}/erlang/lib/dialyzer-*/lib/*.a ${libdir}/erlang/lib/dialyzer-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-dialyzer="1"
-DESCRIPTION:${PN}-dialyzer=""
-RDEPENDS:${PN}-dialyzer=""
-FILES:${PN}-dialyzer="${bindir}/dialyzer ${libdir}/erlang/bin/dialyzer ${libdir}/erlang/lib/dialyzer-* ${libdir}/erlang/erts-*/bin/dialyzer "
-
-ALLOW_EMPTY:${PN}-diameter-examples="1"
-DESCRIPTION:${PN}-diameter-examples=""
-RDEPENDS:${PN}-diameter-examples=""
-FILES:${PN}-diameter-examples="${libdir}/erlang/lib/diameter-*/examples "
-
-ALLOW_EMPTY:${PN}-diameter-doc="1"
-DESCRIPTION:${PN}-diameter-doc=""
-RDEPENDS:${PN}-diameter-doc=""
-FILES:${PN}-diameter-doc="${libdir}/erlang/lib/diameter-*/doc ${libdir}/erlang/lib/diameter-*/man "
-
-ALLOW_EMPTY:${PN}-diameter-dbg="1"
-DESCRIPTION:${PN}-diameter-dbg=""
-RDEPENDS:${PN}-diameter-dbg=""
-FILES:${PN}-diameter-dbg="${libdir}/erlang/lib/diameter-*/bin/.debug ${libdir}/erlang/lib/diameter-*/lib/.debug ${libdir}/erlang/lib/diameter-*/priv/lib/.debug ${libdir}/erlang/lib/diameter-*/priv/obj/.debug ${libdir}/erlang/lib/diameter-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-diameter-dev="1"
-DESCRIPTION:${PN}-diameter-dev=""
-RDEPENDS:${PN}-diameter-dev=""
-FILES:${PN}-diameter-dev="${libdir}/erlang/lib/diameter-*/*src ${libdir}/erlang/lib/diameter-*/include ${libdir}/erlang/lib/diameter-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-diameter-staticdev="1"
-DESCRIPTION:${PN}-diameter-staticdev=""
-RDEPENDS:${PN}-diameter-staticdev=""
-FILES:${PN}-diameter-staticdev="${libdir}/erlang/lib/diameter-*/lib/*.a ${libdir}/erlang/lib/diameter-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-diameter="1"
-DESCRIPTION:${PN}-diameter=""
-RDEPENDS:${PN}-diameter=""
-FILES:${PN}-diameter="${libdir}/erlang/lib/diameter-* "
-
-ALLOW_EMPTY:${PN}-edoc-examples="1"
-DESCRIPTION:${PN}-edoc-examples=""
-RDEPENDS:${PN}-edoc-examples=""
-FILES:${PN}-edoc-examples="${libdir}/erlang/lib/edoc-*/examples "
-
-ALLOW_EMPTY:${PN}-edoc-doc="1"
-DESCRIPTION:${PN}-edoc-doc=""
-RDEPENDS:${PN}-edoc-doc=""
-FILES:${PN}-edoc-doc="${libdir}/erlang/lib/edoc-*/doc ${libdir}/erlang/lib/edoc-*/man "
-
-ALLOW_EMPTY:${PN}-edoc-dbg="1"
-DESCRIPTION:${PN}-edoc-dbg=""
-RDEPENDS:${PN}-edoc-dbg=""
-FILES:${PN}-edoc-dbg="${libdir}/erlang/lib/edoc-*/bin/.debug ${libdir}/erlang/lib/edoc-*/lib/.debug ${libdir}/erlang/lib/edoc-*/priv/lib/.debug ${libdir}/erlang/lib/edoc-*/priv/obj/.debug ${libdir}/erlang/lib/edoc-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-edoc-dev="1"
-DESCRIPTION:${PN}-edoc-dev=""
-RDEPENDS:${PN}-edoc-dev=""
-FILES:${PN}-edoc-dev="${libdir}/erlang/lib/edoc-*/*src ${libdir}/erlang/lib/edoc-*/include ${libdir}/erlang/lib/edoc-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-edoc-staticdev="1"
-DESCRIPTION:${PN}-edoc-staticdev=""
-RDEPENDS:${PN}-edoc-staticdev=""
-FILES:${PN}-edoc-staticdev="${libdir}/erlang/lib/edoc-*/lib/*.a ${libdir}/erlang/lib/edoc-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-edoc="1"
-DESCRIPTION:${PN}-edoc=""
-RDEPENDS:${PN}-edoc=""
-FILES:${PN}-edoc="${libdir}/erlang/lib/edoc-* "
-
-ALLOW_EMPTY:${PN}-eldap-examples="1"
-DESCRIPTION:${PN}-eldap-examples=""
-RDEPENDS:${PN}-eldap-examples=""
-FILES:${PN}-eldap-examples="${libdir}/erlang/lib/eldap-*/examples "
-
-ALLOW_EMPTY:${PN}-eldap-doc="1"
-DESCRIPTION:${PN}-eldap-doc=""
-RDEPENDS:${PN}-eldap-doc=""
-FILES:${PN}-eldap-doc="${libdir}/erlang/lib/eldap-*/doc ${libdir}/erlang/lib/eldap-*/man "
-
-ALLOW_EMPTY:${PN}-eldap-dbg="1"
-DESCRIPTION:${PN}-eldap-dbg=""
-RDEPENDS:${PN}-eldap-dbg=""
-FILES:${PN}-eldap-dbg="${libdir}/erlang/lib/eldap-*/bin/.debug ${libdir}/erlang/lib/eldap-*/lib/.debug ${libdir}/erlang/lib/eldap-*/priv/lib/.debug ${libdir}/erlang/lib/eldap-*/priv/obj/.debug ${libdir}/erlang/lib/eldap-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-eldap-dev="1"
-DESCRIPTION:${PN}-eldap-dev=""
-RDEPENDS:${PN}-eldap-dev=""
-FILES:${PN}-eldap-dev="${libdir}/erlang/lib/eldap-*/*src ${libdir}/erlang/lib/eldap-*/include ${libdir}/erlang/lib/eldap-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-eldap-staticdev="1"
-DESCRIPTION:${PN}-eldap-staticdev=""
-RDEPENDS:${PN}-eldap-staticdev=""
-FILES:${PN}-eldap-staticdev="${libdir}/erlang/lib/eldap-*/lib/*.a ${libdir}/erlang/lib/eldap-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-eldap="1"
-DESCRIPTION:${PN}-eldap=""
-RDEPENDS:${PN}-eldap=""
-FILES:${PN}-eldap="${libdir}/erlang/lib/eldap-* "
-
-ALLOW_EMPTY:${PN}-emacs-examples="1"
-DESCRIPTION:${PN}-emacs-examples=""
-RDEPENDS:${PN}-emacs-examples=""
-FILES:${PN}-emacs-examples="${libdir}/erlang/lib/emacs-*/examples "
-
-ALLOW_EMPTY:${PN}-emacs="1"
-DESCRIPTION:${PN}-emacs=""
-RDEPENDS:${PN}-emacs=""
-FILES:${PN}-emacs="${libdir}/erlang/lib/tools-*/emacs "
-
-ALLOW_EMPTY:${PN}-erl-docgen-examples="1"
-DESCRIPTION:${PN}-erl-docgen-examples=""
-RDEPENDS:${PN}-erl-docgen-examples=""
-FILES:${PN}-erl-docgen-examples="${libdir}/erlang/lib/erl_docgen-*/examples "
-
-ALLOW_EMPTY:${PN}-erl-docgen-doc="1"
-DESCRIPTION:${PN}-erl-docgen-doc=""
-RDEPENDS:${PN}-erl-docgen-doc=""
-FILES:${PN}-erl-docgen-doc="${libdir}/erlang/lib/erl-docgen-*/doc ${libdir}/erlang/lib/erl-docgen-*/man "
-
-ALLOW_EMPTY:${PN}-erl-docgen-dbg="1"
-DESCRIPTION:${PN}-erl-docgen-dbg=""
-RDEPENDS:${PN}-erl-docgen-dbg=""
-FILES:${PN}-erl-docgen-dbg="${libdir}/erlang/lib/erl_docgen-*/bin/.debug ${libdir}/erlang/lib/erl_docgen-*/lib/.debug ${libdir}/erlang/lib/erl_docgen-*/priv/lib/.debug ${libdir}/erlang/lib/erl_docgen-*/priv/obj/.debug ${libdir}/erlang/lib/erl_docgen-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-erl-docgen-dev="1"
-DESCRIPTION:${PN}-erl-docgen-dev=""
-RDEPENDS:${PN}-erl-docgen-dev=""
-FILES:${PN}-erl-docgen-dev="${libdir}/erlang/lib/erl_docgen-*/*src ${libdir}/erlang/lib/erl_docgen-*/include ${libdir}/erlang/lib/erl_docgen-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-erl-docgen-staticdev="1"
-DESCRIPTION:${PN}-erl-docgen-staticdev=""
-RDEPENDS:${PN}-erl-docgen-staticdev=""
-FILES:${PN}-erl-docgen-staticdev="${libdir}/erlang/lib/erl_docgen-*/lib/*.a ${libdir}/erlang/lib/erl_docgen-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-erl-docgen="1"
-DESCRIPTION:${PN}-erl-docgen=""
-RDEPENDS:${PN}-erl-docgen=""
-FILES:${PN}-erl-docgen="${libdir}/erlang/lib/erl_docgen-* "
-
-ALLOW_EMPTY:${PN}-erl-interface-examples="1"
-DESCRIPTION:${PN}-erl-interface-examples=""
-RDEPENDS:${PN}-erl-interface-examples=""
-FILES:${PN}-erl-interface-examples="${libdir}/erlang/lib/erl_interface-*/examples "
-
-ALLOW_EMPTY:${PN}-erl-interface-doc="1"
-DESCRIPTION:${PN}-erl-interface-doc=""
-RDEPENDS:${PN}-erl-interface-doc=""
-FILES:${PN}-erl-interface-doc="${libdir}/erlang/lib/erl-interface-*/doc ${libdir}/erlang/lib/erl-interface-*/man "
-
-ALLOW_EMPTY:${PN}-erl-interface-dbg="1"
-DESCRIPTION:${PN}-erl-interface-dbg=""
-RDEPENDS:${PN}-erl-interface-dbg=""
-FILES:${PN}-erl-interface-dbg="${libdir}/erlang/lib/erl_interface-*/bin/.debug ${libdir}/erlang/lib/erl_interface-*/lib/.debug ${libdir}/erlang/lib/erl_interface-*/priv/lib/.debug ${libdir}/erlang/lib/erl_interface-*/priv/obj/.debug ${libdir}/erlang/lib/erl_interface-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-erl-interface-dev="1"
-DESCRIPTION:${PN}-erl-interface-dev=""
-RDEPENDS:${PN}-erl-interface-dev=""
-FILES:${PN}-erl-interface-dev="${libdir}/erlang/lib/erl_interface-*/*src ${libdir}/erlang/lib/erl_interface-*/include ${libdir}/erlang/lib/erl_interface-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-erl-interface-staticdev="1"
-DESCRIPTION:${PN}-erl-interface-staticdev=""
-RDEPENDS:${PN}-erl-interface-staticdev=""
-FILES:${PN}-erl-interface-staticdev="${libdir}/erlang/lib/erl_interface-*/lib/*.a ${libdir}/erlang/lib/erl_interface-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-erl-interface="1"
-DESCRIPTION:${PN}-erl-interface=""
-RDEPENDS:${PN}-erl-interface=""
-FILES:${PN}-erl-interface="${libdir}/erlang/lib/erl_interface-* "
-
-ALLOW_EMPTY:${PN}-et-examples="1"
-DESCRIPTION:${PN}-et-examples=""
-RDEPENDS:${PN}-et-examples=""
-FILES:${PN}-et-examples="${libdir}/erlang/lib/et-*/examples "
-
-ALLOW_EMPTY:${PN}-et-doc="1"
-DESCRIPTION:${PN}-et-doc=""
-RDEPENDS:${PN}-et-doc=""
-FILES:${PN}-et-doc="${libdir}/erlang/lib/et-*/doc ${libdir}/erlang/lib/et-*/man "
-
-ALLOW_EMPTY:${PN}-et-dbg="1"
-DESCRIPTION:${PN}-et-dbg=""
-RDEPENDS:${PN}-et-dbg=""
-FILES:${PN}-et-dbg="${libdir}/erlang/lib/et-*/bin/.debug ${libdir}/erlang/lib/et-*/lib/.debug ${libdir}/erlang/lib/et-*/priv/lib/.debug ${libdir}/erlang/lib/et-*/priv/obj/.debug ${libdir}/erlang/lib/et-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-et-dev="1"
-DESCRIPTION:${PN}-et-dev=""
-RDEPENDS:${PN}-et-dev=""
-FILES:${PN}-et-dev="${libdir}/erlang/lib/et-*/*src ${libdir}/erlang/lib/et-*/include ${libdir}/erlang/lib/et-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-et-staticdev="1"
-DESCRIPTION:${PN}-et-staticdev=""
-RDEPENDS:${PN}-et-staticdev=""
-FILES:${PN}-et-staticdev="${libdir}/erlang/lib/et-*/lib/*.a ${libdir}/erlang/lib/et-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-et="1"
-DESCRIPTION:${PN}-et=""
-RDEPENDS:${PN}-et=""
-FILES:${PN}-et="${libdir}/erlang/lib/et-* "
-
-ALLOW_EMPTY:${PN}-eunit-examples="1"
-DESCRIPTION:${PN}-eunit-examples=""
-RDEPENDS:${PN}-eunit-examples=""
-FILES:${PN}-eunit-examples="${libdir}/erlang/lib/eunit-*/examples "
-
-ALLOW_EMPTY:${PN}-eunit-doc="1"
-DESCRIPTION:${PN}-eunit-doc=""
-RDEPENDS:${PN}-eunit-doc=""
-FILES:${PN}-eunit-doc="${libdir}/erlang/lib/eunit-*/doc ${libdir}/erlang/lib/eunit-*/man "
-
-ALLOW_EMPTY:${PN}-eunit-dbg="1"
-DESCRIPTION:${PN}-eunit-dbg=""
-RDEPENDS:${PN}-eunit-dbg=""
-FILES:${PN}-eunit-dbg="${libdir}/erlang/lib/eunit-*/bin/.debug ${libdir}/erlang/lib/eunit-*/lib/.debug ${libdir}/erlang/lib/eunit-*/priv/lib/.debug ${libdir}/erlang/lib/eunit-*/priv/obj/.debug ${libdir}/erlang/lib/eunit-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-eunit-dev="1"
-DESCRIPTION:${PN}-eunit-dev=""
-RDEPENDS:${PN}-eunit-dev=""
-FILES:${PN}-eunit-dev="${libdir}/erlang/lib/eunit-*/*src ${libdir}/erlang/lib/eunit-*/include ${libdir}/erlang/lib/eunit-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-eunit-staticdev="1"
-DESCRIPTION:${PN}-eunit-staticdev=""
-RDEPENDS:${PN}-eunit-staticdev=""
-FILES:${PN}-eunit-staticdev="${libdir}/erlang/lib/eunit-*/lib/*.a ${libdir}/erlang/lib/eunit-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-eunit="1"
-DESCRIPTION:${PN}-eunit=""
-RDEPENDS:${PN}-eunit=""
-FILES:${PN}-eunit="${libdir}/erlang/lib/eunit-* "
-
-ALLOW_EMPTY:${PN}-ftp-examples="1"
-DESCRIPTION:${PN}-ftp-examples=""
-RDEPENDS:${PN}-ftp-examples=""
-FILES:${PN}-ftp-examples="${libdir}/erlang/lib/ftp-*/examples "
-
-ALLOW_EMPTY:${PN}-ftp-doc="1"
-DESCRIPTION:${PN}-ftp-doc=""
-RDEPENDS:${PN}-ftp-doc=""
-FILES:${PN}-ftp-doc="${libdir}/erlang/lib/ftp-*/doc ${libdir}/erlang/lib/ftp-*/man "
-
-ALLOW_EMPTY:${PN}-ftp-dbg="1"
-DESCRIPTION:${PN}-ftp-dbg=""
-RDEPENDS:${PN}-ftp-dbg=""
-FILES:${PN}-ftp-dbg="${libdir}/erlang/lib/ftp-*/bin/.debug ${libdir}/erlang/lib/ftp-*/lib/.debug ${libdir}/erlang/lib/ftp-*/priv/lib/.debug ${libdir}/erlang/lib/ftp-*/priv/obj/.debug ${libdir}/erlang/lib/ftp-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-ftp-dev="1"
-DESCRIPTION:${PN}-ftp-dev=""
-RDEPENDS:${PN}-ftp-dev=""
-FILES:${PN}-ftp-dev="${libdir}/erlang/lib/ftp-*/*src ${libdir}/erlang/lib/ftp-*/include ${libdir}/erlang/lib/ftp-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-ftp-staticdev="1"
-DESCRIPTION:${PN}-ftp-staticdev=""
-RDEPENDS:${PN}-ftp-staticdev=""
-FILES:${PN}-ftp-staticdev="${libdir}/erlang/lib/ftp-*/lib/*.a ${libdir}/erlang/lib/ftp-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-ftp="1"
-DESCRIPTION:${PN}-ftp=""
-RDEPENDS:${PN}-ftp=""
-FILES:${PN}-ftp="${libdir}/erlang/lib/ftp-* "
-
-ALLOW_EMPTY:${PN}-inets-examples="1"
-DESCRIPTION:${PN}-inets-examples=""
-RDEPENDS:${PN}-inets-examples=""
-FILES:${PN}-inets-examples="${libdir}/erlang/lib/inets-*/examples "
-
-ALLOW_EMPTY:${PN}-inets-doc="1"
-DESCRIPTION:${PN}-inets-doc=""
-RDEPENDS:${PN}-inets-doc=""
-FILES:${PN}-inets-doc="${libdir}/erlang/lib/inets-*/doc ${libdir}/erlang/lib/inets-*/man "
-
-ALLOW_EMPTY:${PN}-inets-dbg="1"
-DESCRIPTION:${PN}-inets-dbg=""
-RDEPENDS:${PN}-inets-dbg=""
-FILES:${PN}-inets-dbg="${libdir}/erlang/lib/inets-*/bin/.debug ${libdir}/erlang/lib/inets-*/lib/.debug ${libdir}/erlang/lib/inets-*/priv/lib/.debug ${libdir}/erlang/lib/inets-*/priv/obj/.debug ${libdir}/erlang/lib/inets-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-inets-dev="1"
-DESCRIPTION:${PN}-inets-dev=""
-RDEPENDS:${PN}-inets-dev=""
-FILES:${PN}-inets-dev="${libdir}/erlang/lib/inets-*/*src ${libdir}/erlang/lib/inets-*/include ${libdir}/erlang/lib/inets-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-inets-staticdev="1"
-DESCRIPTION:${PN}-inets-staticdev=""
-RDEPENDS:${PN}-inets-staticdev=""
-FILES:${PN}-inets-staticdev="${libdir}/erlang/lib/inets-*/lib/*.a ${libdir}/erlang/lib/inets-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-inets="1"
-DESCRIPTION:${PN}-inets=""
-RDEPENDS:${PN}-inets=""
-FILES:${PN}-inets="${libdir}/erlang/lib/inets-* "
-
-ALLOW_EMPTY:${PN}-jinterface-examples="1"
-DESCRIPTION:${PN}-jinterface-examples=""
-RDEPENDS:${PN}-jinterface-examples=""
-FILES:${PN}-jinterface-examples="${libdir}/erlang/lib/jinterface-*/examples "
-
-ALLOW_EMPTY:${PN}-jinterface-doc="1"
-DESCRIPTION:${PN}-jinterface-doc=""
-RDEPENDS:${PN}-jinterface-doc=""
-FILES:${PN}-jinterface-doc="${libdir}/erlang/lib/jinterface-*/doc ${libdir}/erlang/lib/jinterface-*/man "
-
-ALLOW_EMPTY:${PN}-jinterface-dbg="1"
-DESCRIPTION:${PN}-jinterface-dbg=""
-RDEPENDS:${PN}-jinterface-dbg=""
-FILES:${PN}-jinterface-dbg="${libdir}/erlang/lib/jinterface-*/bin/.debug ${libdir}/erlang/lib/jinterface-*/lib/.debug ${libdir}/erlang/lib/jinterface-*/priv/lib/.debug ${libdir}/erlang/lib/jinterface-*/priv/obj/.debug ${libdir}/erlang/lib/jinterface-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-jinterface-dev="1"
-DESCRIPTION:${PN}-jinterface-dev=""
-RDEPENDS:${PN}-jinterface-dev=""
-FILES:${PN}-jinterface-dev="${libdir}/erlang/lib/jinterface-*/*src ${libdir}/erlang/lib/jinterface-*/include ${libdir}/erlang/lib/jinterface-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-jinterface-staticdev="1"
-DESCRIPTION:${PN}-jinterface-staticdev=""
-RDEPENDS:${PN}-jinterface-staticdev=""
-FILES:${PN}-jinterface-staticdev="${libdir}/erlang/lib/jinterface-*/lib/*.a ${libdir}/erlang/lib/jinterface-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-jinterface="1"
-DESCRIPTION:${PN}-jinterface=""
-RDEPENDS:${PN}-jinterface=""
-FILES:${PN}-jinterface="${libdir}/erlang/lib/jinterface-* "
-
-ALLOW_EMPTY:${PN}-megaco-examples="1"
-DESCRIPTION:${PN}-megaco-examples=""
-RDEPENDS:${PN}-megaco-examples=""
-FILES:${PN}-megaco-examples="${libdir}/erlang/lib/megaco-*/examples "
-
-ALLOW_EMPTY:${PN}-megaco-doc="1"
-DESCRIPTION:${PN}-megaco-doc=""
-RDEPENDS:${PN}-megaco-doc=""
-FILES:${PN}-megaco-doc="${libdir}/erlang/lib/megaco-*/doc ${libdir}/erlang/lib/megaco-*/man "
-
-ALLOW_EMPTY:${PN}-megaco-dbg="1"
-DESCRIPTION:${PN}-megaco-dbg=""
-RDEPENDS:${PN}-megaco-dbg=""
-FILES:${PN}-megaco-dbg="${libdir}/erlang/lib/megaco-*/bin/.debug ${libdir}/erlang/lib/megaco-*/lib/.debug ${libdir}/erlang/lib/megaco-*/priv/lib/.debug ${libdir}/erlang/lib/megaco-*/priv/obj/.debug ${libdir}/erlang/lib/megaco-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-megaco-dev="1"
-DESCRIPTION:${PN}-megaco-dev=""
-RDEPENDS:${PN}-megaco-dev=""
-FILES:${PN}-megaco-dev="${libdir}/erlang/lib/megaco-*/*src ${libdir}/erlang/lib/megaco-*/include ${libdir}/erlang/lib/megaco-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-megaco-staticdev="1"
-DESCRIPTION:${PN}-megaco-staticdev=""
-RDEPENDS:${PN}-megaco-staticdev=""
-FILES:${PN}-megaco-staticdev="${libdir}/erlang/lib/megaco-*/lib/*.a ${libdir}/erlang/lib/megaco-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-megaco="1"
-DESCRIPTION:${PN}-megaco=""
-RDEPENDS:${PN}-megaco=""
-FILES:${PN}-megaco="${libdir}/erlang/lib/megaco-* "
-
-ALLOW_EMPTY:${PN}-mnesia-examples="1"
-DESCRIPTION:${PN}-mnesia-examples=""
-RDEPENDS:${PN}-mnesia-examples=""
-FILES:${PN}-mnesia-examples="${libdir}/erlang/lib/mnesia-*/examples "
-
-ALLOW_EMPTY:${PN}-mnesia-doc="1"
-DESCRIPTION:${PN}-mnesia-doc=""
-RDEPENDS:${PN}-mnesia-doc=""
-FILES:${PN}-mnesia-doc="${libdir}/erlang/lib/mnesia-*/doc ${libdir}/erlang/lib/mnesia-*/man "
-
-ALLOW_EMPTY:${PN}-mnesia-dbg="1"
-DESCRIPTION:${PN}-mnesia-dbg=""
-RDEPENDS:${PN}-mnesia-dbg=""
-FILES:${PN}-mnesia-dbg="${libdir}/erlang/lib/mnesia-*/bin/.debug ${libdir}/erlang/lib/mnesia-*/lib/.debug ${libdir}/erlang/lib/mnesia-*/priv/lib/.debug ${libdir}/erlang/lib/mnesia-*/priv/obj/.debug ${libdir}/erlang/lib/mnesia-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-mnesia-dev="1"
-DESCRIPTION:${PN}-mnesia-dev=""
-RDEPENDS:${PN}-mnesia-dev=""
-FILES:${PN}-mnesia-dev="${libdir}/erlang/lib/mnesia-*/*src ${libdir}/erlang/lib/mnesia-*/include ${libdir}/erlang/lib/mnesia-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-mnesia-staticdev="1"
-DESCRIPTION:${PN}-mnesia-staticdev=""
-RDEPENDS:${PN}-mnesia-staticdev=""
-FILES:${PN}-mnesia-staticdev="${libdir}/erlang/lib/mnesia-*/lib/*.a ${libdir}/erlang/lib/mnesia-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-mnesia="1"
-DESCRIPTION:${PN}-mnesia=""
-RDEPENDS:${PN}-mnesia=""
-FILES:${PN}-mnesia="${libdir}/erlang/lib/mnesia-* "
-
-ALLOW_EMPTY:${PN}-observer-examples="1"
-DESCRIPTION:${PN}-observer-examples=""
-RDEPENDS:${PN}-observer-examples=""
-FILES:${PN}-observer-examples="${libdir}/erlang/lib/observer-*/examples "
-
-ALLOW_EMPTY:${PN}-observer-doc="1"
-DESCRIPTION:${PN}-observer-doc=""
-RDEPENDS:${PN}-observer-doc=""
-FILES:${PN}-observer-doc="${libdir}/erlang/lib/observer-*/doc ${libdir}/erlang/lib/observer-*/man "
-
-ALLOW_EMPTY:${PN}-observer-dbg="1"
-DESCRIPTION:${PN}-observer-dbg=""
-RDEPENDS:${PN}-observer-dbg=""
-FILES:${PN}-observer-dbg="${libdir}/erlang/lib/observer-*/bin/.debug ${libdir}/erlang/lib/observer-*/lib/.debug ${libdir}/erlang/lib/observer-*/priv/lib/.debug ${libdir}/erlang/lib/observer-*/priv/obj/.debug ${libdir}/erlang/lib/observer-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-observer-dev="1"
-DESCRIPTION:${PN}-observer-dev=""
-RDEPENDS:${PN}-observer-dev=""
-FILES:${PN}-observer-dev="${libdir}/erlang/lib/observer-*/*src ${libdir}/erlang/lib/observer-*/include ${libdir}/erlang/lib/observer-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-observer-staticdev="1"
-DESCRIPTION:${PN}-observer-staticdev=""
-RDEPENDS:${PN}-observer-staticdev=""
-FILES:${PN}-observer-staticdev="${libdir}/erlang/lib/observer-*/lib/*.a ${libdir}/erlang/lib/observer-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-observer="1"
-DESCRIPTION:${PN}-observer="--with-observer,--without-observer,wxwidgets,"
-RDEPENDS:${PN}-observer=""
-FILES:${PN}-observer="${libdir}/erlang/lib/observer-* "
-
-ALLOW_EMPTY:${PN}-wx-examples="1"
-DESCRIPTION:${PN}-wx-examples=""
-RDEPENDS:${PN}-wx-examples=""
-FILES:${PN}-wx-examples="${libdir}/erlang/lib/wx-*/examples "
-
-ALLOW_EMPTY:${PN}-wx-doc="1"
-DESCRIPTION:${PN}-wx-doc=""
-RDEPENDS:${PN}-wx-doc=""
-FILES:${PN}-wx-doc="${libdir}/erlang/lib/wx-*/doc ${libdir}/erlang/lib/wx-*/man "
-
-ALLOW_EMPTY:${PN}-wx-dbg="1"
-DESCRIPTION:${PN}-wx-dbg=""
-RDEPENDS:${PN}-wx-dbg=""
-FILES:${PN}-wx-dbg="${libdir}/erlang/lib/wx-*/bin/.debug ${libdir}/erlang/lib/wx-*/lib/.debug ${libdir}/erlang/lib/wx-*/priv/lib/.debug ${libdir}/erlang/lib/wx-*/priv/obj/.debug ${libdir}/erlang/lib/wx-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-wx-dev="1"
-DESCRIPTION:${PN}-wx-dev=""
-RDEPENDS:${PN}-wx-dev=""
-FILES:${PN}-wx-dev="${libdir}/erlang/lib/wx-*/*src ${libdir}/erlang/lib/wx-*/include ${libdir}/erlang/lib/wx-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-wx-staticdev="1"
-DESCRIPTION:${PN}-wx-staticdev=""
-RDEPENDS:${PN}-wx-staticdev=""
-FILES:${PN}-wx-staticdev="${libdir}/erlang/lib/wx-*/lib/*.a ${libdir}/erlang/lib/wx-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-wx="1"
-DESCRIPTION:${PN}-wx=""
-RDEPENDS:${PN}-wx=""
-FILES:${PN}-wx="${libdir}/erlang/lib/wx-* "
-
-ALLOW_EMPTY:${PN}-os-mon-examples="1"
-DESCRIPTION:${PN}-os-mon-examples=""
-RDEPENDS:${PN}-os-mon-examples=""
-FILES:${PN}-os-mon-examples="${libdir}/erlang/lib/os_mon-*/examples "
-
-ALLOW_EMPTY:${PN}-os-mon-doc="1"
-DESCRIPTION:${PN}-os-mon-doc=""
-RDEPENDS:${PN}-os-mon-doc=""
-FILES:${PN}-os-mon-doc="${libdir}/erlang/lib/os-mon-*/doc ${libdir}/erlang/lib/os-mon-*/man "
-
-ALLOW_EMPTY:${PN}-os-mon-dbg="1"
-DESCRIPTION:${PN}-os-mon-dbg=""
-RDEPENDS:${PN}-os-mon-dbg=""
-FILES:${PN}-os-mon-dbg="${libdir}/erlang/lib/os_mon-*/bin/.debug ${libdir}/erlang/lib/os_mon-*/lib/.debug ${libdir}/erlang/lib/os_mon-*/priv/lib/.debug ${libdir}/erlang/lib/os_mon-*/priv/obj/.debug ${libdir}/erlang/lib/os_mon-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-os-mon-dev="1"
-DESCRIPTION:${PN}-os-mon-dev=""
-RDEPENDS:${PN}-os-mon-dev=""
-FILES:${PN}-os-mon-dev="${libdir}/erlang/lib/os_mon-*/*src ${libdir}/erlang/lib/os_mon-*/include ${libdir}/erlang/lib/os_mon-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-os-mon-staticdev="1"
-DESCRIPTION:${PN}-os-mon-staticdev=""
-RDEPENDS:${PN}-os-mon-staticdev=""
-FILES:${PN}-os-mon-staticdev="${libdir}/erlang/lib/os_mon-*/lib/*.a ${libdir}/erlang/lib/os_mon-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-os-mon="1"
-DESCRIPTION:${PN}-os-mon=""
-RDEPENDS:${PN}-os-mon=""
-FILES:${PN}-os-mon="${libdir}/erlang/lib/os_mon-* "
-
-ALLOW_EMPTY:${PN}-parsetools-examples="1"
-DESCRIPTION:${PN}-parsetools-examples=""
-RDEPENDS:${PN}-parsetools-examples=""
-FILES:${PN}-parsetools-examples="${libdir}/erlang/lib/parsetools-*/examples "
-
-ALLOW_EMPTY:${PN}-parsetools-doc="1"
-DESCRIPTION:${PN}-parsetools-doc=""
-RDEPENDS:${PN}-parsetools-doc=""
-FILES:${PN}-parsetools-doc="${libdir}/erlang/lib/parsetools-*/doc ${libdir}/erlang/lib/parsetools-*/man "
-
-ALLOW_EMPTY:${PN}-parsetools-dbg="1"
-DESCRIPTION:${PN}-parsetools-dbg=""
-RDEPENDS:${PN}-parsetools-dbg=""
-FILES:${PN}-parsetools-dbg="${libdir}/erlang/lib/parsetools-*/bin/.debug ${libdir}/erlang/lib/parsetools-*/lib/.debug ${libdir}/erlang/lib/parsetools-*/priv/lib/.debug ${libdir}/erlang/lib/parsetools-*/priv/obj/.debug ${libdir}/erlang/lib/parsetools-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-parsetools-dev="1"
-DESCRIPTION:${PN}-parsetools-dev=""
-RDEPENDS:${PN}-parsetools-dev=""
-FILES:${PN}-parsetools-dev="${libdir}/erlang/lib/parsetools-*/*src ${libdir}/erlang/lib/parsetools-*/include ${libdir}/erlang/lib/parsetools-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-parsetools-staticdev="1"
-DESCRIPTION:${PN}-parsetools-staticdev=""
-RDEPENDS:${PN}-parsetools-staticdev=""
-FILES:${PN}-parsetools-staticdev="${libdir}/erlang/lib/parsetools-*/lib/*.a ${libdir}/erlang/lib/parsetools-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-parsetools="1"
-DESCRIPTION:${PN}-parsetools=""
-RDEPENDS:${PN}-parsetools=""
-FILES:${PN}-parsetools="${libdir}/erlang/lib/parsetools-* "
-
-ALLOW_EMPTY:${PN}-public-key-examples="1"
-DESCRIPTION:${PN}-public-key-examples=""
-RDEPENDS:${PN}-public-key-examples=""
-FILES:${PN}-public-key-examples="${libdir}/erlang/lib/public_key-*/examples "
-
-ALLOW_EMPTY:${PN}-public-key-doc="1"
-DESCRIPTION:${PN}-public-key-doc=""
-RDEPENDS:${PN}-public-key-doc=""
-FILES:${PN}-public-key-doc="${libdir}/erlang/lib/public-key-*/doc ${libdir}/erlang/lib/public-key-*/man "
-
-ALLOW_EMPTY:${PN}-public-key-dbg="1"
-DESCRIPTION:${PN}-public-key-dbg=""
-RDEPENDS:${PN}-public-key-dbg=""
-FILES:${PN}-public-key-dbg="${libdir}/erlang/lib/public_key-*/bin/.debug ${libdir}/erlang/lib/public_key-*/lib/.debug ${libdir}/erlang/lib/public_key-*/priv/lib/.debug ${libdir}/erlang/lib/public_key-*/priv/obj/.debug ${libdir}/erlang/lib/public_key-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-public-key-dev="1"
-DESCRIPTION:${PN}-public-key-dev=""
-RDEPENDS:${PN}-public-key-dev=""
-FILES:${PN}-public-key-dev="${libdir}/erlang/lib/public_key-*/*src ${libdir}/erlang/lib/public_key-*/include ${libdir}/erlang/lib/public_key-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-public-key-staticdev="1"
-DESCRIPTION:${PN}-public-key-staticdev=""
-RDEPENDS:${PN}-public-key-staticdev=""
-FILES:${PN}-public-key-staticdev="${libdir}/erlang/lib/public_key-*/lib/*.a ${libdir}/erlang/lib/public_key-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-public-key="1"
-DESCRIPTION:${PN}-public-key=""
-RDEPENDS:${PN}-public-key=""
-FILES:${PN}-public-key="${libdir}/erlang/lib/public_key-* "
-
-ALLOW_EMPTY:${PN}-reltool-examples="1"
-DESCRIPTION:${PN}-reltool-examples=""
-RDEPENDS:${PN}-reltool-examples=""
-FILES:${PN}-reltool-examples="${libdir}/erlang/lib/reltool-*/examples "
-
-ALLOW_EMPTY:${PN}-reltool-doc="1"
-DESCRIPTION:${PN}-reltool-doc=""
-RDEPENDS:${PN}-reltool-doc=""
-FILES:${PN}-reltool-doc="${libdir}/erlang/lib/reltool-*/doc ${libdir}/erlang/lib/reltool-*/man "
-
-ALLOW_EMPTY:${PN}-reltool-dbg="1"
-DESCRIPTION:${PN}-reltool-dbg=""
-RDEPENDS:${PN}-reltool-dbg=""
-FILES:${PN}-reltool-dbg="${libdir}/erlang/lib/reltool-*/bin/.debug ${libdir}/erlang/lib/reltool-*/lib/.debug ${libdir}/erlang/lib/reltool-*/priv/lib/.debug ${libdir}/erlang/lib/reltool-*/priv/obj/.debug ${libdir}/erlang/lib/reltool-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-reltool-dev="1"
-DESCRIPTION:${PN}-reltool-dev=""
-RDEPENDS:${PN}-reltool-dev=""
-FILES:${PN}-reltool-dev="${libdir}/erlang/lib/reltool-*/*src ${libdir}/erlang/lib/reltool-*/include ${libdir}/erlang/lib/reltool-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-reltool-staticdev="1"
-DESCRIPTION:${PN}-reltool-staticdev=""
-RDEPENDS:${PN}-reltool-staticdev=""
-FILES:${PN}-reltool-staticdev="${libdir}/erlang/lib/reltool-*/lib/*.a ${libdir}/erlang/lib/reltool-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-reltool="1"
-DESCRIPTION:${PN}-reltool=""
-RDEPENDS:${PN}-reltool=""
-FILES:${PN}-reltool="${libdir}/erlang/lib/reltool-* "
-
-ALLOW_EMPTY:${PN}-runtime-tools-examples="1"
-DESCRIPTION:${PN}-runtime-tools-examples=""
-RDEPENDS:${PN}-runtime-tools-examples=""
-FILES:${PN}-runtime-tools-examples="${libdir}/erlang/lib/runtime_tools-*/examples "
-
-ALLOW_EMPTY:${PN}-runtime-tools-doc="1"
-DESCRIPTION:${PN}-runtime-tools-doc=""
-RDEPENDS:${PN}-runtime-tools-doc=""
-FILES:${PN}-runtime-tools-doc="${libdir}/erlang/lib/runtime-tools-*/doc ${libdir}/erlang/lib/runtime-tools-*/man "
-
-ALLOW_EMPTY:${PN}-runtime-tools-dbg="1"
-DESCRIPTION:${PN}-runtime-tools-dbg=""
-RDEPENDS:${PN}-runtime-tools-dbg=""
-FILES:${PN}-runtime-tools-dbg="${libdir}/erlang/lib/runtime_tools-*/bin/.debug ${libdir}/erlang/lib/runtime_tools-*/lib/.debug ${libdir}/erlang/lib/runtime_tools-*/priv/lib/.debug ${libdir}/erlang/lib/runtime_tools-*/priv/obj/.debug ${libdir}/erlang/lib/runtime_tools-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-runtime-tools-dev="1"
-DESCRIPTION:${PN}-runtime-tools-dev=""
-RDEPENDS:${PN}-runtime-tools-dev=""
-FILES:${PN}-runtime-tools-dev="${libdir}/erlang/lib/runtime_tools-*/*src ${libdir}/erlang/lib/runtime_tools-*/include ${libdir}/erlang/lib/runtime_tools-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-runtime-tools-staticdev="1"
-DESCRIPTION:${PN}-runtime-tools-staticdev=""
-RDEPENDS:${PN}-runtime-tools-staticdev=""
-FILES:${PN}-runtime-tools-staticdev="${libdir}/erlang/lib/runtime_tools-*/lib/*.a ${libdir}/erlang/lib/runtime_tools-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-runtime-tools="1"
-DESCRIPTION:${PN}-runtime-tools=""
-RDEPENDS:${PN}-runtime-tools=""
-FILES:${PN}-runtime-tools="${libdir}/erlang/lib/runtime_tools-* "
-
-ALLOW_EMPTY:${PN}-snmp-examples="1"
-DESCRIPTION:${PN}-snmp-examples=""
-RDEPENDS:${PN}-snmp-examples=""
-FILES:${PN}-snmp-examples="${libdir}/erlang/lib/snmp-*/examples "
-
-ALLOW_EMPTY:${PN}-snmp-doc="1"
-DESCRIPTION:${PN}-snmp-doc=""
-RDEPENDS:${PN}-snmp-doc=""
-FILES:${PN}-snmp-doc="${libdir}/erlang/lib/snmp-*/doc ${libdir}/erlang/lib/snmp-*/man "
-
-ALLOW_EMPTY:${PN}-snmp-dbg="1"
-DESCRIPTION:${PN}-snmp-dbg=""
-RDEPENDS:${PN}-snmp-dbg=""
-FILES:${PN}-snmp-dbg="${libdir}/erlang/lib/snmp-*/bin/.debug ${libdir}/erlang/lib/snmp-*/lib/.debug ${libdir}/erlang/lib/snmp-*/priv/lib/.debug ${libdir}/erlang/lib/snmp-*/priv/obj/.debug ${libdir}/erlang/lib/snmp-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-snmp-dev="1"
-DESCRIPTION:${PN}-snmp-dev=""
-RDEPENDS:${PN}-snmp-dev=""
-FILES:${PN}-snmp-dev="${libdir}/erlang/lib/snmp-*/*src ${libdir}/erlang/lib/snmp-*/include ${libdir}/erlang/lib/snmp-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-snmp-staticdev="1"
-DESCRIPTION:${PN}-snmp-staticdev=""
-RDEPENDS:${PN}-snmp-staticdev=""
-FILES:${PN}-snmp-staticdev="${libdir}/erlang/lib/snmp-*/lib/*.a ${libdir}/erlang/lib/snmp-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-snmp="1"
-DESCRIPTION:${PN}-snmp=""
-RDEPENDS:${PN}-snmp=""
-FILES:${PN}-snmp="${libdir}/erlang/lib/snmp-* "
-
-ALLOW_EMPTY:${PN}-ssh-examples="1"
-DESCRIPTION:${PN}-ssh-examples=""
-RDEPENDS:${PN}-ssh-examples=""
-FILES:${PN}-ssh-examples="${libdir}/erlang/lib/ssh-*/examples "
-
-ALLOW_EMPTY:${PN}-ssh-doc="1"
-DESCRIPTION:${PN}-ssh-doc=""
-RDEPENDS:${PN}-ssh-doc=""
-FILES:${PN}-ssh-doc="${libdir}/erlang/lib/ssh-*/doc ${libdir}/erlang/lib/ssh-*/man "
-
-ALLOW_EMPTY:${PN}-ssh-dbg="1"
-DESCRIPTION:${PN}-ssh-dbg=""
-RDEPENDS:${PN}-ssh-dbg=""
-FILES:${PN}-ssh-dbg="${libdir}/erlang/lib/ssh-*/bin/.debug ${libdir}/erlang/lib/ssh-*/lib/.debug ${libdir}/erlang/lib/ssh-*/priv/lib/.debug ${libdir}/erlang/lib/ssh-*/priv/obj/.debug ${libdir}/erlang/lib/ssh-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-ssh-dev="1"
-DESCRIPTION:${PN}-ssh-dev=""
-RDEPENDS:${PN}-ssh-dev=""
-FILES:${PN}-ssh-dev="${libdir}/erlang/lib/ssh-*/*src ${libdir}/erlang/lib/ssh-*/include ${libdir}/erlang/lib/ssh-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-ssh-staticdev="1"
-DESCRIPTION:${PN}-ssh-staticdev=""
-RDEPENDS:${PN}-ssh-staticdev=""
-FILES:${PN}-ssh-staticdev="${libdir}/erlang/lib/ssh-*/lib/*.a ${libdir}/erlang/lib/ssh-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-ssh="1"
-DESCRIPTION:${PN}-ssh=""
-RDEPENDS:${PN}-ssh=""
-FILES:${PN}-ssh="${libdir}/erlang/lib/ssh-* "
-
-ALLOW_EMPTY:${PN}-ssl-examples="1"
-DESCRIPTION:${PN}-ssl-examples=""
-RDEPENDS:${PN}-ssl-examples=""
-FILES:${PN}-ssl-examples="${libdir}/erlang/lib/ssl-*/examples "
-
-ALLOW_EMPTY:${PN}-ssl-doc="1"
-DESCRIPTION:${PN}-ssl-doc=""
-RDEPENDS:${PN}-ssl-doc=""
-FILES:${PN}-ssl-doc="${libdir}/erlang/lib/ssl-*/doc ${libdir}/erlang/lib/ssl-*/man "
-
-ALLOW_EMPTY:${PN}-ssl-dbg="1"
-DESCRIPTION:${PN}-ssl-dbg=""
-RDEPENDS:${PN}-ssl-dbg=""
-FILES:${PN}-ssl-dbg="${libdir}/erlang/lib/ssl-*/bin/.debug ${libdir}/erlang/lib/ssl-*/lib/.debug ${libdir}/erlang/lib/ssl-*/priv/lib/.debug ${libdir}/erlang/lib/ssl-*/priv/obj/.debug ${libdir}/erlang/lib/ssl-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-ssl-dev="1"
-DESCRIPTION:${PN}-ssl-dev=""
-RDEPENDS:${PN}-ssl-dev=""
-FILES:${PN}-ssl-dev="${libdir}/erlang/lib/ssl-*/*src ${libdir}/erlang/lib/ssl-*/include ${libdir}/erlang/lib/ssl-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-ssl-staticdev="1"
-DESCRIPTION:${PN}-ssl-staticdev=""
-RDEPENDS:${PN}-ssl-staticdev=""
-FILES:${PN}-ssl-staticdev="${libdir}/erlang/lib/ssl-*/lib/*.a ${libdir}/erlang/lib/ssl-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-ssl="1"
-DESCRIPTION:${PN}-ssl=""
-RDEPENDS:${PN}-ssl=""
-FILES:${PN}-ssl="${libdir}/erlang/lib/ssl-* "
-
-ALLOW_EMPTY:${PN}-syntax-tools-examples="1"
-DESCRIPTION:${PN}-syntax-tools-examples=""
-RDEPENDS:${PN}-syntax-tools-examples=""
-FILES:${PN}-syntax-tools-examples="${libdir}/erlang/lib/syntax_tools-*/examples "
-
-ALLOW_EMPTY:${PN}-syntax-tools-doc="1"
-DESCRIPTION:${PN}-syntax-tools-doc=""
-RDEPENDS:${PN}-syntax-tools-doc=""
-FILES:${PN}-syntax-tools-doc="${libdir}/erlang/lib/syntax-tools-*/doc ${libdir}/erlang/lib/syntax-tools-*/man "
-
-ALLOW_EMPTY:${PN}-syntax-tools-dbg="1"
-DESCRIPTION:${PN}-syntax-tools-dbg=""
-RDEPENDS:${PN}-syntax-tools-dbg=""
-FILES:${PN}-syntax-tools-dbg="${libdir}/erlang/lib/syntax_tools-*/bin/.debug ${libdir}/erlang/lib/syntax_tools-*/lib/.debug ${libdir}/erlang/lib/syntax_tools-*/priv/lib/.debug ${libdir}/erlang/lib/syntax_tools-*/priv/obj/.debug ${libdir}/erlang/lib/syntax_tools-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-syntax-tools-dev="1"
-DESCRIPTION:${PN}-syntax-tools-dev=""
-RDEPENDS:${PN}-syntax-tools-dev=""
-FILES:${PN}-syntax-tools-dev="${libdir}/erlang/lib/syntax_tools-*/*src ${libdir}/erlang/lib/syntax_tools-*/include ${libdir}/erlang/lib/syntax_tools-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-syntax-tools-staticdev="1"
-DESCRIPTION:${PN}-syntax-tools-staticdev=""
-RDEPENDS:${PN}-syntax-tools-staticdev=""
-FILES:${PN}-syntax-tools-staticdev="${libdir}/erlang/lib/syntax_tools-*/lib/*.a ${libdir}/erlang/lib/syntax_tools-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-syntax-tools="1"
-DESCRIPTION:${PN}-syntax-tools=""
-RDEPENDS:${PN}-syntax-tools=""
-FILES:${PN}-syntax-tools="${libdir}/erlang/lib/syntax_tools-* "
-
-ALLOW_EMPTY:${PN}-tftp-examples="1"
-DESCRIPTION:${PN}-tftp-examples=""
-RDEPENDS:${PN}-tftp-examples=""
-FILES:${PN}-tftp-examples="${libdir}/erlang/lib/tftp-*/examples "
-
-ALLOW_EMPTY:${PN}-tftp-doc="1"
-DESCRIPTION:${PN}-tftp-doc=""
-RDEPENDS:${PN}-tftp-doc=""
-FILES:${PN}-tftp-doc="${libdir}/erlang/lib/tftp-*/doc ${libdir}/erlang/lib/tftp-*/man "
-
-ALLOW_EMPTY:${PN}-tftp-dbg="1"
-DESCRIPTION:${PN}-tftp-dbg=""
-RDEPENDS:${PN}-tftp-dbg=""
-FILES:${PN}-tftp-dbg="${libdir}/erlang/lib/tftp-*/bin/.debug ${libdir}/erlang/lib/tftp-*/lib/.debug ${libdir}/erlang/lib/tftp-*/priv/lib/.debug ${libdir}/erlang/lib/tftp-*/priv/obj/.debug ${libdir}/erlang/lib/tftp-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-tftp-dev="1"
-DESCRIPTION:${PN}-tftp-dev=""
-RDEPENDS:${PN}-tftp-dev=""
-FILES:${PN}-tftp-dev="${libdir}/erlang/lib/tftp-*/*src ${libdir}/erlang/lib/tftp-*/include ${libdir}/erlang/lib/tftp-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-tftp-staticdev="1"
-DESCRIPTION:${PN}-tftp-staticdev=""
-RDEPENDS:${PN}-tftp-staticdev=""
-FILES:${PN}-tftp-staticdev="${libdir}/erlang/lib/tftp-*/lib/*.a ${libdir}/erlang/lib/tftp-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-tftp="1"
-DESCRIPTION:${PN}-tftp=""
-RDEPENDS:${PN}-tftp=""
-FILES:${PN}-tftp="${libdir}/erlang/lib/tftp-* "
-
-ALLOW_EMPTY:${PN}-tools-examples="1"
-DESCRIPTION:${PN}-tools-examples=""
-RDEPENDS:${PN}-tools-examples=""
-FILES:${PN}-tools-examples="${libdir}/erlang/lib/tools-*/examples "
-
-ALLOW_EMPTY:${PN}-tools-doc="1"
-DESCRIPTION:${PN}-tools-doc=""
-RDEPENDS:${PN}-tools-doc=""
-FILES:${PN}-tools-doc="${libdir}/erlang/lib/tools-*/doc ${libdir}/erlang/lib/tools-*/man "
-
-ALLOW_EMPTY:${PN}-tools-dbg="1"
-DESCRIPTION:${PN}-tools-dbg=""
-RDEPENDS:${PN}-tools-dbg=""
-FILES:${PN}-tools-dbg="${libdir}/erlang/lib/tools-*/bin/.debug ${libdir}/erlang/lib/tools-*/lib/.debug ${libdir}/erlang/lib/tools-*/priv/lib/.debug ${libdir}/erlang/lib/tools-*/priv/obj/.debug ${libdir}/erlang/lib/tools-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-tools-dev="1"
-DESCRIPTION:${PN}-tools-dev=""
-RDEPENDS:${PN}-tools-dev=""
-FILES:${PN}-tools-dev="${libdir}/erlang/lib/tools-*/*src ${libdir}/erlang/lib/tools-*/include ${libdir}/erlang/lib/tools-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-tools-staticdev="1"
-DESCRIPTION:${PN}-tools-staticdev=""
-RDEPENDS:${PN}-tools-staticdev=""
-FILES:${PN}-tools-staticdev="${libdir}/erlang/lib/tools-*/lib/*.a ${libdir}/erlang/lib/tools-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-tools="1"
-DESCRIPTION:${PN}-tools=""
-RDEPENDS:${PN}-tools=""
-FILES:${PN}-tools="${libdir}/erlang/lib/tools-* "
-
-ALLOW_EMPTY:${PN}-typer-examples="1"
-DESCRIPTION:${PN}-typer-examples=""
-RDEPENDS:${PN}-typer-examples=""
-FILES:${PN}-typer-examples="${libdir}/erlang/lib/typer-*/examples "
-
-ALLOW_EMPTY:${PN}-typer-doc="1"
-DESCRIPTION:${PN}-typer-doc=""
-RDEPENDS:${PN}-typer-doc=""
-FILES:${PN}-typer-doc="${libdir}/erlang/lib/typer-*/doc ${libdir}/erlang/lib/typer-*/man "
-
-ALLOW_EMPTY:${PN}-typer-dbg="1"
-DESCRIPTION:${PN}-typer-dbg=""
-RDEPENDS:${PN}-typer-dbg=""
-FILES:${PN}-typer-dbg="${libdir}/erlang/lib/typer-*/bin/.debug ${libdir}/erlang/lib/typer-*/lib/.debug ${libdir}/erlang/lib/typer-*/priv/lib/.debug ${libdir}/erlang/lib/typer-*/priv/obj/.debug ${libdir}/erlang/lib/typer-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-typer-dev="1"
-DESCRIPTION:${PN}-typer-dev=""
-RDEPENDS:${PN}-typer-dev=""
-FILES:${PN}-typer-dev="${libdir}/erlang/lib/typer-*/*src ${libdir}/erlang/lib/typer-*/include ${libdir}/erlang/lib/typer-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-typer-staticdev="1"
-DESCRIPTION:${PN}-typer-staticdev=""
-RDEPENDS:${PN}-typer-staticdev=""
-FILES:${PN}-typer-staticdev="${libdir}/erlang/lib/typer-*/lib/*.a ${libdir}/erlang/lib/typer-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-typer="1"
-DESCRIPTION:${PN}-typer=""
-RDEPENDS:${PN}-typer=""
-FILES:${PN}-typer="${bindir}/typer ${libdir}/erlang/bin/typer ${libdir}/erlang/lib/typer-* ${libdir}/erlang/erts-*/bin/typer "
-
-ALLOW_EMPTY:${PN}-xmerl-examples="1"
-DESCRIPTION:${PN}-xmerl-examples=""
-RDEPENDS:${PN}-xmerl-examples=""
-FILES:${PN}-xmerl-examples="${libdir}/erlang/lib/xmerl-*/examples "
-
-ALLOW_EMPTY:${PN}-xmerl-doc="1"
-DESCRIPTION:${PN}-xmerl-doc=""
-RDEPENDS:${PN}-xmerl-doc=""
-FILES:${PN}-xmerl-doc="${libdir}/erlang/lib/xmerl-*/doc ${libdir}/erlang/lib/xmerl-*/man "
-
-ALLOW_EMPTY:${PN}-xmerl-dbg="1"
-DESCRIPTION:${PN}-xmerl-dbg=""
-RDEPENDS:${PN}-xmerl-dbg=""
-FILES:${PN}-xmerl-dbg="${libdir}/erlang/lib/xmerl-*/bin/.debug ${libdir}/erlang/lib/xmerl-*/lib/.debug ${libdir}/erlang/lib/xmerl-*/priv/lib/.debug ${libdir}/erlang/lib/xmerl-*/priv/obj/.debug ${libdir}/erlang/lib/xmerl-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-xmerl-dev="1"
-DESCRIPTION:${PN}-xmerl-dev=""
-RDEPENDS:${PN}-xmerl-dev=""
-FILES:${PN}-xmerl-dev="${libdir}/erlang/lib/xmerl-*/*src ${libdir}/erlang/lib/xmerl-*/include ${libdir}/erlang/lib/xmerl-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-xmerl-staticdev="1"
-DESCRIPTION:${PN}-xmerl-staticdev=""
-RDEPENDS:${PN}-xmerl-staticdev=""
-FILES:${PN}-xmerl-staticdev="${libdir}/erlang/lib/xmerl-*/lib/*.a ${libdir}/erlang/lib/xmerl-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-xmerl="1"
-DESCRIPTION:${PN}-xmerl=""
-RDEPENDS:${PN}-xmerl=""
-FILES:${PN}-xmerl="${libdir}/erlang/lib/xmerl-* "
-
-ALLOW_EMPTY:${PN}-odbc-examples="1"
-DESCRIPTION:${PN}-odbc-examples=""
-RDEPENDS:${PN}-odbc-examples=""
-FILES:${PN}-odbc-examples="${libdir}/erlang/lib/odbc-*/examples "
-
-ALLOW_EMPTY:${PN}-odbc-doc="1"
-DESCRIPTION:${PN}-odbc-doc=""
-RDEPENDS:${PN}-odbc-doc=""
-FILES:${PN}-odbc-doc="${libdir}/erlang/lib/odbc-*/doc ${libdir}/erlang/lib/odbc-*/man "
-
-ALLOW_EMPTY:${PN}-odbc-dbg="1"
-DESCRIPTION:${PN}-odbc-dbg=""
-RDEPENDS:${PN}-odbc-dbg=""
-FILES:${PN}-odbc-dbg="${libdir}/erlang/lib/odbc-*/bin/.debug ${libdir}/erlang/lib/odbc-*/lib/.debug ${libdir}/erlang/lib/odbc-*/priv/lib/.debug ${libdir}/erlang/lib/odbc-*/priv/obj/.debug ${libdir}/erlang/lib/odbc-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-odbc-dev="1"
-DESCRIPTION:${PN}-odbc-dev=""
-RDEPENDS:${PN}-odbc-dev=""
-FILES:${PN}-odbc-dev="${libdir}/erlang/lib/odbc-*/*src ${libdir}/erlang/lib/odbc-*/include ${libdir}/erlang/lib/odbc-*/priv/obj "
-
-ALLOW_EMPTY:${PN}-odbc-staticdev="1"
-DESCRIPTION:${PN}-odbc-staticdev=""
-RDEPENDS:${PN}-odbc-staticdev=""
-FILES:${PN}-odbc-staticdev="${libdir}/erlang/lib/odbc-*/lib/*.a ${libdir}/erlang/lib/odbc-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-odbc="1"
-DESCRIPTION:${PN}-odbc=""
-RDEPENDS:${PN}-odbc=""
-FILES:${PN}-odbc="${libdir}/erlang/lib/odbc-* "
-
-ALLOW_EMPTY:${PN}-epmd-examples="1"
-DESCRIPTION:${PN}-epmd-examples=""
-RDEPENDS:${PN}-epmd-examples=""
-FILES:${PN}-epmd-examples="${libdir}/erlang/lib/epmd-*/examples "
-
-ALLOW_EMPTY:${PN}-epmd="1"
-DESCRIPTION:${PN}-epmd=""
-RDEPENDS:${PN}-epmd=""
-FILES:${PN}-epmd="${libdir}/erlang/erts-*/bin/epmd ${libdir}/erlang/bin/epmd ${bindir}/epmd "
-
-ALLOW_EMPTY:${PN}-erts-examples="1"
-DESCRIPTION:${PN}-erts-examples=""
-RDEPENDS:${PN}-erts-examples=""
-FILES:${PN}-erts-examples="${libdir}/erlang/lib/erts-*/examples "
-
-ALLOW_EMPTY:${PN}-erts-doc="1"
-DESCRIPTION:${PN}-erts-doc=""
-RDEPENDS:${PN}-erts-doc=""
-FILES:${PN}-erts-doc="${libdir}/erlang/lib/erts-*/doc ${libdir}/erlang/lib/erts-*/man "
-
-ALLOW_EMPTY:${PN}-erts-dbg="1"
-DESCRIPTION:${PN}-erts-dbg=""
-RDEPENDS:${PN}-erts-dbg=""
-FILES:${PN}-erts-dbg="${libdir}/erlang/lib/erts-*/bin/.debug ${libdir}/erlang/lib/erts-*/lib/.debug ${libdir}/erlang/lib/erts-*/priv/lib/.debug ${libdir}/erlang/lib/erts-*/priv/obj/.debug ${libdir}/erlang/lib/erts-*/priv/bin/.debug "
-
-ALLOW_EMPTY:${PN}-erts-dev="1"
-DESCRIPTION:${PN}-erts-dev=""
-RDEPENDS:${PN}-erts-dev=""
-FILES:${PN}-erts-dev="${libdir}/erlang/lib/erts-*/src ${libdir}/erlang/erts-*/*src ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/priv/obj ${libdir}/erlang/erts-*/bin/yielding_c_fun "
-
-ALLOW_EMPTY:${PN}-erts-staticdev="1"
-DESCRIPTION:${PN}-erts-staticdev=""
-RDEPENDS:${PN}-erts-staticdev=""
-FILES:${PN}-erts-staticdev="${libdir}/erlang/lib/erts-*/lib/*.a ${libdir}/erlang/lib/erts-*/priv/lib/*.a "
-
-ALLOW_EMPTY:${PN}-erts="1"
-DESCRIPTION:${PN}-erts=""
-RDEPENDS:${PN}-erts=""
-FILES:${PN}-erts="${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${libdir}/erlang/erts-*/bin ${libdir}/erlang/lib/erts-*/ebin "
-
-ALLOW_EMPTY:${PN}-doc="1"
-DESCRIPTION:${PN}-doc=""
-RDEPENDS:${PN}-doc=""
-FILES:${PN}-doc+="${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/misc "
-
-ALLOW_EMPTY:${PN}-dev="1"
-DESCRIPTION:${PN}-dev=""
-RDEPENDS:${PN}-dev="${PN}-erts-dev ${PN}-kernel-dev ${PN}-stdlib-dev ${PN}-sasl-dev"
-FILES:${PN}-dev+="${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src ${libdir}/erlang/usr/include "
-
-ALLOW_EMPTY:${PN}-dbg="1"
-DESCRIPTION:${PN}-dbg=""
-RDEPENDS:${PN}-dbg=""
-FILES:${PN}-dbg+="${libdir}/erlang/bin/.debug ${libdir}/erlang/erts-*/bin/.debug "
-
-ALLOW_EMPTY:${PN}-staticdev="1"
-DESCRIPTION:${PN}-staticdev=""
-RDEPENDS:${PN}-staticdev=""
-FILES:${PN}-staticdev+="${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a ${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/* "
-
-ALLOW_EMPTY:${PN}="1"
-DESCRIPTION:${PN}=""
-RDEPENDS:${PN}="${PN}-erts ${PN}-kernel ${PN}-stdlib ${PN}-sasl ${PN}-epmd"
-FILES:${PN}+=""
-
-DESCRIPTION:${PN}-modules="All Erlang modules"
-RDEPENDS:${PN}-modules="\
+ALLOW_EMPTY:${PN}-sasl-examples = "1"
+DESCRIPTION:${PN}-sasl-examples = ""
+RDEPENDS:${PN}-sasl-examples = ""
+FILES:${PN}-sasl-examples = "${libdir}/erlang/lib/sasl-*/examples "
+
+ALLOW_EMPTY:${PN}-sasl-doc = "1"
+DESCRIPTION:${PN}-sasl-doc = ""
+RDEPENDS:${PN}-sasl-doc = ""
+FILES:${PN}-sasl-doc = "${libdir}/erlang/lib/sasl-*/doc ${libdir}/erlang/lib/sasl-*/man "
+
+ALLOW_EMPTY:${PN}-sasl-dbg = "1"
+DESCRIPTION:${PN}-sasl-dbg = ""
+RDEPENDS:${PN}-sasl-dbg = ""
+FILES:${PN}-sasl-dbg = "${libdir}/erlang/lib/sasl-*/bin/.debug ${libdir}/erlang/lib/sasl-*/lib/.debug ${libdir}/erlang/lib/sasl-*/priv/lib/.debug ${libdir}/erlang/lib/sasl-*/priv/obj/.debug ${libdir}/erlang/lib/sasl-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-sasl-dev = "1"
+DESCRIPTION:${PN}-sasl-dev = ""
+RDEPENDS:${PN}-sasl-dev = ""
+FILES:${PN}-sasl-dev = "${libdir}/erlang/lib/sasl-*/*src ${libdir}/erlang/lib/sasl-*/include ${libdir}/erlang/lib/sasl-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-sasl-staticdev = "1"
+DESCRIPTION:${PN}-sasl-staticdev = ""
+RDEPENDS:${PN}-sasl-staticdev = ""
+FILES:${PN}-sasl-staticdev = "${libdir}/erlang/lib/sasl-*/lib/*.a ${libdir}/erlang/lib/sasl-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-sasl = "1"
+DESCRIPTION:${PN}-sasl = ""
+RDEPENDS:${PN}-sasl = ""
+FILES:${PN}-sasl = "${libdir}/erlang/lib/sasl-* "
+
+ALLOW_EMPTY:${PN}-stdlib-examples = "1"
+DESCRIPTION:${PN}-stdlib-examples = ""
+RDEPENDS:${PN}-stdlib-examples = ""
+FILES:${PN}-stdlib-examples = "${libdir}/erlang/lib/stdlib-*/examples "
+
+ALLOW_EMPTY:${PN}-stdlib-doc = "1"
+DESCRIPTION:${PN}-stdlib-doc = ""
+RDEPENDS:${PN}-stdlib-doc = ""
+FILES:${PN}-stdlib-doc = "${libdir}/erlang/lib/stdlib-*/doc ${libdir}/erlang/lib/stdlib-*/man "
+
+ALLOW_EMPTY:${PN}-stdlib-dbg = "1"
+DESCRIPTION:${PN}-stdlib-dbg = ""
+RDEPENDS:${PN}-stdlib-dbg = ""
+FILES:${PN}-stdlib-dbg = "${libdir}/erlang/lib/stdlib-*/bin/.debug ${libdir}/erlang/lib/stdlib-*/lib/.debug ${libdir}/erlang/lib/stdlib-*/priv/lib/.debug ${libdir}/erlang/lib/stdlib-*/priv/obj/.debug ${libdir}/erlang/lib/stdlib-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-stdlib-dev = "1"
+DESCRIPTION:${PN}-stdlib-dev = ""
+RDEPENDS:${PN}-stdlib-dev = ""
+FILES:${PN}-stdlib-dev = "${libdir}/erlang/lib/stdlib-*/*src ${libdir}/erlang/lib/stdlib-*/include ${libdir}/erlang/lib/stdlib-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-stdlib-staticdev = "1"
+DESCRIPTION:${PN}-stdlib-staticdev = ""
+RDEPENDS:${PN}-stdlib-staticdev = ""
+FILES:${PN}-stdlib-staticdev = "${libdir}/erlang/lib/stdlib-*/lib/*.a ${libdir}/erlang/lib/stdlib-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-stdlib = "1"
+DESCRIPTION:${PN}-stdlib = ""
+RDEPENDS:${PN}-stdlib = ""
+FILES:${PN}-stdlib = "${libdir}/erlang/lib/stdlib-* "
+
+ALLOW_EMPTY:${PN}-kernel-examples = "1"
+DESCRIPTION:${PN}-kernel-examples = ""
+RDEPENDS:${PN}-kernel-examples = ""
+FILES:${PN}-kernel-examples = "${libdir}/erlang/lib/kernel-*/examples "
+
+ALLOW_EMPTY:${PN}-kernel-doc = "1"
+DESCRIPTION:${PN}-kernel-doc = ""
+RDEPENDS:${PN}-kernel-doc = ""
+FILES:${PN}-kernel-doc = "${libdir}/erlang/lib/kernel-*/doc ${libdir}/erlang/lib/kernel-*/man "
+
+ALLOW_EMPTY:${PN}-kernel-dbg = "1"
+DESCRIPTION:${PN}-kernel-dbg = ""
+RDEPENDS:${PN}-kernel-dbg = ""
+FILES:${PN}-kernel-dbg = "${libdir}/erlang/lib/kernel-*/bin/.debug ${libdir}/erlang/lib/kernel-*/lib/.debug ${libdir}/erlang/lib/kernel-*/priv/lib/.debug ${libdir}/erlang/lib/kernel-*/priv/obj/.debug ${libdir}/erlang/lib/kernel-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-kernel-dev = "1"
+DESCRIPTION:${PN}-kernel-dev = ""
+RDEPENDS:${PN}-kernel-dev = ""
+FILES:${PN}-kernel-dev = "${libdir}/erlang/lib/kernel-*/*src ${libdir}/erlang/lib/kernel-*/include ${libdir}/erlang/lib/kernel-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-kernel-staticdev = "1"
+DESCRIPTION:${PN}-kernel-staticdev = ""
+RDEPENDS:${PN}-kernel-staticdev = ""
+FILES:${PN}-kernel-staticdev = "${libdir}/erlang/lib/kernel-*/lib/*.a ${libdir}/erlang/lib/kernel-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-kernel = "1"
+DESCRIPTION:${PN}-kernel = ""
+RDEPENDS:${PN}-kernel = ""
+FILES:${PN}-kernel = "${libdir}/erlang/lib/kernel-* "
+
+ALLOW_EMPTY:${PN}-asn1-examples = "1"
+DESCRIPTION:${PN}-asn1-examples = ""
+RDEPENDS:${PN}-asn1-examples = ""
+FILES:${PN}-asn1-examples = "${libdir}/erlang/lib/asn1-*/examples "
+
+ALLOW_EMPTY:${PN}-asn1-doc = "1"
+DESCRIPTION:${PN}-asn1-doc = ""
+RDEPENDS:${PN}-asn1-doc = ""
+FILES:${PN}-asn1-doc = "${libdir}/erlang/lib/asn1-*/doc ${libdir}/erlang/lib/asn1-*/man "
+
+ALLOW_EMPTY:${PN}-asn1-dbg = "1"
+DESCRIPTION:${PN}-asn1-dbg = ""
+RDEPENDS:${PN}-asn1-dbg = ""
+FILES:${PN}-asn1-dbg = "${libdir}/erlang/lib/asn1-*/bin/.debug ${libdir}/erlang/lib/asn1-*/lib/.debug ${libdir}/erlang/lib/asn1-*/priv/lib/.debug ${libdir}/erlang/lib/asn1-*/priv/obj/.debug ${libdir}/erlang/lib/asn1-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-asn1-dev = "1"
+DESCRIPTION:${PN}-asn1-dev = ""
+RDEPENDS:${PN}-asn1-dev = ""
+FILES:${PN}-asn1-dev = "${libdir}/erlang/lib/asn1-*/*src ${libdir}/erlang/lib/asn1-*/include ${libdir}/erlang/lib/asn1-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-asn1-staticdev = "1"
+DESCRIPTION:${PN}-asn1-staticdev = ""
+RDEPENDS:${PN}-asn1-staticdev = ""
+FILES:${PN}-asn1-staticdev = "${libdir}/erlang/lib/asn1-*/lib/*.a ${libdir}/erlang/lib/asn1-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-asn1 = "1"
+DESCRIPTION:${PN}-asn1 = ""
+RDEPENDS:${PN}-asn1 = ""
+FILES:${PN}-asn1 = "${libdir}/erlang/lib/asn1-* "
+
+ALLOW_EMPTY:${PN}-common-test-examples = "1"
+DESCRIPTION:${PN}-common-test-examples = ""
+RDEPENDS:${PN}-common-test-examples = ""
+FILES:${PN}-common-test-examples = "${libdir}/erlang/lib/common_test-*/examples "
+
+ALLOW_EMPTY:${PN}-common-test-doc = "1"
+DESCRIPTION:${PN}-common-test-doc = ""
+RDEPENDS:${PN}-common-test-doc = ""
+FILES:${PN}-common-test-doc = "${libdir}/erlang/lib/common-test-*/doc ${libdir}/erlang/lib/common-test-*/man "
+
+ALLOW_EMPTY:${PN}-common-test-dbg = "1"
+DESCRIPTION:${PN}-common-test-dbg = ""
+RDEPENDS:${PN}-common-test-dbg = ""
+FILES:${PN}-common-test-dbg = "${libdir}/erlang/lib/common_test-*/bin/.debug ${libdir}/erlang/lib/common_test-*/lib/.debug ${libdir}/erlang/lib/common_test-*/priv/lib/.debug ${libdir}/erlang/lib/common_test-*/priv/obj/.debug ${libdir}/erlang/lib/common_test-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-common-test-dev = "1"
+DESCRIPTION:${PN}-common-test-dev = ""
+RDEPENDS:${PN}-common-test-dev = ""
+FILES:${PN}-common-test-dev = "${libdir}/erlang/lib/common_test-*/*src ${libdir}/erlang/lib/common_test-*/include ${libdir}/erlang/lib/common_test-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-common-test-staticdev = "1"
+DESCRIPTION:${PN}-common-test-staticdev = ""
+RDEPENDS:${PN}-common-test-staticdev = ""
+FILES:${PN}-common-test-staticdev = "${libdir}/erlang/lib/common_test-*/lib/*.a ${libdir}/erlang/lib/common_test-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-common-test = "1"
+DESCRIPTION:${PN}-common-test = ""
+RDEPENDS:${PN}-common-test = ""
+FILES:${PN}-common-test = "${bindir}/ct_run ${libdir}/erlang/bin/ct_run ${libdir}/erlang/lib/common_test-* ${libdir}/erlang/erts-*/bin/ct_run "
+
+ALLOW_EMPTY:${PN}-compiler-examples = "1"
+DESCRIPTION:${PN}-compiler-examples = ""
+RDEPENDS:${PN}-compiler-examples = ""
+FILES:${PN}-compiler-examples = "${libdir}/erlang/lib/compiler-*/examples "
+
+ALLOW_EMPTY:${PN}-compiler-doc = "1"
+DESCRIPTION:${PN}-compiler-doc = ""
+RDEPENDS:${PN}-compiler-doc = ""
+FILES:${PN}-compiler-doc = "${libdir}/erlang/lib/compiler-*/doc ${libdir}/erlang/lib/compiler-*/man "
+
+ALLOW_EMPTY:${PN}-compiler-dbg = "1"
+DESCRIPTION:${PN}-compiler-dbg = ""
+RDEPENDS:${PN}-compiler-dbg = ""
+FILES:${PN}-compiler-dbg = "${libdir}/erlang/lib/compiler-*/bin/.debug ${libdir}/erlang/lib/compiler-*/lib/.debug ${libdir}/erlang/lib/compiler-*/priv/lib/.debug ${libdir}/erlang/lib/compiler-*/priv/obj/.debug ${libdir}/erlang/lib/compiler-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-compiler-dev = "1"
+DESCRIPTION:${PN}-compiler-dev = ""
+RDEPENDS:${PN}-compiler-dev = ""
+FILES:${PN}-compiler-dev = "${libdir}/erlang/lib/compiler-*/*src ${libdir}/erlang/lib/compiler-*/include ${libdir}/erlang/lib/compiler-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-compiler-staticdev = "1"
+DESCRIPTION:${PN}-compiler-staticdev = ""
+RDEPENDS:${PN}-compiler-staticdev = ""
+FILES:${PN}-compiler-staticdev = "${libdir}/erlang/lib/compiler-*/lib/*.a ${libdir}/erlang/lib/compiler-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-compiler = "1"
+DESCRIPTION:${PN}-compiler = ""
+RDEPENDS:${PN}-compiler = ""
+FILES:${PN}-compiler = "${bindir}/erlc ${libdir}/erlang/bin/erlc ${libdir}/erlang/lib/compiler-* ${libdir}/erlang/erts-*/bin/erlc "
+
+ALLOW_EMPTY:${PN}-crypto-examples = "1"
+DESCRIPTION:${PN}-crypto-examples = ""
+RDEPENDS:${PN}-crypto-examples = ""
+FILES:${PN}-crypto-examples = "${libdir}/erlang/lib/crypto-*/examples "
+
+ALLOW_EMPTY:${PN}-crypto-doc = "1"
+DESCRIPTION:${PN}-crypto-doc = ""
+RDEPENDS:${PN}-crypto-doc = ""
+FILES:${PN}-crypto-doc = "${libdir}/erlang/lib/crypto-*/doc ${libdir}/erlang/lib/crypto-*/man "
+
+ALLOW_EMPTY:${PN}-crypto-dbg = "1"
+DESCRIPTION:${PN}-crypto-dbg = ""
+RDEPENDS:${PN}-crypto-dbg = ""
+FILES:${PN}-crypto-dbg = "${libdir}/erlang/lib/crypto-*/bin/.debug ${libdir}/erlang/lib/crypto-*/lib/.debug ${libdir}/erlang/lib/crypto-*/priv/lib/.debug ${libdir}/erlang/lib/crypto-*/priv/obj/.debug ${libdir}/erlang/lib/crypto-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-crypto-dev = "1"
+DESCRIPTION:${PN}-crypto-dev = ""
+RDEPENDS:${PN}-crypto-dev = ""
+FILES:${PN}-crypto-dev = "${libdir}/erlang/lib/crypto-*/*src ${libdir}/erlang/lib/crypto-*/include ${libdir}/erlang/lib/crypto-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-crypto-staticdev = "1"
+DESCRIPTION:${PN}-crypto-staticdev = ""
+RDEPENDS:${PN}-crypto-staticdev = ""
+FILES:${PN}-crypto-staticdev = "${libdir}/erlang/lib/crypto-*/lib/*.a ${libdir}/erlang/lib/crypto-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-crypto = "1"
+DESCRIPTION:${PN}-crypto = ""
+RDEPENDS:${PN}-crypto = "openssl"
+FILES:${PN}-crypto = "${libdir}/erlang/lib/crypto-* "
+
+ALLOW_EMPTY:${PN}-debugger-examples = "1"
+DESCRIPTION:${PN}-debugger-examples = ""
+RDEPENDS:${PN}-debugger-examples = ""
+FILES:${PN}-debugger-examples = "${libdir}/erlang/lib/debugger-*/examples "
+
+ALLOW_EMPTY:${PN}-debugger-doc = "1"
+DESCRIPTION:${PN}-debugger-doc = ""
+RDEPENDS:${PN}-debugger-doc = ""
+FILES:${PN}-debugger-doc = "${libdir}/erlang/lib/debugger-*/doc ${libdir}/erlang/lib/debugger-*/man "
+
+ALLOW_EMPTY:${PN}-debugger-dbg = "1"
+DESCRIPTION:${PN}-debugger-dbg = ""
+RDEPENDS:${PN}-debugger-dbg = ""
+FILES:${PN}-debugger-dbg = "${libdir}/erlang/lib/debugger-*/bin/.debug ${libdir}/erlang/lib/debugger-*/lib/.debug ${libdir}/erlang/lib/debugger-*/priv/lib/.debug ${libdir}/erlang/lib/debugger-*/priv/obj/.debug ${libdir}/erlang/lib/debugger-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-debugger-dev = "1"
+DESCRIPTION:${PN}-debugger-dev = ""
+RDEPENDS:${PN}-debugger-dev = ""
+FILES:${PN}-debugger-dev = "${libdir}/erlang/lib/debugger-*/*src ${libdir}/erlang/lib/debugger-*/include ${libdir}/erlang/lib/debugger-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-debugger-staticdev = "1"
+DESCRIPTION:${PN}-debugger-staticdev = ""
+RDEPENDS:${PN}-debugger-staticdev = ""
+FILES:${PN}-debugger-staticdev = "${libdir}/erlang/lib/debugger-*/lib/*.a ${libdir}/erlang/lib/debugger-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-debugger = "1"
+DESCRIPTION:${PN}-debugger = "--with-debugger,--without-debugger,,"
+RDEPENDS:${PN}-debugger = ""
+FILES:${PN}-debugger = "${libdir}/erlang/lib/debugger-* "
+
+ALLOW_EMPTY:${PN}-dialyzer-examples = "1"
+DESCRIPTION:${PN}-dialyzer-examples = ""
+RDEPENDS:${PN}-dialyzer-examples = ""
+FILES:${PN}-dialyzer-examples = "${libdir}/erlang/lib/dialyzer-*/examples "
+
+ALLOW_EMPTY:${PN}-dialyzer-doc = "1"
+DESCRIPTION:${PN}-dialyzer-doc = ""
+RDEPENDS:${PN}-dialyzer-doc = ""
+FILES:${PN}-dialyzer-doc = "${libdir}/erlang/lib/dialyzer-*/doc ${libdir}/erlang/lib/dialyzer-*/man "
+
+ALLOW_EMPTY:${PN}-dialyzer-dbg = "1"
+DESCRIPTION:${PN}-dialyzer-dbg = ""
+RDEPENDS:${PN}-dialyzer-dbg = ""
+FILES:${PN}-dialyzer-dbg = "${libdir}/erlang/lib/dialyzer-*/bin/.debug ${libdir}/erlang/lib/dialyzer-*/lib/.debug ${libdir}/erlang/lib/dialyzer-*/priv/lib/.debug ${libdir}/erlang/lib/dialyzer-*/priv/obj/.debug ${libdir}/erlang/lib/dialyzer-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-dialyzer-dev = "1"
+DESCRIPTION:${PN}-dialyzer-dev = ""
+RDEPENDS:${PN}-dialyzer-dev = ""
+FILES:${PN}-dialyzer-dev = "${libdir}/erlang/lib/dialyzer-*/*src ${libdir}/erlang/lib/dialyzer-*/include ${libdir}/erlang/lib/dialyzer-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-dialyzer-staticdev = "1"
+DESCRIPTION:${PN}-dialyzer-staticdev = ""
+RDEPENDS:${PN}-dialyzer-staticdev = ""
+FILES:${PN}-dialyzer-staticdev = "${libdir}/erlang/lib/dialyzer-*/lib/*.a ${libdir}/erlang/lib/dialyzer-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-dialyzer = "1"
+DESCRIPTION:${PN}-dialyzer = ""
+RDEPENDS:${PN}-dialyzer = ""
+FILES:${PN}-dialyzer = "${bindir}/dialyzer ${libdir}/erlang/bin/dialyzer ${libdir}/erlang/lib/dialyzer-* ${libdir}/erlang/erts-*/bin/dialyzer "
+
+ALLOW_EMPTY:${PN}-diameter-examples = "1"
+DESCRIPTION:${PN}-diameter-examples = ""
+RDEPENDS:${PN}-diameter-examples = ""
+FILES:${PN}-diameter-examples = "${libdir}/erlang/lib/diameter-*/examples "
+
+ALLOW_EMPTY:${PN}-diameter-doc = "1"
+DESCRIPTION:${PN}-diameter-doc = ""
+RDEPENDS:${PN}-diameter-doc = ""
+FILES:${PN}-diameter-doc = "${libdir}/erlang/lib/diameter-*/doc ${libdir}/erlang/lib/diameter-*/man "
+
+ALLOW_EMPTY:${PN}-diameter-dbg = "1"
+DESCRIPTION:${PN}-diameter-dbg = ""
+RDEPENDS:${PN}-diameter-dbg = ""
+FILES:${PN}-diameter-dbg = "${libdir}/erlang/lib/diameter-*/bin/.debug ${libdir}/erlang/lib/diameter-*/lib/.debug ${libdir}/erlang/lib/diameter-*/priv/lib/.debug ${libdir}/erlang/lib/diameter-*/priv/obj/.debug ${libdir}/erlang/lib/diameter-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-diameter-dev = "1"
+DESCRIPTION:${PN}-diameter-dev = ""
+RDEPENDS:${PN}-diameter-dev = ""
+FILES:${PN}-diameter-dev = "${libdir}/erlang/lib/diameter-*/*src ${libdir}/erlang/lib/diameter-*/include ${libdir}/erlang/lib/diameter-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-diameter-staticdev = "1"
+DESCRIPTION:${PN}-diameter-staticdev = ""
+RDEPENDS:${PN}-diameter-staticdev = ""
+FILES:${PN}-diameter-staticdev = "${libdir}/erlang/lib/diameter-*/lib/*.a ${libdir}/erlang/lib/diameter-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-diameter = "1"
+DESCRIPTION:${PN}-diameter = ""
+RDEPENDS:${PN}-diameter = ""
+FILES:${PN}-diameter = "${libdir}/erlang/lib/diameter-* "
+
+ALLOW_EMPTY:${PN}-edoc-examples = "1"
+DESCRIPTION:${PN}-edoc-examples = ""
+RDEPENDS:${PN}-edoc-examples = ""
+FILES:${PN}-edoc-examples = "${libdir}/erlang/lib/edoc-*/examples "
+
+ALLOW_EMPTY:${PN}-edoc-doc = "1"
+DESCRIPTION:${PN}-edoc-doc = ""
+RDEPENDS:${PN}-edoc-doc = ""
+FILES:${PN}-edoc-doc = "${libdir}/erlang/lib/edoc-*/doc ${libdir}/erlang/lib/edoc-*/man "
+
+ALLOW_EMPTY:${PN}-edoc-dbg = "1"
+DESCRIPTION:${PN}-edoc-dbg = ""
+RDEPENDS:${PN}-edoc-dbg = ""
+FILES:${PN}-edoc-dbg = "${libdir}/erlang/lib/edoc-*/bin/.debug ${libdir}/erlang/lib/edoc-*/lib/.debug ${libdir}/erlang/lib/edoc-*/priv/lib/.debug ${libdir}/erlang/lib/edoc-*/priv/obj/.debug ${libdir}/erlang/lib/edoc-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-edoc-dev = "1"
+DESCRIPTION:${PN}-edoc-dev = ""
+RDEPENDS:${PN}-edoc-dev = ""
+FILES:${PN}-edoc-dev = "${libdir}/erlang/lib/edoc-*/*src ${libdir}/erlang/lib/edoc-*/include ${libdir}/erlang/lib/edoc-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-edoc-staticdev = "1"
+DESCRIPTION:${PN}-edoc-staticdev = ""
+RDEPENDS:${PN}-edoc-staticdev = ""
+FILES:${PN}-edoc-staticdev = "${libdir}/erlang/lib/edoc-*/lib/*.a ${libdir}/erlang/lib/edoc-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-edoc = "1"
+DESCRIPTION:${PN}-edoc = ""
+RDEPENDS:${PN}-edoc = ""
+FILES:${PN}-edoc = "${libdir}/erlang/lib/edoc-* "
+
+ALLOW_EMPTY:${PN}-eldap-examples = "1"
+DESCRIPTION:${PN}-eldap-examples = ""
+RDEPENDS:${PN}-eldap-examples = ""
+FILES:${PN}-eldap-examples = "${libdir}/erlang/lib/eldap-*/examples "
+
+ALLOW_EMPTY:${PN}-eldap-doc = "1"
+DESCRIPTION:${PN}-eldap-doc = ""
+RDEPENDS:${PN}-eldap-doc = ""
+FILES:${PN}-eldap-doc = "${libdir}/erlang/lib/eldap-*/doc ${libdir}/erlang/lib/eldap-*/man "
+
+ALLOW_EMPTY:${PN}-eldap-dbg = "1"
+DESCRIPTION:${PN}-eldap-dbg = ""
+RDEPENDS:${PN}-eldap-dbg = ""
+FILES:${PN}-eldap-dbg = "${libdir}/erlang/lib/eldap-*/bin/.debug ${libdir}/erlang/lib/eldap-*/lib/.debug ${libdir}/erlang/lib/eldap-*/priv/lib/.debug ${libdir}/erlang/lib/eldap-*/priv/obj/.debug ${libdir}/erlang/lib/eldap-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-eldap-dev = "1"
+DESCRIPTION:${PN}-eldap-dev = ""
+RDEPENDS:${PN}-eldap-dev = ""
+FILES:${PN}-eldap-dev = "${libdir}/erlang/lib/eldap-*/*src ${libdir}/erlang/lib/eldap-*/include ${libdir}/erlang/lib/eldap-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-eldap-staticdev = "1"
+DESCRIPTION:${PN}-eldap-staticdev = ""
+RDEPENDS:${PN}-eldap-staticdev = ""
+FILES:${PN}-eldap-staticdev = "${libdir}/erlang/lib/eldap-*/lib/*.a ${libdir}/erlang/lib/eldap-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-eldap = "1"
+DESCRIPTION:${PN}-eldap = ""
+RDEPENDS:${PN}-eldap = ""
+FILES:${PN}-eldap = "${libdir}/erlang/lib/eldap-* "
+
+ALLOW_EMPTY:${PN}-emacs-examples = "1"
+DESCRIPTION:${PN}-emacs-examples = ""
+RDEPENDS:${PN}-emacs-examples = ""
+FILES:${PN}-emacs-examples = "${libdir}/erlang/lib/emacs-*/examples "
+
+ALLOW_EMPTY:${PN}-emacs = "1"
+DESCRIPTION:${PN}-emacs = ""
+RDEPENDS:${PN}-emacs = ""
+FILES:${PN}-emacs = "${libdir}/erlang/lib/tools-*/emacs "
+
+ALLOW_EMPTY:${PN}-erl-docgen-examples = "1"
+DESCRIPTION:${PN}-erl-docgen-examples = ""
+RDEPENDS:${PN}-erl-docgen-examples = ""
+FILES:${PN}-erl-docgen-examples = "${libdir}/erlang/lib/erl_docgen-*/examples "
+
+ALLOW_EMPTY:${PN}-erl-docgen-doc = "1"
+DESCRIPTION:${PN}-erl-docgen-doc = ""
+RDEPENDS:${PN}-erl-docgen-doc = ""
+FILES:${PN}-erl-docgen-doc = "${libdir}/erlang/lib/erl-docgen-*/doc ${libdir}/erlang/lib/erl-docgen-*/man "
+
+ALLOW_EMPTY:${PN}-erl-docgen-dbg = "1"
+DESCRIPTION:${PN}-erl-docgen-dbg = ""
+RDEPENDS:${PN}-erl-docgen-dbg = ""
+FILES:${PN}-erl-docgen-dbg = "${libdir}/erlang/lib/erl_docgen-*/bin/.debug ${libdir}/erlang/lib/erl_docgen-*/lib/.debug ${libdir}/erlang/lib/erl_docgen-*/priv/lib/.debug ${libdir}/erlang/lib/erl_docgen-*/priv/obj/.debug ${libdir}/erlang/lib/erl_docgen-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-erl-docgen-dev = "1"
+DESCRIPTION:${PN}-erl-docgen-dev = ""
+RDEPENDS:${PN}-erl-docgen-dev = ""
+FILES:${PN}-erl-docgen-dev = "${libdir}/erlang/lib/erl_docgen-*/*src ${libdir}/erlang/lib/erl_docgen-*/include ${libdir}/erlang/lib/erl_docgen-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-erl-docgen-staticdev = "1"
+DESCRIPTION:${PN}-erl-docgen-staticdev = ""
+RDEPENDS:${PN}-erl-docgen-staticdev = ""
+FILES:${PN}-erl-docgen-staticdev = "${libdir}/erlang/lib/erl_docgen-*/lib/*.a ${libdir}/erlang/lib/erl_docgen-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-erl-docgen = "1"
+DESCRIPTION:${PN}-erl-docgen = ""
+RDEPENDS:${PN}-erl-docgen = ""
+FILES:${PN}-erl-docgen = "${libdir}/erlang/lib/erl_docgen-* "
+
+ALLOW_EMPTY:${PN}-erl-interface-examples = "1"
+DESCRIPTION:${PN}-erl-interface-examples = ""
+RDEPENDS:${PN}-erl-interface-examples = ""
+FILES:${PN}-erl-interface-examples = "${libdir}/erlang/lib/erl_interface-*/examples "
+
+ALLOW_EMPTY:${PN}-erl-interface-doc = "1"
+DESCRIPTION:${PN}-erl-interface-doc = ""
+RDEPENDS:${PN}-erl-interface-doc = ""
+FILES:${PN}-erl-interface-doc = "${libdir}/erlang/lib/erl-interface-*/doc ${libdir}/erlang/lib/erl-interface-*/man "
+
+ALLOW_EMPTY:${PN}-erl-interface-dbg = "1"
+DESCRIPTION:${PN}-erl-interface-dbg = ""
+RDEPENDS:${PN}-erl-interface-dbg = ""
+FILES:${PN}-erl-interface-dbg = "${libdir}/erlang/lib/erl_interface-*/bin/.debug ${libdir}/erlang/lib/erl_interface-*/lib/.debug ${libdir}/erlang/lib/erl_interface-*/priv/lib/.debug ${libdir}/erlang/lib/erl_interface-*/priv/obj/.debug ${libdir}/erlang/lib/erl_interface-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-erl-interface-dev = "1"
+DESCRIPTION:${PN}-erl-interface-dev = ""
+RDEPENDS:${PN}-erl-interface-dev = ""
+FILES:${PN}-erl-interface-dev = "${libdir}/erlang/lib/erl_interface-*/*src ${libdir}/erlang/lib/erl_interface-*/include ${libdir}/erlang/lib/erl_interface-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-erl-interface-staticdev = "1"
+DESCRIPTION:${PN}-erl-interface-staticdev = ""
+RDEPENDS:${PN}-erl-interface-staticdev = ""
+FILES:${PN}-erl-interface-staticdev = "${libdir}/erlang/lib/erl_interface-*/lib/*.a ${libdir}/erlang/lib/erl_interface-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-erl-interface = "1"
+DESCRIPTION:${PN}-erl-interface = ""
+RDEPENDS:${PN}-erl-interface = ""
+FILES:${PN}-erl-interface = "${libdir}/erlang/lib/erl_interface-* "
+
+ALLOW_EMPTY:${PN}-et-examples = "1"
+DESCRIPTION:${PN}-et-examples = ""
+RDEPENDS:${PN}-et-examples = ""
+FILES:${PN}-et-examples = "${libdir}/erlang/lib/et-*/examples "
+
+ALLOW_EMPTY:${PN}-et-doc = "1"
+DESCRIPTION:${PN}-et-doc = ""
+RDEPENDS:${PN}-et-doc = ""
+FILES:${PN}-et-doc = "${libdir}/erlang/lib/et-*/doc ${libdir}/erlang/lib/et-*/man "
+
+ALLOW_EMPTY:${PN}-et-dbg = "1"
+DESCRIPTION:${PN}-et-dbg = ""
+RDEPENDS:${PN}-et-dbg = ""
+FILES:${PN}-et-dbg = "${libdir}/erlang/lib/et-*/bin/.debug ${libdir}/erlang/lib/et-*/lib/.debug ${libdir}/erlang/lib/et-*/priv/lib/.debug ${libdir}/erlang/lib/et-*/priv/obj/.debug ${libdir}/erlang/lib/et-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-et-dev = "1"
+DESCRIPTION:${PN}-et-dev = ""
+RDEPENDS:${PN}-et-dev = ""
+FILES:${PN}-et-dev = "${libdir}/erlang/lib/et-*/*src ${libdir}/erlang/lib/et-*/include ${libdir}/erlang/lib/et-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-et-staticdev = "1"
+DESCRIPTION:${PN}-et-staticdev = ""
+RDEPENDS:${PN}-et-staticdev = ""
+FILES:${PN}-et-staticdev = "${libdir}/erlang/lib/et-*/lib/*.a ${libdir}/erlang/lib/et-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-et = "1"
+DESCRIPTION:${PN}-et = ""
+RDEPENDS:${PN}-et = ""
+FILES:${PN}-et = "${libdir}/erlang/lib/et-* "
+
+ALLOW_EMPTY:${PN}-eunit-examples = "1"
+DESCRIPTION:${PN}-eunit-examples = ""
+RDEPENDS:${PN}-eunit-examples = ""
+FILES:${PN}-eunit-examples = "${libdir}/erlang/lib/eunit-*/examples "
+
+ALLOW_EMPTY:${PN}-eunit-doc = "1"
+DESCRIPTION:${PN}-eunit-doc = ""
+RDEPENDS:${PN}-eunit-doc = ""
+FILES:${PN}-eunit-doc = "${libdir}/erlang/lib/eunit-*/doc ${libdir}/erlang/lib/eunit-*/man "
+
+ALLOW_EMPTY:${PN}-eunit-dbg = "1"
+DESCRIPTION:${PN}-eunit-dbg = ""
+RDEPENDS:${PN}-eunit-dbg = ""
+FILES:${PN}-eunit-dbg = "${libdir}/erlang/lib/eunit-*/bin/.debug ${libdir}/erlang/lib/eunit-*/lib/.debug ${libdir}/erlang/lib/eunit-*/priv/lib/.debug ${libdir}/erlang/lib/eunit-*/priv/obj/.debug ${libdir}/erlang/lib/eunit-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-eunit-dev = "1"
+DESCRIPTION:${PN}-eunit-dev = ""
+RDEPENDS:${PN}-eunit-dev = ""
+FILES:${PN}-eunit-dev = "${libdir}/erlang/lib/eunit-*/*src ${libdir}/erlang/lib/eunit-*/include ${libdir}/erlang/lib/eunit-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-eunit-staticdev = "1"
+DESCRIPTION:${PN}-eunit-staticdev = ""
+RDEPENDS:${PN}-eunit-staticdev = ""
+FILES:${PN}-eunit-staticdev = "${libdir}/erlang/lib/eunit-*/lib/*.a ${libdir}/erlang/lib/eunit-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-eunit = "1"
+DESCRIPTION:${PN}-eunit = ""
+RDEPENDS:${PN}-eunit = ""
+FILES:${PN}-eunit = "${libdir}/erlang/lib/eunit-* "
+
+ALLOW_EMPTY:${PN}-ftp-examples = "1"
+DESCRIPTION:${PN}-ftp-examples = ""
+RDEPENDS:${PN}-ftp-examples = ""
+FILES:${PN}-ftp-examples = "${libdir}/erlang/lib/ftp-*/examples "
+
+ALLOW_EMPTY:${PN}-ftp-doc = "1"
+DESCRIPTION:${PN}-ftp-doc = ""
+RDEPENDS:${PN}-ftp-doc = ""
+FILES:${PN}-ftp-doc = "${libdir}/erlang/lib/ftp-*/doc ${libdir}/erlang/lib/ftp-*/man "
+
+ALLOW_EMPTY:${PN}-ftp-dbg = "1"
+DESCRIPTION:${PN}-ftp-dbg = ""
+RDEPENDS:${PN}-ftp-dbg = ""
+FILES:${PN}-ftp-dbg = "${libdir}/erlang/lib/ftp-*/bin/.debug ${libdir}/erlang/lib/ftp-*/lib/.debug ${libdir}/erlang/lib/ftp-*/priv/lib/.debug ${libdir}/erlang/lib/ftp-*/priv/obj/.debug ${libdir}/erlang/lib/ftp-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-ftp-dev = "1"
+DESCRIPTION:${PN}-ftp-dev = ""
+RDEPENDS:${PN}-ftp-dev = ""
+FILES:${PN}-ftp-dev = "${libdir}/erlang/lib/ftp-*/*src ${libdir}/erlang/lib/ftp-*/include ${libdir}/erlang/lib/ftp-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-ftp-staticdev = "1"
+DESCRIPTION:${PN}-ftp-staticdev = ""
+RDEPENDS:${PN}-ftp-staticdev = ""
+FILES:${PN}-ftp-staticdev = "${libdir}/erlang/lib/ftp-*/lib/*.a ${libdir}/erlang/lib/ftp-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-ftp = "1"
+DESCRIPTION:${PN}-ftp = ""
+RDEPENDS:${PN}-ftp = ""
+FILES:${PN}-ftp = "${libdir}/erlang/lib/ftp-* "
+
+ALLOW_EMPTY:${PN}-inets-examples = "1"
+DESCRIPTION:${PN}-inets-examples = ""
+RDEPENDS:${PN}-inets-examples = ""
+FILES:${PN}-inets-examples = "${libdir}/erlang/lib/inets-*/examples "
+
+ALLOW_EMPTY:${PN}-inets-doc = "1"
+DESCRIPTION:${PN}-inets-doc = ""
+RDEPENDS:${PN}-inets-doc = ""
+FILES:${PN}-inets-doc = "${libdir}/erlang/lib/inets-*/doc ${libdir}/erlang/lib/inets-*/man "
+
+ALLOW_EMPTY:${PN}-inets-dbg = "1"
+DESCRIPTION:${PN}-inets-dbg = ""
+RDEPENDS:${PN}-inets-dbg = ""
+FILES:${PN}-inets-dbg = "${libdir}/erlang/lib/inets-*/bin/.debug ${libdir}/erlang/lib/inets-*/lib/.debug ${libdir}/erlang/lib/inets-*/priv/lib/.debug ${libdir}/erlang/lib/inets-*/priv/obj/.debug ${libdir}/erlang/lib/inets-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-inets-dev = "1"
+DESCRIPTION:${PN}-inets-dev = ""
+RDEPENDS:${PN}-inets-dev = ""
+FILES:${PN}-inets-dev = "${libdir}/erlang/lib/inets-*/*src ${libdir}/erlang/lib/inets-*/include ${libdir}/erlang/lib/inets-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-inets-staticdev = "1"
+DESCRIPTION:${PN}-inets-staticdev = ""
+RDEPENDS:${PN}-inets-staticdev = ""
+FILES:${PN}-inets-staticdev = "${libdir}/erlang/lib/inets-*/lib/*.a ${libdir}/erlang/lib/inets-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-inets = "1"
+DESCRIPTION:${PN}-inets = ""
+RDEPENDS:${PN}-inets = ""
+FILES:${PN}-inets = "${libdir}/erlang/lib/inets-* "
+
+ALLOW_EMPTY:${PN}-jinterface-examples = "1"
+DESCRIPTION:${PN}-jinterface-examples = ""
+RDEPENDS:${PN}-jinterface-examples = ""
+FILES:${PN}-jinterface-examples = "${libdir}/erlang/lib/jinterface-*/examples "
+
+ALLOW_EMPTY:${PN}-jinterface-doc = "1"
+DESCRIPTION:${PN}-jinterface-doc = ""
+RDEPENDS:${PN}-jinterface-doc = ""
+FILES:${PN}-jinterface-doc = "${libdir}/erlang/lib/jinterface-*/doc ${libdir}/erlang/lib/jinterface-*/man "
+
+ALLOW_EMPTY:${PN}-jinterface-dbg = "1"
+DESCRIPTION:${PN}-jinterface-dbg = ""
+RDEPENDS:${PN}-jinterface-dbg = ""
+FILES:${PN}-jinterface-dbg = "${libdir}/erlang/lib/jinterface-*/bin/.debug ${libdir}/erlang/lib/jinterface-*/lib/.debug ${libdir}/erlang/lib/jinterface-*/priv/lib/.debug ${libdir}/erlang/lib/jinterface-*/priv/obj/.debug ${libdir}/erlang/lib/jinterface-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-jinterface-dev = "1"
+DESCRIPTION:${PN}-jinterface-dev = ""
+RDEPENDS:${PN}-jinterface-dev = ""
+FILES:${PN}-jinterface-dev = "${libdir}/erlang/lib/jinterface-*/*src ${libdir}/erlang/lib/jinterface-*/include ${libdir}/erlang/lib/jinterface-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-jinterface-staticdev = "1"
+DESCRIPTION:${PN}-jinterface-staticdev = ""
+RDEPENDS:${PN}-jinterface-staticdev = ""
+FILES:${PN}-jinterface-staticdev = "${libdir}/erlang/lib/jinterface-*/lib/*.a ${libdir}/erlang/lib/jinterface-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-jinterface = "1"
+DESCRIPTION:${PN}-jinterface = ""
+RDEPENDS:${PN}-jinterface = ""
+FILES:${PN}-jinterface = "${libdir}/erlang/lib/jinterface-* "
+
+ALLOW_EMPTY:${PN}-megaco-examples = "1"
+DESCRIPTION:${PN}-megaco-examples = ""
+RDEPENDS:${PN}-megaco-examples = ""
+FILES:${PN}-megaco-examples = "${libdir}/erlang/lib/megaco-*/examples "
+
+ALLOW_EMPTY:${PN}-megaco-doc = "1"
+DESCRIPTION:${PN}-megaco-doc = ""
+RDEPENDS:${PN}-megaco-doc = ""
+FILES:${PN}-megaco-doc = "${libdir}/erlang/lib/megaco-*/doc ${libdir}/erlang/lib/megaco-*/man "
+
+ALLOW_EMPTY:${PN}-megaco-dbg = "1"
+DESCRIPTION:${PN}-megaco-dbg = ""
+RDEPENDS:${PN}-megaco-dbg = ""
+FILES:${PN}-megaco-dbg = "${libdir}/erlang/lib/megaco-*/bin/.debug ${libdir}/erlang/lib/megaco-*/lib/.debug ${libdir}/erlang/lib/megaco-*/priv/lib/.debug ${libdir}/erlang/lib/megaco-*/priv/obj/.debug ${libdir}/erlang/lib/megaco-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-megaco-dev = "1"
+DESCRIPTION:${PN}-megaco-dev = ""
+RDEPENDS:${PN}-megaco-dev = ""
+FILES:${PN}-megaco-dev = "${libdir}/erlang/lib/megaco-*/*src ${libdir}/erlang/lib/megaco-*/include ${libdir}/erlang/lib/megaco-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-megaco-staticdev = "1"
+DESCRIPTION:${PN}-megaco-staticdev = ""
+RDEPENDS:${PN}-megaco-staticdev = ""
+FILES:${PN}-megaco-staticdev = "${libdir}/erlang/lib/megaco-*/lib/*.a ${libdir}/erlang/lib/megaco-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-megaco = "1"
+DESCRIPTION:${PN}-megaco = ""
+RDEPENDS:${PN}-megaco = ""
+FILES:${PN}-megaco = "${libdir}/erlang/lib/megaco-* "
+
+ALLOW_EMPTY:${PN}-mnesia-examples = "1"
+DESCRIPTION:${PN}-mnesia-examples = ""
+RDEPENDS:${PN}-mnesia-examples = ""
+FILES:${PN}-mnesia-examples = "${libdir}/erlang/lib/mnesia-*/examples "
+
+ALLOW_EMPTY:${PN}-mnesia-doc = "1"
+DESCRIPTION:${PN}-mnesia-doc = ""
+RDEPENDS:${PN}-mnesia-doc = ""
+FILES:${PN}-mnesia-doc = "${libdir}/erlang/lib/mnesia-*/doc ${libdir}/erlang/lib/mnesia-*/man "
+
+ALLOW_EMPTY:${PN}-mnesia-dbg = "1"
+DESCRIPTION:${PN}-mnesia-dbg = ""
+RDEPENDS:${PN}-mnesia-dbg = ""
+FILES:${PN}-mnesia-dbg = "${libdir}/erlang/lib/mnesia-*/bin/.debug ${libdir}/erlang/lib/mnesia-*/lib/.debug ${libdir}/erlang/lib/mnesia-*/priv/lib/.debug ${libdir}/erlang/lib/mnesia-*/priv/obj/.debug ${libdir}/erlang/lib/mnesia-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-mnesia-dev = "1"
+DESCRIPTION:${PN}-mnesia-dev = ""
+RDEPENDS:${PN}-mnesia-dev = ""
+FILES:${PN}-mnesia-dev = "${libdir}/erlang/lib/mnesia-*/*src ${libdir}/erlang/lib/mnesia-*/include ${libdir}/erlang/lib/mnesia-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-mnesia-staticdev = "1"
+DESCRIPTION:${PN}-mnesia-staticdev = ""
+RDEPENDS:${PN}-mnesia-staticdev = ""
+FILES:${PN}-mnesia-staticdev = "${libdir}/erlang/lib/mnesia-*/lib/*.a ${libdir}/erlang/lib/mnesia-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-mnesia = "1"
+DESCRIPTION:${PN}-mnesia = ""
+RDEPENDS:${PN}-mnesia = ""
+FILES:${PN}-mnesia = "${libdir}/erlang/lib/mnesia-* "
+
+ALLOW_EMPTY:${PN}-observer-examples = "1"
+DESCRIPTION:${PN}-observer-examples = ""
+RDEPENDS:${PN}-observer-examples = ""
+FILES:${PN}-observer-examples = "${libdir}/erlang/lib/observer-*/examples "
+
+ALLOW_EMPTY:${PN}-observer-doc = "1"
+DESCRIPTION:${PN}-observer-doc = ""
+RDEPENDS:${PN}-observer-doc = ""
+FILES:${PN}-observer-doc = "${libdir}/erlang/lib/observer-*/doc ${libdir}/erlang/lib/observer-*/man "
+
+ALLOW_EMPTY:${PN}-observer-dbg = "1"
+DESCRIPTION:${PN}-observer-dbg = ""
+RDEPENDS:${PN}-observer-dbg = ""
+FILES:${PN}-observer-dbg = "${libdir}/erlang/lib/observer-*/bin/.debug ${libdir}/erlang/lib/observer-*/lib/.debug ${libdir}/erlang/lib/observer-*/priv/lib/.debug ${libdir}/erlang/lib/observer-*/priv/obj/.debug ${libdir}/erlang/lib/observer-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-observer-dev = "1"
+DESCRIPTION:${PN}-observer-dev = ""
+RDEPENDS:${PN}-observer-dev = ""
+FILES:${PN}-observer-dev = "${libdir}/erlang/lib/observer-*/*src ${libdir}/erlang/lib/observer-*/include ${libdir}/erlang/lib/observer-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-observer-staticdev = "1"
+DESCRIPTION:${PN}-observer-staticdev = ""
+RDEPENDS:${PN}-observer-staticdev = ""
+FILES:${PN}-observer-staticdev = "${libdir}/erlang/lib/observer-*/lib/*.a ${libdir}/erlang/lib/observer-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-observer = "1"
+DESCRIPTION:${PN}-observer = "--with-observer,--without-observer,wxwidgets,"
+RDEPENDS:${PN}-observer = ""
+FILES:${PN}-observer = "${libdir}/erlang/lib/observer-* "
+
+ALLOW_EMPTY:${PN}-wx-examples = "1"
+DESCRIPTION:${PN}-wx-examples = ""
+RDEPENDS:${PN}-wx-examples = ""
+FILES:${PN}-wx-examples = "${libdir}/erlang/lib/wx-*/examples "
+
+ALLOW_EMPTY:${PN}-wx-doc = "1"
+DESCRIPTION:${PN}-wx-doc = ""
+RDEPENDS:${PN}-wx-doc = ""
+FILES:${PN}-wx-doc = "${libdir}/erlang/lib/wx-*/doc ${libdir}/erlang/lib/wx-*/man "
+
+ALLOW_EMPTY:${PN}-wx-dbg = "1"
+DESCRIPTION:${PN}-wx-dbg = ""
+RDEPENDS:${PN}-wx-dbg = ""
+FILES:${PN}-wx-dbg = "${libdir}/erlang/lib/wx-*/bin/.debug ${libdir}/erlang/lib/wx-*/lib/.debug ${libdir}/erlang/lib/wx-*/priv/lib/.debug ${libdir}/erlang/lib/wx-*/priv/obj/.debug ${libdir}/erlang/lib/wx-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-wx-dev = "1"
+DESCRIPTION:${PN}-wx-dev = ""
+RDEPENDS:${PN}-wx-dev = ""
+FILES:${PN}-wx-dev = "${libdir}/erlang/lib/wx-*/*src ${libdir}/erlang/lib/wx-*/include ${libdir}/erlang/lib/wx-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-wx-staticdev = "1"
+DESCRIPTION:${PN}-wx-staticdev = ""
+RDEPENDS:${PN}-wx-staticdev = ""
+FILES:${PN}-wx-staticdev = "${libdir}/erlang/lib/wx-*/lib/*.a ${libdir}/erlang/lib/wx-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-wx = "1"
+DESCRIPTION:${PN}-wx = ""
+RDEPENDS:${PN}-wx = ""
+FILES:${PN}-wx = "${libdir}/erlang/lib/wx-* "
+
+ALLOW_EMPTY:${PN}-os-mon-examples = "1"
+DESCRIPTION:${PN}-os-mon-examples = ""
+RDEPENDS:${PN}-os-mon-examples = ""
+FILES:${PN}-os-mon-examples = "${libdir}/erlang/lib/os_mon-*/examples "
+
+ALLOW_EMPTY:${PN}-os-mon-doc = "1"
+DESCRIPTION:${PN}-os-mon-doc = ""
+RDEPENDS:${PN}-os-mon-doc = ""
+FILES:${PN}-os-mon-doc = "${libdir}/erlang/lib/os-mon-*/doc ${libdir}/erlang/lib/os-mon-*/man "
+
+ALLOW_EMPTY:${PN}-os-mon-dbg = "1"
+DESCRIPTION:${PN}-os-mon-dbg = ""
+RDEPENDS:${PN}-os-mon-dbg = ""
+FILES:${PN}-os-mon-dbg = "${libdir}/erlang/lib/os_mon-*/bin/.debug ${libdir}/erlang/lib/os_mon-*/lib/.debug ${libdir}/erlang/lib/os_mon-*/priv/lib/.debug ${libdir}/erlang/lib/os_mon-*/priv/obj/.debug ${libdir}/erlang/lib/os_mon-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-os-mon-dev = "1"
+DESCRIPTION:${PN}-os-mon-dev = ""
+RDEPENDS:${PN}-os-mon-dev = ""
+FILES:${PN}-os-mon-dev = "${libdir}/erlang/lib/os_mon-*/*src ${libdir}/erlang/lib/os_mon-*/include ${libdir}/erlang/lib/os_mon-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-os-mon-staticdev = "1"
+DESCRIPTION:${PN}-os-mon-staticdev = ""
+RDEPENDS:${PN}-os-mon-staticdev = ""
+FILES:${PN}-os-mon-staticdev = "${libdir}/erlang/lib/os_mon-*/lib/*.a ${libdir}/erlang/lib/os_mon-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-os-mon = "1"
+DESCRIPTION:${PN}-os-mon = ""
+RDEPENDS:${PN}-os-mon = ""
+FILES:${PN}-os-mon = "${libdir}/erlang/lib/os_mon-* "
+
+ALLOW_EMPTY:${PN}-parsetools-examples = "1"
+DESCRIPTION:${PN}-parsetools-examples = ""
+RDEPENDS:${PN}-parsetools-examples = ""
+FILES:${PN}-parsetools-examples = "${libdir}/erlang/lib/parsetools-*/examples "
+
+ALLOW_EMPTY:${PN}-parsetools-doc = "1"
+DESCRIPTION:${PN}-parsetools-doc = ""
+RDEPENDS:${PN}-parsetools-doc = ""
+FILES:${PN}-parsetools-doc = "${libdir}/erlang/lib/parsetools-*/doc ${libdir}/erlang/lib/parsetools-*/man "
+
+ALLOW_EMPTY:${PN}-parsetools-dbg = "1"
+DESCRIPTION:${PN}-parsetools-dbg = ""
+RDEPENDS:${PN}-parsetools-dbg = ""
+FILES:${PN}-parsetools-dbg = "${libdir}/erlang/lib/parsetools-*/bin/.debug ${libdir}/erlang/lib/parsetools-*/lib/.debug ${libdir}/erlang/lib/parsetools-*/priv/lib/.debug ${libdir}/erlang/lib/parsetools-*/priv/obj/.debug ${libdir}/erlang/lib/parsetools-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-parsetools-dev = "1"
+DESCRIPTION:${PN}-parsetools-dev = ""
+RDEPENDS:${PN}-parsetools-dev = ""
+FILES:${PN}-parsetools-dev = "${libdir}/erlang/lib/parsetools-*/*src ${libdir}/erlang/lib/parsetools-*/include ${libdir}/erlang/lib/parsetools-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-parsetools-staticdev = "1"
+DESCRIPTION:${PN}-parsetools-staticdev = ""
+RDEPENDS:${PN}-parsetools-staticdev = ""
+FILES:${PN}-parsetools-staticdev = "${libdir}/erlang/lib/parsetools-*/lib/*.a ${libdir}/erlang/lib/parsetools-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-parsetools = "1"
+DESCRIPTION:${PN}-parsetools = ""
+RDEPENDS:${PN}-parsetools = ""
+FILES:${PN}-parsetools = "${libdir}/erlang/lib/parsetools-* "
+
+ALLOW_EMPTY:${PN}-public-key-examples = "1"
+DESCRIPTION:${PN}-public-key-examples = ""
+RDEPENDS:${PN}-public-key-examples = ""
+FILES:${PN}-public-key-examples = "${libdir}/erlang/lib/public_key-*/examples "
+
+ALLOW_EMPTY:${PN}-public-key-doc = "1"
+DESCRIPTION:${PN}-public-key-doc = ""
+RDEPENDS:${PN}-public-key-doc = ""
+FILES:${PN}-public-key-doc = "${libdir}/erlang/lib/public-key-*/doc ${libdir}/erlang/lib/public-key-*/man "
+
+ALLOW_EMPTY:${PN}-public-key-dbg = "1"
+DESCRIPTION:${PN}-public-key-dbg = ""
+RDEPENDS:${PN}-public-key-dbg = ""
+FILES:${PN}-public-key-dbg = "${libdir}/erlang/lib/public_key-*/bin/.debug ${libdir}/erlang/lib/public_key-*/lib/.debug ${libdir}/erlang/lib/public_key-*/priv/lib/.debug ${libdir}/erlang/lib/public_key-*/priv/obj/.debug ${libdir}/erlang/lib/public_key-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-public-key-dev = "1"
+DESCRIPTION:${PN}-public-key-dev = ""
+RDEPENDS:${PN}-public-key-dev = ""
+FILES:${PN}-public-key-dev = "${libdir}/erlang/lib/public_key-*/*src ${libdir}/erlang/lib/public_key-*/include ${libdir}/erlang/lib/public_key-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-public-key-staticdev = "1"
+DESCRIPTION:${PN}-public-key-staticdev = ""
+RDEPENDS:${PN}-public-key-staticdev = ""
+FILES:${PN}-public-key-staticdev = "${libdir}/erlang/lib/public_key-*/lib/*.a ${libdir}/erlang/lib/public_key-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-public-key = "1"
+DESCRIPTION:${PN}-public-key = ""
+RDEPENDS:${PN}-public-key = ""
+FILES:${PN}-public-key = "${libdir}/erlang/lib/public_key-* "
+
+ALLOW_EMPTY:${PN}-reltool-examples = "1"
+DESCRIPTION:${PN}-reltool-examples = ""
+RDEPENDS:${PN}-reltool-examples = ""
+FILES:${PN}-reltool-examples = "${libdir}/erlang/lib/reltool-*/examples "
+
+ALLOW_EMPTY:${PN}-reltool-doc = "1"
+DESCRIPTION:${PN}-reltool-doc = ""
+RDEPENDS:${PN}-reltool-doc = ""
+FILES:${PN}-reltool-doc = "${libdir}/erlang/lib/reltool-*/doc ${libdir}/erlang/lib/reltool-*/man "
+
+ALLOW_EMPTY:${PN}-reltool-dbg = "1"
+DESCRIPTION:${PN}-reltool-dbg = ""
+RDEPENDS:${PN}-reltool-dbg = ""
+FILES:${PN}-reltool-dbg = "${libdir}/erlang/lib/reltool-*/bin/.debug ${libdir}/erlang/lib/reltool-*/lib/.debug ${libdir}/erlang/lib/reltool-*/priv/lib/.debug ${libdir}/erlang/lib/reltool-*/priv/obj/.debug ${libdir}/erlang/lib/reltool-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-reltool-dev = "1"
+DESCRIPTION:${PN}-reltool-dev = ""
+RDEPENDS:${PN}-reltool-dev = ""
+FILES:${PN}-reltool-dev = "${libdir}/erlang/lib/reltool-*/*src ${libdir}/erlang/lib/reltool-*/include ${libdir}/erlang/lib/reltool-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-reltool-staticdev = "1"
+DESCRIPTION:${PN}-reltool-staticdev = ""
+RDEPENDS:${PN}-reltool-staticdev = ""
+FILES:${PN}-reltool-staticdev = "${libdir}/erlang/lib/reltool-*/lib/*.a ${libdir}/erlang/lib/reltool-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-reltool = "1"
+DESCRIPTION:${PN}-reltool = ""
+RDEPENDS:${PN}-reltool = ""
+FILES:${PN}-reltool = "${libdir}/erlang/lib/reltool-* "
+
+ALLOW_EMPTY:${PN}-runtime-tools-examples = "1"
+DESCRIPTION:${PN}-runtime-tools-examples = ""
+RDEPENDS:${PN}-runtime-tools-examples = ""
+FILES:${PN}-runtime-tools-examples = "${libdir}/erlang/lib/runtime_tools-*/examples "
+
+ALLOW_EMPTY:${PN}-runtime-tools-doc = "1"
+DESCRIPTION:${PN}-runtime-tools-doc = ""
+RDEPENDS:${PN}-runtime-tools-doc = ""
+FILES:${PN}-runtime-tools-doc = "${libdir}/erlang/lib/runtime-tools-*/doc ${libdir}/erlang/lib/runtime-tools-*/man "
+
+ALLOW_EMPTY:${PN}-runtime-tools-dbg = "1"
+DESCRIPTION:${PN}-runtime-tools-dbg = ""
+RDEPENDS:${PN}-runtime-tools-dbg = ""
+FILES:${PN}-runtime-tools-dbg = "${libdir}/erlang/lib/runtime_tools-*/bin/.debug ${libdir}/erlang/lib/runtime_tools-*/lib/.debug ${libdir}/erlang/lib/runtime_tools-*/priv/lib/.debug ${libdir}/erlang/lib/runtime_tools-*/priv/obj/.debug ${libdir}/erlang/lib/runtime_tools-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-runtime-tools-dev = "1"
+DESCRIPTION:${PN}-runtime-tools-dev = ""
+RDEPENDS:${PN}-runtime-tools-dev = ""
+FILES:${PN}-runtime-tools-dev = "${libdir}/erlang/lib/runtime_tools-*/*src ${libdir}/erlang/lib/runtime_tools-*/include ${libdir}/erlang/lib/runtime_tools-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-runtime-tools-staticdev = "1"
+DESCRIPTION:${PN}-runtime-tools-staticdev = ""
+RDEPENDS:${PN}-runtime-tools-staticdev = ""
+FILES:${PN}-runtime-tools-staticdev = "${libdir}/erlang/lib/runtime_tools-*/lib/*.a ${libdir}/erlang/lib/runtime_tools-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-runtime-tools = "1"
+DESCRIPTION:${PN}-runtime-tools = ""
+RDEPENDS:${PN}-runtime-tools = ""
+FILES:${PN}-runtime-tools = "${libdir}/erlang/lib/runtime_tools-* "
+
+ALLOW_EMPTY:${PN}-snmp-examples = "1"
+DESCRIPTION:${PN}-snmp-examples = ""
+RDEPENDS:${PN}-snmp-examples = ""
+FILES:${PN}-snmp-examples = "${libdir}/erlang/lib/snmp-*/examples "
+
+ALLOW_EMPTY:${PN}-snmp-doc = "1"
+DESCRIPTION:${PN}-snmp-doc = ""
+RDEPENDS:${PN}-snmp-doc = ""
+FILES:${PN}-snmp-doc = "${libdir}/erlang/lib/snmp-*/doc ${libdir}/erlang/lib/snmp-*/man "
+
+ALLOW_EMPTY:${PN}-snmp-dbg = "1"
+DESCRIPTION:${PN}-snmp-dbg = ""
+RDEPENDS:${PN}-snmp-dbg = ""
+FILES:${PN}-snmp-dbg = "${libdir}/erlang/lib/snmp-*/bin/.debug ${libdir}/erlang/lib/snmp-*/lib/.debug ${libdir}/erlang/lib/snmp-*/priv/lib/.debug ${libdir}/erlang/lib/snmp-*/priv/obj/.debug ${libdir}/erlang/lib/snmp-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-snmp-dev = "1"
+DESCRIPTION:${PN}-snmp-dev = ""
+RDEPENDS:${PN}-snmp-dev = ""
+FILES:${PN}-snmp-dev = "${libdir}/erlang/lib/snmp-*/*src ${libdir}/erlang/lib/snmp-*/include ${libdir}/erlang/lib/snmp-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-snmp-staticdev = "1"
+DESCRIPTION:${PN}-snmp-staticdev = ""
+RDEPENDS:${PN}-snmp-staticdev = ""
+FILES:${PN}-snmp-staticdev = "${libdir}/erlang/lib/snmp-*/lib/*.a ${libdir}/erlang/lib/snmp-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-snmp = "1"
+DESCRIPTION:${PN}-snmp = ""
+RDEPENDS:${PN}-snmp = ""
+FILES:${PN}-snmp = "${libdir}/erlang/lib/snmp-* "
+
+ALLOW_EMPTY:${PN}-ssh-examples = "1"
+DESCRIPTION:${PN}-ssh-examples = ""
+RDEPENDS:${PN}-ssh-examples = ""
+FILES:${PN}-ssh-examples = "${libdir}/erlang/lib/ssh-*/examples "
+
+ALLOW_EMPTY:${PN}-ssh-doc = "1"
+DESCRIPTION:${PN}-ssh-doc = ""
+RDEPENDS:${PN}-ssh-doc = ""
+FILES:${PN}-ssh-doc = "${libdir}/erlang/lib/ssh-*/doc ${libdir}/erlang/lib/ssh-*/man "
+
+ALLOW_EMPTY:${PN}-ssh-dbg = "1"
+DESCRIPTION:${PN}-ssh-dbg = ""
+RDEPENDS:${PN}-ssh-dbg = ""
+FILES:${PN}-ssh-dbg = "${libdir}/erlang/lib/ssh-*/bin/.debug ${libdir}/erlang/lib/ssh-*/lib/.debug ${libdir}/erlang/lib/ssh-*/priv/lib/.debug ${libdir}/erlang/lib/ssh-*/priv/obj/.debug ${libdir}/erlang/lib/ssh-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-ssh-dev = "1"
+DESCRIPTION:${PN}-ssh-dev = ""
+RDEPENDS:${PN}-ssh-dev = ""
+FILES:${PN}-ssh-dev = "${libdir}/erlang/lib/ssh-*/*src ${libdir}/erlang/lib/ssh-*/include ${libdir}/erlang/lib/ssh-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-ssh-staticdev = "1"
+DESCRIPTION:${PN}-ssh-staticdev = ""
+RDEPENDS:${PN}-ssh-staticdev = ""
+FILES:${PN}-ssh-staticdev = "${libdir}/erlang/lib/ssh-*/lib/*.a ${libdir}/erlang/lib/ssh-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-ssh = "1"
+DESCRIPTION:${PN}-ssh = ""
+RDEPENDS:${PN}-ssh = ""
+FILES:${PN}-ssh = "${libdir}/erlang/lib/ssh-* "
+
+ALLOW_EMPTY:${PN}-ssl-examples = "1"
+DESCRIPTION:${PN}-ssl-examples = ""
+RDEPENDS:${PN}-ssl-examples = ""
+FILES:${PN}-ssl-examples = "${libdir}/erlang/lib/ssl-*/examples "
+
+ALLOW_EMPTY:${PN}-ssl-doc = "1"
+DESCRIPTION:${PN}-ssl-doc = ""
+RDEPENDS:${PN}-ssl-doc = ""
+FILES:${PN}-ssl-doc = "${libdir}/erlang/lib/ssl-*/doc ${libdir}/erlang/lib/ssl-*/man "
+
+ALLOW_EMPTY:${PN}-ssl-dbg = "1"
+DESCRIPTION:${PN}-ssl-dbg = ""
+RDEPENDS:${PN}-ssl-dbg = ""
+FILES:${PN}-ssl-dbg = "${libdir}/erlang/lib/ssl-*/bin/.debug ${libdir}/erlang/lib/ssl-*/lib/.debug ${libdir}/erlang/lib/ssl-*/priv/lib/.debug ${libdir}/erlang/lib/ssl-*/priv/obj/.debug ${libdir}/erlang/lib/ssl-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-ssl-dev = "1"
+DESCRIPTION:${PN}-ssl-dev = ""
+RDEPENDS:${PN}-ssl-dev = ""
+FILES:${PN}-ssl-dev = "${libdir}/erlang/lib/ssl-*/*src ${libdir}/erlang/lib/ssl-*/include ${libdir}/erlang/lib/ssl-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-ssl-staticdev = "1"
+DESCRIPTION:${PN}-ssl-staticdev = ""
+RDEPENDS:${PN}-ssl-staticdev = ""
+FILES:${PN}-ssl-staticdev = "${libdir}/erlang/lib/ssl-*/lib/*.a ${libdir}/erlang/lib/ssl-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-ssl = "1"
+DESCRIPTION:${PN}-ssl = ""
+RDEPENDS:${PN}-ssl = ""
+FILES:${PN}-ssl = "${libdir}/erlang/lib/ssl-* "
+
+ALLOW_EMPTY:${PN}-syntax-tools-examples = "1"
+DESCRIPTION:${PN}-syntax-tools-examples = ""
+RDEPENDS:${PN}-syntax-tools-examples = ""
+FILES:${PN}-syntax-tools-examples = "${libdir}/erlang/lib/syntax_tools-*/examples "
+
+ALLOW_EMPTY:${PN}-syntax-tools-doc = "1"
+DESCRIPTION:${PN}-syntax-tools-doc = ""
+RDEPENDS:${PN}-syntax-tools-doc = ""
+FILES:${PN}-syntax-tools-doc = "${libdir}/erlang/lib/syntax-tools-*/doc ${libdir}/erlang/lib/syntax-tools-*/man "
+
+ALLOW_EMPTY:${PN}-syntax-tools-dbg = "1"
+DESCRIPTION:${PN}-syntax-tools-dbg = ""
+RDEPENDS:${PN}-syntax-tools-dbg = ""
+FILES:${PN}-syntax-tools-dbg = "${libdir}/erlang/lib/syntax_tools-*/bin/.debug ${libdir}/erlang/lib/syntax_tools-*/lib/.debug ${libdir}/erlang/lib/syntax_tools-*/priv/lib/.debug ${libdir}/erlang/lib/syntax_tools-*/priv/obj/.debug ${libdir}/erlang/lib/syntax_tools-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-syntax-tools-dev = "1"
+DESCRIPTION:${PN}-syntax-tools-dev = ""
+RDEPENDS:${PN}-syntax-tools-dev = ""
+FILES:${PN}-syntax-tools-dev = "${libdir}/erlang/lib/syntax_tools-*/*src ${libdir}/erlang/lib/syntax_tools-*/include ${libdir}/erlang/lib/syntax_tools-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-syntax-tools-staticdev = "1"
+DESCRIPTION:${PN}-syntax-tools-staticdev = ""
+RDEPENDS:${PN}-syntax-tools-staticdev = ""
+FILES:${PN}-syntax-tools-staticdev = "${libdir}/erlang/lib/syntax_tools-*/lib/*.a ${libdir}/erlang/lib/syntax_tools-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-syntax-tools = "1"
+DESCRIPTION:${PN}-syntax-tools = ""
+RDEPENDS:${PN}-syntax-tools = ""
+FILES:${PN}-syntax-tools = "${libdir}/erlang/lib/syntax_tools-* "
+
+ALLOW_EMPTY:${PN}-tftp-examples = "1"
+DESCRIPTION:${PN}-tftp-examples = ""
+RDEPENDS:${PN}-tftp-examples = ""
+FILES:${PN}-tftp-examples = "${libdir}/erlang/lib/tftp-*/examples "
+
+ALLOW_EMPTY:${PN}-tftp-doc = "1"
+DESCRIPTION:${PN}-tftp-doc = ""
+RDEPENDS:${PN}-tftp-doc = ""
+FILES:${PN}-tftp-doc = "${libdir}/erlang/lib/tftp-*/doc ${libdir}/erlang/lib/tftp-*/man "
+
+ALLOW_EMPTY:${PN}-tftp-dbg = "1"
+DESCRIPTION:${PN}-tftp-dbg = ""
+RDEPENDS:${PN}-tftp-dbg = ""
+FILES:${PN}-tftp-dbg = "${libdir}/erlang/lib/tftp-*/bin/.debug ${libdir}/erlang/lib/tftp-*/lib/.debug ${libdir}/erlang/lib/tftp-*/priv/lib/.debug ${libdir}/erlang/lib/tftp-*/priv/obj/.debug ${libdir}/erlang/lib/tftp-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-tftp-dev = "1"
+DESCRIPTION:${PN}-tftp-dev = ""
+RDEPENDS:${PN}-tftp-dev = ""
+FILES:${PN}-tftp-dev = "${libdir}/erlang/lib/tftp-*/*src ${libdir}/erlang/lib/tftp-*/include ${libdir}/erlang/lib/tftp-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-tftp-staticdev = "1"
+DESCRIPTION:${PN}-tftp-staticdev = ""
+RDEPENDS:${PN}-tftp-staticdev = ""
+FILES:${PN}-tftp-staticdev = "${libdir}/erlang/lib/tftp-*/lib/*.a ${libdir}/erlang/lib/tftp-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-tftp = "1"
+DESCRIPTION:${PN}-tftp = ""
+RDEPENDS:${PN}-tftp = ""
+FILES:${PN}-tftp = "${libdir}/erlang/lib/tftp-* "
+
+ALLOW_EMPTY:${PN}-tools-examples = "1"
+DESCRIPTION:${PN}-tools-examples = ""
+RDEPENDS:${PN}-tools-examples = ""
+FILES:${PN}-tools-examples = "${libdir}/erlang/lib/tools-*/examples "
+
+ALLOW_EMPTY:${PN}-tools-doc = "1"
+DESCRIPTION:${PN}-tools-doc = ""
+RDEPENDS:${PN}-tools-doc = ""
+FILES:${PN}-tools-doc = "${libdir}/erlang/lib/tools-*/doc ${libdir}/erlang/lib/tools-*/man "
+
+ALLOW_EMPTY:${PN}-tools-dbg = "1"
+DESCRIPTION:${PN}-tools-dbg = ""
+RDEPENDS:${PN}-tools-dbg = ""
+FILES:${PN}-tools-dbg = "${libdir}/erlang/lib/tools-*/bin/.debug ${libdir}/erlang/lib/tools-*/lib/.debug ${libdir}/erlang/lib/tools-*/priv/lib/.debug ${libdir}/erlang/lib/tools-*/priv/obj/.debug ${libdir}/erlang/lib/tools-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-tools-dev = "1"
+DESCRIPTION:${PN}-tools-dev = ""
+RDEPENDS:${PN}-tools-dev = ""
+FILES:${PN}-tools-dev = "${libdir}/erlang/lib/tools-*/*src ${libdir}/erlang/lib/tools-*/include ${libdir}/erlang/lib/tools-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-tools-staticdev = "1"
+DESCRIPTION:${PN}-tools-staticdev = ""
+RDEPENDS:${PN}-tools-staticdev = ""
+FILES:${PN}-tools-staticdev = "${libdir}/erlang/lib/tools-*/lib/*.a ${libdir}/erlang/lib/tools-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-tools = "1"
+DESCRIPTION:${PN}-tools = ""
+RDEPENDS:${PN}-tools = ""
+FILES:${PN}-tools = "${libdir}/erlang/lib/tools-* "
+
+ALLOW_EMPTY:${PN}-typer-examples = "1"
+DESCRIPTION:${PN}-typer-examples = ""
+RDEPENDS:${PN}-typer-examples = ""
+FILES:${PN}-typer-examples = "${libdir}/erlang/lib/typer-*/examples "
+
+ALLOW_EMPTY:${PN}-typer-doc = "1"
+DESCRIPTION:${PN}-typer-doc = ""
+RDEPENDS:${PN}-typer-doc = ""
+FILES:${PN}-typer-doc = "${libdir}/erlang/lib/typer-*/doc ${libdir}/erlang/lib/typer-*/man "
+
+ALLOW_EMPTY:${PN}-typer-dbg = "1"
+DESCRIPTION:${PN}-typer-dbg = ""
+RDEPENDS:${PN}-typer-dbg = ""
+FILES:${PN}-typer-dbg = "${libdir}/erlang/lib/typer-*/bin/.debug ${libdir}/erlang/lib/typer-*/lib/.debug ${libdir}/erlang/lib/typer-*/priv/lib/.debug ${libdir}/erlang/lib/typer-*/priv/obj/.debug ${libdir}/erlang/lib/typer-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-typer-dev = "1"
+DESCRIPTION:${PN}-typer-dev = ""
+RDEPENDS:${PN}-typer-dev = ""
+FILES:${PN}-typer-dev = "${libdir}/erlang/lib/typer-*/*src ${libdir}/erlang/lib/typer-*/include ${libdir}/erlang/lib/typer-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-typer-staticdev = "1"
+DESCRIPTION:${PN}-typer-staticdev = ""
+RDEPENDS:${PN}-typer-staticdev = ""
+FILES:${PN}-typer-staticdev = "${libdir}/erlang/lib/typer-*/lib/*.a ${libdir}/erlang/lib/typer-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-typer = "1"
+DESCRIPTION:${PN}-typer = ""
+RDEPENDS:${PN}-typer = ""
+FILES:${PN}-typer = "${bindir}/typer ${libdir}/erlang/bin/typer ${libdir}/erlang/lib/typer-* ${libdir}/erlang/erts-*/bin/typer "
+
+ALLOW_EMPTY:${PN}-xmerl-examples = "1"
+DESCRIPTION:${PN}-xmerl-examples = ""
+RDEPENDS:${PN}-xmerl-examples = ""
+FILES:${PN}-xmerl-examples = "${libdir}/erlang/lib/xmerl-*/examples "
+
+ALLOW_EMPTY:${PN}-xmerl-doc = "1"
+DESCRIPTION:${PN}-xmerl-doc = ""
+RDEPENDS:${PN}-xmerl-doc = ""
+FILES:${PN}-xmerl-doc = "${libdir}/erlang/lib/xmerl-*/doc ${libdir}/erlang/lib/xmerl-*/man "
+
+ALLOW_EMPTY:${PN}-xmerl-dbg = "1"
+DESCRIPTION:${PN}-xmerl-dbg = ""
+RDEPENDS:${PN}-xmerl-dbg = ""
+FILES:${PN}-xmerl-dbg = "${libdir}/erlang/lib/xmerl-*/bin/.debug ${libdir}/erlang/lib/xmerl-*/lib/.debug ${libdir}/erlang/lib/xmerl-*/priv/lib/.debug ${libdir}/erlang/lib/xmerl-*/priv/obj/.debug ${libdir}/erlang/lib/xmerl-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-xmerl-dev = "1"
+DESCRIPTION:${PN}-xmerl-dev = ""
+RDEPENDS:${PN}-xmerl-dev = ""
+FILES:${PN}-xmerl-dev = "${libdir}/erlang/lib/xmerl-*/*src ${libdir}/erlang/lib/xmerl-*/include ${libdir}/erlang/lib/xmerl-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-xmerl-staticdev = "1"
+DESCRIPTION:${PN}-xmerl-staticdev = ""
+RDEPENDS:${PN}-xmerl-staticdev = ""
+FILES:${PN}-xmerl-staticdev = "${libdir}/erlang/lib/xmerl-*/lib/*.a ${libdir}/erlang/lib/xmerl-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-xmerl = "1"
+DESCRIPTION:${PN}-xmerl = ""
+RDEPENDS:${PN}-xmerl = ""
+FILES:${PN}-xmerl = "${libdir}/erlang/lib/xmerl-* "
+
+ALLOW_EMPTY:${PN}-odbc-examples = "1"
+DESCRIPTION:${PN}-odbc-examples = ""
+RDEPENDS:${PN}-odbc-examples = ""
+FILES:${PN}-odbc-examples = "${libdir}/erlang/lib/odbc-*/examples "
+
+ALLOW_EMPTY:${PN}-odbc-doc = "1"
+DESCRIPTION:${PN}-odbc-doc = ""
+RDEPENDS:${PN}-odbc-doc = ""
+FILES:${PN}-odbc-doc = "${libdir}/erlang/lib/odbc-*/doc ${libdir}/erlang/lib/odbc-*/man "
+
+ALLOW_EMPTY:${PN}-odbc-dbg = "1"
+DESCRIPTION:${PN}-odbc-dbg = ""
+RDEPENDS:${PN}-odbc-dbg = ""
+FILES:${PN}-odbc-dbg = "${libdir}/erlang/lib/odbc-*/bin/.debug ${libdir}/erlang/lib/odbc-*/lib/.debug ${libdir}/erlang/lib/odbc-*/priv/lib/.debug ${libdir}/erlang/lib/odbc-*/priv/obj/.debug ${libdir}/erlang/lib/odbc-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-odbc-dev = "1"
+DESCRIPTION:${PN}-odbc-dev = ""
+RDEPENDS:${PN}-odbc-dev = ""
+FILES:${PN}-odbc-dev = "${libdir}/erlang/lib/odbc-*/*src ${libdir}/erlang/lib/odbc-*/include ${libdir}/erlang/lib/odbc-*/priv/obj "
+
+ALLOW_EMPTY:${PN}-odbc-staticdev = "1"
+DESCRIPTION:${PN}-odbc-staticdev = ""
+RDEPENDS:${PN}-odbc-staticdev = ""
+FILES:${PN}-odbc-staticdev = "${libdir}/erlang/lib/odbc-*/lib/*.a ${libdir}/erlang/lib/odbc-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-odbc = "1"
+DESCRIPTION:${PN}-odbc = ""
+RDEPENDS:${PN}-odbc = ""
+FILES:${PN}-odbc = "${libdir}/erlang/lib/odbc-* "
+
+ALLOW_EMPTY:${PN}-epmd-examples = "1"
+DESCRIPTION:${PN}-epmd-examples = ""
+RDEPENDS:${PN}-epmd-examples = ""
+FILES:${PN}-epmd-examples = "${libdir}/erlang/lib/epmd-*/examples "
+
+ALLOW_EMPTY:${PN}-epmd = "1"
+DESCRIPTION:${PN}-epmd = ""
+RDEPENDS:${PN}-epmd = ""
+FILES:${PN}-epmd = "${libdir}/erlang/erts-*/bin/epmd ${libdir}/erlang/bin/epmd ${bindir}/epmd "
+
+ALLOW_EMPTY:${PN}-erts-examples = "1"
+DESCRIPTION:${PN}-erts-examples = ""
+RDEPENDS:${PN}-erts-examples = ""
+FILES:${PN}-erts-examples = "${libdir}/erlang/lib/erts-*/examples "
+
+ALLOW_EMPTY:${PN}-erts-doc = "1"
+DESCRIPTION:${PN}-erts-doc = ""
+RDEPENDS:${PN}-erts-doc = ""
+FILES:${PN}-erts-doc = "${libdir}/erlang/lib/erts-*/doc ${libdir}/erlang/lib/erts-*/man "
+
+ALLOW_EMPTY:${PN}-erts-dbg = "1"
+DESCRIPTION:${PN}-erts-dbg = ""
+RDEPENDS:${PN}-erts-dbg = ""
+FILES:${PN}-erts-dbg = "${libdir}/erlang/lib/erts-*/bin/.debug ${libdir}/erlang/lib/erts-*/lib/.debug ${libdir}/erlang/lib/erts-*/priv/lib/.debug ${libdir}/erlang/lib/erts-*/priv/obj/.debug ${libdir}/erlang/lib/erts-*/priv/bin/.debug "
+
+ALLOW_EMPTY:${PN}-erts-dev = "1"
+DESCRIPTION:${PN}-erts-dev = ""
+RDEPENDS:${PN}-erts-dev = ""
+FILES:${PN}-erts-dev = "${libdir}/erlang/lib/erts-*/src ${libdir}/erlang/erts-*/*src ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/priv/obj ${libdir}/erlang/erts-*/bin/yielding_c_fun "
+
+ALLOW_EMPTY:${PN}-erts-staticdev = "1"
+DESCRIPTION:${PN}-erts-staticdev = ""
+RDEPENDS:${PN}-erts-staticdev = ""
+FILES:${PN}-erts-staticdev = "${libdir}/erlang/lib/erts-*/lib/*.a ${libdir}/erlang/lib/erts-*/priv/lib/*.a "
+
+ALLOW_EMPTY:${PN}-erts = "1"
+DESCRIPTION:${PN}-erts = ""
+RDEPENDS:${PN}-erts = ""
+FILES:${PN}-erts = "${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${libdir}/erlang/erts-*/bin ${libdir}/erlang/lib/erts-*/ebin "
+
+ALLOW_EMPTY:${PN}-doc = "1"
+DESCRIPTION:${PN}-doc = ""
+RDEPENDS:${PN}-doc = ""
+FILES:${PN}-doc += "${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/misc "
+
+ALLOW_EMPTY:${PN}-dev = "1"
+DESCRIPTION:${PN}-dev = ""
+RDEPENDS:${PN}-dev = "${PN}-erts-dev ${PN}-kernel-dev ${PN}-stdlib-dev ${PN}-sasl-dev"
+FILES:${PN}-dev += "${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src ${libdir}/erlang/usr/include "
+
+ALLOW_EMPTY:${PN}-dbg = "1"
+DESCRIPTION:${PN}-dbg = ""
+RDEPENDS:${PN}-dbg = ""
+FILES:${PN}-dbg += "${libdir}/erlang/bin/.debug ${libdir}/erlang/erts-*/bin/.debug "
+
+ALLOW_EMPTY:${PN}-staticdev = "1"
+DESCRIPTION:${PN}-staticdev = ""
+RDEPENDS:${PN}-staticdev = ""
+FILES:${PN}-staticdev += "${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a ${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/* "
+
+ALLOW_EMPTY:${PN} = "1"
+DESCRIPTION:${PN} = ""
+RDEPENDS:${PN} = "${PN}-erts ${PN}-kernel ${PN}-stdlib ${PN}-sasl ${PN}-epmd"
+FILES:${PN} += ""
+
+DESCRIPTION:${PN}-modules = "All Erlang modules"
+RDEPENDS:${PN}-modules = "\
     ${PN} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-examples', '', d)} \
@@ -2066,8 +2066,8 @@ RDEPENDS:${PN}-modules="\
  "
 ALLOW_EMPTY:${PN}-modules = "1"
 
-DESCRIPTION:${PN}-modules-dev="All Erlang modules for developers"
-RDEPENDS:${PN}-modules-dev="${PN}-modules \
+DESCRIPTION:${PN}-modules-dev = "All Erlang modules for developers"
+RDEPENDS:${PN}-modules-dev = "${PN}-modules \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'asn1', '${PN}-asn1-staticdev', '', d)} \
