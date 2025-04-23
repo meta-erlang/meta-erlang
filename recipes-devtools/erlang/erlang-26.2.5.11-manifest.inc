@@ -1130,7 +1130,7 @@ FILES:${PN}-erl-interface-dbg = "${libdir}/erlang/lib/erl_interface-*/bin/.debug
 
 DESCRIPTION:${PN}-erl-interface-dev = ""
 RDEPENDS:${PN}-erl-interface-dev = ""
-FILES:${PN}-erl-interface-dev = "${libdir}/erlang/lib/erl_interface-*/*src ${libdir}/erlang/lib/erl_interface-*/include ${libdir}/erlang/lib/erl_interface-*/priv/obj "
+FILES:${PN}-erl-interface-dev = "${libdir}/erlang/lib/erl_interface-*/*src ${libdir}/erlang/lib/erl_interface-*/include ${libdir}/erlang/lib/erl_interface-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-erl-interface-staticdev = ""
 RDEPENDS:${PN}-erl-interface-staticdev = ""
@@ -1154,7 +1154,7 @@ FILES:${PN}-et-dbg = "${libdir}/erlang/lib/et-*/bin/.debug ${libdir}/erlang/lib/
 
 DESCRIPTION:${PN}-et-dev = ""
 RDEPENDS:${PN}-et-dev = ""
-FILES:${PN}-et-dev = "${libdir}/erlang/lib/et-*/*src ${libdir}/erlang/lib/et-*/include ${libdir}/erlang/lib/et-*/priv/obj "
+FILES:${PN}-et-dev = "${libdir}/erlang/lib/et-*/*src ${libdir}/erlang/lib/et-*/include ${libdir}/erlang/lib/et-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-et-staticdev = ""
 RDEPENDS:${PN}-et-staticdev = ""
@@ -1178,7 +1178,7 @@ FILES:${PN}-eunit-dbg = "${libdir}/erlang/lib/eunit-*/bin/.debug ${libdir}/erlan
 
 DESCRIPTION:${PN}-eunit-dev = ""
 RDEPENDS:${PN}-eunit-dev = ""
-FILES:${PN}-eunit-dev = "${libdir}/erlang/lib/eunit-*/*src ${libdir}/erlang/lib/eunit-*/include ${libdir}/erlang/lib/eunit-*/priv/obj "
+FILES:${PN}-eunit-dev = "${libdir}/erlang/lib/eunit-*/*src ${libdir}/erlang/lib/eunit-*/include ${libdir}/erlang/lib/eunit-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-eunit-staticdev = ""
 RDEPENDS:${PN}-eunit-staticdev = ""
@@ -1202,7 +1202,7 @@ FILES:${PN}-ftp-dbg = "${libdir}/erlang/lib/ftp-*/bin/.debug ${libdir}/erlang/li
 
 DESCRIPTION:${PN}-ftp-dev = ""
 RDEPENDS:${PN}-ftp-dev = ""
-FILES:${PN}-ftp-dev = "${libdir}/erlang/lib/ftp-*/*src ${libdir}/erlang/lib/ftp-*/include ${libdir}/erlang/lib/ftp-*/priv/obj "
+FILES:${PN}-ftp-dev = "${libdir}/erlang/lib/ftp-*/*src ${libdir}/erlang/lib/ftp-*/include ${libdir}/erlang/lib/ftp-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-ftp-staticdev = ""
 RDEPENDS:${PN}-ftp-staticdev = ""
@@ -1226,7 +1226,7 @@ FILES:${PN}-inets-dbg = "${libdir}/erlang/lib/inets-*/bin/.debug ${libdir}/erlan
 
 DESCRIPTION:${PN}-inets-dev = ""
 RDEPENDS:${PN}-inets-dev = ""
-FILES:${PN}-inets-dev = "${libdir}/erlang/lib/inets-*/*src ${libdir}/erlang/lib/inets-*/include ${libdir}/erlang/lib/inets-*/priv/obj "
+FILES:${PN}-inets-dev = "${libdir}/erlang/lib/inets-*/*src ${libdir}/erlang/lib/inets-*/include ${libdir}/erlang/lib/inets-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-inets-staticdev = ""
 RDEPENDS:${PN}-inets-staticdev = ""
@@ -1250,7 +1250,7 @@ FILES:${PN}-jinterface-dbg = "${libdir}/erlang/lib/jinterface-*/bin/.debug ${lib
 
 DESCRIPTION:${PN}-jinterface-dev = ""
 RDEPENDS:${PN}-jinterface-dev = ""
-FILES:${PN}-jinterface-dev = "${libdir}/erlang/lib/jinterface-*/*src ${libdir}/erlang/lib/jinterface-*/include ${libdir}/erlang/lib/jinterface-*/priv/obj "
+FILES:${PN}-jinterface-dev = "${libdir}/erlang/lib/jinterface-*/*src ${libdir}/erlang/lib/jinterface-*/include ${libdir}/erlang/lib/jinterface-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-jinterface-staticdev = ""
 RDEPENDS:${PN}-jinterface-staticdev = ""
@@ -1274,7 +1274,7 @@ FILES:${PN}-megaco-dbg = "${libdir}/erlang/lib/megaco-*/bin/.debug ${libdir}/erl
 
 DESCRIPTION:${PN}-megaco-dev = ""
 RDEPENDS:${PN}-megaco-dev = ""
-FILES:${PN}-megaco-dev = "${libdir}/erlang/lib/megaco-*/*src ${libdir}/erlang/lib/megaco-*/include ${libdir}/erlang/lib/megaco-*/priv/obj "
+FILES:${PN}-megaco-dev = "${libdir}/erlang/lib/megaco-*/*src ${libdir}/erlang/lib/megaco-*/include ${libdir}/erlang/lib/megaco-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-megaco-staticdev = ""
 RDEPENDS:${PN}-megaco-staticdev = ""
@@ -1298,7 +1298,7 @@ FILES:${PN}-mnesia-dbg = "${libdir}/erlang/lib/mnesia-*/bin/.debug ${libdir}/erl
 
 DESCRIPTION:${PN}-mnesia-dev = ""
 RDEPENDS:${PN}-mnesia-dev = ""
-FILES:${PN}-mnesia-dev = "${libdir}/erlang/lib/mnesia-*/*src ${libdir}/erlang/lib/mnesia-*/include ${libdir}/erlang/lib/mnesia-*/priv/obj "
+FILES:${PN}-mnesia-dev = "${libdir}/erlang/lib/mnesia-*/*src ${libdir}/erlang/lib/mnesia-*/include ${libdir}/erlang/lib/mnesia-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-mnesia-staticdev = ""
 RDEPENDS:${PN}-mnesia-staticdev = ""
@@ -1322,7 +1322,7 @@ FILES:${PN}-observer-dbg = "${libdir}/erlang/lib/observer-*/bin/.debug ${libdir}
 
 DESCRIPTION:${PN}-observer-dev = ""
 RDEPENDS:${PN}-observer-dev = ""
-FILES:${PN}-observer-dev = "${libdir}/erlang/lib/observer-*/*src ${libdir}/erlang/lib/observer-*/include ${libdir}/erlang/lib/observer-*/priv/obj "
+FILES:${PN}-observer-dev = "${libdir}/erlang/lib/observer-*/*src ${libdir}/erlang/lib/observer-*/include ${libdir}/erlang/lib/observer-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-observer-staticdev = ""
 RDEPENDS:${PN}-observer-staticdev = ""
@@ -1346,7 +1346,7 @@ FILES:${PN}-wx-dbg = "${libdir}/erlang/lib/wx-*/bin/.debug ${libdir}/erlang/lib/
 
 DESCRIPTION:${PN}-wx-dev = ""
 RDEPENDS:${PN}-wx-dev = ""
-FILES:${PN}-wx-dev = "${libdir}/erlang/lib/wx-*/*src ${libdir}/erlang/lib/wx-*/include ${libdir}/erlang/lib/wx-*/priv/obj "
+FILES:${PN}-wx-dev = "${libdir}/erlang/lib/wx-*/*src ${libdir}/erlang/lib/wx-*/include ${libdir}/erlang/lib/wx-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-wx-staticdev = ""
 RDEPENDS:${PN}-wx-staticdev = ""
@@ -1370,7 +1370,7 @@ FILES:${PN}-os-mon-dbg = "${libdir}/erlang/lib/os_mon-*/bin/.debug ${libdir}/erl
 
 DESCRIPTION:${PN}-os-mon-dev = ""
 RDEPENDS:${PN}-os-mon-dev = ""
-FILES:${PN}-os-mon-dev = "${libdir}/erlang/lib/os_mon-*/*src ${libdir}/erlang/lib/os_mon-*/include ${libdir}/erlang/lib/os_mon-*/priv/obj "
+FILES:${PN}-os-mon-dev = "${libdir}/erlang/lib/os_mon-*/*src ${libdir}/erlang/lib/os_mon-*/include ${libdir}/erlang/lib/os_mon-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-os-mon-staticdev = ""
 RDEPENDS:${PN}-os-mon-staticdev = ""
@@ -1394,7 +1394,7 @@ FILES:${PN}-parsetools-dbg = "${libdir}/erlang/lib/parsetools-*/bin/.debug ${lib
 
 DESCRIPTION:${PN}-parsetools-dev = ""
 RDEPENDS:${PN}-parsetools-dev = ""
-FILES:${PN}-parsetools-dev = "${libdir}/erlang/lib/parsetools-*/*src ${libdir}/erlang/lib/parsetools-*/include ${libdir}/erlang/lib/parsetools-*/priv/obj "
+FILES:${PN}-parsetools-dev = "${libdir}/erlang/lib/parsetools-*/*src ${libdir}/erlang/lib/parsetools-*/include ${libdir}/erlang/lib/parsetools-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-parsetools-staticdev = ""
 RDEPENDS:${PN}-parsetools-staticdev = ""
@@ -1418,7 +1418,7 @@ FILES:${PN}-public-key-dbg = "${libdir}/erlang/lib/public_key-*/bin/.debug ${lib
 
 DESCRIPTION:${PN}-public-key-dev = ""
 RDEPENDS:${PN}-public-key-dev = ""
-FILES:${PN}-public-key-dev = "${libdir}/erlang/lib/public_key-*/*src ${libdir}/erlang/lib/public_key-*/include ${libdir}/erlang/lib/public_key-*/priv/obj "
+FILES:${PN}-public-key-dev = "${libdir}/erlang/lib/public_key-*/*src ${libdir}/erlang/lib/public_key-*/include ${libdir}/erlang/lib/public_key-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-public-key-staticdev = ""
 RDEPENDS:${PN}-public-key-staticdev = ""
@@ -1442,7 +1442,7 @@ FILES:${PN}-reltool-dbg = "${libdir}/erlang/lib/reltool-*/bin/.debug ${libdir}/e
 
 DESCRIPTION:${PN}-reltool-dev = ""
 RDEPENDS:${PN}-reltool-dev = ""
-FILES:${PN}-reltool-dev = "${libdir}/erlang/lib/reltool-*/*src ${libdir}/erlang/lib/reltool-*/include ${libdir}/erlang/lib/reltool-*/priv/obj "
+FILES:${PN}-reltool-dev = "${libdir}/erlang/lib/reltool-*/*src ${libdir}/erlang/lib/reltool-*/include ${libdir}/erlang/lib/reltool-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-reltool-staticdev = ""
 RDEPENDS:${PN}-reltool-staticdev = ""
@@ -1466,7 +1466,7 @@ FILES:${PN}-runtime-tools-dbg = "${libdir}/erlang/lib/runtime_tools-*/bin/.debug
 
 DESCRIPTION:${PN}-runtime-tools-dev = ""
 RDEPENDS:${PN}-runtime-tools-dev = ""
-FILES:${PN}-runtime-tools-dev = "${libdir}/erlang/lib/runtime_tools-*/*src ${libdir}/erlang/lib/runtime_tools-*/include ${libdir}/erlang/lib/runtime_tools-*/priv/obj "
+FILES:${PN}-runtime-tools-dev = "${libdir}/erlang/lib/runtime_tools-*/*src ${libdir}/erlang/lib/runtime_tools-*/include ${libdir}/erlang/lib/runtime_tools-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-runtime-tools-staticdev = ""
 RDEPENDS:${PN}-runtime-tools-staticdev = ""
@@ -1490,7 +1490,7 @@ FILES:${PN}-snmp-dbg = "${libdir}/erlang/lib/snmp-*/bin/.debug ${libdir}/erlang/
 
 DESCRIPTION:${PN}-snmp-dev = ""
 RDEPENDS:${PN}-snmp-dev = ""
-FILES:${PN}-snmp-dev = "${libdir}/erlang/lib/snmp-*/*src ${libdir}/erlang/lib/snmp-*/include ${libdir}/erlang/lib/snmp-*/priv/obj "
+FILES:${PN}-snmp-dev = "${libdir}/erlang/lib/snmp-*/*src ${libdir}/erlang/lib/snmp-*/include ${libdir}/erlang/lib/snmp-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-snmp-staticdev = ""
 RDEPENDS:${PN}-snmp-staticdev = ""
@@ -1514,7 +1514,7 @@ FILES:${PN}-ssh-dbg = "${libdir}/erlang/lib/ssh-*/bin/.debug ${libdir}/erlang/li
 
 DESCRIPTION:${PN}-ssh-dev = ""
 RDEPENDS:${PN}-ssh-dev = ""
-FILES:${PN}-ssh-dev = "${libdir}/erlang/lib/ssh-*/*src ${libdir}/erlang/lib/ssh-*/include ${libdir}/erlang/lib/ssh-*/priv/obj "
+FILES:${PN}-ssh-dev = "${libdir}/erlang/lib/ssh-*/*src ${libdir}/erlang/lib/ssh-*/include ${libdir}/erlang/lib/ssh-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-ssh-staticdev = ""
 RDEPENDS:${PN}-ssh-staticdev = ""
@@ -1538,7 +1538,7 @@ FILES:${PN}-ssl-dbg = "${libdir}/erlang/lib/ssl-*/bin/.debug ${libdir}/erlang/li
 
 DESCRIPTION:${PN}-ssl-dev = ""
 RDEPENDS:${PN}-ssl-dev = ""
-FILES:${PN}-ssl-dev = "${libdir}/erlang/lib/ssl-*/*src ${libdir}/erlang/lib/ssl-*/include ${libdir}/erlang/lib/ssl-*/priv/obj "
+FILES:${PN}-ssl-dev = "${libdir}/erlang/lib/ssl-*/*src ${libdir}/erlang/lib/ssl-*/include ${libdir}/erlang/lib/ssl-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-ssl-staticdev = ""
 RDEPENDS:${PN}-ssl-staticdev = ""
@@ -1562,7 +1562,7 @@ FILES:${PN}-syntax-tools-dbg = "${libdir}/erlang/lib/syntax_tools-*/bin/.debug $
 
 DESCRIPTION:${PN}-syntax-tools-dev = ""
 RDEPENDS:${PN}-syntax-tools-dev = ""
-FILES:${PN}-syntax-tools-dev = "${libdir}/erlang/lib/syntax_tools-*/*src ${libdir}/erlang/lib/syntax_tools-*/include ${libdir}/erlang/lib/syntax_tools-*/priv/obj "
+FILES:${PN}-syntax-tools-dev = "${libdir}/erlang/lib/syntax_tools-*/*src ${libdir}/erlang/lib/syntax_tools-*/include ${libdir}/erlang/lib/syntax_tools-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-syntax-tools-staticdev = ""
 RDEPENDS:${PN}-syntax-tools-staticdev = ""
@@ -1586,7 +1586,7 @@ FILES:${PN}-tftp-dbg = "${libdir}/erlang/lib/tftp-*/bin/.debug ${libdir}/erlang/
 
 DESCRIPTION:${PN}-tftp-dev = ""
 RDEPENDS:${PN}-tftp-dev = ""
-FILES:${PN}-tftp-dev = "${libdir}/erlang/lib/tftp-*/*src ${libdir}/erlang/lib/tftp-*/include ${libdir}/erlang/lib/tftp-*/priv/obj "
+FILES:${PN}-tftp-dev = "${libdir}/erlang/lib/tftp-*/*src ${libdir}/erlang/lib/tftp-*/include ${libdir}/erlang/lib/tftp-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-tftp-staticdev = ""
 RDEPENDS:${PN}-tftp-staticdev = ""
@@ -1610,7 +1610,7 @@ FILES:${PN}-tools-dbg = "${libdir}/erlang/lib/tools-*/bin/.debug ${libdir}/erlan
 
 DESCRIPTION:${PN}-tools-dev = ""
 RDEPENDS:${PN}-tools-dev = ""
-FILES:${PN}-tools-dev = "${libdir}/erlang/lib/tools-*/*src ${libdir}/erlang/lib/tools-*/include ${libdir}/erlang/lib/tools-*/priv/obj "
+FILES:${PN}-tools-dev = "${libdir}/erlang/lib/tools-*/*src ${libdir}/erlang/lib/tools-*/include ${libdir}/erlang/lib/tools-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-tools-staticdev = ""
 RDEPENDS:${PN}-tools-staticdev = ""
@@ -1634,7 +1634,7 @@ FILES:${PN}-typer-dbg = "${libdir}/erlang/lib/typer-*/bin/.debug ${libdir}/erlan
 
 DESCRIPTION:${PN}-typer-dev = ""
 RDEPENDS:${PN}-typer-dev = ""
-FILES:${PN}-typer-dev = "${libdir}/erlang/lib/typer-*/*src ${libdir}/erlang/lib/typer-*/include ${libdir}/erlang/lib/typer-*/priv/obj "
+FILES:${PN}-typer-dev = "${libdir}/erlang/lib/typer-*/*src ${libdir}/erlang/lib/typer-*/include ${libdir}/erlang/lib/typer-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-typer-staticdev = ""
 RDEPENDS:${PN}-typer-staticdev = ""
@@ -1658,7 +1658,7 @@ FILES:${PN}-xmerl-dbg = "${libdir}/erlang/lib/xmerl-*/bin/.debug ${libdir}/erlan
 
 DESCRIPTION:${PN}-xmerl-dev = ""
 RDEPENDS:${PN}-xmerl-dev = ""
-FILES:${PN}-xmerl-dev = "${libdir}/erlang/lib/xmerl-*/*src ${libdir}/erlang/lib/xmerl-*/include ${libdir}/erlang/lib/xmerl-*/priv/obj "
+FILES:${PN}-xmerl-dev = "${libdir}/erlang/lib/xmerl-*/*src ${libdir}/erlang/lib/xmerl-*/include ${libdir}/erlang/lib/xmerl-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-xmerl-staticdev = ""
 RDEPENDS:${PN}-xmerl-staticdev = ""
@@ -1682,7 +1682,7 @@ FILES:${PN}-odbc-dbg = "${libdir}/erlang/lib/odbc-*/bin/.debug ${libdir}/erlang/
 
 DESCRIPTION:${PN}-odbc-dev = ""
 RDEPENDS:${PN}-odbc-dev = ""
-FILES:${PN}-odbc-dev = "${libdir}/erlang/lib/odbc-*/*src ${libdir}/erlang/lib/odbc-*/include ${libdir}/erlang/lib/odbc-*/priv/obj "
+FILES:${PN}-odbc-dev = "${libdir}/erlang/lib/odbc-*/*src ${libdir}/erlang/lib/odbc-*/include ${libdir}/erlang/lib/odbc-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
 
 DESCRIPTION:${PN}-odbc-staticdev = ""
 RDEPENDS:${PN}-odbc-staticdev = ""
@@ -1698,7 +1698,7 @@ FILES:${PN}-epmd-examples = "${libdir}/erlang/lib/epmd-*/examples "
 
 DESCRIPTION:${PN}-epmd = ""
 RDEPENDS:${PN}-epmd = ""
-FILES:${PN}-epmd = "${libdir}/erlang/erts-*/bin/epmd ${libdir}/erlang/bin/epmd ${bindir}/epmd "
+FILES:${PN}-epmd = "${libdir}/erlang/erts-*/bin/epmd ${libdir}/erlang/bin/epmd ${bindir}/epmd ${systemd_system_unitdir}/epmd.service ${systemd_system_unitdir}/epmd.socket ${sysconfdir}/init.d "
 
 DESCRIPTION:${PN}-erts-examples = ""
 RDEPENDS:${PN}-erts-examples = ""
@@ -1710,11 +1710,11 @@ FILES:${PN}-erts-doc = "${libdir}/erlang/lib/erts-*/doc ${libdir}/erlang/lib/ert
 
 DESCRIPTION:${PN}-erts-dbg = ""
 RDEPENDS:${PN}-erts-dbg = ""
-FILES:${PN}-erts-dbg = "${libdir}/erlang/lib/erts-*/bin/.debug ${libdir}/erlang/lib/erts-*/lib/.debug ${libdir}/erlang/lib/erts-*/priv/.debug ${libdir}/erlang/lib/erts-*/priv/lib/.debug ${libdir}/erlang/lib/erts-*/priv/obj/.debug ${libdir}/erlang/lib/erts-*/priv/bin/.debug "
+FILES:${PN}-erts-dbg = "${libdir}/erlang/lib/erts-*/bin/.debug ${libdir}/erlang/lib/erts-*/lib/.debug ${libdir}/erlang/lib/erts-*/priv/.debug ${libdir}/erlang/lib/erts-*/priv/lib/.debug ${libdir}/erlang/lib/erts-*/priv/obj/.debug ${libdir}/erlang/lib/erts-*/priv/bin/.debug ${libdir}/erlang/erts-*/bin/.debug ${libdir}/erlang/bin/.debug "
 
 DESCRIPTION:${PN}-erts-dev = ""
 RDEPENDS:${PN}-erts-dev = ""
-FILES:${PN}-erts-dev = "${libdir}/erlang/lib/erts-*/src ${libdir}/erlang/erts-*/*src ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/priv/obj ${libdir}/erlang/erts-*/bin/yielding_c_fun "
+FILES:${PN}-erts-dev = "${libdir}/erlang/lib/erts-*/src ${libdir}/erlang/erts-*/*src ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/priv/obj ${libdir}/erlang/erts-*/bin/yielding_c_fun ${libdir}/erlang/usr/include/erl_driver.h ${libdir}/erlang/usr/include/erl_nif_api_funcs.h ${libdir}/erlang/usr/include/erl_int_sizes_config.h ${libdir}/erlang/usr/include/driver_int.h ${libdir}/erlang/usr/include/erl_fixed_size_int_types.h ${libdir}/erlang/usr/include/erl_nif.h "
 
 DESCRIPTION:${PN}-erts-staticdev = ""
 RDEPENDS:${PN}-erts-staticdev = ""
@@ -1726,7 +1726,7 @@ FILES:${PN}-erts = "${bindir} ${libdir}/erlang/releases ${libdir}/erlang/bin ${l
 
 DESCRIPTION:${PN}-doc = ""
 RDEPENDS:${PN}-doc = ""
-FILES:${PN}-doc = "${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/misc "
+FILES:${PN}-doc = "${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/COPYRIGHT ${libdir}/erlang/PR.template ${libdir}/erlang/README.md "
 
 DESCRIPTION:${PN}-dev = ""
 RDEPENDS:${PN}-dev = "${PN}-erts-dev ${PN}-kernel-dev ${PN}-stdlib-dev ${PN}-sasl-dev"

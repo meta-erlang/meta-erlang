@@ -7,11 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ff253ad767462c46be284da12dda33e8"
 
 BBCLASSEXTEND = "native nativesdk"
 
-DEPENDS = " erlang-native"
+DEPENDS:append:class-target = " erlang-native"
+DEPENDS:append:class-nativesdk = " erlang-native"
 
 RDEPENDS:${PN}-ptest += "bash erlang-modules openssh tmux"
-
-PACKAGES =+ "epmd"
 
 SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://epmd.socket \
@@ -205,6 +204,12 @@ do_install:append:class-target() {
     fi
 }
 
+do_install:append() {
+    # remove unnecessary installed files
+    rm -rf ${D}/${libdir}/erlang/misc
+    rm -rf ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/info
+}
+
 do_configure_ptest() {
     xcomp=${UNPACKDIR}/erl-xcomp-oe.conf
     echo 'erl_xcomp_build=${BUILD_SYS}' > $xcomp
@@ -266,14 +271,10 @@ GROUPADD_PARAM:epmd = "--system epmd"
 USERADD_PARAM:epmd  = "--system --create-home --home /var/lib/epmd \
                         -g epmd epmd"
 
-INITSCRIPT_PACKAGES = "epmd"
-INITSCRIPT_NAME:epmd = "epmd"
-INITSCRIPT_PARAMS:epmd = "defaults"
+INITSCRIPT_PACKAGES = "${PN}-epmd"
+INITSCRIPT_NAME:${PN}-epmd = "epmd"
+INITSCRIPT_PARAMS:${PN}-epmd = "defaults"
 
-SYSTEMD_PACKAGES = "epmd"
-SYSTEMD_SERVICE:epmd = "epmd.service epmd.socket"
-SYSTEMD_AUTO_ENABLE:epmd = "enable"
-
-DESCRIPTION:epmd = "Erlang Port Mapper Daemon"
-RDEPENDS:epmd = "${PN}-epmd"
-FILES:epmd = "${systemd_system_unitdir}/epmd.service ${systemd_system_unitdir}/epmd.socket"
+SYSTEMD_PACKAGES = "${PN}-epmd"
+SYSTEMD_SERVICE:${PN}-epmd = "epmd.service epmd.socket"
+SYSTEMD_AUTO_ENABLE:${PN}-epmd = "enable"
