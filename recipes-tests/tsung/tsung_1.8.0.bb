@@ -28,7 +28,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 do_install:append() {
 	# Fix tsung scripts

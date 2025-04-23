@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 
 inherit rebar3-brokensep
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 DEPENDS += "erlang-native"
 

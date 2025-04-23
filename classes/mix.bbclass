@@ -15,14 +15,14 @@ do_configure[network] = "1"
 HEX_ORGANIZATION_TOKEN ?= ""
 HEX_ORGANIZATION ?= ""
 
-MIX_RELEASE_NAME="${@get_release_name("${PN}")}"
-MIX_RELEASE_VERSION="${@get_release_version("${PV}")}"
-MIX_RELEASE_DIR="${B}/_build/${MIX_ENV}"
+MIX_RELEASE_NAME = "${@get_release_name("${PN}")}"
+MIX_RELEASE_VERSION = "${@get_release_version("${PV}")}"
+MIX_RELEASE_DIR = "${B}/_build/${MIX_ENV}"
 
 export MIX_HOME = "${UNPACKDIR}/mix"
 export MIX_ARCHIVES = "${MIX_HOME}/archives"
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 ERLANG_ERTS_VERSION = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
 

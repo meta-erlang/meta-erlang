@@ -52,7 +52,7 @@ REBAR3_RELEASE_NAME = "${PN}"
 
 do_compile[network] = "1"
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 do_compile:prepend() {
      # ebloom

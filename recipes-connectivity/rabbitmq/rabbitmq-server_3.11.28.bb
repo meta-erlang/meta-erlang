@@ -31,7 +31,7 @@ DEPENDS = " \
 
 RDEPENDS:${PN} = "erlang erlang-modules"
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 do_unpack:append() {
     bb.build.exec_func('do_fetch_deps', d)

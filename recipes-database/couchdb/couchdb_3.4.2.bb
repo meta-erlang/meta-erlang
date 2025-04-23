@@ -50,7 +50,7 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "--system couchdb"
 USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/couchdb -g couchdb couchdb"
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 do_configure[network] = "1"
 
