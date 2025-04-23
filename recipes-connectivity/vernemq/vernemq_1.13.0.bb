@@ -46,7 +46,7 @@ do_compile[network] = "1"
 REBAR3_RELEASE_NAME = "vernemq"
 REBAR3_PROFILE = "default"
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 export ERL_CFLAGS = "-I${STAGING_LIBDIR}/erlang/lib/${@get_erlang_application(d, "erl_interface")}/include \
                      -I${STAGING_LIBDIR}/erlang/${@get_erlang_application(d, "erts")}/include"

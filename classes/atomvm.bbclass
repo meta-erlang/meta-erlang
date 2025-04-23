@@ -16,7 +16,7 @@ INSANE_SKIP:${PN} += "already-stripped"
 
 do_configure[network] = "1"
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 REBAR3_PROFILE ?= "default"
 

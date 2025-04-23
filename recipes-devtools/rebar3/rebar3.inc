@@ -11,7 +11,7 @@ INC_PR = "r0"
 
 DEPENDS += "erlang-native"
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 do_compile () {
     ./bootstrap

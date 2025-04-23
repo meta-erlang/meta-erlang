@@ -12,9 +12,9 @@ do_configure[network] = "1"
 HEX_ORGANIZATION_TOKEN ?= ""
 HEX_ORGANIZATION ?= ""
 
-GLEAM_RELEASE_DIR="${B}/build/erlang-shipment"
+GLEAM_RELEASE_DIR = "${B}/build/erlang-shipment"
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 gleam_do_configure() {
     gleam deps download

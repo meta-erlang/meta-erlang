@@ -16,7 +16,7 @@ S = "${WORKDIR}/git"
 DEPENDS = "erlang-native"
 RDEPENDS:${PN} = "erlang"
 
-export ERL_COMPILER_OPTIONS="deterministic"
+export ERL_COMPILER_OPTIONS = "deterministic"
 
 inherit autotools-brokensep
 
