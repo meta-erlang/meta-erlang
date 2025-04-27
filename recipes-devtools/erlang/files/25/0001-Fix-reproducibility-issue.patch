@@ -28,7 +28,7 @@ index bb67a7e34c..7a7182becd 100644
  # We force this to be run every time this makefile is executed
 -TMPVAR := $(shell LANG=C $(PERL) utils/make_compiler_flags -o $(TTF_DIR)/erl_compile_flags.h -f CONFIG_H "$(ERL_TOP)/erts/$(TARGET)/config.h" -v CFLAGS "$(CFLAGS)" -v LDFLAGS "$(LDFLAGS)")
 +TMPVAR0 := $(shell LANG=C $(PERL) utils/make_compiler_flags -o $(TTF_DIR)/erl_compile_flags.h -f CONFIG_H "$(ERL_TOP)/erts/$(TARGET)/config.h" -v CFLAGS "$(CFLAGS)" -v LDFLAGS "$(LDFLAGS)")
-+TMPVAR1 := $(shell sed -i -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' -e 's@[^ ]*-I[^ "]*@@g' $(TTF_DIR)/erl_compile_flags.h)
++TMPVAR1 := $(shell sed -i -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' -e 's@[^ ]*-I[^ "]*@@g' $(TTF_DIR)/erl_compile_flags.h)
  endif
  
  GENERATE =
