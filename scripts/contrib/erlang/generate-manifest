@@ -390,6 +390,7 @@ class MakefileMaker:
             #
             # write out the description, revision and dependencies
             #
+            self.out('ALLOW_EMPTY:%s = "1"' % (name))
             self.out('DESCRIPTION:%s = "%s"' % (name, desc))
             self.out('RDEPENDS:%s = "%s"' % (name, deps))
 
@@ -423,7 +424,7 @@ class MakefileMaker:
         self.out('DESCRIPTION:${PN}-modules = "All Erlang modules"')
         line = 'RDEPENDS:${PN}-modules = "\\\n'
 
-        pkgtoskip = ('-dbg', '-doc', '-staticdev', '-dev')
+        pkgtoskip = ('-dbg', '-doc', '-staticdev', '-dev', '-examples')
 
         for name, data in sorted(self.packages.items()):
             if name.endswith(pkgtoskip):
