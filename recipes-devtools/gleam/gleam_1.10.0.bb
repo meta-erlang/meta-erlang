@@ -11,11 +11,8 @@ SRC_URI = "git://github.com/gleam-lang/gleam;protocol=https;nobranch=1"
 
 SRCREV = "5d13c2212ddda78c725fb358efb777c14176cd83"
 S = "${WORKDIR}/git"
-CARGO_SRC_DIR = "compiler-cli"
 
 inherit cargo cargo-update-recipe-crates
-
-#CARGO_BUILD_FLAGS = "-v --target ${RUST_HOST_SYS} ${BUILD_MODE} --manifest-path=${CARGO_MANIFEST_PATH}"
 
 # from Cargo.lock
 SRC_URI += " \
