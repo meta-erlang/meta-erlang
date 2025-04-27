@@ -93,12 +93,6 @@ do_configure:class-target() {
     SHLIB_LD='${CC}' \
     oe_runconf
 
-    # Remove well know flags which have build host patch
-    sed -i -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
-        -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
-        -e 's@[^ ]*-I[^ "]*@@g' \
-        ${S}/erts/${TARGET_SYS}*/config.h
-
     sed -i -e 's|$(ERL_TOP)/bin/dialyzer|${NATIVE_BIN}/dialyzer --output_plt $@ -pa $(ERL_TOP)/lib/kernel/ebin -pa $(ERL_TOP)/lib/stdlib/ebin|' lib/dialyzer/src/Makefile
 }
 
