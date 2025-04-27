@@ -13,6 +13,7 @@ TOOLCHAIN_HOST_TASK ?= "\
     nativesdk-erlang-ls \
     nativesdk-concuerror \
     nativesdk-erlang \
+    nativesdk-erlang-modules \
     nativesdk-erlang-modules-dev \
     nativesdk-elixir \
     nativesdk-elixir-modules-dev \
