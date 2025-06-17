@@ -2,7 +2,7 @@ SUMMARY = "Tiny Erlang VM"
 DESCRIPTION = "Brings Erlang, Elixir and other functional languages to really small systems. \
 AtomVM implements from scratch a minimal Erlang VM that supports a subset of ErlangVM features \
 and that is able to run unmodified BEAM binaries on really small systems like MCUs."
-HOMEPAGE = "https://www.atomvm.net/"
+HOMEPAGE = "https://atomvm.org/"
 
 LICENSE = "Apache-2.0 & LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
