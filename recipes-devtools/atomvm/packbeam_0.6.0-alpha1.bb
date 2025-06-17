@@ -1,7 +1,7 @@
 SUMMARY = "PackBEAM"
 DESCRIPTION = "A tool for aggregating beam and other file types into a single file that is used as the \
 code base for an AtomVM application."
-HOMEPAGE = "https://www.atomvm.net/"
+HOMEPAGE = "https://atomvm.org/"
 
 LICENSE = "Apache-2.0 & LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
