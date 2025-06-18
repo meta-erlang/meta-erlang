@@ -37,7 +37,7 @@ ERLANG_APPLICATIONS = "\
     syntax-tools \
     tftp \
     tools \
-    wx \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "wx", "", d)} \
     xmerl \
 "
 PACKAGECONFIG[asn1] = "--with-asn1,--without-asn1,,"
