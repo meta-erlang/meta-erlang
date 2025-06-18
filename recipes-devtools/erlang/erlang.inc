@@ -52,6 +52,9 @@ PACKAGECONFIG[static-nifs] = "--enable-static-nifs,--disable-static-nifs,,"
 PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,kernel-module-sctp"
 PACKAGECONFIG[java] = ",--without-javac,,"
 
+# Build debug emulator: https://www.erlang.org/doc/system/debugging.html#debug-emulator
+PACKAGECONFIG[emu-type-debug] = ""
+
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
@@ -127,6 +130,12 @@ do_compile:class-target() {
     oe_runmake
 
     oe_runmake docs DOC_TARGETS=chunks
+
+    if ${@bb.utils.contains('PACKAGECONFIG', 'emu-type-debug', 'true', 'false', d)}; then
+        TARGET=${TARGET_SYS} \
+        PATH=${NATIVE_BIN}:$PATH \
+        oe_runmake -C erts/emulator debug
+    fi
 }
 
 do_install:prepend:class-native() {
@@ -150,6 +159,11 @@ do_install:class-target() {
     oe_runmake 'DESTDIR=${D}' install-docs DOC_TARGETS=chunks
 
     cp ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/dyn_erl ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/erl
+
+    if ${@bb.utils.contains('PACKAGECONFIG', 'emu-type-debug', 'true', 'false', d)}; then
+        cp ${S}/bin/${TARGET_SYS}-gnu/beam.debug* ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/
+        cp ${S}/bin/${TARGET_SYS}-gnu/erl_child_setup.debug ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/
+    fi
 
     rm -f ${D}/${libdir}/erlang/Install
 
