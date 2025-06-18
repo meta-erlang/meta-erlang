@@ -307,8 +307,11 @@ class MakefileMaker:
         self.out(""" """)
         self.out('NOAUTOPACKAGEDEBUG = "1"')
         self.out('ERLANG_APPLICATIONS = "\\')
-        for name, _ in sorted(self.packageconfigs.items()):
-            self.out(f'    {name} \\')
+        for name, _ in sorted(self.packageconfigs.items()):            
+            if name == "wx":
+                self.out('    ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "wx", "", d)} \\')
+            else:
+                self.out(f'    {name} \\')
         self.out('"')
         for name, packageconfig in sorted(self.packageconfigs.items()):
             self.out(f'PACKAGECONFIG[{name}] = "{packageconfig}"')

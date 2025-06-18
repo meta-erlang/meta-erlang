@@ -10,7 +10,8 @@ BBCLASSEXTEND = "native nativesdk"
 DEPENDS:append:class-target = " erlang-native"
 DEPENDS:append:class-nativesdk = " erlang-native"
 
-RDEPENDS:${PN}-ptest += "bash erlang-modules openssh tmux"
+RDEPENDS:${PN}-ptest += "bash erlang-modules openssh \
+                         ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "tmux", "", d)}"
 
 SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://epmd.socket \
@@ -79,7 +80,11 @@ WX_CONFIG = "'${STAGING_BINDIR_CROSS}/wx-config --prefix=${STAGING_EXECPREFIXDIR
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET} ac_cv_header_GL_gl_h=yes ac_cv_header_OpenGL_gl_h=yes"
 CACHED_CONFIGUREVARS:class-native += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
-CACHED_CONFIGUREVARS:class-nativesdk += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE} ac_cv_path_WX_CONFIG_PATH=${WX_CONFIG}"
+CACHED_CONFIGUREVARS:class-nativesdk += "ac_cv_prog_javac_ver_1_2=no \
+    ac_cv_prog_javac_ver_1_5=no \
+    erl_xcomp_sysroot=${STAGING_DIR_NATIVE} \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "ac_cv_path_WX_CONFIG_PATH=${WX_CONFIG}", "", d)} \
+    "
 
 OTP_BUILD_CONFIGURE_OPTS ?= "autoconf"
 
