@@ -1,0 +1,89 @@
+From 666477f4a296e55d1d73be6d4982e975293650bf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Thu, 19 Jun 2025 14:53:25 -0300
+Subject: [PATCH] erts: fix static function prototypes
+
+GCC 15 complains about function prototypes without arguments:
+
+| port_test.c: In function 'packet_loop':
+| port_test.c:235:7: error: too many arguments to function 'ensure_buf_big_enough'; expected 0, have 1
+|   235 |       ensure_buf_big_enough(port_data->header_size);
+|       |       ^~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~
+| port_test.c:75:13: note: declared here
+|    75 | static void ensure_buf_big_enough();
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/xxx]
+---
+ erts/emulator/test/nif_SUITE_data/nif_SUITE.c      |  4 ++--
+ erts/emulator/test/port_SUITE_data/port_test.c     | 12 ++++++------
+ erts/emulator/test/port_bif_SUITE_data/port_test.c | 10 +++++-----
+ 3 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/erts/emulator/test/nif_SUITE_data/nif_SUITE.c b/erts/emulator/test/nif_SUITE_data/nif_SUITE.c
+index 78a1f9e92f..e22bd3bbac 100644
+--- a/erts/emulator/test/nif_SUITE_data/nif_SUITE.c
++++ b/erts/emulator/test/nif_SUITE_data/nif_SUITE.c
+@@ -3700,9 +3700,9 @@ static ERL_NIF_TERM ioq(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+     return enif_make_badarg(env);
+ }
+ 
+-static ERL_NIF_TERM make_bool(ErlNifEnv* env, int bool)
++static ERL_NIF_TERM make_bool(ErlNifEnv* env, int boolean)
+ {
+-    return bool ? atom_true : atom_false;
++    return boolean ? atom_true : atom_false;
+ }
+ 
+ static ERL_NIF_TERM get_local_pid_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+diff --git a/erts/emulator/test/port_SUITE_data/port_test.c b/erts/emulator/test/port_SUITE_data/port_test.c
+index 6c56cdf956..542fed43a7 100644
+--- a/erts/emulator/test/port_SUITE_data/port_test.c
++++ b/erts/emulator/test/port_SUITE_data/port_test.c
+@@ -71,11 +71,11 @@ typedef struct {
+ 
+ PORT_TEST_DATA* port_data;
+ 
+-static int packet_loop();
+-static void reply();
+-static void write_reply();
+-static void ensure_buf_big_enough();
+-static int readn();
++static int packet_loop(void);
++static void reply(char *buf, int size);
++static void write_reply(char *buf, int size);
++static void ensure_buf_big_enough(int size);
++static int readn(int fd, unsigned char *buf, int len);
+ static void delay(unsigned ms);
+ static void dump(unsigned char* buf, int sz, int max);
+ static void replace_stdout(char* filename);
+@@ -212,7 +212,7 @@ int main(int argc, char *argv[])
+       replace_stdout(port_data->output_file);
+ 
+   if (port_data->fd_count)
+-      reply(&fd_count, sizeof(fd_count));
++      reply((char *) &fd_count, sizeof(fd_count));
+ 
+   if (port_data->no_packet_loop){
+       free(port_data);
+diff --git a/erts/emulator/test/port_bif_SUITE_data/port_test.c b/erts/emulator/test/port_bif_SUITE_data/port_test.c
+index fa509d5a15..1a07313d6b 100644
+--- a/erts/emulator/test/port_bif_SUITE_data/port_test.c
++++ b/erts/emulator/test/port_bif_SUITE_data/port_test.c
+@@ -69,11 +69,11 @@ typedef struct {
+ 
+ PORT_TEST_DATA* port_data;
+ 
+-static int packet_loop();
+-static void reply();
+-static void write_reply();
+-static void ensure_buf_big_enough();
+-static int readn();
++static int packet_loop(void);
++static void reply(char *buf, int size);
++static void write_reply(char *buf, int size);
++static void ensure_buf_big_enough(int size);
++static int readn(int fd, unsigned char *buf, int len);
+ static void delay(unsigned ms);
+ static void dump(unsigned char* buf, int sz, int max);
+ static void replace_stdout(char* filename);

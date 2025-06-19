@@ -9,8 +9,9 @@ SRC_URI += "file://0001-Enable-x32-support-for-crypto-configure.patch \
             file://0002-Fix-implicit-int.patch \
             file://0003-Fix-incompatible-pointer-type-ErlDrvPort.patch \
             file://0001-Add-missing-wx-dependencies.patch \
+            file://0001-erts-fix-static-function-prototypes.patch \
            "
 
-SRCREV = "10e20b1dbe39b056fab430e50b08cb4f3696ae87"
+SRCREV = "9b7b5431260e05a16eec3ecd530a232d0995d932"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/27:"
