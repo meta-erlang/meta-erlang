@@ -11,8 +11,9 @@ SRC_URI += "file://0001-Fix-for-Werror-format-security.patch \
             file://0001-Add-missing-wx-dependencies.patch \
             file://0001-erts-fix-incompatible-pointer-type.patch \
             file://0001-Use-autoconf-2.72.patch \
+            file://0001-erts-fix-static-function-prototypes.patch \
            "
 
-SRCREV = "9f6c4eb54823324d1e6f8cb95c15feb09f09044e"
+SRCREV = "0ac548b57c0491196c27e39518b5f6acf9326c1e"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/26:"

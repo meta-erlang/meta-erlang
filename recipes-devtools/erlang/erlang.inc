@@ -216,6 +216,12 @@ do_install:append() {
     # remove unnecessary installed files
     rm -rf ${D}/${libdir}/erlang/misc
     rm -rf ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/info
+
+    # avoid prefix-map, breaks reproducible builds
+    sed -i -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
+        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
+        -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
+        -e 's@[^ ]*-I[^ "]*@@g' ${D}/${libdir}/erlang/lib/erl_interface-*/src/eidefs.mk
 }
 
 do_configure_ptest() {
