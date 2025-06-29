@@ -261,10 +261,10 @@ INSANE_SKIP:${PN}-ptest += "buildpaths"
 # For epmd support
 inherit useradd update-rc.d systemd
 
-USERADD_PACKAGES = "epmd"
-GROUPADD_PARAM:epmd = "--system epmd"
-USERADD_PARAM:epmd  = "--system --create-home --home /var/lib/epmd \
-                        -g epmd epmd"
+USERADD_PACKAGES = "${PN}-epmd"
+GROUPADD_PARAM:${PN}-epmd = "--system epmd"
+USERADD_PARAM:${PN}-epmd  = "--system --create-home --home /var/lib/epmd \
+                             -g epmd epmd"
 
 INITSCRIPT_PACKAGES = "${PN}-epmd"
 INITSCRIPT_NAME:${PN}-epmd = "epmd"
