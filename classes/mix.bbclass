@@ -60,6 +60,9 @@ mix_do_install() {
     MIX_TARGET_INCLUDE_ERTS="${STAGING_LIBDIR}/erlang/erts-${ERLANG_ERTS_VERSION}" \
     MIX_ENV=${MIX_ENV} mix release --overwrite --path ${erlang_release}
 
+    # Remove temporary released tarball
+    rm -f ${erlang_release}/*.tar.gz
+
     chown root:root -R ${erlang_release}
 }
 
