@@ -14,8 +14,6 @@ SRC_URI += "\
     file://environment.d-elixir.sh \
     file://run-ptest"
 
-S = "${WORKDIR}/git"
-
 PARALLEL_MAKE = ""
 PARALLEL_MAKEINST = ""
 
