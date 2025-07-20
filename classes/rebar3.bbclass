@@ -1,5 +1,5 @@
 
-inherit erlang hexpm pkgconfig
+inherit erlang erlang-version hexpm pkgconfig
 
 DEPENDS += "rebar3-native gawk-native"
 
@@ -32,6 +32,14 @@ export ERL_INTERFACE_INCLUDE_DIR = "${STAGING_LIBDIR}/erlang/usr/include"
 export ERL_INTERFACE_LIB_DIR = "${STAGING_LIBDIR}/erlang/usr/lib"
 
 export ERLANG_ERTS = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
+
+# common variables for port_compiler (https://github.com/blt/port_compiler)
+export ERL_EI_LIBDIR ?= "${ERL_INTERFACE_LIB_DIR}"
+export ERL_CFLAGS ?= "-I${STAGING_LIBDIR}/erlang/lib/${@get_erlang_application(d, "erl_interface")}/include \
+                     -I${ERTS_INCLUDE_DIR}"
+export ERL_LDFLAGS ?= "-L${ERL_INTERFACE_LIB_DIR} -lei"
+
+export REBAR_TARGET_ARCH = "${TARGET_SYS}"
 
 def get_full_profile(p):
     profiles = p.split(',')
