@@ -26,8 +26,6 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://0001-Fix-reproducibility-issue.patch \
            "
 
-S = "${WORKDIR}/git"
-
 inherit ptest autotools-brokensep pkgconfig
 
 PTEST_BUILD_HOST_FILES = "Emakefile Makefile variables conf_vars"

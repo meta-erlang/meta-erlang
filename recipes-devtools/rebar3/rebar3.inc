@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 
 SRC_URI = "git://github.com/erlang/rebar3;nobranch=1;protocol=https \
            file://environment.d-rebar3.sh"
-S = "${WORKDIR}/git"
 
 INC_PR = "r0"
 
