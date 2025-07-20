@@ -13,7 +13,7 @@ GCC 15 complains about function prototypes without arguments:
 | port_test.c:75:13: note: declared here
 |    75 | static void ensure_buf_big_enough();
 
-Upstream-Status: Submitted [https://github.com/erlang/otp/pull/xxx]
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/9983]
 ---
  erts/emulator/test/nif_SUITE_data/nif_SUITE.c      |  4 ++--
  erts/emulator/test/port_SUITE_data/port_test.c     | 12 ++++++------
