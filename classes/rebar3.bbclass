@@ -3,11 +3,9 @@ inherit erlang erlang-version hexpm pkgconfig
 
 DEPENDS += "rebar3-native gawk-native"
 
-B ?= "${WORKDIR}/build"
-
 # support REBAR_BASE_DIR for setting the base_dir
 # https://github.com/erlang/rebar3/commit/9402857f5527e300bf28b7e3744bef3fc88f3379
-export REBAR_BASE_DIR = "${B}"
+export REBAR_BASE_DIR = "${WORKDIR}/build"
 
 # erlang system libs, target system was striped
 INSANE_SKIP:${PN} += "already-stripped"
