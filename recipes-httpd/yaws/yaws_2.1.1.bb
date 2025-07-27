@@ -28,8 +28,6 @@ PV = "2.1.1+git${SRCPV}"
 PR = "r0"
 SRCREV = "8f633eed10f2862ff83a851925f2525cbd5a00c2"
 
-S = "${WORKDIR}/git"
-
 inherit autotools-brokensep systemd
 
 SYSTEMD_SERVICE:${PN} = "yaws.service"

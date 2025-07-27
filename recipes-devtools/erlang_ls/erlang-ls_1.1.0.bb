@@ -10,8 +10,6 @@ SRC_URI = "git://github.com/erlang-ls/erlang_ls;branch=main;protocol=https"
 SRCREV = "ed1daaa4d94d2dc9c9d3f934c704ee4dafb176c6"
 PV .= "+git${SRCPV}"
 
-S = "${WORKDIR}/git"
-
 inherit rebar3-brokensep
 
 export ERL_COMPILER_OPTIONS = "deterministic"

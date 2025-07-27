@@ -2188,4 +2188,3 @@ RDEPENDS:${PN}-modules-dev = "${PN}-modules \
  "
 ALLOW_EMPTY:${PN}-modules-dev = "1"
 
-

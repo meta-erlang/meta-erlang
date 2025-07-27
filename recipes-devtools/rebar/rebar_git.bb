@@ -3,7 +3,6 @@ DESCRIPTION = "rebar is a self-contained Erlang script, so it's easy to distribu
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 
-S = "${WORKDIR}/git"
 SRCREV = "9e60c709fdf759b614ab1441f36f51936bb5bbd4"
 PV = "2.6.2-1+git${SRCPV}"
 PR = "r2"

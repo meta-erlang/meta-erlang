@@ -11,7 +11,7 @@ DEPENDS = "erlang-native"
 
 RDEPENDS:${PN} = "erlang-erts erlang-kernel erlang-stdlib erlang-epmd"
 
-S = "${WORKDIR}/${BPN}"
+S = "${UNPACKDIR}/${BPN}"
 
 inherit autotools update-rc.d 
 

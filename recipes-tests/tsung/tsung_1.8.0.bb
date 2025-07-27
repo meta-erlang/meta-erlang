@@ -24,8 +24,6 @@ SRC_URI = "git://github.com/processone/tsung;protocol=https;branch=master \
 SRCREV = "8f0bddadca6baa05fd1935080e24b312bde053b5"
 PR = "r0"
 
-S = "${WORKDIR}/git"
-
 inherit autotools-brokensep
 
 export ERL_COMPILER_OPTIONS = "deterministic"
@@ -37,7 +35,6 @@ do_install:append() {
 	sed -i -e 's,^ERL=.*$,ERL=${libdir}/erlang/bin/erl,g' \
 		${D}/${bindir}/tsung-recorder
 }
-
 
 ALLOW_EMPTY:${PN}-tools = "1"
 DESCRIPTION:${PN}-tools = ""

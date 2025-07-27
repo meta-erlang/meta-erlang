@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/mbj4668/yanger.git;branch=master;protocol=https;dest
     file://0001-Use-pkg-config-to-get-erl_erts.patch \
     file://yanger.sh"
 
-S = "${WORKDIR}/yanger"
+S = "${UNPACKDIR}/yanger"
 SRCREV = "019155d70a5b89a6a22a0985ca5a445412451892"
 PV .= "+git${SRCPV}"
 

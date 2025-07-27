@@ -11,8 +11,6 @@ SRC_URI = "git://github.com/hawk/lux;protocol=https;branch=master"
 PV = "3.0.0"
 SRCREV = "2042deb9dabb754889648b023a9b8ebe3a8ce09c"
 
-S = "${WORKDIR}/git"
-
 DEPENDS = "erlang-native"
 RDEPENDS:${PN} = "erlang"
 

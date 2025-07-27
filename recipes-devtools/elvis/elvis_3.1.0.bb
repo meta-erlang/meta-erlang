@@ -7,7 +7,6 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 SRC_URI = "git://github.com/inaka/elvis.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 SRCREV = "88748c1bd384eba8b3c11932555c98cf46f4d2fd"
 
 inherit rebar3

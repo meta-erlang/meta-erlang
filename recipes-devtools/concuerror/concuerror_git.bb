@@ -7,7 +7,6 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 SRC_URI = "git://github.com/parapluu/Concuerror.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 SRCREV = "4424eabf85d09cfe0ae1d308b91d56ad7abf365f"
 PV = "0.21.0+git${SRCPV}"
 

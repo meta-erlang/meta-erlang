@@ -5,8 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
 
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
-S = "${WORKDIR}/git"
-
 SRCREV = "a24aa5f153fc5da4d5b9a9a2a572404fa8fd686e"
 PR = "r0"
 SRC_URI = "git://github.com/livebook-dev/livebook;branch=v0.15;protocol=https \

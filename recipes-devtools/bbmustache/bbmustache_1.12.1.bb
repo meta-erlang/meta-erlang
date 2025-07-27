@@ -7,7 +7,6 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 SRC_URI = "git://github.com//soranoba/bbmustache.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 SRCREV = "529a6658e7b4963c208d6c97de88bd5936c2e3b2"
 PV .= "+git${SRCPV}"
 

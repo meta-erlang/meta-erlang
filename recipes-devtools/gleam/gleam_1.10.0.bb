@@ -10,7 +10,6 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 SRC_URI = "git://github.com/gleam-lang/gleam;protocol=https;nobranch=1"
 
 SRCREV = "5d13c2212ddda78c725fb358efb777c14176cd83"
-S = "${WORKDIR}/git"
 
 inherit cargo cargo-update-recipe-crates
 

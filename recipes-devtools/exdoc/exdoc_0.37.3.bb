@@ -5,8 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e4071154021ff55c25a0b6ed90b1b0cb"
 
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
-S = "${WORKDIR}/git"
-
 SRCREV = "0ab3d49585fe13f1be38465d936aa4e73db6f4c1"
 PR = "r0"
 SRC_URI = "git://github.com/elixir-lang/ex_doc;branch=main;protocol=https" 
