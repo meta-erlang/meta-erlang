@@ -1,0 +1,17 @@
+[Unit]
+Description=Breadboard Programming for Erlang inspired by Node-RED 
+Wants=network-online.target
+After=network-online.target remote-fs.target
+
+[Service]
+User=erlang-red
+Group=erlang-red
+WorkingDirectory=/var/lib/erlang-red
+ExecStart=/usr/lib/erlang-red/bin/erlang_red foreground
+ExecStop=/usr/lib/erlang-red/bin/erlang_red stop
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
