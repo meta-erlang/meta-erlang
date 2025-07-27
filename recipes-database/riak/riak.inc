@@ -45,8 +45,6 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "--system riak"
 USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/riak -g riak riak"
 
-S = "${WORKDIR}/git"
-
 REBAR3_PROFILE = "rel"
 REBAR3_RELEASE_NAME = "${PN}"
 

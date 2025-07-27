@@ -7,7 +7,6 @@ RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 SRC_URI = "git://github.com/WhatsApp/erlfmt.git;branch=main;protocol=https"
 
-S = "${WORKDIR}/git"
 SRCREV = "6672a5ef2086487de994cd244b1f2b06f615075a"
 PV .= "+git${SRCPV}"
 

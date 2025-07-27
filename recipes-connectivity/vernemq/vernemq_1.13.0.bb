@@ -37,8 +37,6 @@ SRC_URI = "git://github.com/vernemq/vernemq;protocol=https;branch=main \
 SRCREV = "57d248529b52f346e94a7d54c3d5655e0ede105f"
 PR = "r0"
 
-S = "${WORKDIR}/git"
-
 inherit rebar3-brokensep useradd update-rc.d systemd erlang-version
 
 do_compile[network] = "1"

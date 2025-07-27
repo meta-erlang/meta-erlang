@@ -17,8 +17,6 @@ SRC_URI = "git://github.com/apache/couchdb;protocol=https;branch=3.4.x \
 PV = "3.4.2+git${SRCPV}"
 SRCREV = "9295a0aa9ca01ad2254b0c5e245008749c8fcf64"
 
-S = "${WORKDIR}/git"
-
 PR = "r0"
 
 inherit autotools-brokensep pkgconfig erlang systemd update-rc.d useradd

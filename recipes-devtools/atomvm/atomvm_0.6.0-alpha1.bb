@@ -15,8 +15,6 @@ SRC_URI = "git://github.com/atomvm/AtomVM;protocol=https;branch=master \
 PV = "0.6.0-alpha1+git"
 SRCREV = "c239678426f97cc50eea8261f679f1490b355b3a"
 
-S = "${WORKDIR}/git"
-
 # NOTE: unable to map the following CMake package dependencies: Dialyzer Sphinx Graphviz Elixir
 # NOTE: the following library dependencies are unknown, ignoring: REQUIRED
 #       (this is based on recipes that have previously been built and packaged)

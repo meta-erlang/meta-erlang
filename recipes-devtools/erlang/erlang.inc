@@ -114,7 +114,6 @@ do_configure:class-nativesdk() {
     oe_runconf
 }
 
-
 do_compile:prepend:class-native() {
     export TARGET=${HOST_SYS}
 }

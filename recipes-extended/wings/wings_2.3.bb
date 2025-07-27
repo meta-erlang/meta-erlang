@@ -22,7 +22,7 @@ SRC_URI = "git://github.com/dgud/wings;protocol=https;branch=master;destsuffix=w
 PV .= "+git${SRCPV}"
 SRCREV = "4d3e856e666202dcefbf0103a2f6638ae03f1129"
 
-S = "${WORKDIR}/wings"
+S = "${UNPACKDIR}/wings"
 
 DEPENDS = "erlang erlang-native rebar3-native opencl-headers opencl-icd-loader"
 

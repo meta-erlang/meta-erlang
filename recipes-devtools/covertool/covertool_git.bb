@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6d36c043a022f90fea8faa1a4cc9bd4b"
 
 SRC_URI = "git://github.com/covertool/covertool.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 SRCREV = "79872cc7021e3a57e97cab0fcf5d53975f4822b7"
 PV = "2.0.5+git${SRCPV}"
 

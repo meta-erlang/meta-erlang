@@ -3,7 +3,7 @@ SECTION = "examples"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4072a65404e353b02008ca87f23e6002"
 
-S = "${WORKDIR}/${BPN}"
+S = "${UNPACKDIR}/${BPN}"
 
 SRCREV = "7eb1d3e6273deec7ae29e4926f2a8208c41144d3"
 PV = "0.1.0+git${SRCPV}"
