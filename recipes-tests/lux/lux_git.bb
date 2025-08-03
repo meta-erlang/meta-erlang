@@ -1,5 +1,6 @@
 SUMMARY = "Test automation framework with Expect style execution of commands"
-DESCRIPTION = "Lux (LUcid eXpect scripting) is a test automation framework with Expect style execution of commands. See [Expect][] for more info about the origin."
+DESCRIPTION = "Lux (LUcid eXpect scripting) is a test automation framework with \
+Expect style execution of commands."
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=076fb27498b643ae0c594eb233884675"
@@ -21,3 +22,9 @@ inherit autotools-brokensep
 EXTRA_OECONF = ""
 
 BBCLASSEXTEND = "nativesdk"
+
+FILES:${PN}-examples = "${libdir}/${PN}/examples ${libdir}/${PN}/tutorial"
+FILES:${PN}-dev += "${libdir}/${PN}/emacs"
+FILES:${PN}-doc += "${libdir}/${PN}/lux.html ${libdir}/${PN}/*.md"
+
+PACKAGE_BEFORE_PN = "${PN}-examples"
