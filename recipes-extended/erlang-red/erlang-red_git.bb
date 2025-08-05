@@ -62,5 +62,9 @@ do_install:append() {
     fi
 }
 
+FILES:${PN}-testflows = "${libdir}/erlang-red/lib/erlang_red-*/priv/testflows"
+
+PACKAGE_BEFORE_PN = "${PN}-testflows"
+
 # Until get erlexec fixed
 INSANE_SKIP:${PN}-dbg += "buildpaths"
