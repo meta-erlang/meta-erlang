@@ -39,7 +39,7 @@ do_install:append() {
 ALLOW_EMPTY:${PN}-tools = "1"
 DESCRIPTION:${PN}-tools = ""
 RDEPENDS:${PN}-tools = "${PN} perl python3"
-FILES:${PN}-tools = "${bindir}/tsplot ${bindir/tsung-recorder \
+FILES:${PN}-tools = "${bindir}/tsplot ${bindir}/tsung-recorder \
     ${libdir}/tsung/bin/*.pl ${libdir}/tsung/tsung_plotter \
     ${datadir}/tsung/tsung_plotter"
 
