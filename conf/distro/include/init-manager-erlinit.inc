@@ -1,0 +1,10 @@
+# enable erlinit for init
+DISTRO_FEATURES:append = " erlinit"
+DISTRO_FEATURES_BACKFILL_CONSIDERED:append = " systemd sysvinit mdev-busybox"
+VIRTUAL-RUNTIME_initscripts = ""
+VIRTUAL-RUNTIME_init_manager ?= "erlinit"
+VIRTUAL-RUNTIME_login_manager = ""
+VIRTUAL-RUNTIME_syslog = ""
+VIRTUAL-RUNTIME_dev_manager = ""
+VIRTUAL-RUNTIME_keymaps = ""
+VIRTUAL-RUNTIME_update-alternatives = ""
