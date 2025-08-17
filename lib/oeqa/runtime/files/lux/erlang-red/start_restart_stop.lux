@@ -1,0 +1,26 @@
+[doc Test if erlang-red is able to start, restart and stop]
+
+[include ../support/luxinc/utils.luxinc]
+
+[shell cmd]
+    [doc2 Start erlang-red]
+    !systemctl start erlang-red
+    [invoke ok]
+
+    [doc2 Check if erlang-red is up and running]
+    !SYSTEMD_COLORS=0 systemctl status --line=0 --no-pager erlang-red
+    ?.*Active: active \(running\).*
+    [invoke check-exitcode 0]
+
+    [doc2 Stop erlang-red]
+    !systemctl stop erlang-red
+    [invoke ok]
+
+    [doc2 Check if erlang-red has been stop without any issue]
+    !SYSTEMD_COLORS=0 systemctl status --line=0 --no-pager erlang-red
+    ?.*Active: inactive \(dead\).*
+    [invoke check-exitcode 3]
+
+[cleanup]
+    !systemctl stop erlang-red
+    [invoke ok]
