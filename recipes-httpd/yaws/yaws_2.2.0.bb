@@ -24,9 +24,9 @@ SRC_URI = "git://github.com/klacke/yaws;protocol=https;branch=master \
            file://yaws.init \
            file://0001-Fix-libpam-header-include.patch"
 
-PV = "2.1.1+git${SRCPV}"
+PV = "2.2.0+git${SRCPV}"
 PR = "r0"
-SRCREV = "8f633eed10f2862ff83a851925f2525cbd5a00c2"
+SRCREV = "4169509176eee190cca738bcb5cb16046fe5eeea"
 
 inherit autotools-brokensep systemd
 
