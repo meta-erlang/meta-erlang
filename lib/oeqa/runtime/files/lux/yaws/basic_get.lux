@@ -1,0 +1,17 @@
+[doc Test Yaws default page]
+
+[include ../support/luxinc/utils.luxinc]
+
+[shell cmd]
+    [doc2 Start Yaws]
+    !systemctl start yaws
+    [invoke ok]
+
+    [doc2 Get page]
+    !curl -v http://localhost:8000
+    ?< Server: Yaws.*
+    [invoke check-exitcode 0]
+
+[cleanup]
+    !systemctl stop yaws
+    [invoke ok]
