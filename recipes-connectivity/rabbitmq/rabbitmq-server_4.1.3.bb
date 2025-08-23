@@ -14,8 +14,8 @@ SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/
            file://rabbitmq-server-volatiles.conf \
            "
 
-SRC_URI[md5sum] = "3f66edcc403bc735a1aae0f465a75a09"
-SRC_URI[sha256sum] = "85e3b3621b6a127214f13b753f9afd9776d8652f6b1469e49d98027f75f41caa"
+SRC_URI[md5sum] = "9d051231fb67a57591d1151fcd98653f"
+SRC_URI[sha256sum] = "5af3b7a526b081b48ce9651af8ed8e72592c167e51251280a1fa58a19919ebaa"
 
 DEPENDS = " \
     python3-native \
@@ -26,12 +26,16 @@ DEPENDS = " \
     zip-native \
     unzip-native \
     libxslt-native \
-    coreutils-native\
+    coreutils-native \
+    7zip-native \
 "
 
 RDEPENDS:${PN} = "erlang erlang-modules"
 
 export ERL_COMPILER_OPTIONS = "deterministic"
+
+# rabbitmq build is not playing well with parallel make
+PARALLEL_MAKE = ""
 
 do_unpack:append() {
     bb.build.exec_func('do_fetch_deps', d)
@@ -40,23 +44,6 @@ do_unpack:append() {
 do_fetch_deps() {
     cd ${S}
     oe_runmake fetch-deps
-}
-
-do_patch:append() {
-    bb.build.exec_func('do_fix_deps', d)
-}
-
-do_fix_deps () {
-    # Patch python tools to use Python 3; they should be source compatible, but
-    # still refer to Python 2 in the shebang
-    sed -i -e '1s,#!.*python.*,#!${bindir}/python3,' ${S}/deps/rabbit_common/codegen.py
-    sed -i -e '1s,#!.*python.*,#!${bindir}/python3,' ${S}/deps/amqp10_common/codegen.py
-}
-
-do_compile() {
-    export PYTHON=python3
-
-    oe_runmake
 }
 
 do_install() {
