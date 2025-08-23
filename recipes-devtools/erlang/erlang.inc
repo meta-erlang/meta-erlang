@@ -190,8 +190,11 @@ do_install:append:class-nativesdk() {
 }
 
 do_install:append:class-target() {
-    # remove erlang code that does not need to be loaded by the erlang runtime
-    rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin
+    # remove erlang code that does not need to be loaded by the erlang runtime [1].
+    # it is clear that some preload modules exists inside erts. So, those respective beam
+    # modules don't need to be installed.
+    # 1: https://github.com/erlang/otp/blob/master/HOWTO/DEVELOPMENT.md#preloaded-and-primary-bootstrap
+    rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin/*.beam
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
