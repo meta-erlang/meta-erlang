@@ -5,7 +5,7 @@ Requires=epmd.socket
 
 [Service]
 ExecStart=/usr/bin/epmd -systemd
-Type=simple
+Type=notify
 Restart=always
 RestartSec=2
 StandardOutput=journal
