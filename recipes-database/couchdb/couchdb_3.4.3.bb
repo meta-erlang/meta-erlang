@@ -14,8 +14,8 @@ SRC_URI = "git://github.com/apache/couchdb;protocol=https;branch=3.4.x \
     file://couchdb.init \
 "
 
-PV = "3.4.2+git${SRCPV}"
-SRCREV = "9295a0aa9ca01ad2254b0c5e245008749c8fcf64"
+PV = "3.4.3+git${SRCPV}"
+SRCREV = "e12b967d7f674f8388092bf2b043a978cabce151"
 
 PR = "r0"
 
