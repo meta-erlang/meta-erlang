@@ -1,0 +1,29 @@
+[doc Test rabbitmq ping and report commands]
+
+[include ../support/luxinc/utils.luxinc]
+
+[shell cmd]
+    [doc2 Start rabbitmq]
+    [timeout 20]
+    !systemctl start rabbitmq-server
+    [invoke ok]
+
+    !su rabbitmq
+    [invoke ok]
+
+    [doc2 Call ping]
+    !rabbitmqctl ping
+    ?Ping succeeded
+    [invoke check-exitcode 0]
+
+    [doc2 Call report]
+    [timeout 20]
+    !rabbitmqctl report
+    ?OS PID: .*
+    ?OS: Linux
+    ?Uptime.*
+    [invoke check-exitcode 0]
+
+[cleanup]
+    !systemctl stop rabbitmq-server
+    [invoke ok]
