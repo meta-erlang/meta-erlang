@@ -1,0 +1,34 @@
+[doc Test if couchdb is able to start, restart and stop]
+
+[include ../support/luxinc/utils.luxinc]
+
+[shell cmd]
+    [doc2 Stop couchdb]
+    !systemctl stop couchdb
+    [invoke ok]
+
+    [doc2 Add an initial password to admin user]
+    !sed -i 's/^;admin = \(.*\)/admin = pass/' /opt/couchdb/etc/local.ini
+    [invoke ok]
+
+    [doc2 Start couchdb]
+    !systemctl start couchdb
+    [invoke ok]
+
+    [doc2 Check if couchdb is up and running]
+    !SYSTEMD_COLORS=0 systemctl status --line=0 --no-pager couchdb
+    ?.*Active: active \(running\).*
+    [invoke check-exitcode 0]
+
+    [doc2 Stop couchdb]
+    !systemctl stop couchdb
+    [invoke ok]
+
+    [doc2 Check if couchdb has been stop without any issue]
+    !SYSTEMD_COLORS=0 systemctl status --line=0 --no-pager couchdb
+    ?.*Active: inactive \(dead\).*
+    [invoke check-exitcode 3]
+
+[cleanup]
+    !systemctl stop couchdb
+    [invoke ok]

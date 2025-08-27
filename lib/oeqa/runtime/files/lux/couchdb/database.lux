@@ -1,0 +1,54 @@
+[doc Test couchdb database setup]
+
+[include ../support/luxinc/utils.luxinc]
+
+[global username=admin]
+[global password=pass]
+
+[shell cmd]
+    [doc2 Start couchdb]
+    !systemctl start couchdb
+    [invoke ok]
+
+    [doc2 Wait until couchdb is online]
+    !curl -v --connect-timeout 10 --max-time 30 --retry 5 --retry-max-time 120 --retry-connrefused http://$username:$password@127.0.0.1:5984/
+    ?< HTTP/1\.1 200 OK
+    ?{"couchdb":"Welcome",.*
+    [invoke ok]
+
+    [doc2 Create database]
+    !curl -v -X PUT http://$username:$password@127.0.0.1:5984/mydb
+    ?< HTTP/1.1 201 Created
+    ?{"ok":true}
+    [invoke ok]
+
+    [doc2 Add something]
+    ~curl -v
+    ~ -H "Content-Type: application/json"
+    ~ -d '{"name": "Alice", "role": "developer"}'
+    ! -X POST http://$username:$password@127.0.0.1:5984/mydb
+    ?< HTTP/1.1 201 Created
+    ?{"ok":true,"id":".*","rev":".*"}
+    [invoke check-exitcode 0]
+
+    [doc2 List all databases]
+    !curl -v http://$username:$password@127.0.0.1:5984/_all_dbs
+    ?< HTTP/1.1 200 OK
+    ?\["mydb"\]
+    [invoke ok]
+
+    [doc2 Delete mydb]
+    !curl -X DELETE http://$username:$password@127.0.0.1:5984/mydb
+    ?{"ok":true}
+    [invoke ok]
+
+    [doc2 List all databases, without mydb]
+    !curl -X GET http://$username:$password@127.0.0.1:5984/_all_dbs
+    ?\[\]
+    [invoke ok]
+
+[cleanup]
+    !curl -X DELETE http://$username:$password@127.0.0.1:5984/mydb
+    !systemctl stop couchdb
+    [invoke ok]
+
