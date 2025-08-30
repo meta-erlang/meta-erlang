@@ -3,11 +3,16 @@ Description=Riak KV Database
 
 [Service]
 User=riak
+Group=riak
 ExecStart=/usr/lib/riak/bin/riak foreground
 ExecStop=/usr/lib/riak/bin/riak stop
+TimeoutStopSec=120
 Type=simple
 EnvironmentFile=-/etc/default/riak
 RuntimeDirectory=riak
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
 
 [Install]
 WantedBy=multi-user.target
