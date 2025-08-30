@@ -22,6 +22,7 @@ class MetaErlangTestCase(OERuntimeTestCase):
 
     LUX_WORKDIR = '/tmp/lux'
     LUX_SUPPORT_DIR = 'lux/support'
+    LUX_CONFIG_DIR = 'support/luxcfg'
     LUX_TIMEOUT = 1200
 
 
@@ -68,10 +69,17 @@ class MetaErlangTestCase(OERuntimeTestCase):
         luxscript = self.tc._registry['lux']['test_case']
         test_case_dir = self.tc._registry['lux']['test_case_dir']
         workdir = os.path.join(MetaErlangTestCase.LUX_WORKDIR, test_case_dir)
+        configdir = os.path.join(MetaErlangTestCase.LUX_WORKDIR, MetaErlangTestCase.LUX_CONFIG_DIR)
+        configname = f'{self.td.get("MACHINE")}.luxcfg'
 
         log_dir = self._get_lux_log_dir(luxscript)
 
-        lux_command = f'cd {workdir}; lux --log_dir {log_dir} {luxscript}'
+        lux_command = f'cd {workdir}; lux --log_dir {log_dir} \
+            --config_name {configname} \
+            --config_dir {configdir} \
+            {luxscript}'
+
+        self.logger.debug(f'lux command: {lux_command}')
 
         status, output = self.target.run(lux_command, timeout=MetaErlangTestCase.LUX_TIMEOUT)
 
