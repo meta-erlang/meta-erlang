@@ -1,3 +1,0 @@
-require ${PN}.inc
-
-SRCREV = "87f899481890d17cdd4d517376153d7a1ba97811"

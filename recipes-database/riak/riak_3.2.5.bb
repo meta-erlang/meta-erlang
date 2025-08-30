@@ -1,37 +1,28 @@
 DESCRIPTION = "Riak is a distributed, decentralized data storage system."
-HOMEPAGE = "http://www.riak.info/"
+HOMEPAGE = "https://openriak.org/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 
 PR = "r0"
 
+SRCREV = "d010c3d906d245488ef4a13ca9da89a1186f505a"
+
 SRC_URI = " \
-    git://github.com/basho/riak;branch=develop;protocol=https \
-    file://0001-Use-rebar3-from-system.patch \
+    git://github.com/OpenRiak/riak;branch=openriak-3.2;protocol=https \
     file://0002-Remove-bin-bash-dependency.patch \
     file://0003-Remove-observer-from-release.patch \
     file://0004-Remove-bin-bash-dependency-for-riak-admin.patch \
     file://0005-Include-system_libs-for-release.patch \
     file://riak.init \
     file://riak.service \
+    file://99-riak-sysctl.conf \
 "
 
-# Patches for riak dependencies. Most of them to fix C build without 
-# the pc (port compiler) pluggin.
+# Patches for riak dependencies.
 SRC_URI += " \
     file://0001-Switch-to-shared-snappy-library-link.patch;apply=no \
-    file://Makefile.c_src.canola \
-    file://rebar.config.canola \
     file://rebar.config.eleveldb \
-    file://Makefile.c_src.eleveldb \
-    file://Makefile.c_src.lz4 \
-    file://rebar.config.lz4 \
-    file://Makefile.c_src.bitcask \
-    file://rebar.config.bitcask \
-    file://Makefile.c_src.riak_ensemble \
-    file://rebar.config.riak_ensemble \
-    file://Makefile.c_src.ebloom \
-    file://rebar.config.ebloom"
+    file://Makefile.c_src.eleveldb"
 
 inherit rebar3-brokensep useradd systemd update-rc.d features_check
 
@@ -53,23 +44,8 @@ do_compile[network] = "1"
 export ERL_COMPILER_OPTIONS = "deterministic"
 
 do_compile:prepend() {
-     # ebloom
-     install -D ${UNPACKDIR}/Makefile.c_src.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/c_src/Makefile
-     install -D ${UNPACKDIR}/rebar.config.ebloom ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/ebloom/rebar.config    
-     # bitcask
-     install -D ${UNPACKDIR}/Makefile.c_src.bitcask ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bitcask/c_src/Makefile
-     install -D ${UNPACKDIR}/rebar.config.bitcask ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/bitcask/rebar.config
-     # lz4
-     install -D ${UNPACKDIR}/Makefile.c_src.lz4 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/lz4/c_src/Makefile
-     install -D ${UNPACKDIR}/rebar.config.lz4 ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/lz4/rebar.config
-     # riak_ensemble
-    install -D ${UNPACKDIR}/Makefile.c_src.riak_ensemble ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/riak_ensemble/c_src/Makefile
-    install -D ${UNPACKDIR}/rebar.config.riak_ensemble ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/riak_ensemble/rebar.config
-     # fix dependency: canola
-     install -D ${UNPACKDIR}/Makefile.c_src.canola ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/canola/c_src/Makefile
-     install -D ${UNPACKDIR}/rebar.config.canola ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/canola/rebar.config
-     # fix dependency: eleveldb
-     install -D ${UNPACKDIR}/0001-Switch-to-shared-snappy-library-link.patch ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/0001-Switch-to-shared-snappy-library-link.patch
+     install -D ${UNPACKDIR}/0001-Switch-to-shared-snappy-library-link.patch \
+        ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/0001-Switch-to-shared-snappy-library-link.patch
      install -D ${UNPACKDIR}/Makefile.c_src.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/c_src/Makefile
      install -D ${UNPACKDIR}/rebar.config.eleveldb ${REBAR_BASE_DIR}/${REBAR3_PROFILE}/lib/eleveldb/rebar.config
 }
@@ -92,6 +68,13 @@ do_install:append() {
 
     # TODO: check if it is really necessary
     chown -R riak.riak ${erlang_release}
+
+    # Remove nonsense priv/zstd/lib folder
+    rm -rf ${erlang_release}/lib/zstd-*/priv/zstd
+
+    # riak needs some additional configuration for sysctl values
+    install -d ${D}${sysconfdir}/sysctl.d/
+    install -m 0644 ${UNPACKDIR}/99-riak-sysctl.conf ${D}${sysconfdir}/sysctl.d/
 }
 
 DEPENDS += " \
