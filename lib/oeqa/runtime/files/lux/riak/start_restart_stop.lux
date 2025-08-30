@@ -1,0 +1,43 @@
+[doc Test if riak is able to start, restart and stop]
+
+[include ../support/luxinc/utils.luxinc]
+
+[shell cmd]
+
+    # Right after a boot, riak needs some time
+    # mainly because clutterfish processing
+    [sleep 30]
+
+    [doc2 Stop riak]
+    !systemctl stop riak
+    [invoke ok]
+
+    [doc2 Start riak]
+    !systemctl start riak
+    [invoke ok]
+
+    [doc2 Check if riak is up and running]
+    !SYSTEMD_COLORS=0 systemctl status --line=0 --no-pager riak
+    ?.*Active: active \(running\).*
+    [invoke check-exitcode 0]
+
+    # After a start, give some time to riak.
+    [sleep 30]
+
+    [doc2 Ping riak]
+    !/usr/lib/riak/bin/riak ping
+    ?pong
+    [invoke check-exitcode 0]
+
+    [doc2 Stop riak]
+    !systemctl stop riak
+    [invoke ok]
+
+    [doc2 Check if riak has been stop without any issue]
+    !SYSTEMD_COLORS=0 systemctl status --line=0 --no-pager riak
+    ?.*Active: inactive \(dead\).*
+    [invoke check-exitcode 3]
+
+[cleanup]
+    !systemctl stop riak
+    [invoke ok]

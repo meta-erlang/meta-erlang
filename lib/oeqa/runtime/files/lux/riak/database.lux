@@ -1,0 +1,55 @@
+[doc Test riak database setup]
+
+[include ../support/luxinc/utils.luxinc]
+
+[global RIAK=/usr/lib/riak/bin/riak]
+
+[shell cmd]
+
+    [doc2 Start riak]
+    !systemctl start riak
+    [invoke ok]
+
+    # riak needs some extra time before continue
+    [sleep 20]
+
+    [doc2 Check riak config file]
+    # This takes same time in order to process
+    [timeout 40]
+    !$RIAK chkconfig
+    ?config is OK
+    [invoke ok]
+    [timeout]
+
+    [doc2 Try to ping]
+    !$RIAK ping
+    ?pong
+    [invoke ok]
+
+    [doc2 Test if basic read/write is working]
+    !$RIAK admin test
+    ?Successfully completed 1 read/write cycle to 'riak@127.0.0.1'
+    [invoke ok]
+
+    [doc2 Check if remote console is operational]
+    !$RIAK remote_console
+    ?Eshell
+    ?>
+    !$_CTRL_G_
+    ?User switch command
+    ? -->
+    !q
+    [invoke ok]
+
+    [doc2 Check if API is working]
+    !curl -v http://127.0.0.1:8098/types/default/props
+    ?< HTTP/1.1 200 OK
+    [invoke ok]
+
+[cleanup]
+    !systemctl stop riak
+    [invoke ok]
+
+
+
+
