@@ -1,0 +1,2 @@
+# Default config file when no architecture or host specific file is found
+# It may be included by other config files if desired
