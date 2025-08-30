@@ -10,6 +10,8 @@ SRC_URI += "file://0001-Fix-for-Werror-format-security.patch \
             file://0003-Fix-incompatible-pointer-type-ErlDrvPort.patch \
             file://0001-Add-missing-wx-dependencies.patch \            
             file://0001-Use-autoconf-2.72.patch \
+            file://0001-erts-avoid-use-bool-keyword-when-compiling-with-lttn.patch \
+            file://0001-erts-fix-static-function-prototypes.patch \
            "
 
 SRCREV = "52199ed7e79646b73bacc47c92967ce9970b2373"
