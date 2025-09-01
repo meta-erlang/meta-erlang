@@ -97,9 +97,10 @@ class MetaErlangTestCase(OERuntimeTestCase):
     # Copy the log files to be parsed locally
     def _transfer_logs(self, luxscript):
         local_logs = os.path.join(self.td.get('WORKDIR'), 'lux_logs')
-        if os.path.exists(local_logs):
-            rmtree(local_logs)
-        os.makedirs(local_logs)
+        local_logs_test_case = os.path.join(local_logs, self._get_testcase(luxscript))
+        if os.path.exists(local_logs_test_case):
+            rmtree(local_logs_test_case)
+        os.makedirs(local_logs_test_case)
         log_dir = self._get_lux_log_dir(luxscript)
         self.target.copyFrom(log_dir, local_logs)
 
