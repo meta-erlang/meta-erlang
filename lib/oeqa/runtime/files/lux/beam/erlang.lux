@@ -1,0 +1,45 @@
+[doc Test some erlang modules]
+
+[include ../support/luxinc/utils.luxinc]
+
+[shell cmd]
+
+    [doc2 Start erlang shell]
+    !erl
+    ?Eshell
+    ?>
+
+    [doc2 Configure a node name]
+    !node().
+    ?nonode@nohost
+    ?>
+
+    !net_kernel:start([dilber, shortnames]).
+    ?{ok,.*}
+    ?>
+    
+    !Node = node().
+    ?dilber.*
+    ?>
+
+    [doc2 Check node connectivity]
+    !net_adm:ping(Node).
+    ?pong
+    ?>
+
+    [doc2 Check if crypto can be loaded]
+    !application:ensure_all_started(crypto).
+    ?>
+    !crypto:info().
+    """?
+    #{otp_crypto_version => "5.6",compile_type => normal,
+      link_type => dynamic,
+      cryptolib_version_compiled => "OpenSSL 3.*",
+      cryptolib_version_linked => "OpenSSL 3.*",
+      fips_provider_available => false}
+    """
+    ?>
+
+    [doc2 Quit erlang shell]
+    !erlang:halt().
+    [invoke check-exitcode 0]
