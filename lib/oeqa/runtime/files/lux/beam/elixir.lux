@@ -1,0 +1,30 @@
+[doc Test some very basic elixir functions]
+
+[include ../support/luxinc/utils.luxinc]
+
+[shell cmd]
+
+    [doc2 Start iex console]
+    !iex
+    ?>
+
+    [doc2 Disable colors output]
+    !Application.put_env(:elixir, :ansi_enabled, false)
+    ?>
+
+    [doc2 Get build info]
+    !System.build_info()
+    """?
+    %{
+      version: ".*",
+      date: ".*",
+      otp_release: ".*",
+      build: ".*",
+      revision: ".*"
+    }
+    """
+    ?>
+
+    [doc2 Halt VM and exit]
+    !System.halt()
+    [invoke check-exitcode 0]

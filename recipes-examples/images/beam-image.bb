@@ -1,5 +1,5 @@
 SUMMARY = "A console-only image with more full-featured Linux system \
-functionality installed with Erlang/OTP and Elixir installed."
+functionality installed with full (all modules) Erlang/OTP and Elixir installed."
 
 LICENSE = "MIT"
 
@@ -13,5 +13,6 @@ APPLICATION = "\
 
 inherit core-image
 
-IMAGE_ROOTFS_SIZE ?= "8192"
+TEST_SUITES:qemuall += "beam"
 
+IMAGE_ROOTFS_EXTRA_SPACE = "64000"
