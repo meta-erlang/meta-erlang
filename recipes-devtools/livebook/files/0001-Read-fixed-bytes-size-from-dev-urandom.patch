@@ -1,0 +1,40 @@
+From 8ae1844d2fbecdfd1786fa5576642b98600fc471 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Mon, 1 Sep 2025 18:39:05 -0300
+Subject: [PATCH] Read fixed bytes size from /dev/urandom
+
+It is not necessary to read many bytes in order to make a release cookie.
+Only 500 is enough and avoids extra processing during livebook start.
+
+Upstream-Status: Submitted [https://github.com/livebook-dev/livebook/pull/3052]
+---
+ rel/app/env.sh.eex    | 2 +-
+ rel/server/env.sh.eex | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/rel/app/env.sh.eex b/rel/app/env.sh.eex
+index c1edecee..a0598d1c 100644
+--- a/rel/app/env.sh.eex
++++ b/rel/app/env.sh.eex
+@@ -15,6 +15,6 @@ export PATH="${vendor_dir}/otp/erts-<%= @release.erts_version%>/bin:${vendor_dir
+ if [ ! -z "${LIVEBOOK_NODE}" ]; then export RELEASE_NODE=${LIVEBOOK_NODE}; fi
+ if [ ! -z "${LIVEBOOK_COOKIE}" ]; then export RELEASE_COOKIE=${LIVEBOOK_COOKIE}; fi
+ 
+-export RELEASE_COOKIE="${RELEASE_COOKIE:-$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)}"
++export RELEASE_COOKIE="${RELEASE_COOKIE:-$(head -c 512 /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)}"
+ 
+ cd $HOME
+diff --git a/rel/server/env.sh.eex b/rel/server/env.sh.eex
+index a5a7c083..17bc3766 100644
+--- a/rel/server/env.sh.eex
++++ b/rel/server/env.sh.eex
+@@ -43,7 +43,7 @@ else
+   # specifically want the temporary node cookie to be random, rather than
+   # a fixed value. Note that this value is overriden on boot, so other
+   # than being the initial node cookie, we don't really use it.
+-  export RELEASE_COOKIE="${RELEASE_COOKIE:-$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)}"
++  export RELEASE_COOKIE="${RELEASE_COOKIE:-$(head -c 512 /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)}"
+ 
+   cd $HOME
+ fi
