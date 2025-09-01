@@ -8,6 +8,8 @@ PR = "r0"
 
 inherit packagegroup
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 PACKAGES = "\
     ${PN} \
     ${PN}-erlang \
@@ -27,6 +29,6 @@ RDEPENDS:${PN}-erlang = "\
     "
 
 SUMMARY:${PN}-elixir = "Full Elixir support"
-RDEPENDS:${PN}-erlang = "\
+RDEPENDS:${PN}-elixir = "\
     elixir \
     "
