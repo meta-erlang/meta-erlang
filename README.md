@@ -90,26 +90,29 @@ Following the [OTP Versions Tree](http://erlang.org/download/otp_versions_tree.h
 
 Erlang:
 
+ * [maint-28](https://github.com/erlang/otp/tree/maint-28)
  * [maint-27](https://github.com/erlang/otp/tree/maint-27)
  * [maint-26](https://github.com/erlang/otp/tree/maint-26)
  * [maint-25](https://github.com/erlang/otp/tree/maint-25)
 
 Elixir:
 
+* [v1.18](https://github.com/elixir-lang/elixir/tree/v1.18)
+* [v1.17](https://github.com/elixir-lang/elixir/tree/v1.17)
 * [v1.16](https://github.com/elixir-lang/elixir/tree/v1.16)
 * [v1.15](https://github.com/elixir-lang/elixir/tree/v1.15)
 * [v1.14](https://github.com/elixir-lang/elixir/tree/v1.14)
-* [v1.13](https://github.com/elixir-lang/elixir/tree/v1.13)
 
 Gleam:
 
-* [1.5.1](https://github.com/gleam-lang/gleam/releases/tag/v1.5.1)
+* [1.10](https://github.com/gleam-lang/gleam/releases/tag/v1.10.0)
 
 Yocto:
 
 meta-erlang provides specific branches for each YP/OE release. So, please stick with one of the supported branches
 to avoid compatible problems:
 
+* [walnascar](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=walnascar)
 * [styhead](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=styhead)
 * [scarthgap](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=scarthgap)
 * [nanbield](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=nanbield)
