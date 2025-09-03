@@ -9,9 +9,10 @@ include common.inc
 include testimage-common.inc
 
 APPLICATION = "livebook"
+APPLICATION += "${@bb.utils.contains('IMAGE_CLASSES', 'testimage', 'curl', '', d)}"
 
 inherit core-image
 
-IMAGE_ROOTFS_SIZE ?= "8192"
+TEST_SUITES:qemuall += "livebook"
 
 IMAGE_ROOTFS_EXTRA_SPACE = "51200"
