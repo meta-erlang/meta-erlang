@@ -1,0 +1,31 @@
+From e3a956faca656512cf96a11f6718203909422c9f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Wed, 3 Sep 2025 21:54:30 -0300
+Subject: [PATCH] wx: check WXE_WEBVIEW before include wx/webview.h
+
+There are cases where wx/configure.ac detects that wxwidgets
+does not have support for webview.
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/10163]
+---
+ lib/wx/c_src/gen/wxe_macros.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/lib/wx/c_src/gen/wxe_macros.h b/lib/wx/c_src/gen/wxe_macros.h
+index 77a312e1d1..3318815902 100644
+--- a/lib/wx/c_src/gen/wxe_macros.h
++++ b/lib/wx/c_src/gen/wxe_macros.h
+@@ -71,10 +71,12 @@
+ #include <wx/sysopt.h>
+ #include <wx/overlay.h>
+ #include <wx/notifmsg.h>
++#if WXE_WEBVIEW
+ #include <wx/webview.h>
+ #if wxUSE_WEBVIEW && wxUSE_WEBVIEW_IE
+ #include <wx/msw/webview_ie.h>
+ #endif
++#endif
+ #if wxUSE_GLCANVAS_EGL && !wxCHECK_VERSION(3,2,3)
+ #include <EGL/egl.h>
+ #endif
