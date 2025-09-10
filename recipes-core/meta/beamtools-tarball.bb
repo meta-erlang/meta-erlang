@@ -20,6 +20,7 @@ TOOLCHAIN_HOST_TASK ?= "\
     nativesdk-livebook \
     nativesdk-exdoc \
     nativesdk-gleam \
+    nativesdk-lux \
     "
 
 MULTIMACH_TARGET_SYS = "${SDK_ARCH}-nativesdk${SDK_VENDOR}-${SDK_OS}"
