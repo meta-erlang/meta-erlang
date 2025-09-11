@@ -31,13 +31,8 @@
     !application:ensure_all_started(crypto).
     ?>
     !crypto:info().
-    """?
-    #{otp_crypto_version => "5.6",compile_type => normal,
-      link_type => dynamic,
-      cryptolib_version_compiled => "OpenSSL 3.*",
-      cryptolib_version_linked => "OpenSSL 3.*",
-      fips_provider_available => false}
-    """
+    ?cryptolib_version_compiled => "OpenSSL 3.*",
+    ?cryptolib_version_linked => "OpenSSL 3.*",
     ?>
 
     [doc2 Quit erlang shell]

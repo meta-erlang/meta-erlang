@@ -2,6 +2,9 @@
 
 [include ../support/luxinc/utils.luxinc]
 
+# riak is not so fast when starting
+[config timeout=30000]
+
 [shell cmd]
 
     # Right after a boot, riak needs some time

@@ -14,15 +14,7 @@
 
     [doc2 Get build info]
     !System.build_info()
-    """?
-    %{
-      version: ".*",
-      date: ".*",
-      otp_release: ".*",
-      build: ".*",
-      revision: ".*"
-    }
-    """
+    ?.*compiled with Erlang/OTP.*
     ?>
 
     [doc2 Halt VM and exit]
