@@ -70,7 +70,7 @@ class MetaErlangTestCase(OERuntimeTestCase):
         test_case_dir = self.tc._registry['lux']['test_case_dir']
         workdir = os.path.join(MetaErlangTestCase.LUX_WORKDIR, test_case_dir)
         configdir = os.path.join(MetaErlangTestCase.LUX_WORKDIR, MetaErlangTestCase.LUX_CONFIG_DIR)
-        configname = f'{self.td.get("MACHINE")}.luxcfg'
+        configname = f'{self.td.get("MACHINE")}'
 
         log_dir = self._get_lux_log_dir(luxscript)
 
