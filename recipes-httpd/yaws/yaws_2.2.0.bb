@@ -47,40 +47,41 @@ EXTRA_OEMAKE = "WARNINGS_AS_ERRORS="
 PARALLEL_MAKEINST = ""
 
 do_install:append() {
-	# Install systemd unit files
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${S}/scripts/systemd/yaws.service ${D}${systemd_unitdir}/system
-	sed -i -e 's,%bindir%,${bindir},g' \
-		-e 's,%etcdir%,${sysconfdir},g' \
-		${D}${systemd_unitdir}/system/yaws.service
+    # Install systemd unit files
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${S}/scripts/systemd/yaws.service ${D}${systemd_unitdir}/system
+        sed -i -e 's,%bindir%,${bindir},g' \
+            -e 's,%etcdir%,${sysconfdir},g' \
+            ${D}${systemd_unitdir}/system/yaws.service
+    fi
 
-	# Remove python from cgi example
-	#sed -i -e 's,#!/usr/bin/python,#!/bin/sh,g' \
-	#	${D}/var/yaws/www/cgi-bin/foo.py
+    # Install init.d
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        install ${UNPACKDIR}/yaws.init ${D}/${sysconfdir}/init.d/yaws
+    fi
 
-	# Fix host-user-contaminated
-	chown -R root:root ${D}/var/yaws/www
+    # Remove python from cgi example
+    #sed -i -e 's,#!/usr/bin/python,#!/bin/sh,g' \
+    #	${D}/var/yaws/www/cgi-bin/foo.py
 
-	# Fix yaws script
-	sed -i -e 's,^erl=.*$,erl=${libdir}/erlang/bin/erl,g' \
-		-e 's,^run_erl=.*$,run_erl=${libdir}/erlang/bin/run_erl,g' \
-		-e 's,^to_erl=.*$,to_erl=${libdir}/erlang/bin/to_erl,g' \
-		${D}/${bindir}/yaws
+    # Fix host-user-contaminated
+    chown -R root:root ${D}/var/yaws/www
 
-	# Install yaws.conf from this recipe
-	install ${UNPACKDIR}/yaws.conf ${D}/${sysconfdir}/yaws/yaws.conf
-	
-	# Install init.d
-	if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-		install ${UNPACKDIR}/yaws.init ${D}/${sysconfdir}/init.d/yaws
-	fi
+    # Fix yaws script
+    sed -i -e 's,^erl=.*$,erl=${libdir}/erlang/bin/erl,g' \
+        -e 's,^run_erl=.*$,run_erl=${libdir}/erlang/bin/run_erl,g' \
+        -e 's,^to_erl=.*$,to_erl=${libdir}/erlang/bin/to_erl,g' \
+        ${D}/${bindir}/yaws
 
-        # Remove any volatile files
-        rm -rf ${D}/var/log
+    # Install yaws.conf from this recipe
+    install ${UNPACKDIR}/yaws.conf ${D}/${sysconfdir}/yaws/yaws.conf
 
-        # Remove code examples
-        rm -rf ${D}/var/yaws/www/*
-        rm -rf ${D}/${libdir}/yaws-*/examples
+    # Remove any volatile files
+    rm -rf ${D}/var/log
+    # Remove code examples
+    rm -rf ${D}/var/yaws/www/*
+    rm -rf ${D}/${libdir}/yaws-*/examples
 }
 
 CONFFILES:${PN} = "${sysconfdir}/yaws/yaws.conf"
