@@ -8,6 +8,6 @@ SRC_URI += "file://0001-Enable-x32-support-for-crypto-configure.patch \
             file://0001-erts-fix-static-function-prototypes.patch \
             "
 
-SRCREV = "d9454dbccbaaad4b8796095c8e653b71b066dfaf"
+SRCREV = "eec5ff40a2ae2c3b3c6d952709ba4f16a6769024"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/28:"

@@ -34,7 +34,9 @@ PTEST_BUILD_HOST_FILES = "Emakefile Makefile variables conf_vars"
 # Default erlang applications based on class (target, native and nativesdk):
 ERLANG_APPLICATIONS:remove:class-target = "odbc wx observer debugger et reltool jinterface megaco dialyzer emacs"
 ERLANG_APPLICATIONS:remove:class-native = "odbc wx observer debugger et jinterface megaco emacs"
-ERLANG_APPLICATIONS:remove:class-nativesdk = "odbc jinterface megaco"
+# For native, check with opengl is available before including wx and observer
+ERLANG_APPLICATIONS:remove:class-nativesdk = "odbc jinterface megaco \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', '', 'wx observer', d)}"
 
 PACKAGECONFIG:class-target ?= "pkgconfig zlib termcap ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} ${ERLANG_APPLICATIONS}"
 PACKAGECONFIG:class-native ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
