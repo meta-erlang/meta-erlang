@@ -33,6 +33,7 @@ PTEST_BUILD_HOST_FILES = "Emakefile Makefile variables conf_vars"
 
 # Default erlang applications based on class (target, native and nativesdk):
 ERLANG_APPLICATIONS:remove:class-target = "odbc wx observer debugger et reltool jinterface megaco dialyzer emacs"
+# wx is not useful for native build, but it is supported if enabled
 ERLANG_APPLICATIONS:remove:class-native = "odbc wx observer debugger et jinterface megaco emacs"
 # For native, check with opengl is available before including wx and observer
 ERLANG_APPLICATIONS:remove:class-nativesdk = "odbc jinterface megaco \
@@ -80,7 +81,11 @@ EXTRA_OECONF:class-target ??= " \
 WX_CONFIG = "'${STAGING_BINDIR_CROSS}/wx-config --prefix=${STAGING_EXECPREFIXDIR} --baselib=${baselib}'"
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET} ac_cv_header_GL_gl_h=yes ac_cv_header_OpenGL_gl_h=yes"
-CACHED_CONFIGUREVARS:class-native += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
+CACHED_CONFIGUREVARS:class-native += "ac_cv_prog_javac_ver_1_2=no \
+    ac_cv_prog_javac_ver_1_5=no \
+    erl_xcomp_sysroot=${STAGING_DIR_NATIVE} \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "ac_cv_path_WX_CONFIG_PATH=${WX_CONFIG}", "", d)} \
+    "
 CACHED_CONFIGUREVARS:class-nativesdk += "ac_cv_prog_javac_ver_1_2=no \
     ac_cv_prog_javac_ver_1_5=no \
     erl_xcomp_sysroot=${STAGING_DIR_NATIVE} \
