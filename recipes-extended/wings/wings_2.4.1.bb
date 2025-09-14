@@ -12,17 +12,18 @@ LIC_FILES_CHKSUM = "file://license.terms;md5=889fe8682ad9d17b3067710663f6436e \
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 SRC_URI = "git://github.com/dgud/wings;protocol=https;branch=master;destsuffix=wings \
-           file://0001-Release-unix-without-makeself.sh.patch \
-           file://0004-Fix-triple-quote-warning.patch \
-           file://0002-New-FBX-importer-and-exporter-imports-and-exports-ge.patch \
-           file://0003-wpc_fbx_p-Fixes-to-transparency-and-material-names.patch \
-           file://0001-x3d_import-Fixed-transparency-added-gzip-support.patch \
+           file://0001-Release-unix-without-makeself.sh.patch \           
            "
 
+# Remove -m64 parameter and bad host include paths
+SRC_URI += "file://Makefile.c_src.cl"
+
 PV .= "+git${SRCPV}"
-SRCREV = "4d3e856e666202dcefbf0103a2f6638ae03f1129"
+SRCREV = "a5ca80d15e415baf1199a80a28a2b9f3a74d2db8"
 
 S = "${UNPACKDIR}/wings"
+
+inherit erlang-version
 
 DEPENDS = "erlang erlang-native rebar3-native opencl-headers opencl-icd-loader"
 
@@ -31,6 +32,22 @@ RDEPENDS:${PN} = "erlang wxwidgets"
 ERLANG_ERTS = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
 
 do_compile[network] = "1"
+
+# These two prefuncs are very ugly, but I could not find a better
+# way to patch wings as it downloads external dependency during build time.
+do_compile[prefuncs] += "do_fetch_wings_deps"
+do_compile[prefuncs] += "do_patch_wings_cl"
+
+do_fetch_wings_deps() {
+    cd ${S}
+    # clone external dependencies
+    make _deps/cl _deps/libigl _deps/eigen
+}
+
+do_patch_wings_cl() {
+    cd ${S}
+    install -D ${UNPACKDIR}/Makefile.c_src.cl ${S}/_deps/cl/c_src/Makefile
+}
 
 do_compile () {
     cd ${S}
@@ -49,6 +66,13 @@ do_install () {
     install -m 0755 ${STAGING_LIBDIR}/erlang/erts-${ERLANG_ERTS}/bin/inet_gethost ${D}/${libdir}/wings/bin/inet_gethost
     install -m 0755 ${STAGING_LIBDIR}/erlang/erts-${ERLANG_ERTS}/bin/erlexec ${D}/${libdir}/wings/bin/erlexec
     install -m 0755 ${STAGING_LIBDIR}/erlang/erts-${ERLANG_ERTS}/bin/beam.smp ${D}/${libdir}/wings/bin/beam.smp
+
+    # Install target wx drivers, wings build is not able to install the correct target version
+    WX_VERSION=${@get_erlang_application(d, "wx")}
+    WX_PRIV=${STAGING_LIBDIR}/erlang/lib/$WX_VERSION/priv
+    WX_DIR=${D}/${libdir}/wings/lib/$WX_VERSION/priv
+    install -m 0644 $WX_PRIV/erl_gl.so $WX_DIR
+    install -m 0644 $WX_PRIV/wxe_driver.so $WX_DIR
 
     # remove wings_convert script
     rm ${D}/${libdir}/wings/wings_convert
