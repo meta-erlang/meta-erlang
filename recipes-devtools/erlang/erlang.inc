@@ -35,9 +35,15 @@ PTEST_BUILD_HOST_FILES = "Emakefile Makefile variables conf_vars"
 ERLANG_APPLICATIONS:remove:class-target = "odbc wx observer debugger et reltool jinterface megaco dialyzer emacs"
 # wx is not useful for native build, but it is supported if enabled
 ERLANG_APPLICATIONS:remove:class-native = "odbc wx observer debugger et jinterface megaco emacs"
-# For native, check with opengl is available before including wx and observer
+# For nativesdk, check with opengl is available before including: wx, observer, et, debugger
+# as these application depends on wx and it will not be build without opengl support.
+#
+# reltool is also an erlang application which uses wx. However reltool does not depend
+# on wx_object behavior, so, it's safe (no graphic interface available, only batch mode)
+# to allow reltool for nativesdk. For the rest (observer, et and debugger) which use wx_object
+# it is safer to remove them from nativesdk support.
 ERLANG_APPLICATIONS:remove:class-nativesdk = "odbc jinterface megaco \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', '', 'wx observer', d)}"
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', '', 'wx observer et debugger', d)}"
 
 PACKAGECONFIG:class-target ?= "pkgconfig zlib termcap ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} ${ERLANG_APPLICATIONS}"
 PACKAGECONFIG:class-native ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
