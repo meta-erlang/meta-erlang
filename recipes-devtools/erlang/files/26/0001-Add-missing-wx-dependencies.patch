@@ -1,0 +1,153 @@
+From efbe58a62c69b802b2ce2541a33bb0fa3ce5a1c2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Tue, 8 Apr 2025 17:23:25 -0300
+Subject: [PATCH] Add missing wx dependencies
+
+The following applications:
+
+ - et
+ - observer
+ - debugger
+ - reltool
+
+And also the wx/examples/[simple,demo,sudoku] depends on wx application
+in order to build properly.
+
+When cross compiling Erlang/OTP [1], there are cases where the initial
+bootstrap system (which in most of the cases is just the same Erlang/OTP
+version but built for host) may not have Erlang wx application enabled.
+Thus when cross compiling the above applications will not able to found
+wx.hrl and wx behaviour files.
+
+That is because the target build should look into ERL_TOP in order to
+see the missing dependencies.
+
+Without the proper ERL_COMPILE_FLAGS the build will try to use from the
+host system, which in my case does not have wx enabled.
+
+1: https://github.com/erlang/otp/blob/master/HOWTO/INSTALL-CROSS.md
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/9708]
+---
+ lib/debugger/src/Makefile       | 2 +-
+ lib/dialyzer/src/Makefile       | 1 +
+ lib/et/src/Makefile             | 6 +++++-
+ lib/observer/src/Makefile       | 2 ++
+ lib/reltool/src/Makefile        | 3 ++-
+ lib/wx/examples/demo/Makefile   | 2 ++
+ lib/wx/examples/simple/Makefile | 2 ++
+ lib/wx/examples/sudoku/Makefile | 2 ++
+ 8 files changed, 17 insertions(+), 3 deletions(-)
+
+diff --git a/lib/debugger/src/Makefile b/lib/debugger/src/Makefile
+index 2fb955b2e3..4c4773fb5a 100644
+--- a/lib/debugger/src/Makefile
++++ b/lib/debugger/src/Makefile
+@@ -85,7 +85,7 @@ APPUP_TARGET = $(EBIN)/$(APPUP_FILE)
+ # ----------------------------------------------------
+ # FLAGS
+ # ----------------------------------------------------
+-ERL_COMPILE_FLAGS += -Werror
++ERL_COMPILE_FLAGS += -Werror -I $(ERL_TOP)/lib -pa $(ERL_TOP)/lib/wx/ebin
+ 
+ 
+ # ----------------------------------------------------
+diff --git a/lib/dialyzer/src/Makefile b/lib/dialyzer/src/Makefile
+index 2f0f1f6b71..20898e93f3 100644
+--- a/lib/dialyzer/src/Makefile
++++ b/lib/dialyzer/src/Makefile
+@@ -98,6 +98,7 @@ APPUP_TARGET= $(EBIN)/$(APPUP_FILE)
+ 
+ ERL_COMPILE_FLAGS += -Werror
+ ERL_COMPILE_FLAGS += +warn_export_vars +warn_unused_import +warn_missing_spec
++ERL_COMPILE_FLAGS += -I $(ERL_TOP)/lib -pa $(ERL_TOP)/lib/wx/ebin
+ 
+ # ----------------------------------------------------
+ # Targets
+diff --git a/lib/et/src/Makefile b/lib/et/src/Makefile
+index fc66cc1eaf..ed3a2ff712 100644
+--- a/lib/et/src/Makefile
++++ b/lib/et/src/Makefile
+@@ -66,7 +66,11 @@ APPUP_TARGET = $(EBIN)/$(APPUP_FILE)
+ # ----------------------------------------------------
+ # FLAGS
+ # ----------------------------------------------------
+-ERL_COMPILE_FLAGS += -pa $(ERL_TOP)/lib/et/ebin -I../include -Werror
++ERL_COMPILE_FLAGS += -pa $(ERL_TOP)/lib/et/ebin \
++		     -pa $(ERL_TOP)/lib/wx/ebin \
++		     -I../include \
++		     -I $(ERL_TOP)/lib \
++		     -Werror
+ 
+ # ----------------------------------------------------
+ # Special Build Targets
+diff --git a/lib/observer/src/Makefile b/lib/observer/src/Makefile
+index 2edb2ceb3e..3c5bc74c36 100644
+--- a/lib/observer/src/Makefile
++++ b/lib/observer/src/Makefile
+@@ -123,6 +123,8 @@ ERL_COMPILE_FLAGS += \
+ 	-I../include \
+ 	-I ../../et/include \
+ 	-I ../../../libraries/et/include \
++	-I $(ERL_TOP)/lib \
++	-pa $(ERL_TOP)/lib/wx/ebin \
+ 	-Werror
+ 
+ # ----------------------------------------------------
+diff --git a/lib/reltool/src/Makefile b/lib/reltool/src/Makefile
+index 173a557d58..110663a1de 100644
+--- a/lib/reltool/src/Makefile
++++ b/lib/reltool/src/Makefile
+@@ -59,7 +59,8 @@ APPUP_TARGET = $(EBIN)/$(APPUP_FILE)
+ 
+ ERL_COMPILE_FLAGS += +'{parse_transform,sys_pre_attributes}' \
+                      +'{attribute,insert,app_vsn,$(APP_VSN)}' \
+-		     -Werror
++		     -Werror \
++		     -I $(ERL_TOP)/lib
+ 
+ # ----------------------------------------------------
+ # Targets
+diff --git a/lib/wx/examples/demo/Makefile b/lib/wx/examples/demo/Makefile
+index 123c54580f..e18b3ce819 100644
+--- a/lib/wx/examples/demo/Makefile
++++ b/lib/wx/examples/demo/Makefile
+@@ -61,6 +61,8 @@ TESTMODS = \
+ TESTTARGETS = $(TESTMODS:%=%.beam)
+ TESTSRC = $(TESTMODS:%=%.erl)
+ 
++ERL_COMPILE_FLAGS += -I $(ERL_TOP)/lib -pa $(ERL_TOP)/lib/wx/ebin
++
+ # Targets
+ $(TYPES):	$(TESTTARGETS)
+ clean:
+diff --git a/lib/wx/examples/simple/Makefile b/lib/wx/examples/simple/Makefile
+index 16ac01d40d..3725c39ede 100644
+--- a/lib/wx/examples/simple/Makefile
++++ b/lib/wx/examples/simple/Makefile
+@@ -30,6 +30,8 @@ TESTMODS = hello hello2 minimal menu
+ TESTTARGETS = $(TESTMODS:%=%.beam)
+ TESTSRC = $(TESTMODS:%=%.erl)
+ 
++ERL_COMPILE_FLAGS += -I $(ERL_TOP)/lib -pa $(ERL_TOP)/lib/wx/ebin
++
+ # Targets
+ $(TYPES):	$(TESTTARGETS)
+ clean:
+diff --git a/lib/wx/examples/sudoku/Makefile b/lib/wx/examples/sudoku/Makefile
+index ccdcb7cd9f..9e29d1c344 100644
+--- a/lib/wx/examples/sudoku/Makefile
++++ b/lib/wx/examples/sudoku/Makefile
+@@ -30,6 +30,8 @@ TESTMODS = sudoku sudoku_board sudoku_game sudoku_gui
+ TESTTARGETS = $(TESTMODS:%=%.beam)
+ TESTSRC = $(TESTMODS:%=%.erl)
+ 
++ERL_COMPILE_FLAGS += -I $(ERL_TOP)/lib -pa $(ERL_TOP)/lib/wx/ebin
++
+ # Targets
+ $(TYPES):	$(TESTTARGETS)
+ clean:
+-- 
+2.43.0
+
