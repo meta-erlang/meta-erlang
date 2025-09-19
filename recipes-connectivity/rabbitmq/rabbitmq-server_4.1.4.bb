@@ -14,8 +14,8 @@ SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/
            file://rabbitmq-server-volatiles.conf \
            "
 
-SRC_URI[md5sum] = "9d051231fb67a57591d1151fcd98653f"
-SRC_URI[sha256sum] = "5af3b7a526b081b48ce9651af8ed8e72592c167e51251280a1fa58a19919ebaa"
+SRC_URI[md5sum] = "6309f1b4bace3c744b92e70930c41f02"
+SRC_URI[sha256sum] = "76a35dadb5d2cac61430dfba80c31bf465ca111fe63865e05ba8f788e2c7364b"
 
 DEPENDS = " \
     python3-native \
@@ -27,7 +27,6 @@ DEPENDS = " \
     unzip-native \
     libxslt-native \
     coreutils-native \
-    7zip-native \
 "
 
 RDEPENDS:${PN} = "erlang erlang-modules"
@@ -36,6 +35,8 @@ export ERL_COMPILER_OPTIONS = "deterministic"
 
 # rabbitmq build is not playing well with parallel make
 PARALLEL_MAKE = ""
+
+EXTRA_OEMAKE = "ESCRIPT_ZIP=zip"
 
 do_unpack:append() {
     bb.build.exec_func('do_fetch_deps', d)
