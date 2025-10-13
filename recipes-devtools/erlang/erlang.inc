@@ -58,7 +58,12 @@ PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
 PACKAGECONFIG[static-drivers] = "--enable-static-drivers,--disable-static-drivers,,"
 PACKAGECONFIG[static-nifs] = "--enable-static-nifs,--disable-static-nifs,,"
 
-PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,kernel-module-sctp"
+# Only depends on kernel-module-sctp for target build
+LKSCTP_DEPS:class-target = "kernel-module-sctp"
+# Host should support linux sctp kernel module
+LKSCTP_DEPS:class-nativesdk = ""
+
+PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,${LKSCTP_DEPS}"
 PACKAGECONFIG[java] = ",--without-javac,,"
 
 # Build debug emulator: https://www.erlang.org/doc/system/debugging.html#debug-emulator
