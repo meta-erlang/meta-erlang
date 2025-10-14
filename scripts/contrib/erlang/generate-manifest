@@ -207,7 +207,7 @@ COMMON_MODULES = [
            packageconfig=False),
     Module("xmerl"),
     Module("odbc",
-           packageconfig="--with-odbc,--without-odbc,libodbc"),
+           packageconfig="--with-odbc=${STAGING_EXECPREFIXDIR},--without-odbc,libiodbc"),
     Module("epmd",
            base=["${libdir}/erlang/erts-*/bin/epmd",
                  "${libdir}/erlang/bin/epmd",
