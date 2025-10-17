@@ -1,0 +1,27 @@
+From b29ac1ee17b3e4c30fce76a7d592fe9a00964930 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Thu, 16 Oct 2025 09:52:06 -0300
+Subject: [PATCH] [snmp] add deterministic option when available for asn
+
+Avoid build paths for snmp_pdus_basic.beam when deterministic is enabled.
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/10288]
+---
+ lib/snmp/src/misc/Makefile | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/lib/snmp/src/misc/Makefile b/lib/snmp/src/misc/Makefile
+index e984b9fb8b..5b1a45e477 100644
+--- a/lib/snmp/src/misc/Makefile
++++ b/lib/snmp/src/misc/Makefile
+@@ -98,6 +98,9 @@ ERL_COMPILE_FLAGS += -I../../include \
+                      -I$(ERL_TOP)/lib/stdlib \
+                      $(SNMP_FLAGS)
+ 
++ifeq ($(ERL_DETERMINISTIC),yes)
++  ASN1_OPTS += +deterministic
++endif
+ 
+ # ----------------------------------------------------
+ # Targets
