@@ -33,10 +33,10 @@ SDK_PACKAGE_ARCHS += "beamtools-dummy-${SDKPKGSUFFIX}"
 
 require conf/include/beamtools.inc
 
-TOOLCHAIN_OUTPUTNAME ?= "${SDK_ARCH}-beamtools-nativesdk-standalone-${DISTRO_VERSION}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}-gleam-${GLEAM_VERSION}"
+TOOLCHAIN_OUTPUTNAME ?= "${SDK_ARCH}-beamtools-nativesdk-standalone-${DISTRO_VERSION}-${BEAMTOOLS_VERSION}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}-gleam-${GLEAM_VERSION}"
 
 SDK_TITLE = "BEAM tools"
-SDK_VERSION = "${@d.getVar('DISTRO_VERSION').replace('snapshot-${METADATA_REVISION}', 'snapshot')}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}-gleam-${GLEAM_VERSION}"
+SDK_VERSION = "${@d.getVar('DISTRO_VERSION').replace('snapshot-${METADATA_REVISION}', 'snapshot')}-${BEAMTOOLS_VERSION}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}-gleam-${GLEAM_VERSION}"
 SDKPATHINSTALL = "/opt/beamtools/${SDK_VERSION}"
 
 RDEPENDS = "${TOOLCHAIN_HOST_TASK}"

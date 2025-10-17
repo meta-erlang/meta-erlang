@@ -22,10 +22,10 @@ SDK_PACKAGE_ARCHS += "beamruntime-dummy-${SDKPKGSUFFIX}"
 
 require conf/include/beamtools.inc
 
-TOOLCHAIN_OUTPUTNAME ?= "${SDK_ARCH}-beamruntime-nativesdk-standalone-${DISTRO_VERSION}-${TCLIBC}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}"
+TOOLCHAIN_OUTPUTNAME ?= "${SDK_ARCH}-beamruntime-nativesdk-standalone-${DISTRO_VERSION}-${BEAMRUNTIME_VERSION}-${TCLIBC}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}"
 
 SDK_TITLE = "BEAM runtime"
-SDK_VERSION = "${@d.getVar('DISTRO_VERSION').replace('snapshot-${METADATA_REVISION}', 'snapshot')}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}"
+SDK_VERSION = "${@d.getVar('DISTRO_VERSION').replace('snapshot-${METADATA_REVISION}', 'snapshot')}-${BEAMRUNTIME_VERSION}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}"
 SDKPATHINSTALL = "/opt/beamruntime/${SDK_VERSION}"
 
 RDEPENDS = "${TOOLCHAIN_HOST_TASK}"
