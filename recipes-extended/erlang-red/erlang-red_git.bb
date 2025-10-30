@@ -3,8 +3,8 @@ DESCRIPTION = "An experiment to replace Node-REDs existing NodeJS backend with \
 an Erlang equivalent that is 100% compatible to existing flow code."
 HOMEPAGE = "https://github.com/gorenje/erlang-red"
 SECTION = "libs"
-LICENSE = "GPL-3.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=1ebbd3e34237af26da5dc08a4e440464"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE.ap2;md5=86d3f3a95c324c9479bd8986968f4327"
 
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
@@ -13,13 +13,17 @@ SRC_URI = "git://github.com/gorenje/erlang-red.git;protocol=https;branch=main \
            file://erlang-red.init \
           "
 
-SRCREV = "5bd1b518d06ed3addd2bee14e5094be608384319"
+SRCREV = "3ffc53d1762982354d06fed513eed2dac54982fb"
 
 DEPENDS = "rebar3-native"
 
-PV = "0.2.2"
+PV = "0.3.4"
 
 inherit rebar3 erlang-version useradd update-rc.d systemd
+
+export MIX_HOME = "${UNPACKDIR}/mix"
+export MIX_ARCHIVES = "${MIX_HOME}/archives"
+export MIX_REBAR3 = "${UNPACKDIR}/recipe-sysroot-native/usr/bin/rebar3"
 
 # Due exerl plugin used by erlang-red, it's necessary to allow
 # network access during compile phase. Because exerl will try to
@@ -28,8 +32,6 @@ do_compile[network] = "1"
 
 # Avoid building QUIC for emqtt client
 export BUILD_WITHOUT_QUIC = "1"
-
-REBAR3_PROFILE = "prod"
 
 # for erlexec, it's necessary to force the correct target include and library path
 export ERL_LDFLAGS = "-L${ERL_INTERFACE_LIB_DIR}"
@@ -45,7 +47,6 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "--system erlang-red"
 USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/erlang-red -g erlang-red erlang-red"
 
-export DIAGNOSTIC = "1"
 do_install:append() {
     # remove .sh (bash) to avoid unnecessary dependency
     rm -f ${erlang_release}/lib/erlang_red-*/priv/node-red-frontend/retrieve.sh
@@ -68,3 +69,6 @@ PACKAGE_BEFORE_PN = "${PN}-testflows"
 
 # Until get erlexec fixed
 INSANE_SKIP:${PN}-dbg += "buildpaths"
+
+# Ignore buildpaths due  https://github.com/dashbitco/nimble_csv/issues/90
+INSANE_SKIP:${PN} += "buildpaths"
