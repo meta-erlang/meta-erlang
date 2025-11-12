@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=815ca599c9df247a0c7f619bab12
 SECTION = "network"
 PR = "r0"
 
+PV ?= "3.12.6"
+
 SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
            file://rabbitmq-server \
            file://rabbitmq-server.service \
@@ -13,9 +15,6 @@ SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/
            file://volatiles.99_rabbitmq-server \
            file://rabbitmq-server-volatiles.conf \
            "
-
-SRC_URI[md5sum] = "3f66edcc403bc735a1aae0f465a75a09"
-SRC_URI[sha256sum] = "85e3b3621b6a127214f13b753f9afd9776d8652f6b1469e49d98027f75f41caa"
 
 DEPENDS = " \
     python3-native \
