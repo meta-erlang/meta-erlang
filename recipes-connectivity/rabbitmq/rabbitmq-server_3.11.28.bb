@@ -29,7 +29,7 @@ DEPENDS = " \
     coreutils-native\
 "
 
-RDEPENDS:${PN} = "erlang erlang-modules"
+RDEPENDS:${PN} = "erlang erlang-modules glibc-utils"
 
 export ERL_COMPILER_OPTIONS="deterministic"
 
