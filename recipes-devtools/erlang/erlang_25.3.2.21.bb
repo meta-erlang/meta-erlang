@@ -1,5 +1,5 @@
-include erlang.inc
 require erlang-${PV}-manifest.inc
+include erlang.inc
 
 PR = "r0"
 

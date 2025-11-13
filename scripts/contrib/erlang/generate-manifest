@@ -32,11 +32,11 @@ __version__ = "20180809"
 class Module(object):
     PN = '${PN}-%(name)s'
     BASE_PATHS = ["/%(name)s-*"]
-    DOC_PATHS = ["/%(name)s-*/examples",
-                 "/%(name)s-*/doc",
+    DOC_PATHS = ["/%(name)s-*/doc",
                  "/%(name)s-*/man"]
     DEBUG_PATHS = ["/%(name)s-*/bin/.debug",
                    "/%(name)s-*/lib/.debug",
+                   "/%(name)s-*/priv/.debug",
                    "/%(name)s-*/priv/lib/.debug",
                    "/%(name)s-*/priv/obj/.debug",
                    "/%(name)s-*/priv/bin/.debug"]
@@ -45,10 +45,12 @@ class Module(object):
                  "/%(name)s-*/priv/obj"]
     STATICDEV_PATHS = ["/%(name)s-*/lib/*.a",
                        "/%(name)s-*/priv/lib/*.a"]
+    EXAMPLES_PATH = ["/%(name)s-*/examples"]
 
     def __init__(self, name, description="", dependencies="", base=[], doc=[],
-                 debug=[], dev=[], staticdev=[]):
-
+                 debug=[], debug_append=[], dev=[], dev_append=[], staticdev=[], examples=True, packageconfig=""):
+        self.packageconfig_enable = False
+        self.packages_enable = ['doc', 'dbg', 'dev', 'staticdev', 'examples']
         self.name = name
         base_formatter = {'name': name}
         sanitized_name = name.replace("-", "_")
@@ -56,29 +58,88 @@ class Module(object):
 
         pn = self.PN % base_formatter
 
+        if packageconfig == False:
+            self.packageconfig = False
+        elif len(packageconfig) > 0:
+            self.packageconfig_enable = name
+            self.packageconfig = packageconfig
+        else:
+            self.packageconfig_enable = name
+            self.packageconfig = f"--with-{name},--without-{name},,"
+
+        if examples == False:
+          self.packages_enable.remove('examples')
+          examples = []
+        elif examples == True:
+          examples = self.EXAMPLES_PATH
+        elif len(examples) > 0:
+            pass
+        else:
+          examples = self.EXAMPLES_PATH
+
+        if doc == False:
+          self.packages_enable.remove('doc')
+          doc = []
+        elif len(doc) > 0:
+          pass
+        else:
+          doc = self.DOC_PATHS
+
+        if debug == False:
+          self.packages_enable.remove('dbg')
+          debug = []
+        elif len(debug) > 0:
+          debug.extend(debug_append)
+          pass
+        else:
+          debug = self.DEBUG_PATHS
+          debug.extend(debug_append)
+
+        if dev == False:
+          self.packages_enable.remove('dev')
+          dev = []
+        elif len(dev) > 0:
+          dev.extend(dev_append)
+          pass
+        else:
+          dev = self.DEV_PATHS
+          dev.extend(dev_append)
+
+        if staticdev == False:
+          self.packages_enable.remove('staticdev')
+          staticdev = []
+        elif len(staticdev) > 0:
+          pass
+        else:
+          staticdev = self.STATICDEV_PATHS
+
         base_paths = ' '.join(base if base else self.BASE_PATHS)
-        doc_paths = ' '.join(doc if doc else self.DOC_PATHS)
-        debug_paths = ' '.join(debug if debug else self.DEBUG_PATHS)
-        dev_paths = ' '.join(dev if dev else self.DEV_PATHS)
-        staticdev_paths = ' '.join(staticdev if staticdev
-                                   else self.STATICDEV_PATHS)
-        self.packages = [
-            # doc files are not Erlang modules,
-            # hence a base formatter can be used
-            [pn + "-doc", "", "", doc_paths % base_formatter],
-            [pn + "-dbg", "", "", debug_paths % sanitized_formatter],
-            [pn + "-dev", "", "", dev_paths % sanitized_formatter],
-            [pn + "-staticdev", "", "", staticdev_paths % sanitized_formatter],
-            [pn, description, dependencies, base_paths % sanitized_formatter],
-        ]
+        doc_paths = ' '.join(doc)
+        debug_paths = ' '.join(debug)
+        dev_paths = ' '.join(dev)
+        staticdev_paths = ' '.join(staticdev)
+        examples_paths = ' '.join(examples)
+        self.packages = []
+        # doc files are not Erlang modules,
+        # hence a base formatter can be used
+        if 'examples' in self.packages_enable:
+            self.packages.append([pn + "-examples", "", "", examples_paths % sanitized_formatter, self.packageconfig_enable])
+        if 'doc' in self.packages_enable:
+            self.packages.append([pn + "-doc", "", "", doc_paths % base_formatter, self.packageconfig_enable])
+        if 'dbg' in self.packages_enable:
+            self.packages.append([pn + "-dbg", "", "", debug_paths % sanitized_formatter, self.packageconfig_enable])
+        if 'dev' in self.packages_enable:
+            self.packages.append([pn + "-dev", "", "", dev_paths % sanitized_formatter, self.packageconfig_enable])
+        if 'staticdev' in self.packages_enable:
+            self.packages.append([pn + "-staticdev", "", "", staticdev_paths % sanitized_formatter, self.packageconfig_enable])
+
+        self.packages.append([pn, description, dependencies, base_paths % sanitized_formatter, self.packageconfig_enable])
 
 
 COMMON_MODULES = [
-    Module("sasl"),
-    Module("stdlib"),
-    Module("kernel"),
-    Module("tools"),
-    Module("appmon"),
+    Module("sasl", packageconfig=False),
+    Module("stdlib", packageconfig=False),
+    Module("kernel", packageconfig=False),
     Module("asn1"),
     Module("common-test",
            base=["${bindir}/ct_run ${libdir}/erlang/bin/ct_run",
@@ -89,86 +150,10 @@ COMMON_MODULES = [
                  "${libdir}/erlang/bin/erlc",
                  "/compiler-*",
                  "${libdir}/erlang/erts-*/bin/erlc"]),
-    Module("cosevent",
-           base=["/cosEvent-*"],
-           debug=["/cosEvent-*/bin/.debug",
-                  "/cosEvent-*/lib/.debug",
-                  "/cosEvent-*/priv/lib/.debug",
-                  "/cosEvent-*/priv/obj/.debug",
-                  "/cosEvent-*/priv/bin/.debug"],
-           dev=["/cosEvent-*/src",
-                "/cosEvent-*/include"],
-           staticdev=["/cosEvent-*/lib/*.a",
-                      "/cosEvent-*/priv/lib/*.a"]),
-    Module("coseventdomain",
-           base=["/cosEventDomain-*"],
-           debug=["/cosEventDomain-*/bin/.debug",
-                  "/cosEventDomain-*/lib/.debug",
-                  "/cosEventDomain-*/priv/lib/.debug",
-                  "/cosEventDomain-*/priv/obj/.debug",
-                  "/cosEventDomain-*/priv/bin/.debug"],
-           dev=["/cosEventDomain-*/src",
-                "/cosEventDomain-*/include"],
-           staticdev=["/cosEventDomain-*/lib/*.a",
-                      "/cosEventDomain-*/priv/lib/*.a"]),
-    Module("cosfiletransfer",
-           base=["/cosFileTransfer-*"],
-           debug=["/cosFileTransfer-*/bin/.debug",
-                  "/cosFileTransfer-*/lib/.debug",
-                  "/cosFileTransfer-*/priv/lib/.debug",
-                  "/cosFileTransfer-*/priv/obj/.debug",
-                  "/cosFileTransfer-*/priv/bin/.debug"],
-           dev=["/cosFileTransfer-*/src",
-                "/cosFileTransfer-*/include"],
-           staticdev=["/cosFileTransfer-*/lib/*.a",
-                      "/cosFileTransfer-*/priv/lib/*.a"]),
-    Module("cosnotification",
-           base=["/cosNotification-*"],
-           debug=["/cosNotification-*/bin/.debug",
-                  "/cosNotification-*/lib/.debug",
-                  "/cosNotification-*/priv/lib/.debug",
-                  "/cosNotification-*/priv/obj/.debug",
-                  "/cosNotification-*/priv/bin/.debug"],
-           dev=["/cosNotification-*/src",
-                "/cosNotification-*/include"],
-           staticdev=["/cosNotification-*/lib/*.a",
-                      "/cosNotification-*/priv/lib/*.a"]),
-    Module("cosproperty",
-           base=["/cosProperty-*"],
-           debug=["/cosProperty-*/bin/.debug",
-                  "/cosProperty-*/lib/.debug",
-                  "/cosProperty-*/priv/lib/.debug",
-                  "/cosProperty-*/priv/obj/.debug",
-                  "/cosProperty-*/priv/bin/.debug"],
-           dev=["/cosProperty-*/src",
-                "/cosProperty-*/include"],
-           staticdev=["/cosProperty-*/lib/*.a",
-                      "/cosProperty-*/priv/lib/*.a"]),
-    Module("costime",
-           base=["/cosTime-*"],
-           debug=["/cosTime-*/bin/.debug",
-                  "/cosTime-*/lib/.debug",
-                  "/cosTime-*/priv/lib/.debug",
-                  "/cosTime-*/priv/obj/.debug",
-                  "/cosTime-*/priv/bin/.debug"],
-           dev=["/cosTime-*/src",
-                "/cosTime-*/include"],
-           staticdev=["/cosTime-*/lib/*.a",
-                      "/cosTime-*/priv/lib/*.a"]),
-    Module("costransactions",
-           base=["/cosTransactions-*"],
-           staticdev=["/cosTransactions-*/lib/*.a",
-                      "/cosTransactions-*/priv/lib/*.a"],
-           dev=["/cosTransactions-*/src",
-                "/cosTransactions-*/include"],
-           debug=["/cosTransactions-*/bin/.debug",
-                  "/cosTransactions-*/lib/.debug",
-                  "/cosTransactions-*/priv/lib/.debug",
-                  "/cosTransactions-*/priv/obj/.debug",
-                  "/cosTransactions-*/priv/bin/.debug"]),
     Module("crypto",
-           dependencies="openssl"),
-    Module("debugger"),
+           packageconfig="--with-crypto,--without-crypto,openssl"),
+    Module("debugger",
+           "--with-debugger,--without-debugger,,"),
     Module("dialyzer",
            base=["${bindir}/%(name)s",
                  "${libdir}/erlang/bin/%(name)s",
@@ -177,51 +162,85 @@ COMMON_MODULES = [
     Module("diameter"),
     Module("edoc"),
     Module("eldap"),
+    # emacs files belongs to tools, but meta-erlang separates it
+    Module("emacs",
+           base=["${libdir}/erlang/lib/tools-*/emacs"],
+           debug=False,
+           doc=False,
+           dev=False,
+           staticdev=False),
     Module("erl-docgen"),
-    Module("erl-interface"),
+    Module("erl-interface",
+           dev_append=[
+                "${libdir}/erlang/usr/include/eicode.h",
+                "${libdir}/erlang/usr/include/erl_drv_nif.h",
+                "${libdir}/erlang/usr/include/ei_connect.h",
+                "${libdir}/erlang/usr/include/ei.h"]),
     Module("et"),
     Module("eunit"),
     Module("ftp"),
-    Module("gs"),
-    Module("hipe"),
-    Module("ic"),
     Module("inets"),
     Module("jinterface"),
     Module("megaco"),
     Module("mnesia"),
-    Module("observer"),
-    Module("wx"),
-    Module("orber"),
+    Module("observer",
+           "--with-observer,--without-observer,wxwidgets,"),
+    Module("wx",
+           packageconfig="--with-wx,--without-wx,wxwidgets"),
     Module("os-mon"),
-    Module("otp-mibs"),
     Module("parsetools"),
-    Module("percept"),
-    Module("pman"),
     Module("public-key"),
     Module("reltool"),
     Module("runtime-tools"),
     Module("snmp"),
     Module("ssh"),
-    Module("ssl"),
+    Module("ssl",
+           packageconfig=",--without-ssl,,"),
     Module("syntax-tools"),
-    Module("test-server"),
     Module("tftp"),
-    Module("toolbar"),
-    Module("tv"),
+    Module("tools"),
     Module("typer",
            base=["${bindir}/%(name)s",
                  "${libdir}/erlang/bin/%(name)s",
                  "/%(name)s-*",
-                 "${libdir}/erlang/erts-*/bin/%(name)s"]),
-    Module("webtool"),
+                 "${libdir}/erlang/erts-*/bin/%(name)s"],
+           packageconfig=False),
     Module("xmerl"),
-    Module("odbc"),
-    Module("ose"),
+    Module("odbc",
+           packageconfig="--with-odbc=${STAGING_EXECPREFIXDIR},--without-odbc,libiodbc"),
+    Module("epmd",
+           base=["${libdir}/erlang/erts-*/bin/epmd",
+                 "${libdir}/erlang/bin/epmd",
+                 "${bindir}/epmd",
+                 "${systemd_system_unitdir}/epmd.service",
+                 "${systemd_system_unitdir}/epmd.socket",
+                 "${sysconfdir}/init.d"],
+           debug=False,
+           doc=False,
+           dev=False,
+           staticdev=False,
+           packageconfig=False),
     Module("erts",
            base=["${bindir}",
                  "${libdir}/erlang/releases",
                  "${libdir}/erlang/bin",
-                 "${libdir}/erlang/erts-*/bin"]),
+                 "${libdir}/erlang/erts-*/bin",
+                 # only valid for nativesdk-erlang
+                 "${libdir}/erlang/lib/erts-*/ebin"],
+           dev=["${libdir}/erlang/lib/erts-*/src",
+                "${libdir}/erlang/erts-*/*src",
+                "${libdir}/erlang/erts-*/include",
+                "${libdir}/erlang/erts-*/priv/obj",
+                "${libdir}/erlang/erts-*/bin/yielding_c_fun",
+                "${libdir}/erlang/usr/include/erl_driver.h",
+                "${libdir}/erlang/usr/include/erl_nif_api_funcs.h",
+                "${libdir}/erlang/usr/include/erl_int_sizes_config.h",
+                "${libdir}/erlang/usr/include/driver_int.h",
+                "${libdir}/erlang/usr/include/erl_fixed_size_int_types.h",
+                "${libdir}/erlang/usr/include/erl_nif.h"],
+           debug_append=["${libdir}/erlang/erts-*/bin/.debug",
+                         "${libdir}/erlang/bin/.debug"],
+           packageconfig=False),
 ]
 
 
@@ -257,6 +276,7 @@ class MakefileMaker:
         self.erts_version = erts_version
         self.erl_interface_version = erl_interface_version
         self.packages = OrderedDict()
+        self.packageconfigs = OrderedDict()
         self.targetPrefix = "${libdir}/erlang/lib"
         self.output = outfile
         self.out(self.WARNING % version)
@@ -274,13 +294,28 @@ class MakefileMaker:
 
     def doProlog(self):
         self.out(""" """)
+        self.out('NOAUTOPACKAGEDEBUG = "1"')
+        self.out('ERLANG_APPLICATIONS = "\\')
+        for name, _ in sorted(self.packageconfigs.items()):            
+            if name == "wx":
+                self.out('    ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "wx", "", d)} \\')
+            else:
+                self.out(f'    {name} \\')
+        self.out('"')
+        for name, packageconfig in sorted(self.packageconfigs.items()):
+            self.out(f'PACKAGECONFIG[{name}] = "{packageconfig}"')
         self.out("")
 
     def addModule(self, module):
+        self.addPackageconfig(module)
         for pkg in module.packages:
             self.addPackage(*pkg)
 
-    def addPackage(self, name, description, dependencies, filenames, keepfiles=False):
+    def addPackageconfig(self, module):
+        if module.packageconfig:
+            self.packageconfigs[module.name] = module.packageconfig
+
+    def addPackage(self, name, description, dependencies, filenames, packageconfig_enable, keepfiles=False):
         """add a package to the Makefile"""
         if isinstance(filenames, str):
             filenames = filenames.split()
@@ -290,7 +325,7 @@ class MakefileMaker:
                 fullFilenames.append("%s%s" % (self.targetPrefix, filename))
             else:
                 fullFilenames.append(filename)
-        self.packages[name] = description, dependencies, fullFilenames, keepfiles
+        self.packages[name] = description, dependencies, fullFilenames, packageconfig_enable, keepfiles
 
     def doBody(self):
         """generate body of Makefile"""
@@ -299,14 +334,22 @@ class MakefileMaker:
         # generate provides line
         #
 
-        provideLine = 'PROVIDES+="'
-        for name in self.packages:
-            provideLine += "%s " % name
+        provideLine = 'PROVIDES += "\\\n'
+        for name, data in self.packages.items():
+            _desc, _deps, _files, packageconfig, _keepfiles = data
+            if packageconfig:
+                provideLine += "    ${@bb.utils.contains('PACKAGECONFIG', '%s', '%s', '', d)} \\\n" % (packageconfig, name)
+            else:
+                provideLine += "    %s \\\n" % name
         provideLine += '"'
 
-        provideNativeLine = 'RPROVIDES:${PN}:class-native+="'
-        for name in self.packages:
-            provideNativeLine += "%s-native " % name
+        provideNativeLine = 'RPROVIDES:${PN}:class-native += "\\\n'
+        for name, data in self.packages.items():
+            _desc, _deps, _files, packageconfig, _keepfiles = data
+            if packageconfig:
+                provideNativeLine += "    ${@bb.utils.contains('PACKAGECONFIG', '%s', '%s', '', d)} \\\n" % (packageconfig, name)
+            else:
+                provideNativeLine += "    %s-native \\\n" % name
         provideNativeLine += '"'
 
         self.out("ERTS_VERSION = \"" + self.erts_version + "\"")
@@ -319,16 +362,16 @@ class MakefileMaker:
         # generate package line
         #
 
-        packageLine = 'PACKAGES="'
-        packageLine += "${@bb.utils.contains('PTEST_ENABLED', '1', '${PN}-ptest', '', d)} "
-        packageLine += '${PN}-dbg '
-        for name in self.packages:
-            if name.startswith("${PN}-distutils"):
-                if name == "${PN}-distutils":
-                    packageLine += "%s-staticdev %s " % (name, name)
-            elif name != '${PN}-dbg':
-                packageLine += "%s " % name
-        packageLine += '${PN}-modules ${PN}-modules-dev"'
+        packageLine = 'PACKAGES = "\\\n'
+        for name, data in self.packages.items():
+            _desc, _deps, _files, packageconfig, _keepfiles = data
+            if name != '${PN}-dbg':
+                if packageconfig:
+                    packageLine += "    ${@bb.utils.contains('PACKAGECONFIG', '%s', '%s', '', d)} \\\n" % (packageconfig, name)
+                else:
+                    packageLine += "    %s \\\n" % name
+        packageLine += '    ${PN}-dbg \\\n'
+        packageLine += '    ${PN}-modules ${PN}-modules-dev"'
 
         self.out(packageLine)
         self.out("")
@@ -338,19 +381,19 @@ class MakefileMaker:
         #
 
         for name, data in self.packages.items():
-            desc, deps, files, keepfiles = data
+            desc, deps, files, packageconfig_enable, keepfiles = data
 
             #
             # write out the description, revision and dependencies
             #
-            self.out('ALLOW_EMPTY:%s="1"' % (name))
-            self.out('DESCRIPTION:%s="%s"' % (name, desc))
-            self.out('RDEPENDS:%s="%s"' % (name, deps))
+            self.out('ALLOW_EMPTY:%s = "1"' % (name))
+            self.out('DESCRIPTION:%s = "%s"' % (name, desc))
+            self.out('RDEPENDS:%s = "%s"' % (name, deps))
 
             if keepfiles:
-                line = 'FILES:%s+="' % name
+                line = 'FILES:%s += "' % name
             else:
-                line = 'FILES:%s="' % name
+                line = 'FILES:%s = "' % name
 
             #
             # check which directories to make in the temporary directory
@@ -374,29 +417,37 @@ class MakefileMaker:
             self.out(line)
             self.out("")
 
-        self.out('DESCRIPTION:${PN}-modules="All Erlang modules"')
-        line = 'RDEPENDS:${PN}-modules="'
+        self.out('DESCRIPTION:${PN}-modules = "All Erlang modules"')
+        line = 'RDEPENDS:${PN}-modules = "\\\n'
 
-        pkgtoskip = ('-dbg', '-doc', '-staticdev', '-dev')
+        pkgtoskip = ('-dbg', '-doc', '-staticdev', '-dev', '-examples')
 
         for name, data in sorted(self.packages.items()):
             if name.endswith(pkgtoskip):
                 continue
-            if name not in ['${PN}-dev', '${PN}-distutils-staticdev']:
-                line += "%s " % name
+            _desc, _deps, _files, packageconfig, _keepfiles = data
+            if name not in ['${PN}-dev']:
+                if packageconfig:
+                    line += "    ${@bb.utils.contains('PACKAGECONFIG', '%s', '%s', '', d)} \\\n" % (packageconfig, name)
+                else:
+                    line += "    %s \\\n" % name
 
         self.out("%s \"" % line)
         self.out('ALLOW_EMPTY:${PN}-modules = "1"')
         self.out("")
 
-        self.out('DESCRIPTION:${PN}-modules-dev="All Erlang modules for developers"')
-        line = 'RDEPENDS:${PN}-modules-dev="${PN}-modules '
+        self.out('DESCRIPTION:${PN}-modules-dev = "All Erlang modules for developers"')
+        line = 'RDEPENDS:${PN}-modules-dev = "${PN}-modules \\\n'
 
         for name, data in sorted(self.packages.items()):
             if not name.endswith(pkgtoskip) or name.endswith('-dbg'):
                 continue
-            if name not in ['${PN}-dev', '${PN}-distutils-staticdev']:
-                line += "%s " % name
+            _desc, _deps, _files, packageconfig, _keepfiles = data
+            if name not in ['${PN}-dev']:
+                if packageconfig:
+                    line += "    ${@bb.utils.contains('PACKAGECONFIG', '%s', '%s', '', d)} \\\n" % (packageconfig, name)
+                else:
+                    line += "    %s \\\n" % name
 
         self.out("%s \"" % line)
         self.out('ALLOW_EMPTY:${PN}-modules-dev = "1"')
@@ -454,21 +505,25 @@ if __name__ == "__main__":
     # revision, name, description, dependencies, filenames
     #
     m.addPackage("${PN}-doc", "", "",
-                 " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man "
-                 "${libdir}/erlang/lib/*/examples ${libdir}/erlang/misc",
-                 True)
+                 " ${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${libdir}/erlang/COPYRIGHT ${libdir}/erlang/PR.template ${libdir}/erlang/README.md",
+                 False,
+                 False)
     m.addPackage("${PN}-dev", "",
                  "${PN}-erts-dev ${PN}-kernel-dev ${PN}-stdlib-dev ${PN}-sasl-dev" ,
-                 " ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/src "
-                 "${libdir}/erlang/usr/include",
-                 True)
+                 "${libdir}/pkgconfig",
+                 False,
+                 False)
     m.addPackage("${PN}-dbg", "", "",
                  " ${libdir}/erlang/bin/.debug ${libdir}/erlang/erts-*/bin/.debug",
-                 True)
+                 False,
+                 False)
     m.addPackage("${PN}-staticdev", "", "",
                  "  ${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a "
                  "${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/*",
-                 True)
+                 False,
+                 False)
     m.addPackage("${PN}", "",
-                 "${PN}-erts ${PN}-kernel ${PN}-stdlib ${PN}-sasl", "", True)
+                 "${PN}-erts ${PN}-kernel ${PN}-stdlib ${PN}-sasl ${PN}-epmd", "",
+                 False,
+                 False)
     m.make()

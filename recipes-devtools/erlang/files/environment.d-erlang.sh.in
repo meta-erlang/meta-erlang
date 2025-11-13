@@ -1,5 +1,6 @@
-# set path to erl_interface lib required by building NIF, port driver and port
+# set path to erl_interface lib and include required by building NIF, port driver and port
 export ERL_EI_LIBDIR=${OECORE_TARGET_SYSROOT}/usr/lib/erlang/lib/erl_interface-@ERL_INTERFACE_VERSION@/lib/
-
+export ERL_EI_INCLUDE_DIR=${OECORE_TARGET_SYSROOT}/usr/lib/erlang/lib/erl_interface-@ERL_INTERFACE_VERSION@/include
+export ERL_ERTS_INCLUDE_DIR=${OECORE_TARGET_SYSROOT}/usr/lib/erlang/erts-@ERTS_VERSION@/include
 # for mix release (elixir)
 export MIX_TARGET_INCLUDE_ERTS="${OECORE_TARGET_SYSROOT}/usr/lib/erlang/erts-@ERTS_VERSION@"

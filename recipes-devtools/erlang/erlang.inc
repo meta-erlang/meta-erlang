@@ -7,13 +7,16 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ff253ad767462c46be284da12dda33e8"
 
 BBCLASSEXTEND = "native nativesdk"
 
-DEPENDS:append:class-target = " erlang-native openssl"
-DEPENDS:append:class-native = " ncurses-native zlib-native openssl-native"
-DEPENDS:append:class-nativesdk = " erlang-native nativesdk-zlib nativesdk-openssl nativesdk-ncurses"
+DEPENDS:append:class-target = " erlang-native"
+DEPENDS:append:class-nativesdk = " erlang-native"
 
-RDEPENDS:${PN}-ptest += "bash erlang-modules openssh tmux"
+RDEPENDS:${PN}-ptest += "bash erlang-modules openssh \
+                         ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "tmux", "", d)}"
 
 SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
+           file://epmd.socket \
+           file://epmd.service \
+           file://epmd.init \
            file://environment.d-erlang.sh.in \
            file://run-ptest \
            file://otp-0002-Remove-rpath.patch \
@@ -31,30 +34,45 @@ S = "${WORKDIR}/git"
 
 inherit ptest autotools-brokensep pkgconfig
 
-PACKAGECONFIG ?= "pkgconfig zlib termcap"
-PACKAGECONFIG:class-native ?= "pkgconfig"
-# For nativesdk, check if opengl is available before including: wx, observer, et, debugger
+PTEST_BUILD_HOST_FILES = "Emakefile Makefile variables conf_vars"
+
+# Default erlang applications based on class (target, native and nativesdk):
+ERLANG_APPLICATIONS:remove:class-target = "odbc wx observer debugger et reltool jinterface megaco dialyzer emacs"
+# wx is not useful for native build, but it is supported if enabled
+ERLANG_APPLICATIONS:remove:class-native = "odbc wx observer debugger et jinterface megaco emacs"
+# For nativesdk, check with opengl is available before including: wx, observer, et, debugger
 # as these application depends on wx and it will not be build without opengl support.
 #
 # reltool is also an erlang application which uses wx. However reltool does not depend
 # on wx_object behavior, so, it's safe (no graphic interface available, only batch mode)
 # to allow reltool for nativesdk. For the rest (observer, et and debugger) which use wx_object
 # it is safer to remove them from nativesdk support.
-PACKAGECONFIG:class-nativesdk ?= "pkgconfig termcap \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'wx observer et debugger', '', d)}"
-PACKAGECONFIG[zlib] = "--disable-builtin-zlib,--enable-builtin-zlib,zlib"
-PACKAGECONFIG[termcap] = "--with-termcap,--without-termcap,ncurses"
-PACKAGECONFIG[odbc] = "--with-odbc,--without-odbc,libodbc"
-PACKAGECONFIG[lttng] = "--with-dynamic-trace=lttng,--without-dynamic-trace,lttng-ust"
-PACKAGECONFIG[wx] = "--with-wx,--without-wx,wxwidgets"
-PACKAGECONFIG[observer] = "--with-observer,--without-observer,,"
-PACKAGECONFIG[et] = "--with-et,--without-et,,"
-PACKAGECONFIG[debugger] = "--with-debugger,--without-debugger,,"
-PACKAGECONFIG[sctp] = ",,,lksctp-tools"
-PACKAGECONFIG[java] = ",--without-javac,,"
-PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
+ERLANG_APPLICATIONS:remove:class-nativesdk = "odbc jinterface megaco \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', '', 'wx observer et debugger', d)}"
 
-RRECOMMENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
+PACKAGECONFIG:class-target ?= "pkgconfig zlib termcap ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} ${ERLANG_APPLICATIONS}"
+PACKAGECONFIG:class-native ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
+PACKAGECONFIG:class-nativesdk ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
+
+PACKAGECONFIG[zlib] = ",,zlib,,,builtin-zlib"
+PACKAGECONFIG[builtin-zlib] = "--enable-builtin-zlib,--disable-builtin-zlib,,,,zlib"
+PACKAGECONFIG[termcap] = "--with-termcap,--without-termcap,ncurses"
+PACKAGECONFIG[lttng] = "--with-dynamic-trace=lttng,--without-dynamic-trace,lttng-ust"
+PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
+PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
+PACKAGECONFIG[static-drivers] = "--enable-static-drivers,--disable-static-drivers,,"
+PACKAGECONFIG[static-nifs] = "--enable-static-nifs,--disable-static-nifs,,"
+
+# Only depends on kernel-module-sctp for target build
+LKSCTP_DEPS:class-target = "kernel-module-sctp"
+# Host should support linux sctp kernel module
+LKSCTP_DEPS:class-nativesdk = ""
+
+PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,${LKSCTP_DEPS}"
+PACKAGECONFIG[java] = ",--without-javac,,"
+
+# Build debug emulator: https://www.erlang.org/doc/system/debugging.html#debug-emulator
+PACKAGECONFIG[emu-type-debug] = ""
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
@@ -65,16 +83,30 @@ OTP_BUILD_CONFIGURE_OPTS = "update_configure --no-commit"
 NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 
 EXTRA_OECONF:class-native ??= " \
-    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-zlib=${STAGING_DIR_NATIVE}/usr \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '--with-ssl=${STAGING_EXECPREFIXDIR} --with-ssl-zlib=${STAGING_EXECPREFIXDIR}', '', d)} \
     "
 EXTRA_OECONF:class-nativesdk ??= " \
-    --with-ssl=${STAGING_DIR_NATIVE}/usr --with-ssl-zlib=${STAGING_DIR_NATIVE}/usr \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '--with-ssl=${STAGING_EXECPREFIXDIR} --with-ssl-zlib=${STAGING_EXECPREFIXDIR}', '', d)} \
+    --enable-deterministic-build \
     "
-EXTRA_OECONF:class-target ??= " --with-ssl-rpath=no --enable-deterministic-build"
+EXTRA_OECONF:class-target ??= " \
+    ${@bb.utils.contains('PACKAGECONFIG', 'crypto', '--with-ssl-rpath=no', '', d)} \
+    --enable-deterministic-build"
+
+# Due multilib wxwidgets, it's necessary to pass additional arguments to wx-config script.
+WX_CONFIG = "'${STAGING_BINDIR_CROSS}/wx-config --prefix=${STAGING_EXECPREFIXDIR} --baselib=${baselib}'"
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET} ac_cv_header_GL_gl_h=yes ac_cv_header_OpenGL_gl_h=yes"
-CACHED_CONFIGUREVARS:class-native += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
-CACHED_CONFIGUREVARS:class-nativesdk += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_NATIVE}"
+CACHED_CONFIGUREVARS:class-native += "ac_cv_prog_javac_ver_1_2=no \
+    ac_cv_prog_javac_ver_1_5=no \
+    erl_xcomp_sysroot=${STAGING_DIR_NATIVE} \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "ac_cv_path_WX_CONFIG_PATH=${WX_CONFIG}", "", d)} \
+    "
+CACHED_CONFIGUREVARS:class-nativesdk += "ac_cv_prog_javac_ver_1_2=no \
+    ac_cv_prog_javac_ver_1_5=no \
+    erl_xcomp_sysroot=${STAGING_DIR_NATIVE} \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "ac_cv_path_WX_CONFIG_PATH=${WX_CONFIG}", "", d)} \
+    "
 
 OTP_BUILD_CONFIGURE_OPTS ?= "autoconf"
 
@@ -112,7 +144,6 @@ do_configure:class-nativesdk() {
     oe_runconf
 }
 
-
 do_compile:prepend:class-native() {
     export TARGET=${HOST_SYS}
 }
@@ -131,6 +162,12 @@ do_compile:class-target() {
     oe_runmake
 
     oe_runmake docs DOC_TARGETS=chunks
+
+    if ${@bb.utils.contains('PACKAGECONFIG', 'emu-type-debug', 'true', 'false', d)}; then
+        TARGET=${TARGET_SYS} \
+        PATH=${NATIVE_BIN}:$PATH \
+        oe_runmake -C erts/emulator debug
+    fi
 }
 
 do_install:prepend:class-native() {
@@ -154,6 +191,11 @@ do_install:class-target() {
     oe_runmake 'DESTDIR=${D}' install-docs DOC_TARGETS=chunks
 
     cp ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/dyn_erl ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/erl
+
+    if ${@bb.utils.contains('PACKAGECONFIG', 'emu-type-debug', 'true', 'false', d)}; then
+        cp ${S}/bin/${TARGET_SYS}-gnu/beam.debug* ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/
+        cp ${S}/bin/${TARGET_SYS}-gnu/erl_child_setup.debug ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/
+    fi
 
     rm -f ${D}/${libdir}/erlang/Install
 
@@ -182,8 +224,43 @@ do_install:append:class-nativesdk() {
 }
 
 do_install:append:class-target() {
-    # remove erlang code that does not need to be loaded by the erlang runtime
-    rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin
+    # remove erlang code that does not need to be loaded by the erlang runtime [1].
+    # it is clear that some preload modules exists inside erts. So, those respective beam
+    # modules don't need to be installed.
+    # 1: https://github.com/erlang/otp/blob/master/HOWTO/DEVELOPMENT.md#preloaded-and-primary-bootstrap
+    rm -rf ${D}/${libdir}/erlang/lib/erts-${ERTS_VERSION}/ebin/*.beam
+
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/epmd.service ${D}${systemd_system_unitdir}
+        install -m 0644 ${WORKDIR}/epmd.socket ${D}${systemd_system_unitdir}
+    fi
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/init.d
+        install -m 0755 ${WORKDIR}/epmd.init ${D}${sysconfdir}/init.d/epmd
+    fi
+
+    # only install dialyzer if it is present in PACKAGECONFIG
+    if ${@bb.utils.contains('PACKAGECONFIG', 'dialyzer', 'false', 'true', d)}; then
+        for bin in typer dialyzer; do
+            rm -f ${D}${libdir}/erlang/erts-${ERTS_VERSION}/bin/$bin
+            rm -f ${D}${libdir}/erlang/bin/$bin
+            rm -f ${D}${bindir}/$bin
+        done
+    fi
+}
+
+do_install:append() {
+    # remove unnecessary installed files
+    rm -rf ${D}/${libdir}/erlang/misc
+    rm -rf ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/info
+
+    # avoid prefix-map, breaks reproducible builds
+    sed -i -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
+        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
+        -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
+        -e 's@[^ ]*-I[^ "]*@@g' ${D}/${libdir}/erlang/lib/erl_interface-*/src/eidefs.mk
 }
 
 do_configure_ptest() {
@@ -228,6 +305,29 @@ do_install_ptest() {
     install -d ${D}${PTEST_PATH}
     cp -r ${S}/release/tests ${D}${PTEST_PATH}
     find ${D}${PTEST_PATH} -name '*.o' -delete
+    sed -i s:@PTEST_PATH@:${PTEST_PATH}:g ${D}${PTEST_PATH}/run-ptest
 }
 
 FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}/environment-setup.d/erlang.sh"
+
+# Erlang tests ignores +deterministic flag because it may depends on additional
+# module meta data. https://github.com/erlang/otp/issues/8602
+# It's safer to keep this behaviour and skip buildpaths for erlang-ptest package.
+# For additional details see: https://github.com/erlang/otp/commit/da001d9d75f2cac4ebc577d362a21ebff58080c6
+INSANE_SKIP:${PN}-ptest += "buildpaths"
+
+# For epmd support
+inherit useradd update-rc.d systemd
+
+USERADD_PACKAGES = "${PN}-epmd"
+GROUPADD_PARAM:${PN}-epmd = "--system epmd"
+USERADD_PARAM:${PN}-epmd  = "--system --create-home --home /var/lib/epmd \
+                             -g epmd epmd"
+
+INITSCRIPT_PACKAGES = "${PN}-epmd"
+INITSCRIPT_NAME:${PN}-epmd = "epmd"
+INITSCRIPT_PARAMS:${PN}-epmd = "defaults"
+
+SYSTEMD_PACKAGES = "${PN}-epmd"
+SYSTEMD_SERVICE:${PN}-epmd = "epmd.service epmd.socket"
+SYSTEMD_AUTO_ENABLE:${PN}-epmd = "enable"

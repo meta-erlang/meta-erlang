@@ -1,0 +1,11 @@
+[Unit]
+Description=Erlang Port Mapper Daemon Activation Socket
+
+[Socket]
+ListenStream=127.0.0.1:4369
+ListenStream=127.0.1.1:4369
+BindIPv6Only=both
+Accept=false
+
+[Install]
+WantedBy=sockets.target
