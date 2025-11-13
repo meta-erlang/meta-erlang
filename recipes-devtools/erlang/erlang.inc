@@ -33,13 +33,23 @@ inherit ptest autotools-brokensep pkgconfig
 
 PACKAGECONFIG ?= "pkgconfig zlib termcap"
 PACKAGECONFIG:class-native ?= "pkgconfig"
-PACKAGECONFIG:class-nativesdk ?= "pkgconfig wx observer termcap"
+# For nativesdk, check if opengl is available before including: wx, observer, et, debugger
+# as these application depends on wx and it will not be build without opengl support.
+#
+# reltool is also an erlang application which uses wx. However reltool does not depend
+# on wx_object behavior, so, it's safe (no graphic interface available, only batch mode)
+# to allow reltool for nativesdk. For the rest (observer, et and debugger) which use wx_object
+# it is safer to remove them from nativesdk support.
+PACKAGECONFIG:class-nativesdk ?= "pkgconfig termcap \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'wx observer et debugger', '', d)}"
 PACKAGECONFIG[zlib] = "--disable-builtin-zlib,--enable-builtin-zlib,zlib"
 PACKAGECONFIG[termcap] = "--with-termcap,--without-termcap,ncurses"
 PACKAGECONFIG[odbc] = "--with-odbc,--without-odbc,libodbc"
 PACKAGECONFIG[lttng] = "--with-dynamic-trace=lttng,--without-dynamic-trace,lttng-ust"
-PACKAGECONFIG[wx] = "--with-wx,,wxwidgets"
-PACKAGECONFIG[observer] = "--with-observer,--without-observer,wxwidgets,"
+PACKAGECONFIG[wx] = "--with-wx,--without-wx,wxwidgets"
+PACKAGECONFIG[observer] = "--with-observer,--without-observer,,"
+PACKAGECONFIG[et] = "--with-et,--without-et,,"
+PACKAGECONFIG[debugger] = "--with-debugger,--without-debugger,,"
 PACKAGECONFIG[sctp] = ",,,lksctp-tools"
 PACKAGECONFIG[java] = ",--without-javac,,"
 PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
