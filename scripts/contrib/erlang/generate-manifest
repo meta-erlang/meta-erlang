@@ -336,7 +336,6 @@ class MakefileMaker:
                 fullFilenames.append("%s%s" % (self.targetPrefix, filename))
             else:
                 fullFilenames.append(filename)
-        #print(f"kkkk {packageconfig_enable} keepfiles {keepfiles}")
         self.packages[name] = description, dependencies, fullFilenames, packageconfig_enable, keepfiles
 
     def doBody(self):
