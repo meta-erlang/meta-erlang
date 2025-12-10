@@ -10,6 +10,7 @@ SRC_URI += "file://0001-Enable-x32-support-for-crypto-configure.patch \
             file://0003-Fix-incompatible-pointer-type-ErlDrvPort.patch \
             file://0001-Add-missing-wx-dependencies.patch \
             file://0001-erts-fix-static-function-prototypes.patch \
+            file://0001-wx-check-WXE_WEBVIEW-before-include-wx-webview.h.patch \
            "
 
 SRCREV = "940ec0f6f0370ecf5cd93cae31fd91f4651ddca6"
