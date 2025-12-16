@@ -1,5 +1,16 @@
 # OpenEmbedded/Yocto Project layer for Erlang, Elixir and Gleam support
 
+<table border="0" rules="none">
+<tr border="0">
+<td width="140" height="100" align="center">
+  <br />
+  <a href="https://www.yoctoproject.org/ecosystem/branding/">
+    <img alt="Yocto Project Layer Compatible" src="img/YoctoCompatibleBadge.png">
+  </a>
+</td>
+</tr>
+</table>
+
 This layer provides support for the following BEAM languages:
 
 * [Erlang](https://www.erlang.org/)
@@ -12,6 +23,12 @@ the [Yocto Project](https://www.yoctoproject.org/) build system.
 ## Documentation
 
 See [meta-erlang documentation](https://meta-erlang.github.io/docs/master/).
+
+## Yocto Project Compatible Layer
+
+This layer is officially approved as part of the `Yocto Project Compatible
+Layers Program`. You can find details of that on the official Yocto Project
+[website](https://www.yoctoproject.org/development/yocto-project-compatible-layers/).
 
 ## Dependencies
 
