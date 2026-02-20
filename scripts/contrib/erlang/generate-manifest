@@ -250,24 +250,24 @@ SPEC = {
         'ERL_INTERFACE_VERSION': '5.3.2.1',
         'modules': COMMON_MODULES,
     },
-    '26.2.5.15': {
-        'ERTS_VERSION': '14.2.5.11',
+    '26.2.5.17': {
+        'ERTS_VERSION': '14.2.5.13',
         'ERL_INTERFACE_VERSION': '5.5.1',
         'modules': COMMON_MODULES,
     },
-    '27.3.4.3': {
-        'ERTS_VERSION': '15.2.7.2',
+    '27.3.4.8': {
+        'ERTS_VERSION': '15.2.7.6',
         'ERL_INTERFACE_VERSION': '5.5.2',
         'modules': COMMON_MODULES,
     },
-    '28.3': {
-        'ERTS_VERSION': '16.2',
+    '28.3.2': {
+        'ERTS_VERSION': '16.2.1',
         'ERL_INTERFACE_VERSION': '5.6.2',
         'modules': COMMON_MODULES,
     },
-    '29.0-rc0': {
-        'ERTS_VERSION': '16.0.1',
-        'ERL_INTERFACE_VERSION': '5.6',
+    '29.0-rc1': {
+        'ERTS_VERSION': '17.0',
+        'ERL_INTERFACE_VERSION': '5.7',
         'modules': COMMON_MODULES,
     }
 

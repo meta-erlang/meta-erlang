@@ -178,7 +178,10 @@ do_install:class-target() {
     oe_runmake 'DESTDIR=${D}' install
     oe_runmake 'DESTDIR=${D}' install-docs DOC_TARGETS=chunks
 
-    cp ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/dyn_erl ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/erl
+    # pre OTP-29 used to ship dyn_erl, so install it if available
+    if [ -e ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/dyn_erl ]; then
+        cp ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/dyn_erl ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/erl
+    fi
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'emu-type-debug', 'true', 'false', d)}; then
         cp ${S}/bin/${TARGET_SYS}-gnu/beam.debug* ${D}/${libdir}/erlang/erts-${ERTS_VERSION}/bin/
