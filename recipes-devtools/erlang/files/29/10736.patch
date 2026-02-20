@@ -1,0 +1,114 @@
+From 6dd3e419842dcb8f568f5ec720f1ca01e7ed399d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Lukas=20Backstr=C3=B6m?= <lukas@erlang.org>
+Date: Thu, 19 Feb 2026 10:45:20 +0100
+Subject: [PATCH] otp: Fix deterministic builds
+
+When improving makefile dependencies, the deterministic build
+was accidentally broken. This skips deps for .yrl files and
+removes the deterministic flag from erlc -M.
+
+closes #10734
+
+Upstream-Status: Pending [https://github.com/erlang/otp/pull/10736]
+---
+ lib/compiler/src/Makefile | 1 +
+ lib/edoc/src/Makefile     | 4 ++++
+ lib/stdlib/src/Makefile   | 1 +
+ lib/tools/src/Makefile    | 4 ++++
+ lib/xmerl/src/Makefile    | 8 ++++++++
+ make/dep.mk               | 4 +++-
+ 6 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/lib/compiler/src/Makefile b/lib/compiler/src/Makefile
+index 7434a9b4d20c..1ba684351863 100644
+--- a/lib/compiler/src/Makefile
++++ b/lib/compiler/src/Makefile
+@@ -145,6 +145,7 @@ ERL_COMPILE_FLAGS += +inline +warn_unused_import \
+ 
+ ifeq ($(ERL_DETERMINISTIC),yes)
+ 	DETERMINISM_FLAG = +deterministic
++	DEP_SKIP_FILES = core_parse.erl
+ else
+ 	DETERMINISM_FLAG =
+ endif
+diff --git a/lib/edoc/src/Makefile b/lib/edoc/src/Makefile
+index aba27ab3d5e1..ab2e71ae509b 100644
+--- a/lib/edoc/src/Makefile
++++ b/lib/edoc/src/Makefile
+@@ -51,6 +51,10 @@ XMERL = ../../xmerl
+ ERL_COMPILE_FLAGS += -pa $(XMERL) -I../include -I$(XMERL)/include -I${ERL_TOP}/lib
+ ERL_COMPILE_FLAGS += +warn_unused_vars +warn_unused_import +warn_deprecated_guard +no_docs +nowarn_missing_spec_documented +warn_deprecated_catch -Werror
+ 
++ifeq ($(ERL_DETERMINISTIC),yes)
++	DEP_SKIP_FILES = edoc_parser.erl
++endif
++
+ include files.mk
+ 
+ OBJECTS=$(ERL_FILES:%.erl=$(EBIN)/%.$(EMULATOR)) $(APP_TARGET) $(APPUP_TARGET)
+diff --git a/lib/stdlib/src/Makefile b/lib/stdlib/src/Makefile
+index 652077df3dc1..ede4fa322b73 100644
+--- a/lib/stdlib/src/Makefile
++++ b/lib/stdlib/src/Makefile
+@@ -183,6 +183,7 @@ ERL_COMPILE_FLAGS += -I../include -I../../kernel/include
+ 
+ ifeq ($(ERL_DETERMINISTIC),yes)
+ 	DETERMINISM_FLAG = +deterministic
++	DEP_SKIP_FILES = erl_parse.erl
+ else
+ 	DETERMINISM_FLAG =
+ endif
+diff --git a/lib/tools/src/Makefile b/lib/tools/src/Makefile
+index dd27bb437c66..afbd76fbe49d 100644
+--- a/lib/tools/src/Makefile
++++ b/lib/tools/src/Makefile
+@@ -82,6 +82,10 @@ CSS = $(PRIVDIR)/styles.css
+ # ----------------------------------------------------
+ ERL_COMPILE_FLAGS += -Werror +nowarn_deprecated_catch
+ 
++ifeq ($(ERL_DETERMINISTIC),yes)
++	DEP_SKIP_FILES = xref_parser.erl
++endif
++
+ # ----------------------------------------------------
+ # Targets
+ # ----------------------------------------------------
+diff --git a/lib/xmerl/src/Makefile b/lib/xmerl/src/Makefile
+index 37fdbe6bc55b..b420ad8b9894 100644
+--- a/lib/xmerl/src/Makefile
++++ b/lib/xmerl/src/Makefile
+@@ -133,6 +133,14 @@ ERL_COMPILE_FLAGS += \
+ 
+ ifeq ($(ERL_DETERMINISTIC),yes)
+ 	DETERMINISM_FLAG = +deterministic
++	DEP_SKIP_FILES = xmerl_b64Bin.erl \
++		xmerl_xpath_parse.erl \
++		xmerl_xsd_re_parse.erl \
++		xmerl_sax_parser_list.erl \
++		xmerl_sax_parser_latin1.erl \
++		xmerl_sax_parser_utf8.erl \
++		xmerl_sax_parser_utf16be.erl \
++		xmerl_sax_parser_utf16le.erl
+ else
+ 	DETERMINISM_FLAG =
+ endif
+diff --git a/make/dep.mk b/make/dep.mk
+index 2da7bf24d492..b8861bb8156e 100644
+--- a/make/dep.mk
++++ b/make/dep.mk
+@@ -30,12 +30,14 @@ DEPDIR=deps
+ DEP_FILE=$(DEPDIR)/deps.mk
+ $(shell mkdir -p $(dir $(DEP_FILE)) >/dev/null)
+ 
++DEP_FILTER_ERL_COMPILE_FLAGS=+deterministic
++
+ DEP_REL_TOP?=../../
+ 
+ deps: $(DEP_FILE)
+ 
+ $(DEP_FILE): $(ERL_FILES) $(HRL_FILES) $(INTERNAL_HRL_FILES) $(EXTRA_DEP_DEPENDENCIES) $(ERL_TOP)/make/dep.mk Makefile
+-	$(gen_verbose)erlc -M $(ERL_COMPILE_FLAGS) -o $(EBIN) $(filter-out $(DEP_SKIP_FILES), $(ERL_FILES)) \
++	$(gen_verbose)erlc -M $(filter-out $(DEP_FILTER_ERL_COMPILE_FLAGS), $(ERL_COMPILE_FLAGS)) -o $(EBIN) $(filter-out $(DEP_SKIP_FILES), $(ERL_FILES)) \
+ 	| perl -pe "s@ [a-zA-Z]?$(ERL_TOP_NATIVE)/(?:bootstrap/)?lib/([^/]+)@ $(DEP_REL_TOP)\1@g" 2> /dev/null \
+ 	> $(DEP_FILE)
+ 
