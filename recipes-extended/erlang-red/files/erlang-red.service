@@ -13,5 +13,8 @@ ExecStart=/usr/lib/erlang-red/bin/erlang_red foreground
 Restart=on-failure
 RestartSec=5
 
+# Writes erlang-red configuration into WorkingDirectory
+Environment="RELX_OUT_FILE_PATH=/var/lib/erlang-red"
+
 [Install]
 WantedBy=multi-user.target
