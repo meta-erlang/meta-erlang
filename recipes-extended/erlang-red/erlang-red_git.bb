@@ -13,11 +13,11 @@ SRC_URI = "git://github.com/gorenje/erlang-red.git;protocol=https;branch=main \
            file://erlang-red.init \
           "
 
-SRCREV = "3ffc53d1762982354d06fed513eed2dac54982fb"
+SRCREV = "8031328bea87b0e0d19ea9c0a7e4528b30ddc34b"
 
 DEPENDS = "rebar3-native"
 
-PV = "0.3.4"
+PV = "0.4.0"
 
 inherit rebar3 erlang-version useradd update-rc.d systemd
 
@@ -72,3 +72,7 @@ INSANE_SKIP:${PN}-dbg += "buildpaths"
 
 # Ignore buildpaths due  https://github.com/dashbitco/nimble_csv/issues/90
 INSANE_SKIP:${PN} += "buildpaths"
+
+# Due libcrc32cer_nif.so contains bad RPATH
+INSANE_SKIP:${PN} += "rpaths"
+
