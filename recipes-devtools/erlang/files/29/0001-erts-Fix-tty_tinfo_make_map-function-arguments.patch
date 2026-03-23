@@ -1,0 +1,35 @@
+From 8e78700e5947b0225fe074605a1aacb0596d3291 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Mon, 23 Mar 2026 09:21:02 -0300
+Subject: [PATCH] erts: Fix tty_tinfo_make_map function arguments
+
+According to [1], term_variables: bool*, num*, std* are
+`NCURSES_CONST char * const`. Where NCURSES_CONST is defined by
+ncurses configuration scripts [2].
+
+1: https://man7.org/linux/man-pages/man3/term_variables.3x.html
+2: https://github.com/mirror/ncurses/blob/master/configure.in#L1228
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/10895]
+---
+ erts/emulator/nifs/common/prim_tty_nif.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/erts/emulator/nifs/common/prim_tty_nif.c b/erts/emulator/nifs/common/prim_tty_nif.c
+index d8f0603b1b..6e6c2d1fb8 100644
+--- a/erts/emulator/nifs/common/prim_tty_nif.c
++++ b/erts/emulator/nifs/common/prim_tty_nif.c
+@@ -786,9 +786,9 @@ static ERL_NIF_TERM tty_setupterm_nif(ErlNifEnv* env, int argc, const ERL_NIF_TE
+ }
+ 
+ static ERL_NIF_TERM tty_tinfo_make_map(ErlNifEnv* env,
+-                                       const char * const* names,
+-                                       const char * const* codes,
+-                                       const char * const* fnames) {
++                                       NCURSES_CONST char * const* names,
++                                       NCURSES_CONST char * const* codes,
++                                       NCURSES_CONST char * const* fnames) {
+     ERL_NIF_TERM res = enif_make_list(env, 0);
+     ERL_NIF_TERM ks[3] = {
+         enif_make_atom(env, "name"),
