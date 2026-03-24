@@ -114,11 +114,11 @@ Erlang:
 
 Elixir:
 
+* [v1.19](https://github.com/elixir-lang/elixir/tree/v1.19)
 * [v1.18](https://github.com/elixir-lang/elixir/tree/v1.18)
 * [v1.17](https://github.com/elixir-lang/elixir/tree/v1.17)
 * [v1.16](https://github.com/elixir-lang/elixir/tree/v1.16)
 * [v1.15](https://github.com/elixir-lang/elixir/tree/v1.15)
-* [v1.14](https://github.com/elixir-lang/elixir/tree/v1.14)
 
 Gleam:
 
