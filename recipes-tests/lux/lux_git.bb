@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=076fb27498b643ae0c594eb233884675"
 
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
-SRC_URI = "git://github.com/hawk/lux;protocol=https;branch=master"
+SRC_URI = "git://github.com/hawk/lux;protocol=https;branch=master \
+           file://0001-Fixes-for-OTP-29.patch \
+           "
 
 PV = "3.0.0"
 SRCREV = "2042deb9dabb754889648b023a9b8ebe3a8ce09c"

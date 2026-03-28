@@ -1,0 +1,328 @@
+From ebbfb3f014141a7f587dedbca0c074c3c1d82680 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Fri, 27 Mar 2026 16:31:39 -0300
+Subject: [PATCH] Fixes for OTP 29
+
+ - use lists:filtermap/2 instead lists:zf/2
+ - adopt try..catch instead catch
+
+1: https://erlang.org/download//OTP-29.0-rc1.README
+
+Upstream-Status: Submitted [https://github.com/hawk/lux/pull/59]
+---
+ bin/ecover               |  4 ++--
+ bin/lux                  |  2 +-
+ src/lux_case.erl         |  4 ++--
+ src/lux_debug.erl        | 15 ++++++++-------
+ src/lux_diff.erl         |  4 ++--
+ src/lux_html_history.erl |  4 ++--
+ src/lux_interpret.erl    | 14 ++++++++++++--
+ src/lux_log.erl          |  6 +++---
+ src/lux_parse.erl        |  2 +-
+ src/lux_product.erl      |  2 +-
+ src/lux_shell.erl        | 19 ++++++++++++-------
+ src/lux_suite.erl        |  2 +-
+ src/lux_utils.erl        |  2 +-
+ 13 files changed, 48 insertions(+), 32 deletions(-)
+
+diff --git a/bin/ecover b/bin/ecover
+index c85d11f..6d6a3e5 100755
+--- a/bin/ecover
++++ b/bin/ecover
+@@ -739,7 +739,7 @@ find_test_case_lines(TestCaseModLines, Mod) ->
+         M =:= Mod].
+ 
+ test_case_mod_lines(DataDirs)  ->
+-    lists:flatten(lists:zf(fun dir_filter/1, DataDirs)).
++    lists:flatten(lists:filtermap(fun dir_filter/1, DataDirs)).
+ 
+ mod_lines_test_case(TestCaseModLines) ->
+     SplitTestCaseModLines = split_mod_lines(TestCaseModLines),
+@@ -787,7 +787,7 @@ split_test_cases([], Acc) ->
+ 
+ dir_filter(Dir) ->
+     CoverDataFiles = find_cover_data_files(Dir),
+-    case lists:zf(fun mod_filter/1, CoverDataFiles) of
++    case lists:filtermap(fun mod_filter/1, CoverDataFiles) of
+         []       -> false;
+         ModLines -> {true, ModLines}
+     end.
+diff --git a/bin/lux b/bin/lux
+index 0c1ca47..8e6af8a 100755
+--- a/bin/lux
++++ b/bin/lux
+@@ -292,7 +292,7 @@ steal_signals() ->
+ 
+ do_steal_signals() ->
+     Pid = spawn_link(fun echo_signals/0),
+-    catch erlang:unregister(erl_signal_server),
++    try erlang:unregister(erl_signal_server) catch _C:_E:_S -> ok end,
+     true = erlang:register(erl_signal_server, Pid),
+                                     % io:format("ospid=~s\n", [os:getpid()]),
+     os:set_signal(sigusr1, handle), % io:format("sigusr1=crashdump\n", []),
+diff --git a/src/lux_case.erl b/src/lux_case.erl
+index dac6b44..2dfac67 100644
+--- a/src/lux_case.erl
++++ b/src/lux_case.erl
+@@ -723,8 +723,8 @@ unstable_warnings(#istate{unstable=U,
+                           latest_cmd = LatestCmd} = I) ->
+     FullLineNo = ?i2l(LatestCmd#cmd.lineno),
+     F = fun(Var, NameVal) -> filter_unstable(I, FullLineNo, Var, NameVal) end,
+-    Unstable = lists:zf(fun(Val) -> F("unstable", Val) end, U),
+-    UnstableUnless = lists:zf(fun(Val) -> F("unstable_unless", Val) end, UU),
++    Unstable = lists:filtermap(fun(Val) -> F("unstable", Val) end, U),
++    UnstableUnless = lists:filtermap(fun(Val) -> F("unstable_unless", Val) end, UU),
+     Unstable ++ UnstableUnless.
+ 
+ filter_unstable(#istate{skip_skip = true}, _FullLineNo, _Var, _NameVal) ->
+diff --git a/src/lux_debug.erl b/src/lux_debug.erl
+index b7b682f..ceb1a6a 100644
+--- a/src/lux_debug.erl
++++ b/src/lux_debug.erl
+@@ -85,11 +85,11 @@ loop(#dstate{mode=Mode} = Dstate) ->
+             %% Closed already at startup
+             exit(normal);
+         eof ->
+-            catch format("\nEOF: stdin closed\n", []),
++            try format("\nEOF: stdin closed\n", []) catch _:_ -> ok end,
+             exit(normal);
+         {error, Reason} ->
+             ReasonStr = file:format_error(Reason),
+-            catch format("\nERROR: ~s\n", [ReasonStr]),
++            try format("\nERROR: ~s\n", [ReasonStr]) catch _:_ -> ok end,
+             exit(Reason);
+         "\"\"\n" when Mode =:= foreground->
+             %% Found """. Exit foreground mode
+@@ -1161,14 +1161,15 @@ cmd_tail(I, [{"index", Index} | Rest], CmdState) ->
+             UserN = undefined
+     end,
+     {I2, Logs} = all_logs(I),
+-    case catch lists:nth(Index, Logs) of
+-        {'EXIT', _} ->
++    try
++        LogFile = lists:nth(Index, Logs),
++        tail(I2, LogFile, CmdState, Format, UserN)
++    catch
++        Class:_Reason when Class == error orelse Class == exit ->
+             format("ERROR: ~p is not a valid log index."
+                    " Must be within ~p..~p.\n",
+                    [Index, 1, length(Logs)]),
+-            {CmdState, I2};
+-        LogFile ->
+-            tail(I2, LogFile, CmdState, Format, UserN)
++            {CmdState, I2}
+     end.
+ 
+ all_logs(#istate{main_file = MainFile,
+diff --git a/src/lux_diff.erl b/src/lux_diff.erl
+index 4fdbf13..d28fda1 100644
+--- a/src/lux_diff.erl
++++ b/src/lux_diff.erl
+@@ -526,7 +526,7 @@ test(N, Max, Var) ->
+         end,
+     A = Populate(),
+     B = Populate(),
+-    case catch test2(A, B) of
++    case test2(A, B) of
+         {ok, Time1, Time2} when (N rem 10) =:= 0 ->
+             C = A -- (A -- B),
+             D = B -- (B -- A),
+@@ -547,7 +547,7 @@ test(N, Max, Var) ->
+                        case Time2 of 0 -> 0; _ -> Time1 div Time2 end]);
+         {ok, _Time1, _Time2} ->
+             ok;
+-        {'EXIT', Reason} = Exit ->
++        {error, Reason} = Exit ->
+             io:format("Test ~p failed for:\n"
+                       "  ~p:test2(\n"
+                       "      ~p\n,"
+diff --git a/src/lux_html_history.erl b/src/lux_html_history.erl
+index 6e8acac..741c70a 100644
+--- a/src/lux_html_history.erl
++++ b/src/lux_html_history.erl
+@@ -474,7 +474,7 @@ gen_table(AbsHtmlDir, MultiBranch, Page, TagDict) ->
+     io:format("\t\tGenerate rows\n", []),
+     HostMap = maps:new(),
+     RevSplitIds = lists:reverse(SplitIds),
+-    Rows = lists:zf(fun({Test, TestRuns}) ->
++    Rows = lists:filtermap(fun({Test, TestRuns}) ->
+                             gen_row(AbsHtmlDir, Test, TestRuns, RevSplitIds,
+                                     MultiBranch, TagDict,
+                                     Select, Suppress, HostMap)
+@@ -1207,7 +1207,7 @@ parse_summary_logs(Source, RelHtmlDir,
+                            (_Skip) ->
+                                 false
+                         end,
+-                    Files = lists:zf(Extract, Links),
++                    Files = lists:filtermap(Extract, Links),
+                     %% io:format("\nLINKS ~p\n", [Files]),
+                     parse_summary_files(Source, RelHtmlDir, RelDir, Files,
+                                         Threshold, Newest,
+diff --git a/src/lux_interpret.erl b/src/lux_interpret.erl
+index 43cfd89..a040297 100644
+--- a/src/lux_interpret.erl
++++ b/src/lux_interpret.erl
+@@ -832,9 +832,14 @@ eval_body(OldI, InvokeLineNo, FirstLineNo, LastLineNo,
+         lux_utils:progress_write(AfterI#istate.progress, ")"),
+         AfterExit =
+             fun() ->
+-                    catch timestamp_ilog(AfterI, "file_exit ~p ~p ~p ~p\n",
++                    try
++                        timestamp_ilog(AfterI, "file_exit ~p ~p ~p ~p\n",
+                                          [InvokeLineNo, FirstLineNo,
+                                           LastLineNo, CurrFile])
++                    catch
++                        throw:Reason -> Reason;
++                        _Class:Reason -> {'EXIT', Reason}
++                    end
+             end,
+         AfterI2 = adjust_stacks('after', AfterI, Cmd, OldStack,
+                                 AfterExit, IsRootLoop),
+@@ -859,9 +864,14 @@ eval_body(OldI, InvokeLineNo, FirstLineNo, LastLineNo,
+             lux_utils:progress_write(OldI#istate.progress, ")"),
+             BeforeExit =
+                 fun() ->
+-                        catch timestamp_ilog(BeforeI2,"file_exit ~p ~p ~p ~p\n",
++                        try
++                            timestamp_ilog(BeforeI2,"file_exit ~p ~p ~p ~p\n",
+                                              [InvokeLineNo, FirstLineNo,
+                                               LastLineNo, CurrFile])
++                        catch
++                            throw:Reason -> Reason;
++                            _Class:Reason -> {'EXIT', Reason}
++                        end
+                 end,
+             if
+                 Class =:= throw, element(1, Reason) =:= error ->
+diff --git a/src/lux_log.erl b/src/lux_log.erl
+index 5d2a09c..b388633 100644
+--- a/src/lux_log.erl
++++ b/src/lux_log.erl
+@@ -436,7 +436,7 @@ split_config(ConfigBins) ->
+                         false
+                 end
+         end,
+-    lists:zf(Split, ConfigBins).
++    lists:filtermap(Split, ConfigBins).
+ 
+ parse_run_case(NewLogDir, RunDir, OrigRunDir, RunLogDir, OrigLogDir,
+                StartTime, Branch, Host, ConfigName,
+@@ -609,7 +609,7 @@ pick_result(SuiteResults, Outcome) when Outcome =:= error ->
+            ({suite_error, Script, FullLineNo, Reason}) ->
+                 {true, {Script, FullLineNo, Reason}}
+         end,
+-    lists:zf(Filter, SuiteResults);
++    lists:filtermap(Filter, SuiteResults);
+ pick_result(Warnings, Outcome) when Outcome =:= warning ->
+     Filter =
+         fun(#warning{file = Script,
+@@ -642,7 +642,7 @@ pick_result(SuiteResults, Outcome) ->
+            ({suite_error, _Script, _FullLineNo, _Reason}) ->
+                 false
+         end,
+-    lists:zf(MatchRes, SuiteResults).
++    lists:filtermap(MatchRes, SuiteResults).
+ 
+ result_format(Progress, {IsTmp, Fd}, Format, Args) ->
+     IoList = ?FF(Format, Args),
+diff --git a/src/lux_parse.erl b/src/lux_parse.erl
+index 36dd22c..d75ce92 100644
+--- a/src/lux_parse.erl
++++ b/src/lux_parse.erl
+@@ -178,7 +178,7 @@ updated_opts(I, DefaultI) ->
+                              {true, {Tag, New}}
+                      end
+              end,
+-    Args = lists:zf(Filter, Candidates),
++    Args = lists:filtermap(Filter, Candidates),
+     lux_suite:args_to_opts(Args, case_style, []).
+ 
+ parse_file2(P) ->
+diff --git a/src/lux_product.erl b/src/lux_product.erl
+index 0a646f6..557b8e8 100644
+--- a/src/lux_product.erl
++++ b/src/lux_product.erl
+@@ -313,7 +313,7 @@ app_has_feature(AppName, LowestVersion, Require, RA) ->
+ filter_apps(AppConds, _IsCross, true, _MA) ->
+     [{app, AppName, [{incl_cond,InclCond}]} || {AppName,InclCond} <- AppConds];
+ filter_apps(AppConds, _IsCross, false, MA) ->
+-    lists:zf(fun({AppName, InclCond}) ->
++    lists:filtermap(fun({AppName, InclCond}) ->
+                      case application:load(AppName) of
+                          ok ->
+                              {true, {app, AppName, [{incl_cond, InclCond}]}};
+diff --git a/src/lux_shell.erl b/src/lux_shell.erl
+index 8355aac..10ae8e3 100644
+--- a/src/lux_shell.erl
++++ b/src/lux_shell.erl
+@@ -1195,14 +1195,19 @@ match_single(Actual, MP, RegExp) ->
+     {Matches, single}.
+ 
+ re_run(Actual, MP, Opts, _RegExp) ->
+-    Matches = (catch re:run(Actual, MP, Opts)),
+-%%     io:format("\nre:run(~p,"
++    try  
++        Matches = re:run(Actual, MP, Opts),
++%%        io:format("\nre:run(~p,"
+ %%               "\n       ~p,"
+ %%               "\n       ~p)."
+ %%               "\n       -> ~p\n",
+ %%               [Actual, _RegExp, Opts, Matches]),
+-%%     display_total(Actual, Matches),
+-    Matches.
++%%        display_total(Actual, Matches),
++        Matches
++    catch
++        throw:Reason -> Reason;
++        _Class:Reason -> {'EXIT', Reason}
++    end.
+ 
+ %% display_total(Actual, {match, Matches}) ->
+ %%     {S,M,R,_} = split_total(Actual, Matches, noendshell),
+@@ -1606,7 +1611,7 @@ trace_interpreter_down(C, DownReason) ->
+ 
+ port_close_and_exit(C, DownReason, #result{} = Res) ->
+     ?TRACE_ME2(40, C#cstate.name, close_and_exit, [Res]),
+-    catch port_close(C#cstate.port),
++    try port_close(C#cstate.port) catch _:_ -> ok end,
+     exit(DownReason).
+ 
+ close_logs_and_exit(C, IE) when element(1, IE) =:= internal_error ->
+@@ -1646,8 +1651,8 @@ error_to_result(C, IE) ->
+ 
+ close_logs(#cstate{stdin_log_fd = {_,InFd}, stdout_log_fd = {_,OutFd}} = C) ->
+     ?TRACE_ME2(40, C#cstate.name, close_logs, []),
+-    catch file:close(InFd),
+-    catch file:close(OutFd),
++    try file:close(InFd) catch _:_ -> ok end,
++    try file:close(OutFd) catch _:_ -> ok end,
+     C#cstate{log_fun = closed,
+              event_log_fd  = closed, % Leave the log open for other processes
+              stdin_log_fd  = closed,
+diff --git a/src/lux_suite.erl b/src/lux_suite.erl
+index b25e804..c913c64 100644
+--- a/src/lux_suite.erl
++++ b/src/lux_suite.erl
+@@ -636,7 +636,7 @@ filter_rerun_files(R, InitialRes) ->
+                         Return(error, Script)
+                 end
+         end,
+-    lists:zf(Filter, InitialRes).
++    lists:filtermap(Filter, InitialRes).
+ 
+ parse_ropts([{Name, Val} = NameVal | T], R) ->
+     case Name of
+diff --git a/src/lux_utils.erl b/src/lux_utils.erl
+index bb88ad0..6604834 100644
+--- a/src/lux_utils.erl
++++ b/src/lux_utils.erl
+@@ -618,7 +618,7 @@ pretty_stack(OrigFile, FullStack) ->
+                      RelFile = drop_prefix(Dir, pretty_filename(RevFile)),
+                      {true, {RelFile ++ ":" ++ ?i2l(L), CmdPos}}
+              end,
+-    lists:zf(Pretty, FullStack).
++    lists:filtermap(Pretty, FullStack).
+ 
+ pretty_filename(RevFile) ->
+     filename:join(lists:reverse(RevFile)).
