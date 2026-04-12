@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ff253ad767462c46be284da12dda33e8"
 
 PR = "r0"
 
-SRCREV = "d010c3d906d245488ef4a13ca9da89a1186f505a"
+SRCREV = "2a73a343522aa3339f778c4f3c680e64c56c7508"
 
 SRC_URI = " \
-    git://github.com/OpenRiak/riak;branch=openriak-3.2;protocol=https \
+    git://github.com/OpenRiak/riak;branch=openriak-3.4;protocol=https \
     file://0002-Remove-bin-bash-dependency.patch \
     file://0003-Remove-observer-from-release.patch \
     file://0004-Remove-bin-bash-dependency-for-riak-admin.patch \
