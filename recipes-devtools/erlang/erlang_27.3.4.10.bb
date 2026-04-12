@@ -3,17 +3,17 @@ include erlang.inc
 
 PR = "r0"
 
-SRC_URI += "file://0001-Fix-for-Werror-format-security.patch \
-            file://pr-gh-7952-Fix-build-on-Yocto.patch \
+SRC_URI += "file://0001-Enable-x32-support-for-crypto-configure.patch \
+            file://0002-Enable-the-correct-ifdef-branch-when-x32-is-enabled.patch \
             file://0001-Fix-incompatible-pointer-types.patch \
             file://0002-Fix-implicit-int.patch \
             file://0003-Fix-incompatible-pointer-type-ErlDrvPort.patch \
             file://0001-Add-missing-wx-dependencies.patch \
-            file://0001-Use-autoconf-2.73.patch \
             file://0001-erts-fix-static-function-prototypes.patch \
             file://0001-wx-check-WXE_WEBVIEW-before-include-wx-webview.h.patch \
+            file://0001-Use-autoconf-2.73.patch \
            "
 
-SRCREV = "8c304e09e4d9301f56f6d7b2c4c9f60b4f9d9425"
+SRCREV = "0aa261a7765c9698aabc7f7c5be878a8850a9c5f"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/files/26:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files/27:"
