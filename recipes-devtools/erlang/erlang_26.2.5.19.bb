@@ -9,11 +9,11 @@ SRC_URI += "file://0001-Fix-for-Werror-format-security.patch \
             file://0002-Fix-implicit-int.patch \
             file://0003-Fix-incompatible-pointer-type-ErlDrvPort.patch \
             file://0001-Add-missing-wx-dependencies.patch \
-            file://0001-Use-autoconf-2.72.patch \
+            file://0001-Use-autoconf-2.73.patch \
             file://0001-erts-fix-static-function-prototypes.patch \
             file://0001-wx-check-WXE_WEBVIEW-before-include-wx-webview.h.patch \
            "
 
-SRCREV = "8c304e09e4d9301f56f6d7b2c4c9f60b4f9d9425"
+SRCREV = "cdb375af6b456946b1ff3fc993d122018f20b031"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/26:"

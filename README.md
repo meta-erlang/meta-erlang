@@ -110,7 +110,6 @@ Erlang:
  * [maint-28](https://github.com/erlang/otp/tree/maint-28)
  * [maint-27](https://github.com/erlang/otp/tree/maint-27)
  * [maint-26](https://github.com/erlang/otp/tree/maint-26)
- * [maint-25](https://github.com/erlang/otp/tree/maint-25)
 
 Elixir:
 
