@@ -5,6 +5,7 @@ PR = "r0"
 
 SRC_URI += "file://0001-Enable-x32-support-for-crypto-configure.patch \
             file://0002-Enable-the-correct-ifdef-branch-when-x32-is-enabled.patch \
+            file://0001-Use-autoconf-2.73.patch \
             "
 
 SRCREV = "c8fca7e34e4db5d977ccf292cc2490ddb05b5879"

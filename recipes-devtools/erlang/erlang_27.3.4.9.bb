@@ -11,6 +11,7 @@ SRC_URI += "file://0001-Enable-x32-support-for-crypto-configure.patch \
             file://0001-Add-missing-wx-dependencies.patch \
             file://0001-erts-fix-static-function-prototypes.patch \
             file://0001-wx-check-WXE_WEBVIEW-before-include-wx-webview.h.patch \
+            file://0001-Use-autoconf-2.73.patch \
            "
 
 SRCREV = "4aa809ae4eb4a20ad89c23837376acf179877f39"
