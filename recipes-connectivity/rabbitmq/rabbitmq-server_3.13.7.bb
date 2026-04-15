@@ -56,7 +56,7 @@ do_fix_deps () {
 do_compile() {
     export PYTHON=python3
 
-    oe_runmake
+    oe_runmake -j1
 }
 
 do_install() {
