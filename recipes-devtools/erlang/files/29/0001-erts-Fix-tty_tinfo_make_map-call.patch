@@ -1,0 +1,35 @@
+From 5f39a4f8e634147df96430f4b55cb9d179c020c4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Fri, 17 Apr 2026 16:35:48 -0300
+Subject: [PATCH] erts: Fix tty_tinfo_make_map call
+
+According to [1], term_variables: bool*, num*, std* are
+`NCURSES_CONST char * const`. Where NCURSES_CONST is defined by
+ncurses configuration scripts [2].
+
+1: https://man7.org/linux/man-pages/man3/term_variables.3x.html
+2: https://github.com/mirror/ncurses/blob/master/configure.in#L1228
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/11036]
+---
+ erts/emulator/nifs/common/prim_tty_nif.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/erts/emulator/nifs/common/prim_tty_nif.c b/erts/emulator/nifs/common/prim_tty_nif.c
+index a9ec19a1d0..1538b23d10 100644
+--- a/erts/emulator/nifs/common/prim_tty_nif.c
++++ b/erts/emulator/nifs/common/prim_tty_nif.c
+@@ -824,9 +824,9 @@ static ERL_NIF_TERM tty_tinfo_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM a
+     };
+ 
+     ERL_NIF_TERM vs[3] = {
+-        tty_tinfo_make_map(env, (const char * const*)boolnames, (const char * const*)boolcodes, (const char * const*)boolfnames),
+-        tty_tinfo_make_map(env, (const char * const*)numnames, (const char * const*)numcodes, (const char * const*)numfnames),
+-        tty_tinfo_make_map(env, (const char * const*)strnames, (const char * const*)strcodes, (const char * const*)strfnames)
++        tty_tinfo_make_map(env, (NCURSES_CONST char * const*)boolnames, (NCURSES_CONST char * const*)boolcodes, (NCURSES_CONST char * const*)boolfnames),
++        tty_tinfo_make_map(env, (NCURSES_CONST char * const*)numnames, (NCURSES_CONST char * const*)numcodes, (NCURSES_CONST char * const*)numfnames),
++        tty_tinfo_make_map(env, (NCURSES_CONST char * const*)strnames, (NCURSES_CONST char * const*)strcodes, (NCURSES_CONST char * const*)strfnames)
+     };
+     ERL_NIF_TERM res;
+     

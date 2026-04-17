@@ -1,0 +1,39 @@
+From acae2e81bf0da568a18f31ad2c9a45f1ee45053d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Fri, 17 Apr 2026 18:59:17 -0300
+Subject: [PATCH] Skip odbc build when --without-odbc is requested by user
+
+This patch is specific for meta-erlang Yocto layer as it keeps
+the compatibility. When --without-odbc (default PACKAGECONFIG parameters)
+is used, odbc application is skip, erlang code is not even built and the
+package erlang-odbc does not exist too.
+
+Without this patch OE packaging breaks because files are not packaged.
+
+Upstream-Status: Inappropriate [OE specific]
+---
+ configure.src | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/configure.src b/configure.src
+index d01b2d3215..643e40456d 100644
+--- a/configure.src
++++ b/configure.src
+@@ -165,11 +165,13 @@ while test $# != 0; do
+                            [ "$skip_app" = "erl_interface" ]; then
+                         echo "ERROR: $skip_app is a mandatory application" 1>&2
+                         exit 1
+-		    elif [ "$skip_app" = "odbc" ]; then
+-			echo "make of odbc c_src will be skipped due to user configure option --without-odbc" >> lib/$skip_app/CONF_INFO;
+ 		    elif test -d "lib/$skip_app"; then
+ 			skip_applications="$skip_applications $skip_app"
+-		    fi;;
++		    fi
++                    if [ "$skip_app" = "odbc" ]; then
++                        echo "make of odbc c_src will be skipped due to user configure option --without-odbc" >> lib/$skip_app/CONF_INFO;
++                    fi
++                    ;;
+ 		*)
+ 		    ;;
+ 	    esac
