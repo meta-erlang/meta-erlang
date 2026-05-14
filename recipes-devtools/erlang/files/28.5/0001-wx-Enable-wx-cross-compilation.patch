@@ -1,4 +1,4 @@
-From 4da7859cb9870571d7df68fbe0056dd8be9c3440 Mon Sep 17 00:00:00 2001
+From 8c893674529750bf2851d9f575efa05377e5dd24 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Fri, 18 Feb 2022 21:24:49 -0300
@@ -11,10 +11,10 @@ Upstream-Status: Inappropriate [OE specific]
  2 files changed, 8 deletions(-)
 
 diff --git a/lib/wx/configure.ac b/lib/wx/configure.ac
-index ba34c709fc..752317117f 100644
+index c3825e2a54..ccffa5f000 100644
 --- a/lib/wx/configure.ac
 +++ b/lib/wx/configure.ac
-@@ -344,11 +344,6 @@ dnl
+@@ -361,11 +361,6 @@ dnl
  dnl  Check for wxwidgets
  dnl 
  AS_IF(

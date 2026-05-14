@@ -1,8 +1,10 @@
-From cc309f4c1363c6fc64aad69eb51653c8f92ee97d Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
- <joaohf@gmail.com>
+From 9908a94b539ac8c738da8175b15b2c24c0305b65 Mon Sep 17 00:00:00 2001
+From: OpenEmbedded <oe.patch@oe>
 Date: Thu, 11 Feb 2021 21:07:21 -0300
 Subject: [PATCH] erl_interface: Add pkg-config support for erl_interface
+
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
 
 pkg-config is a helper tool used when compiling applications and
 libraries.
@@ -36,10 +38,10 @@ Upstream-Status: Submitted [https://github.com/erlang/otp/pull/4527]
  create mode 100644 lib/erl_interface/erl_ei.pc.in
 
 diff --git a/configure.src b/configure.src
-index 24b21fd70e..427106ccbb 100644
+index 463c4a3a8c..a51fb0f343 100644
 --- a/configure.src
 +++ b/configure.src
-@@ -52,6 +52,7 @@ help=no
+@@ -54,6 +54,7 @@ help=no
  user_srcdir=
  config_arguments=
  skip_applications=
@@ -47,7 +49,7 @@ index 24b21fd70e..427106ccbb 100644
  while test $# != 0; do
      case $1 in
  	-srcdir=* | --srcdir=*)
-@@ -148,7 +149,10 @@ while test $# != 0; do
+@@ -150,7 +151,10 @@ while test $# != 0; do
          flgs_val=`echo "$1" | sed 's/^[^=]*=//'`
  	    eval $flgs_var=\$flgs_val
  	    ;;
@@ -59,7 +61,7 @@ index 24b21fd70e..427106ccbb 100644
  	    help=all;;
          --help* | -help* | -h)
  	    help=$1;;
-@@ -316,6 +320,14 @@ else
+@@ -318,6 +322,14 @@ else
      esac
  fi
  
@@ -75,10 +77,10 @@ index 24b21fd70e..427106ccbb 100644
  
  if test $bootstrap_only = no; then
 diff --git a/lib/erl_interface/configure.ac b/lib/erl_interface/configure.ac
-index 4874fd0313..5feb7fa190 100644
+index d1649826c8..941e4d4d4b 100644
 --- a/lib/erl_interface/configure.ac
 +++ b/lib/erl_interface/configure.ac
-@@ -22,8 +22,8 @@
+@@ -24,8 +24,8 @@
  
  # Find the erl_interface version number and set m4 macro to it.
  # We do this because AC_INIT can't handle shell variables. Still broken.
@@ -89,7 +91,7 @@ index 4874fd0313..5feb7fa190 100644
  
  AC_INIT
  AC_CONFIG_SRCDIR([include/ei.h])
-@@ -56,6 +56,9 @@ AC_CONFIG_AUX_DIR([${ERL_TOP}/make/autoconf])
+@@ -60,11 +60,25 @@ AC_CONFIG_AUX_DIR([${ERL_TOP}/make/autoconf])
  
  ERL_CANONICAL_SYSTEM_TYPE
  
@@ -99,9 +101,7 @@ index 4874fd0313..5feb7fa190 100644
  TARGET=$host
  AC_SUBST(TARGET)
  
-@@ -92,6 +95,17 @@ AC_ARG_ENABLE(ei-dynamic-lib,
- [ DYNAMIC_LIB=no ])
- AC_SUBST(DYNAMIC_LIB)
+ AC_CONFIG_HEADERS([src/$host/config.h:config.h.in])
  
 +AC_ARG_ENABLE(pkg-config,
 +[  --enable-pkg-config install pkg-config file],
@@ -115,9 +115,9 @@ index 4874fd0313..5feb7fa190 100644
 +AC_SUBST(ENABLE_PKG_CONFIG)
 +
  dnl ----------------------------------------------------------------------
- dnl Checks for programs
+ dnl Optional features
  dnl ----------------------------------------------------------------------
-@@ -345,5 +359,6 @@ LM_TRY_ENABLE_CFLAG([-fno-strict-aliasing], [CFLAGS])
+@@ -389,5 +403,6 @@ ERL_POP_WERROR
  
  AC_CONFIG_FILES([src/$host/Makefile:src/Makefile.in
  	src/$host/eidefs.mk:src/eidefs.mk.in
@@ -162,12 +162,12 @@ index 0000000000..0b5d439af1
 +Cflags: -I${includedir}
 +Libs: -L${libdir} -lei
 diff --git a/lib/erl_interface/src/Makefile.in b/lib/erl_interface/src/Makefile.in
-index 04eecfb937..11480445f9 100644
+index 6404222566..345bb38d46 100644
 --- a/lib/erl_interface/src/Makefile.in
 +++ b/lib/erl_interface/src/Makefile.in
-@@ -44,6 +44,10 @@ include $(ERL_TOP)/make/output.mk
- 
- include openssl/openssl.mk
+@@ -52,6 +52,10 @@ else
+ ERTS_DIR=erts
+ endif
  
 +prefix          = @prefix@
 +exec_prefix     = @exec_prefix@
@@ -176,7 +176,7 @@ index 04eecfb937..11480445f9 100644
  EBINDIR=../ebin
  
  APP_FILE= erl_interface.app
-@@ -120,6 +124,8 @@ INSTALL_DIR = @INSTALL_DIR@
+@@ -137,6 +141,8 @@ INSTALL_DIR = @INSTALL_DIR@
  INSTALL_DATA = @INSTALL_DATA@
  INSTALL_PROGRAM = @INSTALL_PROGRAM@
  
@@ -185,7 +185,7 @@ index 04eecfb937..11480445f9 100644
  # The default library (no extra extension in name) is for Unix with
  # thread support if exists.  For windows MD is the default.
  #
-@@ -688,7 +694,18 @@ EXTRA = \
+@@ -728,7 +734,18 @@ EXTRA = \
  	README.internal \
  	$(TARGET)/eidefs.mk
  

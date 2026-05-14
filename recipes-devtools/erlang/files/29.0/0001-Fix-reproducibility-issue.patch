@@ -1,4 +1,4 @@
-From 83ab38a7e54a4edc429ebe824fccda2ba884ab2f Mon Sep 17 00:00:00 2001
+From c5b801e7ca13f1da5b8f08923956b82920d9459a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 22 Jan 2023 10:54:12 -0300
@@ -19,10 +19,10 @@ Upstream-Status: Inappropriate [oe specific]
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
-index 264d7a3fee..8cd7bcb855 100644
+index e6d274065f..aa81fdfa48 100644
 --- a/erts/emulator/Makefile.in
 +++ b/erts/emulator/Makefile.in
-@@ -633,7 +633,8 @@ ifeq ($(TARGET), win32)
+@@ -650,7 +650,8 @@ ifeq ($(TARGET), win32)
  TMPVAR := $(shell LANG=C $(PERL) utils/make_compiler_flags -o $(TTF_DIR)/erl_compile_flags.h -v CONFIG_H "N/A" -v CFLAGS "$(CFLAGS)" -v LDFLAGS "$(LDFLAGS)")
  else
  # We force this to be run every time this makefile is executed

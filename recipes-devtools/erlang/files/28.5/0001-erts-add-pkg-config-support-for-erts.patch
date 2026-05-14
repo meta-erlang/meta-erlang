@@ -1,4 +1,4 @@
-From 61efc9ae14c7f0a2ed6f997e1dee02150d883e04 Mon Sep 17 00:00:00 2001
+From eb34315eeccc66629e116f1067de9c50abb45f93 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Fri, 21 Mar 2025 18:53:33 -0300
@@ -25,7 +25,7 @@ Upstream-Status: Submitted [https://github.com/erlang/otp/pull/4527]
  create mode 100644 erts/erl_erts.pc.in
 
 diff --git a/erts/configure.ac b/erts/configure.ac
-index b04769c4ec..bc428e8f04 100644
+index dd0813412b..0515d38818 100644
 --- a/erts/configure.ac
 +++ b/erts/configure.ac
 @@ -23,6 +23,8 @@ dnl %CopyrightEnd%
@@ -47,7 +47,7 @@ index b04769c4ec..bc428e8f04 100644
  dnl How to set srcdir absolute is taken from the GNU Emacs distribution
  #### Make srcdir absolute, if it isn't already.  It's important to
  #### avoid running the path through pwd unnecessary, since pwd can
-@@ -3881,6 +3886,21 @@ AC_DEFINE_UNQUOTED(ERTS_EMU_CMDLINE_FLAGS,
+@@ -3886,6 +3891,21 @@ AC_DEFINE_UNQUOTED(ERTS_EMU_CMDLINE_FLAGS,
  [The only reason ERTS_EMU_CMDLINE_FLAGS exists is to force modification
   of config.h when the emulator command line flags are modified by configure])
  
@@ -69,7 +69,7 @@ index b04769c4ec..bc428e8f04 100644
  dnl ----------------------------------------------------------------------
  dnl Output the result.
  dnl ----------------------------------------------------------------------
-@@ -3894,6 +3914,7 @@ AC_CONFIG_FILES([
+@@ -3899,6 +3919,7 @@ AC_CONFIG_FILES([
    include/internal/$host/erts_internal.mk:include/internal/erts_internal.mk.in
    lib_src/$host/Makefile:lib_src/Makefile.in
    ../make/$host/otp.mk:../make/otp.mk.in
@@ -78,7 +78,7 @@ index b04769c4ec..bc428e8f04 100644
  
  AC_CONFIG_FILES([../make/make_emakefile:../make/make_emakefile.in],
 diff --git a/erts/emulator/Makefile.in b/erts/emulator/Makefile.in
-index a623cb48aa..264d7a3fee 100644
+index 7402359f13..695781327f 100644
 --- a/erts/emulator/Makefile.in
 +++ b/erts/emulator/Makefile.in
 @@ -25,6 +25,12 @@ include ../vsn.mk
@@ -94,7 +94,7 @@ index a623cb48aa..264d7a3fee 100644
  ENABLE_ALLOC_TYPE_VARS = @ENABLE_ALLOC_TYPE_VARS@
  JIT_ENABLED=@JIT_ENABLED@
  JIT_ARCH=@JIT_ARCH@
-@@ -569,12 +575,23 @@ ifeq ($(TARGET),win32)
+@@ -578,12 +584,23 @@ ifeq ($(TARGET),win32)
  RELEASE_INCLUDES += sys/$(ERLANG_OSTYPE)/erl_win_dyn_driver.h
  endif
  
