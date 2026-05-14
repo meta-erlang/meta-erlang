@@ -1,4 +1,4 @@
-From 9e691c6637421ac73db0e4c51f6593b5d6fc6f97 Mon Sep 17 00:00:00 2001
+From 582b10c561dfbbc0bd45dc4dad473e6c32efe944 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sat, 22 May 2021 22:52:27 -0300
@@ -10,10 +10,10 @@ Upstream-Status: Inappropriate [oe specific]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/lib/crypto/c_src/Makefile.in b/lib/crypto/c_src/Makefile.in
-index c67782e7bd..f16bccdd02 100644
+index 646ea7da89..7cf1c8003a 100644
 --- a/lib/crypto/c_src/Makefile.in
 +++ b/lib/crypto/c_src/Makefile.in
-@@ -147,7 +147,7 @@ endif
+@@ -149,7 +149,7 @@ endif
  endif
  
  ifeq ($(DYNAMIC_OR_WIN_CRYPTO_LIB),yes)

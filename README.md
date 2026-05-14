@@ -81,6 +81,46 @@ Also, there are a set of [recipe examples](recipes-examples) demonstrating how t
 projects into YP/OE. The examples tried to cover some common use cases when dealing with cross compiled
 applications.
 
+### Simple setup suggestion: (RECOMMENDED and tested to work with Yocto 6.0)
+
+Add this in you myapp-elixir_1.0.bb:
+```
+DEPENDS = "erlang elixir"
+RDEPENDS:${PN} += "erlang elixir"
+```
+
+Add this to your mydistro.conf or local.conf:
+
+```
+ERLANG_VERSION = "29.0"
+ELIXIR_VERSION = "1.19.5"
+BBMASK:append = " ${@'/erlang_(?!' + d.getVar('ERLANG_VERSION').replace('.', '\.') + ')[^/]*\.bb$'}"
+BBMASK:append = " ${@'/elixir_(?!' + d.getVar('ELIXIR_VERSION').replace('.', '\.') + ')[^/]*\.bb$'}"
+```
+
+PREFERRED_VERSION variables are populated automatically from ERLANG_VERSION and ELIXIR_VERSION
+
+Elixir requires UTF8 and not latin1 locale, after fixing it, then you will need to remove a QA error
+```
+INSANE_SKIP:append:pn-elixir = " buildpaths"
+INSANE_SKIP:append:pn-elixir-eex = " buildpaths"
+```
+
+for version 29.0 you will need this:
+your-layer/recipes-devtools/erlang/erlang_%.bbappend
+```
+do_install:append() {
+    rm -rf ${D}${libdir}/erlang/lib/odbc-*
+}
+```
+
+In case of patch fuzziness, one can regenerate them:
+```
+devtool modify erlang
+devtool finish --force-patch-refresh erlang \
+  /home/user/Documents/yocto/bitbake-builds/mydistro-wrynose/layers/openembedded-core/meta-erlang
+```
+
 ## Supported versions
 
 meta-erlang tries to support a well balanced range of Erlang, Elixir and Yocto Project versions. The purpose is to provide up-to-date recipes following the latest fixes found in Erlang and Elixir projects as well keeping the old recipes to not break compatibility.

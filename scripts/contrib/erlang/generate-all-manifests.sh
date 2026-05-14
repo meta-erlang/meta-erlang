@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-versions=("26.2.5.19" "27.3.4.10" "28.4.2" "29.0-rc3")
+versions=("26.2.5.19" "27.3.4.10" "28.5" "29.0")
 
 for version in ${versions[@]}
 do
