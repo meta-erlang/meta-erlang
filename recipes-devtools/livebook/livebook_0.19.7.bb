@@ -5,12 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
 
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
-SRCREV = "8eb90623cd8f96d141e038179c30f4c0fa32c941"
+SRCREV = "692847dc466ab6370eed9dd2596d569fe52dc763"
 PR = "r0"
-SRC_URI = "git://github.com/livebook-dev/livebook;branch=v0.16;protocol=https \
+SRC_URI = "git://github.com/livebook-dev/livebook;branch=v0.19;protocol=https \
            file://livebook.service \
-           file://livebook.conf \
-           file://0001-Read-fixed-bytes-size-from-dev-urandom.patch"
+           file://livebook.conf"
 
 SRC_URI:append:class-nativesdk = " \
            file://environment.d-livebook.sh \
