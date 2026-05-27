@@ -245,23 +245,23 @@ COMMON_MODULES = [
 
 
 SPEC = {
-    '26.2.5.19': {
-        'ERTS_VERSION': '14.2.5.13',
+    '26.2.5.21': {
+        'ERTS_VERSION': '14.2.5.15',
         'ERL_INTERFACE_VERSION': '5.5.1',
         'modules': COMMON_MODULES,
     },
-    '27.3.4.10': {
-        'ERTS_VERSION': '15.2.7.7',
+    '27.3.4.12': {
+        'ERTS_VERSION': '15.2.7.8',
         'ERL_INTERFACE_VERSION': '5.5.2',
         'modules': COMMON_MODULES,
     },
-    '28.5': {
-        'ERTS_VERSION': '16.4',
+    '28.5.0.1': {
+        'ERTS_VERSION': '16.4.0.1',
         'ERL_INTERFACE_VERSION': '5.7',
         'modules': COMMON_MODULES,
     },
-    '29.0': {
-        'ERTS_VERSION': '17.0',
+    '29.0.1': {
+        'ERTS_VERSION': '17.0.1',
         'ERL_INTERFACE_VERSION': '5.8',
         'modules': COMMON_MODULES,
     }
