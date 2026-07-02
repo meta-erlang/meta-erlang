@@ -1,0 +1,25 @@
+From 1e50bcedf7bfee0f17dd4b37f148244d0ba047c1 Mon Sep 17 00:00:00 2001
+From: kas User <kas@example.com>
+Date: Thu, 2 Jul 2026 14:56:08 -0300
+Subject: [PATCH] fallback to arm
+
+Upstream-Status: Inappropriate [oe specific]
+---
+ make/autoconf/otp.m4 | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/make/autoconf/otp.m4 b/make/autoconf/otp.m4
+index 92be871b1e..bd60f29eec 100644
+--- a/make/autoconf/otp.m4
++++ b/make/autoconf/otp.m4
+@@ -2974,6 +2974,7 @@ AC_DEFUN([LM_HARDWARE_ARCH], [
+     armv7l)	ARCH=arm;;
+     armv7hl)	ARCH=arm;;
+     armv8*)	ARCH=arm;;
++    arm)	ARCH=arm;;
+     aarch64)	ARCH=arm64;;
+     aarch*)	ARCH=arm;;
+     tile)	ARCH=tile;;
+-- 
+2.47.3
+

@@ -13,7 +13,7 @@ DEPENDS:append:class-nativesdk = " erlang-native"
 RDEPENDS:${PN}-ptest += "bash erlang-modules openssh \
                          ${@bb.utils.contains("BBFILE_COLLECTIONS", "openembedded-layer", "tmux", "", d)}"
 
-SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
+SRC_URI = "git://github.com/stritzinger/otp;branch=arm32-jit;protocol=https \
            file://epmd.socket \
            file://epmd.service \
            file://epmd.init \
@@ -56,6 +56,7 @@ PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
 PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
 PACKAGECONFIG[static-drivers] = "--enable-static-drivers,--disable-static-drivers,,"
 PACKAGECONFIG[static-nifs] = "--enable-static-nifs,--disable-static-nifs,,"
+PACKAGECONFIG[jit] = "--enable-jit,--disable-jit,,"
 
 # Only depends on kernel-module-sctp for target build
 LKSCTP_DEPS:class-target = "kernel-module-sctp"
