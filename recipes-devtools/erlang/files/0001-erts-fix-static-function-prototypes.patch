@@ -1,4 +1,4 @@
-From 666477f4a296e55d1d73be6d4982e975293650bf Mon Sep 17 00:00:00 2001
+From 040f8df2f5ea6ff812ed6d11113d97693011b619 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Thu, 19 Jun 2025 14:53:25 -0300
@@ -21,10 +21,10 @@ Upstream-Status: Submitted [https://github.com/erlang/otp/pull/9983]
  3 files changed, 13 insertions(+), 13 deletions(-)
 
 diff --git a/erts/emulator/test/nif_SUITE_data/nif_SUITE.c b/erts/emulator/test/nif_SUITE_data/nif_SUITE.c
-index 78a1f9e92f..e22bd3bbac 100644
+index fb7fe70dfe..3ce7ce3cda 100644
 --- a/erts/emulator/test/nif_SUITE_data/nif_SUITE.c
 +++ b/erts/emulator/test/nif_SUITE_data/nif_SUITE.c
-@@ -3700,9 +3700,9 @@ static ERL_NIF_TERM ioq(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+@@ -3690,9 +3690,9 @@ static ERL_NIF_TERM ioq(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
      return enif_make_badarg(env);
  }
  

@@ -1,0 +1,32 @@
+From 2bce923a62480e416b0f3fccbd69d98ba24d9da0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Sat, 17 Feb 2024 21:46:07 -0300
+Subject: [PATCH] Fix deterministic build for preloaded beams
+
+Previous commit 5a80cfd03987a70f4496dc7a78e1d2f4066cc171, started
+building preloaded beam files when there is a working compiler. However,
+when deterministic build is enable the flag for ERL_COMPILE_FLAGS was
+wrong due a missing '+'.
+
+Upstream-Status: Submitted [https://github.com/erlang/otp/pull/8146]
+---
+ erts/preloaded/src/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/erts/preloaded/src/Makefile b/erts/preloaded/src/Makefile
+index dc09403824..55d0044d15 100644
+--- a/erts/preloaded/src/Makefile
++++ b/erts/preloaded/src/Makefile
+@@ -86,7 +86,7 @@ STDLIB_INCLUDE=$(ERL_TOP)/lib/stdlib/include
+ ERL_COMPILE_FLAGS += -I$(KERNEL_SRC) -I$(KERNEL_INCLUDE)
+ 
+ ifeq ($(ERL_DETERMINISTIC),yes)
+-	ERL_COMPILE_FLAGS += deterministic
++	ERL_COMPILE_FLAGS += +deterministic
+ endif
+ 
+ DIA_PLT      = erts-preloaded.plt
+-- 
+2.40.1
+
