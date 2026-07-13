@@ -44,7 +44,10 @@ ERLANG_APPLICATIONS:remove:class-native = "odbc wx observer debugger et jinterfa
 ERLANG_APPLICATIONS:remove:class-nativesdk = "odbc jinterface megaco \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', '', 'wx observer et debugger', d)}"
 
-PACKAGECONFIG:class-target ?= "pkgconfig zlib termcap ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} ${ERLANG_APPLICATIONS}"
+PACKAGECONFIG:class-target ?= "pkgconfig zlib termcap \
+                               ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+                               ${ERLANG_APPLICATIONS} \
+                               ei-dynamic-lib"
 PACKAGECONFIG:class-native ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
 PACKAGECONFIG:class-nativesdk ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
 
@@ -56,6 +59,7 @@ PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
 PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
 PACKAGECONFIG[static-drivers] = "--enable-static-drivers,--disable-static-drivers,,"
 PACKAGECONFIG[static-nifs] = "--enable-static-nifs,--disable-static-nifs,,"
+PACKAGECONFIG[ei-dynamic-lib] = "--enable-ei-dynamic-lib,,,"
 
 # Only depends on kernel-module-sctp for target build
 LKSCTP_DEPS:class-target = "kernel-module-sctp"
@@ -189,6 +193,20 @@ do_install:class-target() {
     fi
 
     rm -f ${D}/${libdir}/erlang/Install
+
+    if ${@bb.utils.contains('PACKAGECONFIG','ei-dynamic-lib','true','false',d)}; then
+        # Move and accommodate libei for erlang-interface package
+        mkdir -p ${D}/${includedir} ${D}/${libdir}
+        for f in eicode.h ei.h ei_connect.h; do
+            install -m 0644 ${D}/${libdir}/erlang/usr/include/${f} ${D}/${includedir}
+        done
+        for f in libei.a libei_st.a libei_st.so libei.so; do
+            install -m 0644 ${D}/${libdir}/erlang/usr/lib/$f ${D}/${libdir}
+        done
+    fi
+
+    # Remove erl_call from erl_interface
+    rm -rf ${D}/${libdir}/erlang/lib/erl_interface-*/bin
 
     chown -R root:root ${D}${libdir}/erlang
 }
