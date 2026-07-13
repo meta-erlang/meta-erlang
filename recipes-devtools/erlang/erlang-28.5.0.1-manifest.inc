@@ -304,6 +304,10 @@ PROVIDES += "\
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc', '', d)} \
     ${PN}-epmd-examples \
     ${PN}-epmd \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-dbg', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-dev', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-staticdev', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface', '', d)} \
     ${PN}-erts-examples \
     ${PN}-erts-doc \
     ${PN}-erts-dbg \
@@ -543,6 +547,10 @@ RPROVIDES:${PN}:class-native += "\
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc', '', d)} \
     ${PN}-epmd-examples-native \
     ${PN}-epmd-native \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-dbg', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-dev', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-staticdev', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface', '', d)} \
     ${PN}-erts-examples-native \
     ${PN}-erts-doc-native \
     ${PN}-erts-dbg-native \
@@ -783,6 +791,10 @@ PACKAGES = "\
     ${@bb.utils.contains('PACKAGECONFIG', 'odbc', '${PN}-odbc', '', d)} \
     ${PN}-epmd-examples \
     ${PN}-epmd \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-dbg', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-dev', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-staticdev', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface', '', d)} \
     ${PN}-erts-examples \
     ${PN}-erts-doc \
     ${PN}-erts-dbg \
@@ -1209,22 +1221,22 @@ FILES:${PN}-erl-interface-doc = "${libdir}/erlang/lib/erl-interface-*/doc ${libd
 ALLOW_EMPTY:${PN}-erl-interface-dbg = "1"
 DESCRIPTION:${PN}-erl-interface-dbg = ""
 RDEPENDS:${PN}-erl-interface-dbg = ""
-FILES:${PN}-erl-interface-dbg = "${libdir}/erlang/lib/erl_interface-*/bin/.debug ${libdir}/erlang/lib/erl_interface-*/lib/.debug ${libdir}/erlang/lib/erl_interface-*/priv/.debug ${libdir}/erlang/lib/erl_interface-*/priv/lib/.debug ${libdir}/erlang/lib/erl_interface-*/priv/obj/.debug ${libdir}/erlang/lib/erl_interface-*/priv/bin/.debug "
+FILES:${PN}-erl-interface-dbg = "${libdir}/erlang/lib/erl_interface-*/bin/.debug ${libdir}/erlang/lib/erl_interface-*/lib/.debug ${libdir}/erlang/lib/erl_interface-*/priv/.debug ${libdir}/erlang/lib/erl_interface-*/priv/lib/.debug ${libdir}/erlang/lib/erl_interface-*/priv/obj/.debug ${libdir}/erlang/lib/erl_interface-*/priv/bin/.debug ${libdir}/erlang/usr/lib/.debug/libei_st.so ${libdir}/erlang/usr/lib/.debug/libei.so "
 
 ALLOW_EMPTY:${PN}-erl-interface-dev = "1"
 DESCRIPTION:${PN}-erl-interface-dev = ""
 RDEPENDS:${PN}-erl-interface-dev = ""
-FILES:${PN}-erl-interface-dev = "${libdir}/erlang/lib/erl_interface-*/*src ${libdir}/erlang/lib/erl_interface-*/include ${libdir}/erlang/lib/erl_interface-*/priv/obj ${libdir}/erlang/usr/include/eicode.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/ei.h "
+FILES:${PN}-erl-interface-dev = "${libdir}/erlang/lib/erl_interface-*/*src ${libdir}/erlang/lib/erl_interface-*/include ${libdir}/erlang/lib/erl_interface-*/priv/obj ${libdir}/erlang/usr/include/ei.h ${libdir}/erlang/usr/include/ei_connect.h ${libdir}/erlang/usr/include/eicode.h ${libdir}/pkgconfig/erl_ei.pc "
 
 ALLOW_EMPTY:${PN}-erl-interface-staticdev = "1"
 DESCRIPTION:${PN}-erl-interface-staticdev = ""
 RDEPENDS:${PN}-erl-interface-staticdev = ""
-FILES:${PN}-erl-interface-staticdev = "${libdir}/erlang/lib/erl_interface-*/lib/*.a ${libdir}/erlang/lib/erl_interface-*/priv/lib/*.a "
+FILES:${PN}-erl-interface-staticdev = "${libdir}/erlang/lib/erl_interface-*/lib/*.a ${libdir}/erlang/lib/erl_interface-*/priv/lib/*.a ${libdir}/erlang/usr/lib/libei.a ${libdir}/erlang/usr/lib/libei_st.a ${libdir}/erlang/lib/erl_interface-*/lib/libei.a ${libdir}/erlang/lib/erl_interface-*/lib/libei_st.a "
 
 ALLOW_EMPTY:${PN}-erl-interface = "1"
 DESCRIPTION:${PN}-erl-interface = ""
 RDEPENDS:${PN}-erl-interface = ""
-FILES:${PN}-erl-interface = "${libdir}/erlang/lib/erl_interface-* "
+FILES:${PN}-erl-interface = "${libdir}/erlang/usr/lib/libei_st.so ${libdir}/erlang/usr/lib/libei.so ${libdir}/erlang/lib/erl_interface-* "
 
 ALLOW_EMPTY:${PN}-et-examples = "1"
 DESCRIPTION:${PN}-et-examples = ""
@@ -1926,6 +1938,26 @@ DESCRIPTION:${PN}-epmd = ""
 RDEPENDS:${PN}-epmd = ""
 FILES:${PN}-epmd = "${libdir}/erlang/erts-*/bin/epmd ${libdir}/erlang/bin/epmd ${bindir}/epmd ${systemd_system_unitdir}/epmd.service ${systemd_system_unitdir}/epmd.socket ${sysconfdir}/init.d "
 
+ALLOW_EMPTY:${PN}-interface-dbg = "1"
+DESCRIPTION:${PN}-interface-dbg = ""
+RDEPENDS:${PN}-interface-dbg = ""
+FILES:${PN}-interface-dbg = "${libdir}/.debug "
+
+ALLOW_EMPTY:${PN}-interface-dev = "1"
+DESCRIPTION:${PN}-interface-dev = ""
+RDEPENDS:${PN}-interface-dev = ""
+FILES:${PN}-interface-dev = "${includedir}/ei_connect.h ${includedir}/ei.h ${includedir}/eicode.h "
+
+ALLOW_EMPTY:${PN}-interface-staticdev = "1"
+DESCRIPTION:${PN}-interface-staticdev = ""
+RDEPENDS:${PN}-interface-staticdev = ""
+FILES:${PN}-interface-staticdev = "${libdir}/libei_st.a ${libdir}/libei.a "
+
+ALLOW_EMPTY:${PN}-interface = "1"
+DESCRIPTION:${PN}-interface = ""
+RDEPENDS:${PN}-interface = ""
+FILES:${PN}-interface = "${libdir}/libei.so ${libdir}/libei_st.so "
+
 ALLOW_EMPTY:${PN}-erts-examples = "1"
 DESCRIPTION:${PN}-erts-examples = ""
 RDEPENDS:${PN}-erts-examples = ""
@@ -1944,12 +1976,12 @@ FILES:${PN}-erts-dbg = "${libdir}/erlang/lib/erts-*/bin/.debug ${libdir}/erlang/
 ALLOW_EMPTY:${PN}-erts-dev = "1"
 DESCRIPTION:${PN}-erts-dev = ""
 RDEPENDS:${PN}-erts-dev = ""
-FILES:${PN}-erts-dev = "${libdir}/erlang/lib/erts-*/src ${libdir}/erlang/erts-*/*src ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/priv/obj ${libdir}/erlang/erts-*/bin/yielding_c_fun ${libdir}/erlang/usr/include/erl_driver.h ${libdir}/erlang/usr/include/erl_nif_api_funcs.h ${libdir}/erlang/usr/include/erl_int_sizes_config.h ${libdir}/erlang/usr/include/driver_int.h ${libdir}/erlang/usr/include/erl_fixed_size_int_types.h ${libdir}/erlang/usr/include/erl_nif.h "
+FILES:${PN}-erts-dev = "${libdir}/erlang/lib/erts-*/src ${libdir}/erlang/erts-*/*src ${libdir}/erlang/erts-*/include ${libdir}/erlang/erts-*/priv/obj ${libdir}/erlang/erts-*/bin/yielding_c_fun ${libdir}/erlang/usr/include/erl_driver.h ${libdir}/erlang/usr/include/erl_nif_api_funcs.h ${libdir}/erlang/usr/include/erl_int_sizes_config.h ${libdir}/erlang/usr/include/driver_int.h ${libdir}/erlang/usr/include/erl_fixed_size_int_types.h ${libdir}/erlang/usr/include/erl_nif.h ${libdir}/erlang/usr/include/erl_drv_nif.h ${libdir}/pkgconfig/erl_erts.pc "
 
 ALLOW_EMPTY:${PN}-erts-staticdev = "1"
 DESCRIPTION:${PN}-erts-staticdev = ""
 RDEPENDS:${PN}-erts-staticdev = ""
-FILES:${PN}-erts-staticdev = "${libdir}/erlang/lib/erts-*/lib/*.a ${libdir}/erlang/lib/erts-*/priv/lib/*.a "
+FILES:${PN}-erts-staticdev = "${libdir}/erlang/lib/erts-*/lib/*.a ${libdir}/erlang/lib/erts-*/priv/lib/*.a ${libdir}/erlang/erts-*/lib/internal/* "
 
 ALLOW_EMPTY:${PN}-erts = "1"
 DESCRIPTION:${PN}-erts = ""
@@ -1964,7 +1996,7 @@ FILES:${PN}-doc = "${libdir}/erlang/erts-*/doc ${libdir}/erlang/erts-*/man ${lib
 ALLOW_EMPTY:${PN}-dev = "1"
 DESCRIPTION:${PN}-dev = ""
 RDEPENDS:${PN}-dev = "${PN}-erts-dev ${PN}-kernel-dev ${PN}-stdlib-dev ${PN}-sasl-dev"
-FILES:${PN}-dev = "${libdir}/pkgconfig "
+FILES:${PN}-dev = ""
 
 ALLOW_EMPTY:${PN}-dbg = "1"
 DESCRIPTION:${PN}-dbg = ""
@@ -1974,7 +2006,7 @@ FILES:${PN}-dbg = "${libdir}/erlang/bin/.debug ${libdir}/erlang/erts-*/bin/.debu
 ALLOW_EMPTY:${PN}-staticdev = "1"
 DESCRIPTION:${PN}-staticdev = ""
 RDEPENDS:${PN}-staticdev = ""
-FILES:${PN}-staticdev = "${libdir}/erlang/usr/lib/*.a ${libdir}/erlang/usr/lib/internal/*.a ${libdir}/erlang/erts-*/lib/*.a ${libdir}/erlang/erts-*/lib/internal/* "
+FILES:${PN}-staticdev = ""
 
 ALLOW_EMPTY:${PN} = "1"
 DESCRIPTION:${PN} = ""
@@ -2002,6 +2034,7 @@ RDEPENDS:${PN}-modules = "\
     ${@bb.utils.contains('PACKAGECONFIG', 'eunit', '${PN}-eunit', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ftp', '${PN}-ftp', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface', '', d)} \
     ${PN}-kernel \
     ${@bb.utils.contains('PACKAGECONFIG', 'megaco', '${PN}-megaco', '', d)} \
@@ -2096,6 +2129,8 @@ RDEPENDS:${PN}-modules-dev = "${PN}-modules \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-examples', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'inets', '${PN}-inets-staticdev', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-dev', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'erl-interface ei-dynamic-lib', '${PN}-interface-staticdev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-dev', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-doc', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'jinterface', '${PN}-jinterface-examples', '', d)} \
