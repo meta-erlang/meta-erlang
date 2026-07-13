@@ -71,11 +71,11 @@ class Module(object):
           self.packages_enable.remove('examples')
           examples = []
         elif examples == True:
-          examples = self.EXAMPLES_PATH
+          examples = self.EXAMPLES_PATH.copy()
         elif len(examples) > 0:
             pass
         else:
-          examples = self.EXAMPLES_PATH
+          examples = self.EXAMPLES_PATH.copy()
 
         if doc == False:
           self.packages_enable.remove('doc')
@@ -83,7 +83,7 @@ class Module(object):
         elif len(doc) > 0:
           pass
         else:
-          doc = self.DOC_PATHS
+          doc = self.DOC_PATHS.copy()
 
         if debug == False:
           self.packages_enable.remove('dbg')
@@ -92,9 +92,8 @@ class Module(object):
           debug.extend(debug_append)
           pass
         else:
-          debug = self.DEBUG_PATHS
+          debug = self.DEBUG_PATHS.copy()
           debug.extend(debug_append)
-
         if dev == False:
           self.packages_enable.remove('dev')
           dev = []
@@ -102,7 +101,7 @@ class Module(object):
           dev.extend(dev_append)
           pass
         else:
-          dev = self.DEV_PATHS
+          dev = self.DEV_PATHS.copy()
           dev.extend(dev_append)
 
         if staticdev == False:
@@ -111,9 +110,9 @@ class Module(object):
         elif len(staticdev) > 0:
           pass
         else:
-          staticdev = self.STATICDEV_PATHS
+          staticdev = self.STATICDEV_PATHS.copy()
 
-        base_paths = ' '.join(base if base else self.BASE_PATHS)
+        base_paths = ' '.join(base if base else self.BASE_PATHS.copy())
         doc_paths = ' '.join(doc)
         debug_paths = ' '.join(debug)
         dev_paths = ' '.join(dev)
