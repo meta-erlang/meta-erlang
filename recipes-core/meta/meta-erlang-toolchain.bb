@@ -14,7 +14,7 @@ TOOLCHAIN_HOST_TASK:append = " \
 "
 
 TOOLCHAIN_TARGET_TASK:append = " \
-    ${@multilib_pkg_extend(d, 'packagegroup-erlang-sdk-target')} \
+    ${@oe.utils.multilib_pkg_extend(d, 'packagegroup-erlang-sdk-target')} \
 "
 
 SDK_TITLE = "Erlang/Elixir toolchain"
