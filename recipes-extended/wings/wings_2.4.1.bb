@@ -5,7 +5,7 @@ and Mirai modellers from Izware."
 
 HOMEPAGE = "http://www.wings3d.com/"
 NO_GENERIC_LICENSE[Wings] = "license.terms"
-LICENSE = "Wings"
+LICENSE = "LicenseRef-Wings"
 LIC_FILES_CHKSUM = "file://license.terms;md5=889fe8682ad9d17b3067710663f6436e \
                     file://unix/COPYING;md5=ea5bed2f60d357618ca161ad539f7c0a"
 

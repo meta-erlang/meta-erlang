@@ -4,11 +4,11 @@ AtomVM implements from scratch a minimal Erlang VM that supports a subset of Erl
 and that is able to run unmodified BEAM binaries on really small systems like MCUs."
 HOMEPAGE = "https://atomvm.org/"
 
-LICENSE = "Apache-2.0 & LGPL-2.1-only"
+LICENSE = "Apache-2.0 AND LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
                     file://LICENSES/LGPL-2.1-or-later.txt;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "git://github.com/atomvm/AtomVM;protocol=https;branch=master \
+SRC_URI = "git://github.com/atomvm/AtomVM;protocol=https;branch=main \
            file://0001-Remove-PackBEAM-dependency-rules.patch"
 
 # Modify these as desired
