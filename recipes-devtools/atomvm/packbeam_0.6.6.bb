@@ -3,17 +3,16 @@ DESCRIPTION = "A tool for aggregating beam and other file types into a single fi
 code base for an AtomVM application."
 HOMEPAGE = "https://atomvm.org/"
 
-LICENSE = "Apache-2.0 & LGPL-2.1-only"
+LICENSE = "Apache-2.0 AND LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
                     file://LICENSES/LGPL-2.1-or-later.txt;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "git://github.com/atomvm/AtomVM;protocol=https;branch=master"
+SRC_URI = "git://github.com/atomvm/AtomVM;protocol=https;branch=main"
 
 BBCLASSEXTEND = "native nativesdk"
 
 # Modify these as desired
-PV = "0.6.0-alpha1+git"
-SRCREV = "c239678426f97cc50eea8261f679f1490b355b3a"
+SRCREV = "ff993a80963298b532c1e573f883951ecaac9fef"
 
 # NOTE: unable to map the following CMake package dependencies: Dialyzer Sphinx Graphviz Elixir
 # NOTE: the following library dependencies are unknown, ignoring: REQUIRED
