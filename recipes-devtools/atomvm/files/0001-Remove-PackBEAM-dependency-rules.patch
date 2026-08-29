@@ -1,4 +1,4 @@
-From c6c5d835bb20879aaf64cd31ead6d4ae7046a7a9 Mon Sep 17 00:00:00 2001
+From 93e2a5b7ad9e66419569ee7a7a6a462b8cd0ee7c Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
  <joaohf@gmail.com>
 Date: Sun, 29 Oct 2023 11:25:43 -0300
@@ -12,18 +12,18 @@ Upstream-Status: Inappropriate [oe specific]
  3 files changed, 21 insertions(+), 17 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 091435a1..4a7772ad 100644
+index c1e631b9..5363564a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -28,6 +28,7 @@ find_package(Elixir)
- 
+@@ -29,6 +29,7 @@ find_package(Elixir)
  option(AVM_DISABLE_FP "Disable floating point support." OFF)
  option(AVM_DISABLE_SMP "Disable SMP." OFF)
+ option(AVM_DISABLE_TASK_DRIVER "Disable task driver support." OFF)
 +option(AVM_DISABLE_PACKBEAM_BUILD "Disable PackBEAM build." OFF)
  option(AVM_USE_32BIT_FLOAT "Use 32 bit floats." OFF)
  option(AVM_VERBOSE_ABORT "Print module and line number on VM abort" OFF)
  option(AVM_RELEASE "Build an AtomVM release" ON)
-@@ -47,7 +48,10 @@ if(NOT AVM_BUILD_RUNTIME_ONLY)
+@@ -49,7 +50,10 @@ if(NOT AVM_BUILD_RUNTIME_ONLY)
      add_subdirectory(tests)
  endif()
  

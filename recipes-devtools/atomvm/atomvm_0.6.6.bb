@@ -12,8 +12,7 @@ SRC_URI = "git://github.com/atomvm/AtomVM;protocol=https;branch=main \
            file://0001-Remove-PackBEAM-dependency-rules.patch"
 
 # Modify these as desired
-PV = "0.6.0-alpha1+git"
-SRCREV = "c239678426f97cc50eea8261f679f1490b355b3a"
+SRCREV = "ff993a80963298b532c1e573f883951ecaac9fef"
 
 # NOTE: unable to map the following CMake package dependencies: Dialyzer Sphinx Graphviz Elixir
 # NOTE: the following library dependencies are unknown, ignoring: REQUIRED
@@ -36,5 +35,6 @@ PACKAGES =+ "${PN}-examples"
 FILES:${PN}-examples = "${datadir}/${BPN}/examples/"
 RDEPENDS:${PN}-examples += "${PN}"
 
-# don't complain that some examples haval build patchs
+# don't complain that some examples have build paths
 INSANE_SKIP:${PN}-examples += "buildpaths"
+INSANE_SKIP:${PN} += "buildpaths"
