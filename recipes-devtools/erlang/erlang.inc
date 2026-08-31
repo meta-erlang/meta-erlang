@@ -44,7 +44,13 @@ ERLANG_APPLICATIONS:remove:class-native = "odbc wx observer debugger et jinterfa
 ERLANG_APPLICATIONS:remove:class-nativesdk = "odbc jinterface megaco \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', '', 'wx observer et debugger', d)}"
 
-PACKAGECONFIG:class-target ?= "pkgconfig zlib termcap ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} ${ERLANG_APPLICATIONS}"
+PACKAGECONFIG:class-target ?= "\
+    pkgconfig \
+    zlib \
+    termcap \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} ${ERLANG_APPLICATIONS} \
+    ${@bb.utils.contains_any('TUNE_FEATURES', 'aarch64 x86-64-v3 x86-64 x86-64-x32', 'jit', '', d)} \
+    "
 PACKAGECONFIG:class-native ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
 PACKAGECONFIG:class-nativesdk ?= "pkgconfig zlib termcap ${ERLANG_APPLICATIONS}"
 
@@ -56,6 +62,7 @@ PACKAGECONFIG[pkgconfig] = "--enable-pkg-config,,,"
 PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
 PACKAGECONFIG[static-drivers] = "--enable-static-drivers,--disable-static-drivers,,"
 PACKAGECONFIG[static-nifs] = "--enable-static-nifs,--disable-static-nifs,,"
+PACKAGECONFIG[jit] = "--enable-jit,--disable-jit,,"
 
 # Only depends on kernel-module-sctp for target build
 LKSCTP_DEPS:class-target = "kernel-module-sctp"
