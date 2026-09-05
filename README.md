@@ -154,6 +154,7 @@ Erlang:
 
 Elixir:
 
+* [v1.20](https://github.com/elixir-lang/elixir/tree/v1.20)
 * [v1.19](https://github.com/elixir-lang/elixir/tree/v1.19)
 * [v1.18](https://github.com/elixir-lang/elixir/tree/v1.18)
 * [v1.17](https://github.com/elixir-lang/elixir/tree/v1.17)
