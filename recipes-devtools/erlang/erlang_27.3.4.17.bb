@@ -14,6 +14,6 @@ SRC_URI += "file://0001-Enable-x32-support-for-crypto-configure.patch \
             file://0001-Use-autoconf-2.73.patch \
            "
 
-SRCREV = "a2394acad3e3b8fa74d40905cb79bac2ab68258a"
+SRCREV = "79157f447019730504f6f6c43c9b1d1cfa1d4192"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/27:"
