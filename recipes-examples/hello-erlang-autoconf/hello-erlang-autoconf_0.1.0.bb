@@ -1,11 +1,11 @@
 SUMMARY = "Demonstrating how erlang autoconf based can be used with the Yocto project"
 SECTION = "examples"
-LICENSE = "CLOSED"
-LIC_FILES_CHKSUM = ""
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=62612d1c0b9e46d8296dd0097c07db91"
 
 SRC_URI = "git://github.com/meta-erlang/hello-world;branch=master;subpath=${BPN};protocol=https"
 PV = "0.1.0+git"
-SRCREV = "6c7f37489e79fb5953c100bb705ee89346ff4835"
+SRCREV = "d65050e302f7ea51e33b3209d9ed39a9f088fbc5"
 
 DEPENDS = "erlang-native"
 
