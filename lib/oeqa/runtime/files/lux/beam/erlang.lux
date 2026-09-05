@@ -31,8 +31,8 @@
     !application:ensure_all_started(crypto).
     ?>
     !crypto:info().
-    ?cryptolib_version_compiled => "OpenSSL 3.*",
-    ?cryptolib_version_linked => "OpenSSL 3.*",
+    ?cryptolib_version_compiled => "OpenSSL 4.*",
+    ?cryptolib_version_linked => "OpenSSL 4.*",
     ?>
 
     [doc2 Quit erlang shell]
