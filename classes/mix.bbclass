@@ -11,6 +11,8 @@ MIX_ENV ?= "prod"
 INSANE_SKIP:${PN} += "already-stripped"
 
 do_configure[network] = "1"
+do_compile[network] = "1"
+do_install[network] = "1"
 
 HEX_ORGANIZATION_TOKEN ?= ""
 HEX_ORGANIZATION ?= ""
