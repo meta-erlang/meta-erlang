@@ -10,3 +10,5 @@ PV = "0.1.0+git${SRCPV}"
 SRC_URI = "git://github.com/meta-erlang/hello-world;branch=master;subpath=${BPN};protocol=https"
 
 inherit mix-rustler
+
+INSANE_SKIP:${PN} += "buildpaths"
