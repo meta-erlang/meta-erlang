@@ -7,7 +7,7 @@ ATOMVM_EXAMPLE = "erlang/system_info"
 
 S = "${UNPACKDIR}/system_info"
 
-SRCREV = "8e54aaf475a74b59a20f914e575202b1810a7954"
+SRCREV = "19b0f370393c4921a603e62a3b1c90b8c340e2d0"
 PV = "0.1.0+git${SRCPV}"
 SRC_URI = "git://github.com/atomvm/atomvm_examples;branch=master;subpath=${ATOMVM_EXAMPLE};protocol=https"
 
