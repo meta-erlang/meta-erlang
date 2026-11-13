@@ -20,6 +20,8 @@ TARGET_OS = "none"
 
 SDK_PACKAGE_ARCHS += "beamruntime-dummy-${SDKPKGSUFFIX}"
 
+SDKIMAGE_LINGUAS = "en-us"
+
 require conf/include/beamtools.inc
 
 TOOLCHAIN_OUTPUTNAME ?= "${SDK_ARCH}-beamruntime-nativesdk-standalone-${DISTRO_VERSION}-${BEAMRUNTIME_VERSION}-${TCLIBC}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}"
