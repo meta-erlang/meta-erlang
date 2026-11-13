@@ -32,9 +32,11 @@ INITSCRIPT_NAME = "riak"
 INITSCRIPT_PARAMS = "defaults"
 SYSTEMD_SERVICE:${PN} = "riak.service"
 
-USERADD_PACKAGES = "${PN}"
+USERADD_PACKAGES = "${PN} ${PN}-erts"
 GROUPADD_PARAM:${PN} = "--system riak"
 USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/riak -g riak riak"
+GROUPADD_PARAM:${PN}-erts = "--system riak"
+USERADD_PARAM:${PN}-erts  = "--system --create-home --home /var/lib/riak -g riak riak"
 
 REBAR3_PROFILE = "rel"
 REBAR3_RELEASE_NAME = "${PN}"
@@ -55,19 +57,22 @@ do_install:append() {
     sed -i -e "s|^#!.*/bin/bash|#!/bin/sh|" ${erlang_release}/bin/hooks/builtin/wait_for_process
     
     # Install systemd unit files
-    install -Dm 0644 ${UNPACKDIR}/riak.service ${D}${systemd_unitdir}/system/riak.service
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -Dm 0644 ${UNPACKDIR}/riak.service ${D}${systemd_unitdir}/system/riak.service
+    fi
 
     # Install init.d
-    install -Dm 0755 ${UNPACKDIR}/riak.init ${D}/${sysconfdir}/init.d/riak
+    if ${@bb.utils.contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
+        install -Dm 0755 ${UNPACKDIR}/riak.init ${D}/${sysconfdir}/init.d/riak
+    fi
 
     install -d ${erlang_release}/log
-    chown -R riak.riak ${erlang_release}/log
+    chown -R riak:riak ${erlang_release}/log
 
-    chown -R riak.riak ${erlang_release}/data
-    chown -R riak.riak ${erlang_release}/releases
+    chown -R riak:riak ${erlang_release}/data
+    chown -R riak:riak ${erlang_release}/releases
 
-    # TODO: check if it is really necessary
-    chown -R riak.riak ${erlang_release}
+    chown -R riak:riak ${erlang_release}
 
     # Remove nonsense priv/zstd/lib folder
     rm -rf ${erlang_release}/lib/zstd-*/priv/zstd
@@ -82,6 +87,8 @@ DEPENDS += " \
     openssl \
     snappy \
 "
+
+RDEPENDS:${PN} += "erlang-erl-interface"
 
 FILES:${PN} += " \
     /etc \
