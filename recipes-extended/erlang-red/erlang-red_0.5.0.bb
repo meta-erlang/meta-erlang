@@ -8,16 +8,16 @@ LIC_FILES_CHKSUM = "file://LICENSE.ap2;md5=86d3f3a95c324c9479bd8986968f4327"
 
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
-SRC_URI = "git://github.com/gorenje/erlang-red.git;protocol=https;branch=main \
+SRC_URI = "git://github.com/gorenje/erlang-red.git;protocol=https;branch=main;tag=${PV} \
            file://erlang-red.service \
            file://erlang-red.init \
           "
 
-SRCREV = "8031328bea87b0e0d19ea9c0a7e4528b30ddc34b"
+SRCREV = "5ffbe1071d3768b8e060bbc86061e0b974b17f3a"
 
-DEPENDS = "rebar3-native"
+DEPENDS = "rebar3-native cmake-native"
 
-PV = "0.4.0"
+RDEPENDS:${PN} += "erlang-erl-interface"
 
 inherit rebar3 erlang-version useradd update-rc.d systemd
 
