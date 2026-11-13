@@ -59,6 +59,7 @@ FILES:${PN}-erts = "\
     ${base_erlang_release}/erts-*/bin/dyn_erl \
     ${base_erlang_release}/erts-*/bin/epmd \
     ${base_erlang_release}/erts-*/bin/erl \
+    ${base_erlang_release}/erts-*/bin/erl_call \
     ${base_erlang_release}/erts-*/bin/erl_child_setup \
     ${base_erlang_release}/erts-*/bin/erlexec \
     ${base_erlang_release}/erts-*/bin/escript \
