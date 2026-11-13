@@ -92,7 +92,7 @@ EXTRA_OECONF:class-target ??= " \
     --enable-deterministic-build"
 
 # Due multilib wxwidgets, it's necessary to pass additional arguments to wx-config script.
-WX_CONFIG = "'${STAGING_BINDIR_CROSS}/wx-config --prefix=${STAGING_EXECPREFIXDIR} --baselib=${baselib}'"
+WX_CONFIG = "'${STAGING_BINDIR_CROSS}/wx-config --prefix=${STAGING_EXECPREFIXDIR}'"
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_javac_ver_1_2=no ac_cv_prog_javac_ver_1_5=no erl_xcomp_sysroot=${STAGING_DIR_TARGET} ac_cv_header_GL_gl_h=yes ac_cv_header_OpenGL_gl_h=yes"
 CACHED_CONFIGUREVARS:class-native += "ac_cv_prog_javac_ver_1_2=no \
