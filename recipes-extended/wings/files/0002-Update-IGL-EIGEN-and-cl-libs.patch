@@ -1,0 +1,50 @@
+From 83c176fd0df4f118bff001dc04d3e5b1d23231ac Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?=
+ <joaohf@gmail.com>
+Date: Tue, 10 Nov 2026 17:16:26 -0300
+Subject: [PATCH] Update IGL, EIGEN, and cl libs
+
+---
+ Makefile         | 10 +++++-----
+ c_src/libigl.cpp |  4 +++-
+ 2 files changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 96ddfff3..c9c0d552 100644
+--- a/Makefile
++++ b/Makefile
+@@ -117,12 +117,12 @@ lang: opt
+ #
+ 
+ CL_REPO = https://github.com/tonyrog/cl.git
+-IGL_REPO = https://github.com/dgud/libigl.git
+-EIGEN_REPO = https://github.com/eigenteam/eigen-git-mirror.git
++IGL_REPO = https://github.com/libigl/libigl.git
++EIGEN_REPO = https://gitlab.com/libeigen/eigen.git
+ 
+-CL_VER=cl-1.2.4
+-IGL_VER=master
+-EIGEN_VER=3.3.7
++CL_VER=master
++IGL_VER=main
++EIGEN_VER=5.0.1
+ # see libigl/cmake/LibiglDownloadExternal.cmake for eigen version
+ 
+ GIT_FLAGS = -c advice.detachedHead=false clone --depth 1
+diff --git a/c_src/libigl.cpp b/c_src/libigl.cpp
+index ab2e24a0..8aa27bc6 100644
+--- a/c_src/libigl.cpp
++++ b/c_src/libigl.cpp
+@@ -28,9 +28,11 @@ public:
+   int line = 0;
+ };
+ 
++static bool no_more_assert = false;
++
+ #define eigen_assert(x) \
+  do { \
+-   if(!Eigen::internal::copy_bool(x))                          \
++   if(!(x))                             \
+      throw nif_error(#x, __FUNCTION__, __FILE__, __LINE__);    \
+  } while(false)
+ 

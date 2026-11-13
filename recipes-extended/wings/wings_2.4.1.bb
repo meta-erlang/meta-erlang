@@ -12,18 +12,21 @@ LIC_FILES_CHKSUM = "file://license.terms;md5=889fe8682ad9d17b3067710663f6436e \
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
 SRC_URI = "git://github.com/dgud/wings;protocol=https;branch=master;destsuffix=wings \
-           file://0001-Release-unix-without-makeself.sh.patch \           
+           file://0001-Release-unix-without-makeself.sh.patch \
+           file://0002-Update-IGL-EIGEN-and-cl-libs.patch \
            "
 
 # Remove -m64 parameter and bad host include paths
 SRC_URI += "file://Makefile.c_src.cl"
 
+REQUIRED_DISTRO_FEATURES = "opencl"
+
 PV .= "+git${SRCPV}"
-SRCREV = "a5ca80d15e415baf1199a80a28a2b9f3a74d2db8"
+SRCREV = "2f6672721d83af7bc39717c86deb12a2970ade9f"
 
 S = "${UNPACKDIR}/wings"
 
-inherit erlang-version
+inherit erlang-version features_check
 
 DEPENDS = "erlang erlang-native rebar3-native opencl-headers opencl-icd-loader"
 
@@ -31,6 +34,7 @@ RDEPENDS:${PN} = "erlang wxwidgets"
 
 ERLANG_ERTS = "$(erl -version 2>&1 | gawk '{print $NF}' | tr -d '\n\r')"
 
+do_configure[network] = "1"
 do_compile[network] = "1"
 
 # These two prefuncs are very ugly, but I could not find a better
