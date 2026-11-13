@@ -30,6 +30,8 @@ TARGET_OS = "none"
 
 SDK_PACKAGE_ARCHS += "beamtools-dummy-${SDKPKGSUFFIX}"
 
+SDKIMAGE_LINGUAS = "en-us"
+
 require conf/include/beamtools.inc
 
 TOOLCHAIN_OUTPUTNAME ?= "${SDK_ARCH}-beamtools-nativesdk-standalone-${DISTRO_VERSION}-${BEAMTOOLS_VERSION}-erlang-${ERLANG_VERSION}-elixir-${ELIXIR_VERSION}-gleam-${GLEAM_VERSION}"
