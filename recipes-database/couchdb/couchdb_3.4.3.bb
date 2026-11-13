@@ -126,4 +126,9 @@ DEPENDS:class-target += " \
 
 INSANE_SKIP:${PN} = "already-stripped"
 
+# priv/.debug/couchjs_mainjs
+# priv/.debug/couchjs_coffee
+# priv/.debug/jiffy.so
+INSANE_SKIP:${PN}-dbg += "buildpaths"
+
 BBCLASSEXTEND = "native"
