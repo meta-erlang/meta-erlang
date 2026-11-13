@@ -1,13 +1,13 @@
 SUMMARY = "Erlang Style Reviewer"
 DESCRIPTION = "Command-line interface for Elvis, the Erlang style reviewer."
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=75f5126d170bbca5f1ef6a84b032dca7"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e6af349f36434aa6e14afc0f203e8ab4"
 
 RECIPE_MAINTAINER = "João Henrique Ferreira de Freitas <joaohf@gmail.com>"
 
-SRC_URI = "git://github.com/inaka/elvis.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/inaka/elvis.git;branch=master;protocol=https;tag=${PV}"
 
-SRCREV = "88748c1bd384eba8b3c11932555c98cf46f4d2fd"
+SRCREV = "c4ca8fa918c9096c6e4d5d995ed03d86c6a3f0bb"
 
 inherit rebar3
 
