@@ -22,7 +22,6 @@ SRC_URI = "git://github.com/erlang/otp;branch=master;protocol=https \
            file://otp-0002-Remove-rpath.patch \
            file://0001-erts-add-pkg-config-support-for-erts.patch \
            file://0002-erl_interface-Add-pkg-config-support-for-erl_interfa.patch \
-           file://0001-wx-Enable-wx-cross-compilation.patch \
            file://0001-Fix-reproducibility-issue.patch \
            "
 

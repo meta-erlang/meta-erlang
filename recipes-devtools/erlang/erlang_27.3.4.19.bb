@@ -12,8 +12,9 @@ SRC_URI += "file://0001-Enable-x32-support-for-crypto-configure.patch \
             file://0001-erts-fix-static-function-prototypes.patch \
             file://0001-wx-check-WXE_WEBVIEW-before-include-wx-webview.h.patch \
             file://0001-Use-autoconf-2.73.patch \
+            file://0001-wx-Enable-wx-cross-compilation.patch \
            "
 
-SRCREV = "79157f447019730504f6f6c43c9b1d1cfa1d4192"
+SRCREV = "fc7e10af595f3ffd2c25c84c253a4d042734cfed"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/27:"
