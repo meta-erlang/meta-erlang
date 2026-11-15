@@ -5,9 +5,10 @@ PR = "r0"
 
 # the 32-bit patches were not added for sanitizing
 SRC_URI += "file://0001-Use-autoconf-2.73.patch \
+            file://0001-wx-Enable-wx-cross-compilation.patch \
             "
 
-SRCREV = "e7252384d42f124c07bec5c79eebd7ea9cdd5100"
+SRCREV = "882bc060aca3f9491ba6345da56c5076793d31e2"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/28.5:"
 

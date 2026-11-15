@@ -8,7 +8,7 @@ SRC_URI += "file://0001-Use-autoconf-2.73.patch \
             file://0001-Skip-odbc-build-when-without-odbc-is-requested-by-us.patch \
             "
 
-SRCREV = "e07fd07837e5aa845657f5fa340637121e451d47"
+SRCREV = "d199a49a01a2079afb6f2c5c9ae047cd4555e68d"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/29.0:"
 

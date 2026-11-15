@@ -12,6 +12,7 @@ SRC_URI += "file://0001-Fix-for-Werror-format-security.patch \
             file://0001-Use-autoconf-2.73.patch \
             file://0001-erts-fix-static-function-prototypes.patch \
             file://0001-wx-check-WXE_WEBVIEW-before-include-wx-webview.h.patch \
+            file://0001-wx-Enable-wx-cross-compilation.patch \
            "
 
 SRCREV = "c9ce879f4ca194adc5393f52b2c4cd57b3c3d89d"
