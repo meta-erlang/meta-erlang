@@ -1,0 +1,60 @@
+# Call bitbake to build and test erlang and elixir recipes.
+[macro build-beam]
+    [my recipes=erlang-native erlang elixir-native elixir]
+
+    !bitbake -qq -c cleansstate $recipes
+    [invoke wait-build-ok]
+
+    !bitbake -qq $recipes
+    [invoke wait-build-ok]
+[endmacro]
+
+[macro set_otp_and_elixir_version otp elixir]
+    """!
+    cat << EOF > conf/local.conf
+    ERLANG_VERSION = "$otp"
+    ELIXIR_VERSION = "$elixir"
+    EOF
+    """
+    [invoke build-ok]
+[endmacro]
+
+# Run cleanup recipes before switching recipe versions
+[macro meta-erlang-cleanup]
+    [my recipes=rebar3-native rebar3 erlang-native erlang elixir-native elixir]
+    [loop recipe $recipes]
+        !bitbake -qq -c cleansstate $recipe
+        [invoke wait-build-ok]
+    [endloop]
+[endmacro]
+
+# Build erlang and elixir for all machines using specific otp and elixir
+# versions.
+[macro build-erlang-elixir machine otp elixir]
+        [invoke bitbake-setup poky poky-otp-$otp-elixir-$elixir distro/poky machine/$machine]
+
+        [invoke set_otp_and_elixir_version $otp $elixir]
+
+        [invoke build-beam]
+[endmacro]
+
+# For a given recipe, run testimage.
+[macro testimage recipe config setup_dir_name distro machine]
+    [invoke configure_testimage $config $setup_dir_name $distro $machine]
+    [invoke run_testimage $recipe]
+[endmacro]
+
+[macro configure_testimage config setup_dir_name distro machine]
+    [invoke bitbake-setup $config $setup_dir_name distro/$distro machine/$machine]
+[endmacro]
+
+[macro run_testimage recipe]
+    !bitbake -c cleansstate $recipe
+    [invoke wait-build-ok]
+
+    !bitbake $recipe
+    [invoke wait-build-ok]
+
+    !bitbake -c testimage $recipe
+    [invoke wait-build-ok]
+[endmacro]

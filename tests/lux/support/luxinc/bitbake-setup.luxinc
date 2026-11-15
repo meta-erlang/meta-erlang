@@ -1,0 +1,28 @@
+
+[macro bitbake-setup-prepare-env]
+    !cd $WORKDIR
+    [invoke ok]
+    !. bitbake-setup-venv/bin/activate
+    [invoke ok]
+
+[endmacro]
+
+[macro bitbake-setup config dirname distro machine]
+    """!
+    bitbake-setup \
+      --setting default top-dir-prefix $BBS_TOP_DIR_PREFIX \
+      --setting default dl-dir $BBS_DL_DIR \
+      --setting default use-full-setup-dir-name $BBS_USE_FULL_SETUP_DIR_NAME \
+      init \
+      --non-interactive \
+      --source-overrides develop-branch.json \
+      --setup-dir-name "$$(echo $dirname | tr -d '%')" \
+      configurations/meta-erlang-poky-master.conf.json \
+      "$config" $distro $machine
+    """
+    [invoke wait-build-ok]
+
+    !. $BBS_TOP_DIR_PREFIX/bitbake-builds/$$(echo $dirname | tr -d '%')/build/init-build-env
+    [invoke build-ok]
+
+[endmacro]

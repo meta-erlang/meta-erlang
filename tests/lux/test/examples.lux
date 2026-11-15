@@ -1,0 +1,50 @@
+[doc Build recipe-examples]
+
+[include ../support/luxinc/utils.luxinc]
+[include ../support/luxinc/bitbake-setup.luxinc]
+[include ../support/luxinc/meta_erlang.luxinc]
+
+[global ERLANG_VERSION=29%]
+[global ELIXIR_VERSION=1.20%]
+
+[global ATOMVM_ERLANG_VERSION=27%]
+[global ATOMVM_ELIXIR_VERSION=1.18%]
+
+[global MACHINE=qemuarm64]
+
+[macro run-example recipe]
+    [progress building recipe $recipe]
+
+    !bitbake -qqq -c cleansstate $recipe
+    [invoke wait-build-ok]
+    !bitbake -qqq $recipe
+    [invoke wait-build-ok]
+
+    [progress $recipe :OK]
+[endmacro]
+
+[shell cmd]
+    [invoke bitbake-setup-prepare-env]
+
+    [invoke bitbake-setup poky poky distro/poky machine/$MACHINE]
+
+    [invoke set_otp_and_elixir_version $ATOMVM_ERLANG_VERSION $ATOMVM_ELIXIR_VERSION]
+
+    [invoke meta-erlang-cleanup]
+
+    [invoke run-example atomvm-examples-system-info]
+
+    [invoke set_otp_and_elixir_version $ERLANG_VERSION $ELIXIR_VERSION]
+
+    [invoke meta-erlang-cleanup]
+
+    # https://github.com/meta-erlang/hello-world
+
+    [invoke run-example hello-http-server]
+    [invoke run-example hello-phoenix]
+    [invoke run-example hello-erlang-interoperability]
+    [invoke run-example hello-erlang-c-node]
+    [invoke run-example hello-erlang-autoconf]
+    [invoke run-example hello-elixir-rustler]
+    [invoke run-example hello-elixir-interoperability]
+    [invoke run-example hello-gleam-echo-server]

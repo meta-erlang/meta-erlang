@@ -1,8 +1,9 @@
 BEAMTOOLS_VERSION = "0.11.0-m0"
 BEAMRUNTIME_VERSION = "0.11.0-m0"
 
-ERLANG_VERSION ?= "29.0"
-ELIXIR_VERSION ?= "1.19.5"
+# Use the latest PV versions of Erlang, Elixir, and Gleam by default
+ERLANG_VERSION ?= "29.1.2"
+ELIXIR_VERSION ?= "1.20.5"
 GLEAM_VERSION ?= "1.10.0"
 
 PREFERRED_VERSION_erlang = "${ERLANG_VERSION}"

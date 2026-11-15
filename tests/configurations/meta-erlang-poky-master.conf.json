@@ -1,0 +1,190 @@
+{
+    "description": "meta-erlang - Poky - The Yocto Project testing distribution configurations and hardware test platforms",
+    "sources": {
+        "bitbake": {
+            "git-remote": {
+                "uri": "https://git.openembedded.org/bitbake",
+                "branch": "master",
+                "rev": "master"
+            }
+        },
+        "openembedded-core": {
+            "git-remote": {
+                "uri": "https://git.openembedded.org/openembedded-core",
+                "branch": "master",
+                "rev": "master"
+            }
+        },
+        "meta-yocto": {
+            "git-remote": {
+                "uri": "https://git.yoctoproject.org/meta-yocto",
+                "branch": "master",
+                "rev": "master"
+            }
+        },
+        "yocto-docs": {
+            "git-remote": {
+                "uri": "https://git.yoctoproject.org/yocto-docs",
+                "branch": "master",
+                "rev": "master"
+            }
+        },
+        "meta-erlang": {
+            "git-remote": {
+                "uri": "https://github.com/meta-erlang/meta-erlang",
+                "branch": "master",
+                "rev": "master"
+            }
+        },
+        "meta-openembedded": {
+            "git-remote": {
+                "uri": "https://github.com/openembedded/meta-openembedded",
+                "branch": "master",
+                "rev": "master"
+            }
+        }
+    },
+    "bitbake-setup": {
+        "configurations": [
+        {
+            "name": "yocto-compatible",
+            "description": "Poky - The Yocto Project testing distribution - compatibility checks",
+            "bb-layers": ["openembedded-core/meta","meta-yocto/meta-yocto-bsp","meta-yocto/meta-poky", "meta-openembedded/meta-oe"],
+            "setup-dir-name": "$distro-master",
+            "oe-fragments-one-of": {
+                "machine": {
+                    "description": "Target machines",
+                    "options" : [
+                        { "name": "machine/qemux86-64", "description": "x86-64 system on QEMU" },
+                        { "name": "machine/qemuarm64", "description": "ARMv8 system on QEMU" },
+                        { "name": "machine/qemuriscv64", "description": "RISC-V system on QEMU" },
+                        { "name": "machine/genericarm64", "description": "Arm64 SystemReady IR/ES platforms" },
+                        { "name": "machine/genericx86-64", "description": "x86_64 (64-bit) PCs and servers" }
+                    ]
+                },
+                "distro": {
+                    "description": "Target distributions",
+                    "options" : [
+                        { "name": "distro/poky", "description": "Yocto Project Reference Distro" }
+                    ]
+                }
+            }
+        },
+        {
+            "bb-layers": ["openembedded-core/meta","meta-yocto/meta-yocto-bsp","meta-yocto/meta-poky", "meta-erlang"],
+            "setup-dir-name": "$distro-master",
+            "oe-fragments": ["core/yocto/monitor-disk-space", "core/yocto/root-login-with-empty-password"],
+            "oe-fragments-one-of": {
+                "machine": {
+                    "description": "Target machines",
+                    "options" : [
+                        { "name": "machine/qemux86-64", "description": "x86-64 system on QEMU" },
+                        { "name": "machine/qemuarm64", "description": "ARMv8 system on QEMU" },
+                        { "name": "machine/qemuriscv64", "description": "RISC-V system on QEMU" },
+                        { "name": "machine/genericarm64", "description": "Arm64 SystemReady IR/ES platforms" },
+                        { "name": "machine/genericx86-64", "description": "x86_64 (64-bit) PCs and servers" }
+                    ]
+                },
+                "distro": {
+                    "description": "Target distributions",
+                    "options" : [
+                        { "name": "distro/poky", "description": "Yocto Project Reference Distro" }
+                    ]
+                }
+            },
+            "configurations": [
+            {
+                "name": "poky",
+                "description": "Poky - The Yocto Project testing distribution",
+                "oe-fragments": ["erlang-layer/base"]
+            },
+            {
+                "name": "beamtools ",
+                "description": "Enable beamtools build ",
+                "oe-fragments": ["erlang-layer/base", "erlang-layer/beamtools/base", "erlang-layer/beamtools/sctp", "erlang-layer/beamtools/odbc"],
+                "bb-layers": ["meta-openembedded/meta-oe", "meta-openembedded/meta-networking", "meta-openembedded/meta-python"],
+                "configurations": [
+                    {
+                        "name": "opengl",
+                        "description": "with opengl",
+                        "oe-fragments": ["erlang-layer/beamtools/opengl"]
+                    },
+                    {
+                        "name": "no opengl",
+                        "description": "without opengl",
+                        "oe-fragments": ["erlang-layer/beamtools/no_opengl"]
+                    }
+                ]
+            },
+            {
+                "name": "beamruntime ",
+                "description": "Enable beamruntime build ",
+                "oe-fragments": ["erlang-layer/base", "erlang-layer/beamruntime/base"],
+                "configurations": [
+                    {
+                        "name": "glibc",
+                        "description": "with glibc",
+                        "oe-fragments": ["erlang-layer/beamruntime/glibc"]
+                    },
+                    {
+                        "name": "musl",
+                        "description": "with musl",
+                        "oe-fragments": ["erlang-layer/beamruntime/musl"]
+                    }
+                ]
+            },
+            {
+                "name": "image example with",
+                "description": "BEAM applications ",
+                "oe-fragments": ["erlang-layer/base", "erlang-layer/images/base", "erlang-layer/images/testimage"],
+                "configurations": [
+                    {
+                        "name": " livebook",
+                        "description": "livebook application",
+                        "oe-fragments": ["erlang-layer/images/livebook"]
+                    },
+                    {
+                        "name": " yaws",
+                        "description": "yaws application",
+                        "oe-fragments": ["erlang-layer/images/yaws"]
+                    },
+                    {
+                        "name": " wings",
+                        "description": "wings application",
+                        "oe-fragments": ["erlang-layer/images/wings"],
+                        "bb-layers": ["meta-openembedded/meta-oe"]
+                    },
+                    {
+                        "name": " couchdb",
+                        "description": "couchdb application",
+                        "oe-fragments": ["erlang-layer/images/couchdb"]
+                    },
+                    {
+                        "name": " riak",
+                        "description": "riak application",
+                        "oe-fragments": ["erlang-layer/images/riak"],
+                        "bb-layers": ["meta-openembedded/meta-oe"]
+                    },
+                    {
+                        "name": " rabbitmq",
+                        "description": "rabbitmq application",
+                        "oe-fragments": ["erlang-layer/images/rabbitmq"]
+                    },
+                    {
+                        "name": " erlang-red",
+                        "description": "erlang-red application",
+                        "oe-fragments": ["erlang-layer/images/erlang-red"]
+                    },
+                    {
+                        "name": " erlang-elixir",
+                        "description": "erlang-elixir application",
+                        "oe-fragments": ["erlang-layer/images/erlang-elixir"]
+                    }
+                ]
+            }
+            ]
+        }
+        ]
+    },
+    "version": "1.0"
+}

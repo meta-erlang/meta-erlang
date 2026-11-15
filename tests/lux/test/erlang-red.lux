@@ -1,0 +1,15 @@
+[doc Test if erlang-red build and image is working]
+
+[include ../support/luxinc/utils.luxinc]
+[include ../support/luxinc/bitbake-setup.luxinc]
+[include ../support/luxinc/meta_erlang.luxinc]
+
+[shell cmd-qemuarm64]
+    [invoke bitbake-setup-prepare-env]
+
+    [invoke testimage erlang-red-image "image example with erlang-red" erlang-red poky qemuarm64]
+
+[shell cmd-qemux86-64]
+    [invoke bitbake-setup-prepare-env]
+
+    [invoke testimage erlang-red-image "image example with erlang-red" erlang-red poky qemux86-64]

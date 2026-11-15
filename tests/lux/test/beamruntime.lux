@@ -1,0 +1,110 @@
+[doc Test if beamruntime is able to produce a runtime system]
+
+[include ../support/luxinc/utils.luxinc]
+[include ../support/luxinc/bitbake-setup.luxinc]
+
+[macro get_toolchain_script]
+    !bitbake-getvar -r beamruntime-tarball SDK_DEPLOY
+    ?SDK_DEPLOY="(.*)"
+    [local SDK_DEPLOY=$1]
+    [invoke wait-build-ok]
+
+    !bitbake-getvar -r beamruntime-tarball TOOLCHAIN_OUTPUTNAME
+    ?TOOLCHAIN_OUTPUTNAME="(.*)"
+    [local TOOLCHAIN_OUTPUTNAME=$1]
+    [invoke wait-build-ok]
+[endmacro]
+
+[macro setup_toolchain tmpdir_toolchain toolchain_script]
+    # install toolchain
+    !${toolchain_script} -y -d ${tmpdir_toolchain}
+    [invoke ok]
+
+    # source it and run a basic validation
+    !. ${tmpdir_toolchain}/environment-setup-x86_64-pokysdk-linux
+    [invoke ok]
+[endmacro]
+
+[macro check_erl]
+    [timeout 10]
+
+    !erl
+    ?Erlang/OTP
+    ?Eshell
+    ?>
+
+    !erlang:system_info(system_version).
+    ?Erlang/OTP
+    ?>
+
+    !application:ensure_all_started(crypto).
+    ?>
+    !crypto:info().
+    ?cryptolib_version_compiled => "OpenSSL 4.*",
+    ?cryptolib_version_linked => "OpenSSL 4.*",
+    ?>
+
+    !halt().
+    [invoke ok]
+[endmacro]
+
+[shell setup]
+    # create a temp folder for toolchain installation
+    !mktemp -d
+    ?^(/tmp.*)
+    [global TMPDIR_TOOLCHAIN_GLIBC=$1]
+    [invoke ok]
+
+    !mktemp -d
+    ?^(/tmp.*)
+    [global TMPDIR_TOOLCHAIN_MUSL=$1]
+    [invoke ok]
+
+    !${_CTRL_D_}
+    [endshell 0]
+
+[shell beamruntime-glibc]
+    [invoke bitbake-setup-prepare-env]
+
+    [invoke bitbake-setup "beamruntime glibc" beamruntime-glibc distro/poky machine/qemuarm64]
+
+    !bitbake beamruntime-tarball -c cleansstate
+    [invoke wait-build-ok]
+
+    !bitbake beamruntime-tarball
+    [invoke wait-build-ok]
+
+    [invoke get_toolchain_script]
+    
+    [global TOOLCHAIN_SCRIPT_GLIBC=${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.sh]
+
+[shell beamruntime-install-glibc]
+    [invoke setup_toolchain ${TMPDIR_TOOLCHAIN_GLIBC} ${TOOLCHAIN_SCRIPT_GLIBC}]
+
+    [invoke check_erl]
+
+ [shell beamruntime-musl]
+    [invoke bitbake-setup-prepare-env]
+
+    [invoke bitbake-setup "beamruntime musl" beamruntime-musl distro/poky machine/qemuarm64]
+
+    !bitbake beamruntime-tarball -c cleansstate
+    [invoke wait-build-ok]
+
+    !bitbake beamruntime-tarball
+    [invoke wait-build-ok]
+
+    [invoke get_toolchain_script]
+    
+    [global TOOLCHAIN_SCRIPT_MUSL=${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.sh]
+
+[shell beamruntime-install-musl]
+    [invoke setup_toolchain ${TMPDIR_TOOLCHAIN_GLIBC} ${TOOLCHAIN_SCRIPT_GLIBC}]
+
+    [invoke check_erl]
+
+[cleanup]
+    !rm -rf ${TMPDIR_TOOLCHAIN_GLIBC}
+    [invoke ok]
+    !rm -rf ${TMPDIR_TOOLCHAIN_MUSL}
+    [invoke ok]

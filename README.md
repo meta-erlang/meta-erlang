@@ -170,6 +170,7 @@ Yocto:
 meta-erlang provides specific branches for each YP/OE release. So, please stick with one of the supported branches
 to avoid compatible problems:
 
+* [wrynose](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=wrynose)
 * [walnascar](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=walnascar)
 * [styhead](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=styhead)
 * [scarthgap](https://git.yoctoproject.org/cgit/cgit.cgi/poky/log/?h=scarthgap)
@@ -186,6 +187,17 @@ to avoid compatible problems:
 
 Even though supporting a range of versions, users are recommended to checkout specific meta-erlang branch in order to find out the correct combination between Erlang/OTP versions. Due to how Erlang/OTP and YP/OE are made, it is not
 possible always to keep some versions without backporting or fixing cross compilation issues.
+
+## Tests
+
+The [tests](tests) folder contains the automated test suites for this layer.
+Tests are written and executed with [Lux](https://github.com/hawk/lux) and use
+[`bitbake-setup`](https://docs.yoctoproject.org/bitbake/dev/bitbake-user-manual/bitbake-user-manual-environment-setup.html#)
+to configure the different BitBake environments described in
+[tests/configurations](tests/configurations).
+
+See [tests/README.md](tests/README.md) for the prerequisites and instructions
+on how to install `bitbake-setup` and run the tests.
 
 ## Other Information
 

@@ -1,0 +1,67 @@
+[global BITBAKE_PROMPT=\(bitbake-setup-venv\) SH-PROMPT:]
+
+[macro check-exitcode code]
+    ?SH-PROMPT:
+    !echo ==$$?==
+    ?==${code}==
+    ?SH-PROMPT:
+[endmacro]
+
+[macro wait-build-ok]
+    [timeout]
+    [my tmp=$LUX_FAIL_PATTERN]
+    ?$BITBAKE_PROMPT
+    [timeout 10]
+    -==[1-9][0-9]*==
+    !echo ==$$?==
+    ?==0==
+    ?$BITBAKE_PROMPT
+    -$tmp
+    [timeout]
+[endmacro]
+
+[macro build-ok]
+    [timeout 10]
+    [my tmp=$LUX_FAIL_PATTERN]
+    ?$BITBAKE_PROMPT
+    -==[1-9][0-9]*==
+    !echo ==$$?==
+    ?==0==
+    ?$BITBAKE_PROMPT
+    -$tmp
+    [timeout]
+[endmacro]
+
+[macro ok]
+    [timeout 10]
+    [my tmp=$LUX_FAIL_PATTERN]
+    ?SH-PROMPT:
+    -==[1-9][0-9]*==
+    !echo ==$$?==
+    ?==0==
+    ?SH-PROMPT:
+    -$tmp
+    [timeout]
+[endmacro]
+
+[macro wait-ok timeout]
+    [timeout $timeout]
+    [my tmp=$LUX_FAIL_PATTERN]
+    ?SH-PROMPT:
+    -==[1-9][0-9]*==
+    !echo ==$$?==
+    ?==0==
+    ?SH-PROMPT:
+    -$tmp
+    [timeout]
+[endmacro]
+
+[macro not-ok]
+    [my tmp=$LUX_FAIL_PATTERN]
+    ?SH-PROMPT
+    -==0==
+    !echo ==$$?==
+    ?==[1-9][0-9]*==
+    ?SH-PROMPT
+    -$tmp
+[endmacro]

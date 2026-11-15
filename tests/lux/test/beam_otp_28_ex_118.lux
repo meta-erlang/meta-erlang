@@ -1,0 +1,32 @@
+[doc Test Erlang/OTP and Elixir build image]
+
+[include ../support/luxinc/utils.luxinc]
+[include ../support/luxinc/bitbake-setup.luxinc]
+[include ../support/luxinc/meta_erlang.luxinc]
+
+[global OTP=28%]
+[global ELIXIR=1.18%]
+[global MACHINES=qemuarm64 qemux86-64]
+
+[shell cmd]
+    [loop machine $MACHINES]
+        [shell build-beam-$machine]
+            [invoke bitbake-setup-prepare-env]
+
+            [invoke build-erlang-elixir $machine $OTP $ELIXIR]
+
+            !${_CTRL_D_}
+            [endshell 0]
+
+        [shell build-beam-image-$machine]
+            [invoke bitbake-setup-prepare-env]
+
+            [invoke configure_testimage "image example with erlang-elixir" beam-image-otp-$OTP-elixir-$ELIXIR poky $machine]
+
+            [invoke set_otp_and_elixir_version $OTP $ELIXIR]
+
+            [invoke run_testimage beam-image]
+
+            !${_CTRL_D_}
+            [endshell 0]
+    [endloop]
