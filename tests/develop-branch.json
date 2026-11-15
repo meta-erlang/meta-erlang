@@ -1,0 +1,11 @@
+{
+    "description": "Source override file",
+    "sources": {
+        "meta-erlang": {
+            "local": {
+                "path": "../"
+            }
+        }
+    },
+    "version": "1.0"
+}

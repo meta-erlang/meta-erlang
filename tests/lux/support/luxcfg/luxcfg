@@ -1,0 +1,14 @@
+# Default config file when no architecture or host specific file is found
+# It may be included by other config files if desired
+[config var=YOCTO_RELEASE=master]
+[config var=YOCTO_DIR=/data-work/yocto]
+[config case_timeout=21600000]
+[config suite_timeout=infinity]
+[config timeout=14400000]
+[config progress=summary]
+[config var=WORKDIR=../../]
+
+# Configuration for bitbake-setup parameters
+[config var=BBS_TOP_DIR_PREFIX=/data-work/yocto/builds]
+[config var=BBS_DL_DIR=/data-work/yocto/downloads]
+[config var=BBS_USE_FULL_SETUP_DIR_NAME=yes]

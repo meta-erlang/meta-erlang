@@ -1,0 +1,22 @@
+[doc Test if wings build and image is working]
+
+[include ../support/luxinc/utils.luxinc]
+[include ../support/luxinc/bitbake-setup.luxinc]
+
+[global MACHINES=qemuarm64]
+
+[shell cmd]
+    [invoke bitbake-setup-prepare-env]
+
+
+    [invoke bitbake-setup "image example with wings" wings distro/poky machine/qemuarm64]
+
+    !bitbake -c cleansstate wings-image
+    [invoke wait-build-ok]
+
+    !bitbake wings-image
+    [invoke wait-build-ok]
+
+    # TODO
+    # !bitbake -c testimage wings-image
+    # [invoke build-ok]

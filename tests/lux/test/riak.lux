@@ -1,0 +1,15 @@
+[doc Test if riak build and image is working]
+
+[include ../support/luxinc/utils.luxinc]
+[include ../support/luxinc/bitbake-setup.luxinc]
+[include ../support/luxinc/meta_erlang.luxinc]
+
+[shell cmd-qemuarm64]
+    [invoke bitbake-setup-prepare-env]
+
+    [invoke testimage riak-image "image example with riak" riak poky qemuarm64]
+
+[shell cmd-qemux86-64]
+    [invoke bitbake-setup-prepare-env]
+
+    [invoke testimage riak-image "image example with riak" riak poky qemux86-64]

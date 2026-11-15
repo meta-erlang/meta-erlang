@@ -1,0 +1,15 @@
+[doc Test if meta-erlang follows Yocto Project compatible checks]
+
+[config skip_unless=ISSUE418]
+
+[include ../support/luxinc/utils.luxinc]
+[include ../support/luxinc/bitbake-setup.luxinc]
+
+[shell cmd]
+    [invoke bitbake-setup-prepare-env]
+
+    [invoke bitbake-setup "yocto-compatible" yocto-compatible distro/poky machine/qemux86-64]
+
+    !yocto-check-layer ${BBS_TOP_DIR_PREFIX}/bitbake-builds/poky/layers/meta-erlang
+    ?INFO: meta-erlang ... PASS
+    [invoke wait-build-ok]

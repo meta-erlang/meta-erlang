@@ -1,0 +1,23 @@
+[doc Test if Yaws build and image is working]
+
+[include ../support/luxinc/utils.luxinc]
+[include ../support/luxinc/bitbake-setup.luxinc]
+
+#[global MACHINES=qemuarm64 qemux86-64]
+[global MACHINES=qemuarm64]
+
+[shell cmd]
+    [invoke bitbake-setup-prepare-env]
+
+    [loop machine $MACHINES]
+        [invoke bitbake-setup "image example with yaws" yaws distro/poky machine/$machine]
+    
+        !bitbake -c cleansstate yaws-image
+        [invoke wait-build-ok]
+
+        !bitbake yaws-image
+        [invoke wait-build-ok]
+
+        !bitbake -c testimage yaws-image
+        [invoke wait-build-ok]
+    [endloop]
